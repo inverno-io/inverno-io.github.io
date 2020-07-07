@@ -121,6 +121,49 @@ juin 08, 2020 11:45:05 PM io.winterframework.core.v1.Module start
 INFOS: Module io.winterframework.example.hello started in 12ms
 Hello John!!!
 </code></pre>
+				<h3>Building and running with Gradle</h3>
+				<p>Since version 6.4, it is also possible to use <a href="https://gradle.org/">gradle</a> instead of Maven. The following <code>build.gradle</code> file can be used to build and run the hello application:</p>
+				<pre><code>/* build.gradle */
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.winterframework:winter-core:1.0.0'
+    annotationProcessor 'io.winterframework:winter-core-compiler:1.0.0'
+}
+
+java {
+    modularity.inferModulePath = true
+    sourceCompatibility = JavaVersion.VERSION_1_9
+    targetCompatibility = JavaVersion.VERSION_1_9
+}
+
+application {
+    mainModule = 'io.winterframework.example.hello'
+    mainClassName = 'io.winterframework.example.hello.App'
+}
+</code></pre>
+				<p>As for Maven, Java source files for <code>io.winterframework.example.hello</code> module must be placed in <code>src/main/java</code> directory, the module is then built as follows:</p>
+				<pre><code>$ gradle build</code></pre>
+				<p>and run as follows:</p>
+				<pre><code>$ gradle run --args="John"
+
+> Task :run
+juil. 07, 2020 3:47:08 PM io.winterframework.core.v1.Application run
+INFOS: Winter is starting...
+juil. 07, 2020 3:47:08 PM io.winterframework.core.v1.Module start
+INFOS: Starting Module io.winterframework.example.hello...
+juil. 07, 2020 3:47:08 PM io.winterframework.core.v1.SingletonBean create
+INFOS: Creating Singleton Bean io.winterframework.example.hello:helloService
+juil. 07, 2020 3:47:08 PM io.winterframework.core.v1.Module start
+INFOS: Module io.winterframework.example.hello started in 14ms
+Hello hello!!!
+</code></pre>
 				<h3>Building and running with pure Java</h3>
 				<p>You can also choose to build your Winter module using pure Java commands. Assuming Winter framework modules are located under <code>lib/</code> directory and Java source files for <code>io.winterframework.example.hello</code> module are placed in <code>src/io.winterframework.example.hello</code> directory, you can build the module with the <code>javac</code> command:</p>
 				<pre><code>$ javac --processor-module-path lib/ --module-path lib/ --module-source-path src/ -d jmods/ --module io.winterframework.example.hello</code></pre>
