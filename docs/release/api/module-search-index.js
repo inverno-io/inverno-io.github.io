@@ -1,0 +1,1 @@
+moduleSearchIndex = [{"l":"io.winterframework.core"},{"l":"io.winterframework.core.annotation"},{"l":"io.winterframework.mod.base"},{"l":"io.winterframework.mod.boot"},{"l":"io.winterframework.mod.configuration"},{"l":"io.winterframework.mod.http.base"},{"l":"io.winterframework.mod.http.server"},{"l":"io.winterframework.mod.web"}];updateSearchResults();

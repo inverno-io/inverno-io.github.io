@@ -1,192 +1,296 @@
-<html>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>The Winter Framework | Fast and secure IoC and DI framework for modern Java applications</title>
+		<title>The Winter Framework | Definitive Framework for modern, fast and modular applications</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 		<meta property="og:title" content="The Winter Framework"/>
 		<meta property="og:url" content="https://winterframework.io/"/>
-		<meta property="og:image" content="https://winterframework.io/winter_portable.svg"/>
-		<meta property="og:description" content="Fast and secure IoC and DI framework for modern Java applications"/>
+		<meta property="og:image" content="https://winterframework.io/img/winter_portable.svg"/>
+		<meta property="og:description" content="Definitive Java Framework for modern, fast and modular applications"/>
 		<meta property="og:locale" content="en_US" />
 		<meta name="author" content="Jeremy KUHN (jeremy.kuhn@winterframework.io)" />
-		<meta name="description" content="Fast and secure IoC and DI framework for modern Java applications" />
-		<meta name="keywords" content="Java, Inversion of Control, Dependency Injection, IoC, DI, stand-alone, application" />
-		<link rel="icon" type="image/svg" href="snowflake.svg">
-		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic">
-		<link rel="stylesheet" type="text/css" href="styles.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/default.min.css">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
+		<meta name="description" content="Definitive Java Framework for modern, fast and modular applications" />
+		<meta name="keywords" content="Java, MicroServices, Reactive, REST, Inversion of Control, Dependency Injection, Non-blocking, IoC, DI, standalone, application" />
+		<link rel="icon" type="image/svg" href="img/snowflake.svg">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="styles/styles.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/stackoverflow-dark.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/idea.min.css" media="print">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
 		<script>hljs.initHighlightingOnLoad();</script>
 	</head>
 	<body>
-		<header class="header" role="banner">
-			<div class="content">
-				<img class="logo" src="winter_portable.svg" alt="Winter Framework"/>
-				<h2>Fast and secure IoC and DI framework for modern Java applications</h2>
-				<br/>
-				<a class="btn" href="https://github.com/winterframework-io/winter-root/">View on GitHub</a>
-				<a class="btn" href="https://github.com/winterframework-io/winter-root/blob/master/doc/reference-guide.md">Documentation</a>
+		<header class="header">
+			<div class="container-fluid border-bottom bg-light">
+				<nav class="navbar navbar-expand-lg navbar-light container p-0 py-2 p-lg-1">
+					<a class="navbar-brand p-0" href="/">
+						<img class="logo" src="img/winter_portable.svg" alt="Winter Framework"/>
+					</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#smallNavMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+				    </button>
+				    <div class="collapse" id="smallNavMenu" style="flex-basis: 100%;">
+				    	<ul class="navbar-nav border-top mt-2">
+							<li class="nav-item mt-2">
+								<h5>Documentation</h5>
+								<ul class="nav flex-column">
+									<li class="nav-item ms-4"><a class="nav-link" href="docs/getting-started/html/index.html">Getting Started</a></li>
+									<li class="nav-item ms-4"><a class="nav-link" href="docs/release/reference/html/index.html">Reference Guide</a></li>
+									<li class="nav-item ms-4"><a class="nav-link" href="docs/release/api/index.html">API Doc</a></li>
+								</ul>
+							</li>
+							<li class="nav-item mt-2">
+								<h5>Projects</h5>
+								<ul class="nav flex-column">
+									<li class="nav-item ms-4"><a class="nav-link" href="https://github.com/winterframework-io/winter">Core</a></li>
+									<li class="nav-item ms-4"><a class="nav-link" href="https://github.com/winterframework-io/winter-mods">Modules</a></li>
+									<li class="nav-item ms-4"><a class="nav-link" href="https://github.com/winterframework-io/winter-dist">Distribution</a></li>
+									<li class="nav-item ms-4"><a class="nav-link" href="https://github.com/winterframework-io/winter-tools">Tools</a></li>
+									<li class="nav-item ms-4"><a class="nav-link" href="https://github.com/winterframework-io/winter-examples">Examples</a></li>
+								</ul>
+							</li>
+						</ul>
+				    </div>
+					<ul class="navbar-nav d-none d-sm-none d-lg-flex flex-fill justify-content-end align-self-stretch">
+						<li class="nav-item dropdown d-flex align-items-center me-3">
+							<a class="nav-link dropdown-toggle text-decoration-none" href="#" id="documentationMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Documentation</a>
+							<ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="documentationMenu">
+								<li><a class="dropdown-item" href="docs/getting-started/html/index.html">Getting Started</a></li>
+								<li><a class="dropdown-item" href="docs/release/reference/html/index.html">Reference Guide</a></li>
+								<li><a class="dropdown-item" href="docs/release/api/index.html">API Doc</a></li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown d-flex align-items-center">
+							<a class="nav-link dropdown-toggle text-decoration-none" href="#" id="projectsMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
+							<ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="projectsMenu">
+								<li><a class="dropdown-item" href="https://github.com/winterframework-io/winter">Core</a></li>
+								<li><a class="dropdown-item" href="https://github.com/winterframework-io/winter-mods">Modules</a></li>
+								<li><a class="dropdown-item" href="https://github.com/winterframework-io/winter-dist">Distribution</a></li>
+								<li><a class="dropdown-item" href="https://github.com/winterframework-io/winter-tools">Tools</a></li>
+								<li><a class="dropdown-item" href="https://github.com/winterframework-io/winter-examples">Examples</a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<section class="banner container-fluid position-relative text-light overflow-hidden shadow-sm border-bottom" role="banner">
+			<div class="container position-relative" style="z-index: 1000;">
+				<h1 class="display-lg-3 fw-bold mt-3 mt-lg-4 mb-3 mb-lg-4 text-center"><img class="logo text-center" src="img/winter_portable.svg" alt="Winter Framework"/></h1>
+				<h5 class="text-center">The definitive Java<sup>TM</sup> framework for building modern, fast and modular applications.</h5>
+				<div class="container my-4 my-lg-5 d-flex flex-column flex-lg-row justify-content-center align-items-stretch align-items-lg-center">
+					<a type="button" class="btn btn-outline-light p-2 p-lg-3">Getting Started</a>
+					<a type="button" class="btn btn-outline-light p-2 p-lg-3 mx-lg-2 my-1" href="docs/release/reference/html/index.html">Documentation</a>
+					<a type="button" class="btn btn-outline-light p-2 p-lg-3" href="https://github.com/winterframework-io/">View on GitHub</a>
+				</div>
+				<script type="text/javascript">
+				let featureIndex = 0;
+				setInterval(function(){
+					document.getElementById("feature-" + featureIndex).className = document.getElementById("feature-" + featureIndex).className.replaceAll(" active", "");
+					featureIndex = (featureIndex + 1)%4;
+					document.getElementById("feature-" + featureIndex).className = document.getElementById("feature-" + featureIndex).className + " active";
+				}, 17000);
+				</script>
+				<div class="features">
+					<div id="feature-0" class="feature active">
+						<h2 class="feature-title fs-1">Be Modular</h2>
+						<p class="feature-desc" class="col-md-8 fs-5">Modularity is at the core of the framework which fully embraces Java™ module system in order to deliver flexible and solid applications.</p>
+					</div>
+					<div id="feature-1" class="feature">
+						<h2 class="feature-title fs-1">Be Fast</h2>
+						<p class="feature-desc" class="col-md-8 fs-5">A Winter application is assembled through IoC/DI at compilation time, it starts quickly with a very small runtime footprint and run blazingly fast using high-end threading model and non-blocking I/O.</p>
+					</div>
+					<div id="feature-2" class="feature">
+						<h2 class="feature-title fs-1">Be Reactive</h2>
+						<p class="feature-desc" class="col-md-8 fs-5">Winter has been built from the ground up to be reactive and non-blocking in order to make full use of computer resources.</p>
+					</div>
+					<div id="feature-3" class="feature">
+						<h2 class="feature-title fs-1">Be Reliable</h2>
+						<p class="feature-desc" class="col-md-8 fs-5">The Winter compiler statically checks that the application components fit together eliminating runtime issues caused by the use of reflection and possible security issues related to dynamic linking.</p>
+					</div>
+				</div>
 			</div>
 			<div class="snowflakes">
 				<div class="snowflake">❆</div>
+				<div class="snowflake d-none d-lg-block">❆</div>
+				<div class="snowflake d-none d-lg-block">❆</div>
+				<div class="snowflake d-none d-lg-block">❆</div>
 				<div class="snowflake">❆</div>
 				<div class="snowflake">❆</div>
 				<div class="snowflake">❆</div>
 				<div class="snowflake">❆</div>
-				<div class="snowflake">❆</div>
-				<div class="snowflake">❆</div>
-				<div class="snowflake">❆</div>
-				<div class="snowflake">❆</div>
-				<div class="snowflake">❆</div>
+				<div class="snowflake d-none d-lg-block">❆</div>
+				<div class="snowflake d-none d-lg-block">❆</div>
 				<div class="snowflake">❆</div>
 				<div class="snowflake">❆</div>
 			</div>
-		</header>
+		</section>
 		<main class="main">
-			<div id="_html" class="markdown-body">
-				<p>The <a href="https://www.winterframework.io">Winter framework</a> is an <strong><em>Inversion of Control</em></strong> and <strong><em>Dependency Injection</em></strong> framework for the <em><strong>Java 9+ platform</em></strong>. It has the particularity of not using Java reflection for object instantiation and dependency injection, everything being verified and done statically during compilation.</p>
-				<p>This approach has many advantages over other IoC/DI solutions starting with the static checking of the bean dependency graph at compile time which guarantees that a program is correct and will run properly. Debugging is also made easier since you can actually access the source code where beans are instantiated and wired together. Finally, the startup time of a program is greatly reduced since everything is known in advance, such program can even be further optimized with ahead of time compilation solutions like <a href="https://docs.oracle.com/en/java/javase/13/docs/specs/man/jaotc.html">jaotc</a> or <a href="https://www.graalvm.org/">GraalVM</a>...</p>
-				<p>The framework has been designed to build <strong><em>highly modular applications</em></strong> using standard Java 9+ modules. A Winter module supports encapsulation, it only exposes the beans that need to be exposed and it clearly specifies the dependencies it requires to operate properly. This greatly improves program stability over time and simplifies the use of a module. Since a Winter module has a very small runtime footprint it can also be easily integrated in any application.</p>
-				<h2>Creating a Winter module</h2>
-				<p>A <strong><em>Winter Module</em></strong> is a regular Java module, that requires <code>io.winterframework.core</code> and <code>io.winterframework.core.annotation</code> modules, and which is annotated with <code>@Module</code> annotation. The following <code>hello</code> module is a simple Winter module:</p>
-				<pre><code>@io.winterframework.core.annotation.Module
-module io.winterframework.example.hello {
-    requires io.winterframework.core;
-    requires io.winterframework.core.annotation;
-    
-    exports io.winterframework.example.hello;
-}</code></pre>
-				<p>A <strong><em>Winter Bean</em></strong> can be a regular Java class annotated with <code>@Bean</code> annotation. A bean represents the basic building block of an application which is typically composed of multiple interconnected beans instances. The following <code>HelloService</code> bean can be used to create a basic application:</p>
-				<pre><code>package io.winterframework.example.hello;
-
-import io.winterframework.core.annotation.Bean;
-
-@Bean
-public class HelloService {
-
-    public HelloService() {}
-
-    public void sayHello(String name) {
-        System.out.println("Hello " + name + "!!!");
-    }
-}</code></pre>
-				<p>At compile time, the Winter framework will generate a module class named after the module, <code>io.winterframework.example.hello.Hello</code> in our example. This class contains all the logic required to instantiate and wire the application beans at runtime. It can be used in a Java program to access and use the <code>HelloService</code>. This program can be in the same Java module or in any other Java module which requires module <code>io.winterframework.example.hello</code>:</p>
-				<pre><code>package io.winterframework.example.hello;
-
-import io.winterframework.core.v1.Application;
-
+			<section class="container my-5">
+				<div class="row align-items-center mt-4">
+					<div class="col-12 col-lg-8">
+						<pre class="m-0"><code class="language-java p-3 rounded">@Bean
+@WebController
 public class App {
 
+    @WebRoute( path = "/hello")
+    public String hello() {
+        return "Hello, world!";
+    }
+
     public static void main(String[] args) {
-        Hello hello = Application.with(new Hello.Builder()).run();
-        hello.helloService().sayHello(args[0]);
+        Application.run(new SampleApp.Builder());
     }
 }</code></pre>
-				<h3>Building and running with Maven</h3>
-				<p>The development of a Winter module is pretty easy using <a href="https://maven.apache.org/">Apache Maven</a>, you simply need to create a standard Java project that inherits from <code>io.winterframework:winter-parent</code> project and declare a dependency to <code>winter-core</code> artifact:</p>
-				<pre><code>&lt;!-- pom.xml --&gt;
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;parent&gt;
-        &lt;groupId&gt;io.winterframework&lt;/groupId&gt;
-        &lt;artifactId&gt;winter-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.0.0&lt;/version&gt;
-    &lt;/parent&gt;
-    &lt;groupId&gt;io.winterframework.example&lt;/groupId&gt;
-    &lt;artifactId&gt;hello&lt;/artifactId&gt;
-    
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;io.winterframework&lt;/groupId&gt;
-            &lt;artifactId&gt;winter-core&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/project&gt;</code></pre>
-				<p>Java source files for <code>io.winterframework.example.hello</code> module must be placed in <code>src/main/java</code> directory, the module can then be built using Maven:</p>
-				<pre><code>$ mvn install</code></pre>
-				<p>You can then run the hello application:</p>
-				<pre><code>$ mvn exec:java -Dexec.mainClass=io.winterframework.example.hello.App -Dexec.arguments=John
-
-[INFO] --- exec-maven-plugin:1.6.0:java (default-cli) @ hello ---
-juin 08, 2020 11:45:05 PM io.winterframework.core.v1.Application run
-INFOS: Winter is starting...
-juin 08, 2020 11:45:05 PM io.winterframework.core.v1.Module start
-INFOS: Starting Module io.winterframework.example.hello...
-juin 08, 2020 11:45:05 PM io.winterframework.core.v1.SingletonBean create
-INFOS: Creating Singleton Bean io.winterframework.example.hello:helloService
-juin 08, 2020 11:45:05 PM io.winterframework.core.v1.Module start
-INFOS: Module io.winterframework.example.hello started in 12ms
-Hello John!!!
-</code></pre>
-				<h3>Building and running with Gradle</h3>
-				<p>Since version 6.4, it is also possible to use <a href="https://gradle.org/">gradle</a> instead of Maven. The following <code>build.gradle</code> file can be used to build and run the hello application:</p>
-				<pre><code>/* build.gradle */
-plugins {
-    id 'application'
-}
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation 'io.winterframework:winter-core:1.0.0'
-    annotationProcessor 'io.winterframework:winter-core-compiler:1.0.0'
-}
-
-java {
-    modularity.inferModulePath = true
-    sourceCompatibility = JavaVersion.VERSION_1_9
-    targetCompatibility = JavaVersion.VERSION_1_9
-}
-
-application {
-    mainModule = 'io.winterframework.example.hello'
-    mainClassName = 'io.winterframework.example.hello.App'
-}
-</code></pre>
-				<p>As for Maven, Java source files for <code>io.winterframework.example.hello</code> module must be placed in <code>src/main/java</code> directory, the module is then built as follows:</p>
-				<pre><code>$ gradle build</code></pre>
-				<p>and run as follows:</p>
-				<pre><code>$ gradle run --args="John"
-
-> Task :run
-juil. 07, 2020 3:47:08 PM io.winterframework.core.v1.Application run
-INFOS: Winter is starting...
-juil. 07, 2020 3:47:08 PM io.winterframework.core.v1.Module start
-INFOS: Starting Module io.winterframework.example.hello...
-juil. 07, 2020 3:47:08 PM io.winterframework.core.v1.SingletonBean create
-INFOS: Creating Singleton Bean io.winterframework.example.hello:helloService
-juil. 07, 2020 3:47:08 PM io.winterframework.core.v1.Module start
-INFOS: Module io.winterframework.example.hello started in 14ms
-Hello hello!!!
-</code></pre>
-				<h3>Building and running with pure Java</h3>
-				<p>You can also choose to build your Winter module using pure Java commands. Assuming Winter framework modules are located under <code>lib/</code> directory and Java source files for <code>io.winterframework.example.hello</code> module are placed in <code>src/io.winterframework.example.hello</code> directory, you can build the module with the <code>javac</code> command:</p>
-				<pre><code>$ javac --processor-module-path lib/ --module-path lib/ --module-source-path src/ -d jmods/ --module io.winterframework.example.hello</code></pre>
-				<p>The hello application is then run as follows:</p>
-				<pre><code>$ java --module-path lib/:jmods/ --module io.winterframework.example.hello/io.winterframework.example.hello.App John
-juin 09, 2020 12:02:28 AM io.winterframework.core.v1.Application run
-INFOS: Winter is starting...
-juin 09, 2020 12:02:28 AM io.winterframework.core.v1.Module start
-INFOS: Starting Module io.winterframework.example.hello...
-juin 09, 2020 12:02:28 AM io.winterframework.core.v1.SingletonBean create
-INFOS: Creating Singleton Bean io.winterframework.example.hello:helloService
-juin 09, 2020 12:02:28 AM io.winterframework.core.v1.Module start
-INFOS: Module io.winterframework.example.hello started in 8ms
-Hello John!!!
-</code></pre>
-				<h3>Summary</h3>
-				<p>In this simple example, we created a Winter module which exposes one bean and use it to implement logic in an application. As you can imagine a real life application is far more complex than that, composed of many modules providing multiple beans in different ways and wired altogether. The Winter framework has been designed to create such applications in a simple, elegant and efficient way, please consult the <a href="https://github.com/winterframework-io/winter-root/blob/master/doc/reference-guide.md">complete documentation</a> to get the full picture.</p>
-				<h2>Building Winter framework</h2>
-				<p>The Winter framework can be built using maven and Java 9+ with the following command:</p>
-				<pre><code>$ mvn install</code></pre>
-				<h2>License</h2>
-				<p>The Winter Framework is released under version 2.0 of the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License</a>.</p>
-			</div>
+					</div>
+					<div class="col-12 col-lg-4">
+						<h4 class="text-center text-lg-start mt-5 mt-lg-0 lh-lg">Create Microservices applications in minutes that start in milliseconds and run blazingly fast.</h4>
+					</div>
+				</div>
+			</section>
+			<hr class="container my-5"/>
+			<section class="container my-4">
+				<div class="row align-items-stretch">
+					<div class="col-12 col-lg-6 col-xxl-4 mb-4">
+						<div class="card shadow h-100">
+							<div class="card-body">
+								<h3 class="card-title text-center my-3">
+									<img src="img/modularity.svg" style="max-width: 96px;"/>
+									<span class="d-block mt-4 fw-bold">Modularity</span>
+								</h3>
+								<div class="p-4">
+									<p class="card-text">Modularity is a key aspect of modern applications development. It allows to properly separate the concerns by isolating the different parts of an application into modules with clear interfaces. A modular application can then be effectively developed by a large group of people while promoting reusability resulting in highly maintainable and extensible applications.</p>
+									<p class="card-text">The Winter Framework embraces the <a href="https://en.wikipedia.org/wiki/Java_Platform_Module_System">Java™ module system</a>. A Winter module is assembled through IoC/DI at compile time, it exposes a clear interface describing the features provided and the dependencies required for the module to operate. This greatly improves program stability over time and clarifies module usage.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-6 col-xxl-4 mb-4">
+						<div class="card shadow h-100">
+							<div class="card-body">
+								<h3 class="card-title text-center my-3">
+									<img src="img/performance.svg" style="max-width: 96px;"/>
+									<span class="d-block mt-4 fw-bold">Performance</span>
+								</h3>
+								<div class="p-4">
+									<p class="card-text">Performance is a multi-faceted topic, modern applications running in containers, sometimes even serverless, must start as quickly as possible and support very high throughput while making fair use of resources.</p>
+									<p class="card-text">The Winter Framework reduces to the minimum the runtime processing required to bootstrap an application by relying on the compiler to generate the exact code that instantiates and wires the objects of the application together without use of reflection resulting in fast startup and small runtime overhead.</p>
+									<p class="card-text">It also combines a best-in-class reactive threading model with non-blocking I/O in order to absorb very high throughput without wasting resources.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-6 col-xxl-4 mb-4">
+						<div class="card shadow h-100">
+							<div class="card-body">
+								<h3 class="card-title text-center my-3">
+									<img src="img/reactive.svg" style="max-width: 96px;"/>
+									<span class="d-block mt-4 fw-bold">Reactive</span>
+								</h3>
+								<div class="p-4">
+									<p class="card-text">In a fully reactive application, processing is asynchronous and non-blocking, the execution can switch between active tasks without going into an idle state waiting for some blocking operation to finish maximizing the use of hardware resources.</p>
+									<p class="card-text">The Winter Framework has been designed from scratch to follow the reactive programming paradigm, making it easy to create fully and truly reactive applications.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-6 col-xxl-4 mb-4">
+						<div class="card shadow h-100">
+							<div class="card-body">
+								<h3 class="card-title text-center my-3">
+									<img src="img/microservices.svg" style="max-width: 96px;"/>
+									<span class="d-block mt-4 fw-bold">Microservices</span>
+								</h3>
+								<div class="p-4">
+									<p class="card-text">Microservices architecture has become the de facto standard for backend applications. It ensures a great modularity that makes complex applications easier to understand. Microservices can be monitored and scaled independently, they are easier to integrate with legacy systems and their development can be easily distributed and parallelized. All this makes it a perfect match for the Cloud and DevOps practices.</p>
+									<p class="card-text">The Winter Framework facilitates the development of Microservices and exposes corresponding <a href="https://www.openapis.org/">Open API</a> specifications with no runtime overhead by generating them from JavaDoc comments at compile time.</p> 
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-6 col-xxl-4 mb-4">
+						<div class="card shadow h-100">
+							<div class="card-body">
+								<h3 class="card-title text-center my-3">
+									<img src="img/configurability.svg" style="max-width: 96px;"/>
+									<span class="d-block mt-4 fw-bold">Configurability</span>
+								</h3>
+								<div class="p-4">
+									<p class="card-text">Modern applications can no longer be configured in a simple property files as they have become more complex and require more advanced configuration capabilities. An application can run in multiple situations on multiple environments, geographical locations or machines and targeted by different tenants or users. All these aspects define particular contexts for which particular configurations are needed.</p>
+									<p class="card-text">The Winter Framework provides a unified Configuration API which can be used to create agile and highly configurable applications from low-level configuration required to bootstrap the application to high-level tenant specific configuration used to customize the behavior of the application at runtime.</p>								
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-6 col-xxl-4 mb-4">
+						<div class="card shadow h-100">
+							<div class="card-body">
+								<h3 class="card-title text-center my-3">
+									<img src="img/maintainability.svg" style="max-width: 96px;"/>
+									<span class="d-block mt-4 fw-bold">Maintainability</span>
+								</h3>
+								<div class="p-4">
+									<p class="card-text">Information systems must adapt to an ever-changing environment. Features must be continuously added or removed while guaranteeing limited defects with the lowest MTTR.</p>
+									<p class="card-text">The Winter Framework produces modular applications which makes it easy to replace a faulty or worn-out module or add a new one without impacting the rest of the application. Modules expose clear interfaces generated at compile time and only expose what needs to be exposed, the rest of the implementation being properly encapsulated by the Java™ module system protecting against intentional or unintentional misuse. There is no magic, the generated code is human readable, it can be debugged and we can actually see how objects are created and wired together.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<hr class="container my-5"/>
+			<section class="container my-4">
+				<div class="row align-items-center">
+					<div class="col-12 col-lg-4">
+						<h4 class="text-center text-lg-start mb-5 mb-lg-0 lh-lg">The Winter Framework provides high-end performance that <a href="https://github.com/winterframework-io/benchmarks">outperforms</a> most competitors and matches the best ones.</h4>
+					</div>
+					<div class="col-12 col-lg-8">
+						<img class="img-fluid" src="img/benchmarks.svg" alt="Benchmarks" title="Requests/sec change relative to Winter"/>
+					</div>
+				</div>
+			</section>
+			<hr class="container my-5"/>
+			<section class="container my-4">
+				<div class="row align-items-center">
+					<div class="col-12 col-lg-8">
+						<img class="img-fluid" src="img/startup_time.svg" alt="Startup Time" title="Startup Time change relative to Winter"/>
+					</div>
+					<div class="col-12 col-lg-4">
+						<h4 class="text-center text-lg-start mt-5 mt-lg-0 lh-lg">The Winter Framework <a href="benchmarks">reduces</a> application startup time on the JVM.</h4>
+					</div>
+				</div>
+			</section>
 		</main>
+		
+		<footer class="footer bg-light border-top mt-5">
+			<div class="container p-5">
+				<div class="row mb-5">
+					<div class="col col-lg-3">
+						<h5>Documentation</h5>
+						<ul class="nav flex-column">
+							<li class="nav-item"><a class="nav-link px-0" href="#">Getting Started</a></li>
+							<li class="nav-item"><a class="nav-link px-0" href="#">Reference</a></li>
+							<li class="nav-item"><a class="nav-link px-0" href="#">API Doc</a></li>
+						</ul>
+					</div>
+					<div class="col col-lg-3">
+						<h5>Projects</h5>
+						<ul class="nav flex-column">
+							<li class="nav-item"><a class="nav-link px-0" href="#">Core</a></li>
+							<li class="nav-item"><a class="nav-link px-0" href="#">Modules</a></li>
+							<li class="nav-item"><a class="nav-link px-0" href="#">Distribution</a></li>
+							<li class="nav-item"><a class="nav-link px-0" href="#">Tools</a></li>
+							<li class="nav-item"><a class="nav-link px-0" href="#">Examples</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="p-3 mb-5 text-center"> 
+                <p class="fw-light fs-6">The Winter Framework is released under version 2.0 of the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License</a>.</p> 
+                <p class="fw-light fs-6">Copyright © 2021, The Winter Framework</p> 
+            </div>
+		</footer>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
 	</body>
 </html>
