@@ -519,7 +519,9 @@ html {
 
 /* xs */
 @media (min-width: 0px) {
-	
+	pre > code {
+		word-wrap: normal;
+	}
 }
 
 /* sm */

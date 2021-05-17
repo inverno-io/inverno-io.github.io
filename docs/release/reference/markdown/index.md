@@ -13,7 +13,7 @@ $properties(base = ../../../../, title = Winter Reference Guide)
 	<h1 class="heading-title">Winter Reference Guide</h1> 
 	<p class="heading-subtitle">Version: 1.0.0</p> 
 	<p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@winterframework.io">Jeremy Kuhn</a></p>
-	<a class="btn btn-primary d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="winter-reference-guide-1.0.0.pdf"><i class="bi bi-download"></i> Reference guide.pdf</a>
+	<a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="winter-reference-guide-1.0.0.pdf"><i class="bi bi-download"></i> Reference guide.pdf</a>
 </div>
 
 $toc( level=3 )
