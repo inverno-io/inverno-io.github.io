@@ -358,19 +358,19 @@ html {
 }
 
 .scrollbar-thin::-webkit-scrollbar {
-  width: 0.4em;
+	width: 0.4em;
 }
 
 .scrollbar-thin::-webkit-scrollbar-track {
-  background: #f8f9fa; 
+	background: #f8f9fa; 
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #dee2e6;
+	background: #dee2e6;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: #ced4da; 
+	background: #ced4da; 
 }
 
 .heading {
@@ -392,7 +392,7 @@ html {
 	top: 0;
 	left: 40%;
 	background-image: url("../img/snowflake.svg");
-	background-size: auto 300%;
+	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: 0% 80%;
 	z-index: -1;
@@ -595,10 +595,15 @@ html {
 		padding: 0;
 	}
 	
+	.shadow {
+		box-shadow: none !important; 
+	}
+	
 	@page {
 		margin: 2cm;
+		size: A4;
 	}
-
+	
 	.header {
 		display: none;
 	}
@@ -608,31 +613,38 @@ html {
 		margin: 0 !important;
 	}
 	
+	.scrollbar-thin {
+		scrollbar-width: none;
+	}
+	
+	.scrollbar-thin::-webkit-scrollbar {
+		width: 0;
+	}
+	
 	.heading {
 		-webkit-print-color-adjust: exact !important;
 		height: 100vh;
 		width: 100vw;
 		margin: 0% !important;
-		padding: 0% !important;
+		padding: 60vh 0% 0% 0% !important;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 	}
 	
 	.heading::after {
-		top: -30%;
-		left: 25%;
-		background-size: auto 100%;
 		background-position: 0% 0%;
+		top: -30%;
+		left: 15%;
+		opacity: 0.3;
 	}
 	
 	.heading .heading-title {
-		maring-top: 3cm !important;
-		margin-left: 2cm !important;
+		margin: 0 !important;
+		margin-bottom: 1rem !important;
 	}
 	
 	.heading .heading-subtitle {
-		margin-left: 2cm;
+		font-size: 1rem;
 	}
 	
 	.toc .toc-toggler {
@@ -647,7 +659,6 @@ html {
 	.toc .toc-navbar {
 		display: block !important;
 		position: relative !important;
-		font-size: 1rem !important;
 		height: unset !important;
 		font-size: 10pt !important;
 		background-color: transparent !important;
@@ -662,6 +673,17 @@ html {
 		color: #000000;
 		padding: 0 !important;
 		margin: 0 !important;
+		break-after: avoid;
+		page-break-after: avoid;
+		break-inside: avoid;
+		page-break-inside: avoid;
+	}
+	
+	.toc .toc-navbar a:after {
+		content: "";
+    	display: block;
+		height: 100px;
+		margin-bottom: -100px;
 	}
 	
 	.toc .toc-navbar > .nav > a {

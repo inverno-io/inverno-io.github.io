@@ -31,7 +31,7 @@ $properties(base = ../../../, title = Winter Getting Started Guide)
 
 $doc
 
-# Step 1: Create the Maven project
+# Step 1: Create a Winter project
 
 The creation of a Maven project setup with the Winter distribution should always be the first thing to do when developing a Winter component or application.
 
@@ -40,14 +40,12 @@ You can start by creating a regular Maven Java project using your IDE, the Maven
 ```plaintext
 ├── pom.xml
 └── src
-    ├── main
-    │   └── java
-    │       └── com
-    │           └── example
-    │               └── helloworld
-    │                   └── App.java
-    └── test
-        └── ...
+    └── main
+        └── java
+            └── com
+                └── example
+                    └── helloworld
+                        └── App.java
 ```
 
 You can now setup the `pom.xml` build descriptor with the Winter distribution by defining a `<parent/>` section pointing to `io.winterframework.dist:winter-parent:1.0.0` parent pom:
@@ -60,7 +58,7 @@ You can now setup the `pom.xml` build descriptor with the Winter distribution by
     <parent>
         <groupId>io.winterframework.dist</groupId>
         <artifactId>winter-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <groupId>com.example</groupId>
     <artifactId>helloworld</artifactId>
@@ -79,7 +77,7 @@ Then you must declare dependencies to Winter *boot* and *web* modules since you 
     <parent>
         <groupId>io.winterframework.dist</groupId>
         <artifactId>winter-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <groupId>com.example</groupId>
     <artifactId>helloworld</artifactId>
@@ -164,7 +162,7 @@ $ mvn winter:run
 You should see an output similar to the following:
 
 ```plaintext
-[INFO] --- winter-maven-plugin:1.0.0-SNAPSHOT:run (default-cli) @ helloworld ---
+[INFO] --- winter-maven-plugin:1.0.0:run (default-cli) @ helloworld ---
 [INFO] Running project: com.example.helloworld@1.0-SNAPSHOT...
 ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
 INFO Application Winter is starting...
@@ -179,7 +177,7 @@ INFO Application Winter is starting...
      ║                 ,   __\_/\_\__   ,     \  / \  /| || | | || |_ |  __/| |                   ║
      ║                  , /_/ /\/\ \_\ ,       \/   \/ |_||_| |_| \__| \___||_|                   ║
      ║                   ,     /\     ,                                                           ║
-     ║                     ,   \/   ,                        -- 1.0.2-SNAPSHOT --                 ║
+     ║                     ,   \/   ,                        -- 1.0.2 --                          ║
      ║                       ' -- '                                                               ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║

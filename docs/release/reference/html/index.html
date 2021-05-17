@@ -4,19 +4,13 @@
         <title>The Winter Framework | Winter Reference Guide</title> 
         <meta name="viewport" content="width=device-width, initial-scale=1" /> 
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> 
-        <meta property="og:title" content="The Winter Framework" /> 
-        <meta property="og:url" content="https://winterframework.io/" /> 
-        <meta property="og:image" content="https://winterframework.io/img/winter_portable.svg" /> 
-        <meta property="og:description" content="Definitive Java Framework for modern, fast and modular applications" /> 
-        <meta property="og:locale" content="en_US" /> 
         <meta name="author" content="Jeremy KUHN (jeremy.kuhn@winterframework.io)" /> 
-        <meta name="description" content="Definitive Java Framework for modern, fast and modular applications" /> 
-        <meta name="keywords" content="Java, MicroServices, Reactive, REST, Inversion of Control, Dependency Injection, Non-blocking, IoC, DI, standalone, application" /> 
         <link rel="icon" type="image/svg" href="../../../../img/snowflake.svg" /> 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous" /> 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" /> 
         <link rel="stylesheet" type="text/css" href="../../../../styles/styles.css" /> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/stackoverflow-dark.min.css" /> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/idea.min.css" media="print" /> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/stackoverflow-dark.min.css" media="screen" /> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/ascetic.min.css" media="print" /> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script> 
         <script>hljs.initHighlightingOnLoad();</script> 
     </head> 
@@ -28,9 +22,9 @@
                         <ul class="navbar-nav border-top mt-2"> 
                             <li class="nav-item mt-2"> <h5>Documentation</h5> 
                                 <ul class="nav flex-column"> 
-                                    <li class="nav-item ms-4"><a class="nav-link" href="#">Getting Started</a></li> 
-                                    <li class="nav-item ms-4"><a class="nav-link" href="#">Reference</a></li> 
-                                    <li class="nav-item ms-4"><a class="nav-link" href="#">API Doc</a></li> 
+                                    <li class="nav-item ms-4"><a class="nav-link" href="../../../../docs/getting-started/html/index.html">Getting Started</a></li> 
+                                    <li class="nav-item ms-4"><a class="nav-link" href="../../../../docs/release/reference/html/index.html">Reference Guide</a></li> 
+                                    <li class="nav-item ms-4"><a class="nav-link" href="../../../../docs/release/api/index.html">API Doc</a></li> 
                                 </ul> </li> 
                             <li class="nav-item mt-2"> <h5>Projects</h5> 
                                 <ul class="nav flex-column"> 
@@ -45,17 +39,17 @@
                     <ul class="navbar-nav d-none d-sm-none d-lg-flex flex-fill justify-content-end align-self-stretch"> 
                         <li class="nav-item dropdown d-flex align-items-center me-3"> <a class="nav-link dropdown-toggle text-decoration-none" href="#" id="documentationMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Documentation</a> 
                             <ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="documentationMenu"> 
-                                <li><a class="dropdown-item" href="#">Getting Started</a></li> 
-                                <li><a class="dropdown-item" href="#">Reference</a></li> 
-                                <li><a class="dropdown-item" href="#">API Doc</a></li> 
+                                <li><a class="dropdown-item" href="../../../../docs/getting-started/html/index.html">Getting Started</a></li> 
+                                <li><a class="dropdown-item" href="../../../../docs/release/reference/html/index.html">Reference Guide</a></li> 
+                                <li><a class="dropdown-item" href="../../../../docs/release/api/index.html">API Doc</a></li> 
                             </ul> </li> 
                         <li class="nav-item dropdown d-flex align-items-center"> <a class="nav-link dropdown-toggle text-decoration-none" href="#" id="projectsMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a> 
                             <ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="projectsMenu"> 
-                                <li><a class="dropdown-item" href="#">Core</a></li> 
-                                <li><a class="dropdown-item" href="#">Modules</a></li> 
-                                <li><a class="dropdown-item" href="#">Distribution</a></li> 
-                                <li><a class="dropdown-item" href="#">Tools</a></li> 
-                                <li><a class="dropdown-item" href="#">Examples</a></li> 
+                                <li><a class="dropdown-item" href="https://github.com/winterframework-io/winter">Core</a></li> 
+                                <li><a class="dropdown-item" href="https://github.com/winterframework-io/winter-mods">Modules</a></li> 
+                                <li><a class="dropdown-item" href="https://github.com/winterframework-io/winter-dist">Distribution</a></li> 
+                                <li><a class="dropdown-item" href="https://github.com/winterframework-io/winter-tools">Tools</a></li> 
+                                <li><a class="dropdown-item" href="https://github.com/winterframework-io/winter-examples">Examples</a></li> 
                             </ul> </li> 
                     </ul> 
                 </nav> 
@@ -65,7 +59,7 @@
             <div class="heading"> 
                 <h1 class="heading-title">Winter Reference Guide</h1> 
                 <p class="heading-subtitle">Version: 1.0.0</p> 
-                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@winterframework.io">Jeremy Kuhn</a></p> 
+                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@winterframework.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="winter-reference-guide-1.0.0.pdf"><i class="bi bi-download"></i> Reference guide.pdf</a> 
             </div> 
             <div class="d-lg-flex">
                 <section class="toc col-12 col-lg-3">
@@ -73,6 +67,9 @@
                     <nav id="toc" class="navbar navbar-light toc-navbar toc-navbar-collapse collapse scrollbar-thin" onclick="this.className = 'navbar navbar-light toc-navbar toc-navbar-collapse collapse scrollbar-thin'">
                         <nav class="nav nav-pills flex-column">
                             <a class="nav-link" href="#introduction">Introduction</a>
+                            <nav class="nav nav-pills flex-column ms-2 my-1">
+                                <a class="nav-link" href="#design-principles">Design principles</a><a class="nav-link" href="#getting-help">Getting help</a>
+                            </nav><a class="nav-link" href="#overview">Overview</a>
                             <nav class="nav nav-pills flex-column ms-2 my-1">
                                 <a class="nav-link" href="#winter-core">Winter Core</a>
                                 <nav class="nav nav-pills flex-column ms-2 my-1">
@@ -92,7 +89,7 @@
                                 </nav>
                             </nav><a class="nav-link" href="#winter-core-1">Winter Core</a>
                             <nav class="nav nav-pills flex-column ms-2 my-1">
-                                <a class="nav-link" href="#motivation">Motivation</a><a class="nav-link" href="#prerequisites">Prerequisites</a><a class="nav-link" href="#overview">Overview</a>
+                                <a class="nav-link" href="#motivation">Motivation</a><a class="nav-link" href="#prerequisites">Prerequisites</a><a class="nav-link" href="#overview-1">Overview</a>
                                 <nav class="nav nav-pills flex-column ms-2 my-1">
                                     <a class="nav-link" href="#modules-and-beans">Modules and Beans</a><a class="nav-link" href="#java-module-system">Java module system</a>
                                 </nav><a class="nav-link" href="#project-setup">Project Setup</a>
@@ -113,7 +110,7 @@
                                 </nav>
                             </nav><a class="nav-link" href="#winter-modules-1">Winter Modules</a>
                             <nav class="nav nav-pills flex-column ms-2 my-1">
-                                <a class="nav-link" href="#motivation-1">Motivation</a><a class="nav-link" href="#prerequisites-1">Prerequisites</a><a class="nav-link" href="#overview-1">Overview</a><a class="nav-link" href="#base">Base</a>
+                                <a class="nav-link" href="#motivation-1">Motivation</a><a class="nav-link" href="#prerequisites-1">Prerequisites</a><a class="nav-link" href="#overview-2">Overview</a><a class="nav-link" href="#base">Base</a>
                                 <nav class="nav nav-pills flex-column ms-2 my-1">
                                     <a class="nav-link" href="#converter-api">Converter API</a><a class="nav-link" href="#net-api">Net API</a><a class="nav-link" href="#reflection-api">Reflection API</a><a class="nav-link" href="#resource-api">Resource API</a>
                                 </nav><a class="nav-link" href="#boot">Boot</a>
@@ -139,7 +136,7 @@
                                     <a class="nav-link" href="#run-a-module-application-project">Run a module application project</a><a class="nav-link" href="#start-and-stop-the-application-for-integration-testing">Start and stop the application for integration testing</a><a class="nav-link" href="#build-a-runtime-image">Build a runtime image</a><a class="nav-link" href="#build-an-application-image">Build an application image</a><a class="nav-link" href="#build-a-container-image-tarball">Build a container image tarball</a><a class="nav-link" href="#build-and-deploy-a-container-image-to-a-docker-daemon">Build and deploy a container image to a Docker daemon</a><a class="nav-link" href="#build-and-deploy-a-container-image-to-a-remote-repository">Build and deploy a container image to a remote repository</a>
                                 </nav><a class="nav-link" href="#goals">Goals</a>
                                 <nav class="nav nav-pills flex-column ms-2 my-1">
-                                    <a class="nav-link" href="#overview-2">Overview</a><a class="nav-link" href="#winterbuild-app">winter:build-app</a><a class="nav-link" href="#winterbuild-image">winter:build-image</a><a class="nav-link" href="#winterbuild-image-docker">winter:build-image-docker</a><a class="nav-link" href="#winterbuild-image-tar">winter:build-image-tar</a><a class="nav-link" href="#winterbuild-runtime">winter:build-runtime</a><a class="nav-link" href="#winterhelp">winter:help</a><a class="nav-link" href="#winterrun">winter:run</a><a class="nav-link" href="#winterstart">winter:start</a><a class="nav-link" href="#winterstop">winter:stop</a>
+                                    <a class="nav-link" href="#overview-3">Overview</a><a class="nav-link" href="#winterbuild-app">winter:build-app</a><a class="nav-link" href="#winterbuild-image">winter:build-image</a><a class="nav-link" href="#winterbuild-image-docker">winter:build-image-docker</a><a class="nav-link" href="#winterbuild-image-tar">winter:build-image-tar</a><a class="nav-link" href="#winterbuild-runtime">winter:build-runtime</a><a class="nav-link" href="#winterhelp">winter:help</a><a class="nav-link" href="#winterrun">winter:run</a><a class="nav-link" href="#winterstart">winter:start</a><a class="nav-link" href="#winterstop">winter:stop</a>
                                 </nav>
                             </nav><a class="nav-link" href="#winter-oss-parent">Winter OSS Parent</a>
                             <nav class="nav nav-pills flex-column ms-2 my-1">
@@ -150,6 +147,20 @@
                 </section>
                 <section class="markdown col p-3 overflow-auto"> 
                     <h1 id="introduction">Introduction</h1> 
+                    <p>The <strong>Winter Framework</strong> has been created with the objective of facilitating the creation of Java enterprise applications with maximum modularity, performance, maintainability and customizability.</p> 
+                    <p>New technologies are emerging all the time questioning what has been working for years, We strongly believe that we must instead recognize and preserve proven solutions and only provide what is missing or change what is no longer in line with widely accepted evolutions. The Java platform has proven to be resilient to change and offers features that make it an ideal choice to create durable and efficient applications in complex technical and organizational environments which is precisely what is expected in an enterprise world. The Winter Framework is a fully integrated suite of modules built for the Java platform that fully embrace its philosophy by keeping things well organized, strict and explicit with clean APIs and comprehensive documentation.</p> 
+                    <p>The Winter framework is open source and licensed under version 2.0 of the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License</a>.</p> 
+                    <h2 id="design-principles">Design principles</h2> 
+                    <p>A Winter application is inherently modular, <strong>modularity</strong> is a key design principle which guarantees a proper separation of concerns providing flexibility, maintainability, stability and ease of development regardless of the lifespan of an application or the number of people involved to develop it. A Winter module is built as a standard Java module extending the <a href="https://en.wikipedia.org/wiki/Java_Platform_Module_System">Java module system</a> with <a href="https://en.wikipedia.org/wiki/Inversion_of_control">Inversion of Control</a> and <a href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency Injection</a> performed at compile time.</p> 
+                    <p>The Winter Framework extends the Java compiler to generate code at compile time when it makes sense to do so which is strictly why annotations were initially created for. When done appropriately, <strong>code generation</strong> can be extremely valuable: issues can be detected ahead of time by analyzing the code during compilation, runtime footprint can be reduced by transferring costly processing like IoC/DI to the compiler improving runtime performance at the same time.</p> 
+                    <p>The framework uses a state of the art threading model and it has been designed from the ground up to be fully non-blocking and reactive in order to deliver very <strong>high performance</strong> while simplifying development of highly distributed applications requiring back pressure management.</p> 
+                    <p>The inherent modularity of the framework based on the Java module system guarantees a nice and clean project structure which prevents misuse and abuse by clearly separating the concerns and exposing <strong>well designed APIs</strong>.</p> 
+                    <p>Special attention has been paid to <strong>configuration</strong> and <strong>customization</strong> which are often overlooked and yet vital to create applications that can adapt to any environment or context.</p> 
+                    <h2 id="getting-help">Getting help</h2> 
+                    <p>We provide here a reference guide that starts by an overview of the Winter core, modules and tools projects which gives a good idea of what can be done with the framework followed by a more comprehensive documentation that should guide you in the creation of a Winter project using the Winter distribution, the use of the core IoC/DI framework, the various modules including the configuration and the Web server modules and the tools to run, package and distribute Winter components and applications.</p> 
+                    <p>The <a href="../../../../docs/release/api/index.html">API documentation</a> provides plenty of details on how to use the various APIs. The <a href="../../../../docs/getting-started/html/index.html">getting started guide</a> is also a good starting point to get into it.</p> 
+                    <p>Feel free to report bugs and feature requests or simply ask questions using <a href="https://github.com/winterframework-io/winter/issues">GitHub</a>'s issue tracking system if you ran in any issue or wish to see some new functionalities implemented in the framework.</p> 
+                    <h1 id="overview">Overview</h1> 
                     <h2 id="winter-core">Winter Core</h2> 
                     <p>The <a href="https://www.winterframework.io">Winter framework</a> core project provides an Inversion of Control and Dependency Injection framework for the Java™ platform. It has the particularity of not using reflection for object instantiation and dependency injection, everything being verified and done statically during compilation.</p> 
                     <p>This approach has many advantages over other IoC/DI solutions starting with the static checking of the bean dependency graph at compile time which guarantees that a program is correct and will run properly. Debugging is also made easier since you can actually access the source code where beans are instantiated and wired together. Finally, the startup time of a program is greatly reduced since everything is known in advance, such program can even be further optimized with ahead of time compilation solutions like <a href="https://www.graalvm.org/">GraalVM</a>...</p> 
@@ -200,7 +211,7 @@ public class Main {
     &lt;parent&gt;
         &lt;groupId&gt;io.winterframework.dist&lt;/groupId&gt;
         &lt;artifactId&gt;winter-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+        &lt;version&gt;1.0.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.winterframework.example&lt;/groupId&gt;
     &lt;artifactId&gt;hello&lt;/artifactId&gt;
@@ -220,7 +231,7 @@ public class Main {
                     <p>You can then run the application:</p> 
                     <pre><code class="language-plaintext">$ mvn winter:run -Dwinter.run.arguments=John
 
-[INFO] --- winter-maven-plugin:1.0.0-SNAPSHOT:run (default-cli) @ app-hello ---
+[INFO] --- winter-maven-plugin:1.0.0:run (default-cli) @ app-hello ---
 [INFO] Running project: io.winterframework.example.hello@1.0.0-SNAPSHOT...
 Hello John!!!
 
@@ -480,7 +491,7 @@ public class App {
                     <pre><code class="language-plaintext">$ mvn winter:run
 
 ...
-[INFO] --- winter-maven-plugin:1.0.0-SNAPSHOT:run (default-cli) @ sample-app ---
+[INFO] --- winter-maven-plugin:1.0.0:run (default-cli) @ sample-app ---
 [INFO] Running project: io.winterframework.example.sample_app@1.0.0-SNAPSHOT...
  [═══════════════════════════════════════════════ 100&nbsp;% ══════════════════════════════════════════════] 
 2021-04-08 23:50:35,261 INFO  [main] i.w.c.v.Application - Winter is starting...
@@ -531,12 +542,17 @@ Hello, world!
                     <p>The application can be gracefully shutdown by pressing <code>Ctrl-c</code>.</p> 
                     <h3 id="building-the-application-image">Building the application image</h3> 
                     <p>In order to create a native image containing the application and all its dependencies including JDK's dependencies, we can simply invoke the <code>winter:build-app</code> goal:</p> 
-                    <pre><code class="language-plaintext">$ mvn package winter:build-app
+                    <pre><code class="language-plaintext">$ mvn winter:build-app
 
 ...
 [INFO] Building application image: /home/jkuhn/Devel/git/frmk/io.winterframework.example.sample-app/target/maven-winter/application_linux_amd64/sample-app-1.0.0-SNAPSHOT...
  [═══════════════════════════════════════════════  67&nbsp;% ═════════════&gt;                                ] Creating archive sample-app-1.0.0-SNAPSHOT-application_linux_amd64.zip...
 </code></pre> 
+                    <blockquote> 
+                        <p>This uses <code>jpackage</code> tool which is an incubating feature in JDK&lt;16, if you intend to build an application image with an old JDK, you'll need to explicitly add the <code>jdk.incubator.jpackage</code> module in <code>MAVEN_OPTS</code>:</p> 
+                        <pre><code class="language-plaintext">$ export MAVEN_OPTS="--add-modules jdk.incubator.jpackage"
+</code></pre> 
+                    </blockquote> 
                     <p>This will create a ZIP archive containing a native application distribution <code>target/sample-app-1.0.0-SNAPSHOT-application_linux_amd64.zip</code> which will be deployed to the local Maven repository and eventually to a remote Maven repository.</p> 
                     <p>Then in order to install the application on a compatible platform, we just need to download the archive corresponding to the platform, extract it to some location and run the application. Luckily for us this can be done quite easily with Maven dependency plugin:</p> 
                     <pre><code class="language-plaintext">$ mvn dependency:unpack -Dartifact=io.winterframework.example:sample-app:1.0.0-SNAPSHOT:zip:application_linux_amd64 -DoutputDirectory=./
@@ -583,9 +599,7 @@ $ ./sample-app-1.0.0-SNAPSHOT/bin/sample-app
 $ sudo dpkg -i sample-app-1.0.0-SNAPSHOT-application_linux_amd64.deb
 ...
 $ /opt/sample-app/bin/sample-app
-...
 </code></pre> 
-                    <p>The Winter Maven plugin allows to create various application images including Docker or OCI container images, please refer to the <a href="https://github.com/winterframework-io/winter-tools/tree/master/winter-maven-plugin">Winter Maven plugin documentation</a> to learn more.</p> 
                     <h1 id="winter-core-1">Winter Core</h1> 
                     <h2 id="motivation">Motivation</h2> 
                     <p><a href="https://en.wikipedia.org/wiki/Inversion_of_control">Inversion of Control</a> and <a href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency Injection</a> principles are not new and many Java applications have been developed following these principles over the past two decades using frameworks such as Spring, CDI, Guice... However these recognized solutions might have some issues in practice especially with the way Java has evolved and how applications should be developed nowadays.</p> 
@@ -596,7 +610,7 @@ $ /opt/sample-app/bin/sample-app
                     <p>These points are very high level, please have a look at this <a href="https://medium.com/@jeremy.kuhn.winter/reviving-java-ioc-di-and-why-does-it-matters-b1a2b0b57cca">article</a> if you like to learn more about the general ideas behind the Winter framework. The Winter framework proposes a new approach of IoC/DI principles consistent with latest developments of the Java™ platform and perfectly adapted to the development of modern applications in Java.</p> 
                     <h2 id="prerequisites">Prerequisites</h2> 
                     <p>In this documentation, we’ll assume that you have a working knowledge of <a href="https://en.wikipedia.org/wiki/Inversion_of_control">Inversion of Control</a> and <a href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency Injection</a> principles as well as <a href="https://en.wikipedia.org/wiki/Object-oriented_programming">Object Oriented Programming</a>.</p> 
-                    <h2 id="overview">Overview</h2> 
+                    <h2 id="overview-1">Overview</h2> 
                     <p>The Winter framework is different in many ways and tries to address previous issues. Its main difference is that it doesn't rely on Java reflection at all to instantiate the beans composing an application (IoC) and wire them together (DI), this is actually done by a class generated by the Winter compiler at compile time.</p> 
                     <p>Since beans and their dependencies are determined at compile time, errors can be raised precisely when they make sense during development or at build time.</p> 
                     <p>There is also no need for complex runtime libraries since the complexity is handled by the compiler which generates a readable class providing only what is required at runtime. This presents two advantages, first applications have a small footprint and start fast since most of the processing is already done and no reflection is involved. Secondly you will be able to actually debug all parts of your application since nothing is hidden behind a complex library, you can actually see when the beans are instantiated with the <code>new</code> operator opening rooms to other compile and runtime optimization as well.</p> 
@@ -1480,7 +1494,7 @@ public class CoffeMakerImpl implements @Provide CoffeMaker {
                     <p>Before we can dig into the various modules provided in the framework, it is important to understand how to setup a modular Winter project, so please have a look at the <a href="https://github.com/winterframework-io/winter-dist">Winter distribution documentation</a> which describes in details how to create, build, run, package and distribute a modular Winter component or application.</p> 
                     <p>Winter modules are built on top of the Winter core IoC/DI framework, please refer to the <a href="https://github.com/winterframework-io/winter/tree/master/doc/reference-guide.md">Winter core documentation</a> to understand how IoC/DI is working in the framework.</p> 
                     <p>The framework is fully reactive thanks to <a href="https://projectreactor.io/">Project Reactor Core library</a>, it is strongly recommended to also look at <a href="https://projectreactor.io/docs/core/release/reference/">the reference documentation</a>.</p> 
-                    <h2 id="overview-1">Overview</h2> 
+                    <h2 id="overview-2">Overview</h2> 
                     <p>The basic Winter application is a Winter module composing the <em>boot</em> module which provides common services. Other Winter modules can then be added by defining the corresponding dependencies in the module descriptor.</p> 
                     <pre><code class="language-java">@io.winterframework.core.annotation.Module
 module io.winterframework.example.app {
@@ -1949,7 +1963,7 @@ compile 'io.winterframework.mod:winter-boot:1.0.0'
                     <h3 id="configuration">Configuration</h3> 
                     <p>The <em>boot</em> module defines specific configuration for the services it exposes, they can be specified when starting the module to override default values.</p> 
                     <p>For instance the <code>NetConfiguration</code> is used to configure the net service.</p> 
-                    <p>Please refer to the <a href="http://tbd">API documentation</a> to have an exhaustive description of the different configuration properties.</p> 
+                    <p>Please refer to the <a href="https://winterframework.io/docs/release/api/index.html">API documentation</a> to have an exhaustive description of the different configuration properties.</p> 
                     <h3 id="net-service">Net service</h3> 
                     <p>The module provides a base <code>NetService</code> implementation exposed as a bean for building network applications based on Netty.</p> 
                     <h3 id="media-type-service">Media type service</h3> 
@@ -2156,7 +2170,7 @@ PropertyFileConfigurationSource source = new PropertyFileConfigurationSource(new
                     <p>This implementation can be used to bootstrap an application using system properties.</p> 
                     <h4 id="command-line-configuration-source">Command line configuration source</h4> 
                     <p>The command line configuration source exposes configuration properties specified as command line arguments of the application. This implementation supports parameterized properties.</p> 
-                    <p>Configuration properties must be specified as application arguments using the following syntax: <code>--property[parameter_1=value_1...parameter_n=value_n]=value</code> where property and parameter names are valid Java identifiers and property and parameter values are Java primitives such as integer, boolean, string... A complete description of the syntax can be found in the <a href="http://tbd">API documentation</a>.</p> 
+                    <p>Configuration properties must be specified as application arguments using the following syntax: <code>--property[parameter_1=value_1...parameter_n=value_n]=value</code> where property and parameter names are valid Java identifiers and property and parameter values are Java primitives such as integer, boolean, string... A complete description of the syntax can be found in the <a href="https://winterframework.io/docs/release/api/index.html">API documentation</a>.</p> 
                     <p>For instance the following are valid configuration properties specified as command line arguments:</p> 
                     <pre><code class="language-plaintext">$ java ... Main \
 --web.server_port=8080 \
@@ -2969,7 +2983,7 @@ public class Main {
      ║                 ,   __\_/\_\__   ,     \  / \  /| || | | || |_ |  __/| |                   ║
      ║                  , /_/ /\/\ \_\ ,       \/   \/ |_||_| |_| \__| \___||_|                   ║
      ║                   ,     /\     ,                                                           ║
-     ║                     ,   \/   ,                        -- 1.0.2-SNAPSHOT --                 ║
+     ║                     ,   \/   ,                        -- 1.0.2 --                          ║
      ║                       ' -- '                                                               ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -3967,7 +3981,7 @@ public class Main {
      ║                 ,   __\_/\_\__   ,     \  / \  /| || | | || |_ |  __/| |                   ║
      ║                  , /_/ /\/\ \_\ ,       \/   \/ |_||_| |_| \__| \___||_|                   ║
      ║                   ,     /\     ,                                                           ║
-     ║                     ,   \/   ,                        -- 1.0.2-SNAPSHOT --                 ║
+     ║                     ,   \/   ,                        -- 1.0.2 --                          ║
      ║                       ' -- '                                                               ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -5156,7 +5170,7 @@ info:
 </code></pre> 
                     </blockquote> 
                     <h2 id="goals">Goals</h2> 
-                    <h3 id="overview-2">Overview</h3> 
+                    <h3 id="overview-3">Overview</h3> 
                     <ul> 
                         <li><a href="#winterbuild-app">winter:build-app</a> Builds the project application package.</li> 
                         <li><a href="#winterbuild-image">winter:build-image</a> Builds a container image and publishes it to a registry.</li> 
@@ -5170,7 +5184,7 @@ info:
                     </ul> 
                     <h3 id="winterbuild-app">winter:build-app</h3> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0-SNAPSHOT:build-app</p> 
+                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0:build-app</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds the project application package.</p> 
                     <p>A project application package is a native self-contained Java application including all the necessary dependencies. It can be used to distribute a complete application.</p> 
@@ -5804,7 +5818,7 @@ info:
                     </ul> 
                     <h3 id="winterbuild-image">winter:build-image</h3> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0-SNAPSHOT:build-image</p> 
+                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0:build-image</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds a container image and publishes it to a registry.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -6608,7 +6622,7 @@ info:
                     </ul> 
                     <h3 id="winterbuild-image-docker">winter:build-image-docker</h3> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0-SNAPSHOT:build-image-docker</p> 
+                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0:build-image-docker</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds a Docker container image to a local Docker daemon.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -7409,7 +7423,7 @@ info:
                     </ul> 
                     <h3 id="winterbuild-image-tar">winter:build-image-tar</h3> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0-SNAPSHOT:build-image-tar</p> 
+                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0:build-image-tar</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds a container image to a TAR archive that can be later loaded into Docker:</p> 
                     <p>$ docker load --input target/&lt;image&gt;.tar</p> 
@@ -8184,7 +8198,7 @@ info:
                     </ul> 
                     <h3 id="winterbuild-runtime">winter:build-runtime</h3> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0-SNAPSHOT:build-runtime</p> 
+                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0:build-runtime</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds the project runtime image.</p> 
                     <p>A runtime image is a custom Java runtime containing a set of modules and their dependencies.</p> 
@@ -8669,7 +8683,7 @@ info:
                     </ul> 
                     <h3 id="winterhelp">winter:help</h3> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0-SNAPSHOT:help</p> 
+                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0:help</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Display help information on winter-maven-plugin. Call mvn winter:help -Ddetail=true -Dgoal=&lt;goal-name&gt; to display parameter details.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -8754,7 +8768,7 @@ info:
                     </ul> 
                     <h3 id="winterrun">winter:run</h3> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0-SNAPSHOT:run</p> 
+                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0:run</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Runs the project application.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -8956,7 +8970,7 @@ info:
                     </ul> 
                     <h3 id="winterstart">winter:start</h3> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0-SNAPSHOT:start</p> 
+                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0:start</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Starts the project application without blocking the Maven build.</p> 
                     <p>This goal is used together with the stop goal in the pre-integration-test and post-integration-test phases to run integration tests.</p> 
@@ -9161,7 +9175,7 @@ info:
                     </ul> 
                     <h3 id="winterstop">winter:stop</h3> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0-SNAPSHOT:stop</p> 
+                    <p>io.winterframework.tool:winter-maven-plugin:1.0.0:stop</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Stops the project application that has been previously started using the start goal.</p> 
                     <p>This goal is used together with the start goal in the pre-integration-test and post-integration-test phases to run integration tests.</p> 
@@ -9247,7 +9261,7 @@ info:
                                 <tr> 
                                     <td>com.fasterxml.jackson.core</td> 
                                     <td>jackson-databind</td> 
-                                    <td>2.12.1</td> 
+                                    <td>2.12.3</td> 
                                 </tr> 
                                 <tr> 
                                     <td>com.google.cloud.tools</td> 
@@ -9257,77 +9271,77 @@ info:
                                 <tr> 
                                     <td>io.lettuce</td> 
                                     <td>lettuce-core</td> 
-                                    <td>6.0.2.RELEASE</td> 
+                                    <td>6.1.1.RELEASE</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-all</td> 
-                                    <td>4.1.59.Final</td> 
+                                    <td>4.1.63.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-buffer</td> 
-                                    <td>4.1.59.Final</td> 
+                                    <td>4.1.63.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-codec-http2</td> 
-                                    <td>4.1.59.Final</td> 
+                                    <td>4.1.63.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-common</td> 
-                                    <td>4.1.59.Final</td> 
+                                    <td>4.1.63.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-resolver</td> 
-                                    <td>4.1.59.Final</td> 
+                                    <td>4.1.63.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-tcnative-boringssl-static</td> 
-                                    <td>2.0.36.Final</td> 
+                                    <td>2.0.39.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-transport</td> 
-                                    <td>4.1.59.Final</td> 
+                                    <td>4.1.63.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-transport-native-epoll</td> 
-                                    <td>4.1.59.Final</td> 
+                                    <td>4.1.63.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-transport-native-epoll</td> 
-                                    <td>4.1.59.Final</td> 
+                                    <td>4.1.63.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-transport-native-epoll</td> 
-                                    <td>4.1.59.Final</td> 
+                                    <td>4.1.63.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-transport-native-epoll</td> 
-                                    <td>4.1.59.Final</td> 
+                                    <td>4.1.63.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-transport-native-kqueue</td> 
-                                    <td>4.1.59.Final</td> 
+                                    <td>4.1.63.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-transport-native-kqueue</td> 
-                                    <td>4.1.59.Final</td> 
+                                    <td>4.1.63.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.projectreactor</td> 
                                     <td>reactor-core</td> 
-                                    <td>3.4.3</td> 
+                                    <td>3.4.6</td> 
                                 </tr> 
                                 <tr> 
                                     <td>net.java.dev.javacc</td> 
@@ -9352,12 +9366,12 @@ info:
                                 <tr> 
                                     <td>org.apache.logging.log4j</td> 
                                     <td>log4j-api</td> 
-                                    <td>2.14.0</td> 
+                                    <td>2.14.1</td> 
                                 </tr> 
                                 <tr> 
                                     <td>org.apache.logging.log4j</td> 
                                     <td>log4j-core</td> 
-                                    <td>2.14.0</td> 
+                                    <td>2.14.1</td> 
                                 </tr> 
                                 <tr> 
                                     <td>org.apache.maven</td> 
@@ -9427,7 +9441,7 @@ info:
                                 <tr> 
                                     <td>org.webjars</td> 
                                     <td>swagger-ui</td> 
-                                    <td>3.46.0</td> 
+                                    <td>3.48.0</td> 
                                 </tr> 
                             </tbody>
                         </table>
@@ -9469,7 +9483,7 @@ info:
                                 <tr> 
                                     <td>org.apache.maven.plugins</td> 
                                     <td>maven-gpg-plugin</td> 
-                                    <td>1.6</td> 
+                                    <td>3.0.1</td> 
                                 </tr> 
                                 <tr> 
                                     <td>org.apache.maven.plugins</td> 
@@ -9489,7 +9503,7 @@ info:
                                 <tr> 
                                     <td>org.apache.maven.plugins</td> 
                                     <td>maven-plugin-plugin</td> 
-                                    <td>3.6.0</td> 
+                                    <td>3.6.1</td> 
                                 </tr> 
                                 <tr> 
                                     <td>org.apache.maven.plugins</td> 
@@ -9514,7 +9528,7 @@ info:
                                 <tr> 
                                     <td>org.javacc.plugin</td> 
                                     <td>javacc-maven-plugin</td> 
-                                    <td>3.0.2</td> 
+                                    <td>3.0.3</td> 
                                 </tr> 
                                 <tr> 
                                     <td>org.sonatype.plugins</td> 
@@ -9533,19 +9547,19 @@ info:
                     <div class="col col-lg-3"> 
                         <h5>Documentation</h5> 
                         <ul class="nav flex-column"> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">Getting Started</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">Reference</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">API Doc</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../../docs/getting-started/html/index.html">Getting Started</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../../docs/release/reference/html/index.html">Reference</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../../docs/release/api/index.html">API Doc</a></li> 
                         </ul> 
                     </div> 
                     <div class="col col-lg-3"> 
                         <h5>Projects</h5> 
                         <ul class="nav flex-column"> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">Core</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">Modules</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">Distribution</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">Tools</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">Examples</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/winterframework-io/winter">Core</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/winterframework-io/winter-mods">Modules</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/winterframework-io/winter-dist">Distribution</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/winterframework-io/winter-tools">Tools</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/winterframework-io/winter-examples">Examples</a></li> 
                         </ul> 
                     </div> 
                 </div> 

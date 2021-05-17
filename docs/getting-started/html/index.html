@@ -4,19 +4,13 @@
         <title>The Winter Framework | Winter Getting Started Guide</title> 
         <meta name="viewport" content="width=device-width, initial-scale=1" /> 
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> 
-        <meta property="og:title" content="The Winter Framework" /> 
-        <meta property="og:url" content="https://winterframework.io/" /> 
-        <meta property="og:image" content="https://winterframework.io/img/winter_portable.svg" /> 
-        <meta property="og:description" content="Definitive Java Framework for modern, fast and modular applications" /> 
-        <meta property="og:locale" content="en_US" /> 
         <meta name="author" content="Jeremy KUHN (jeremy.kuhn@winterframework.io)" /> 
-        <meta name="description" content="Definitive Java Framework for modern, fast and modular applications" /> 
-        <meta name="keywords" content="Java, MicroServices, Reactive, REST, Inversion of Control, Dependency Injection, Non-blocking, IoC, DI, standalone, application" /> 
         <link rel="icon" type="image/svg" href="../../../img/snowflake.svg" /> 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous" /> 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" /> 
         <link rel="stylesheet" type="text/css" href="../../../styles/styles.css" /> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/stackoverflow-dark.min.css" /> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/idea.min.css" media="print" /> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/stackoverflow-dark.min.css" media="screen" /> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/ascetic.min.css" media="print" /> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script> 
         <script>hljs.initHighlightingOnLoad();</script> 
     </head> 
@@ -28,9 +22,9 @@
                         <ul class="navbar-nav border-top mt-2"> 
                             <li class="nav-item mt-2"> <h5>Documentation</h5> 
                                 <ul class="nav flex-column"> 
-                                    <li class="nav-item ms-4"><a class="nav-link" href="#">Getting Started</a></li> 
-                                    <li class="nav-item ms-4"><a class="nav-link" href="#">Reference</a></li> 
-                                    <li class="nav-item ms-4"><a class="nav-link" href="#">API Doc</a></li> 
+                                    <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/getting-started/html/index.html">Getting Started</a></li> 
+                                    <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/release/reference/html/index.html">Reference Guide</a></li> 
+                                    <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/release/api/index.html">API Doc</a></li> 
                                 </ul> </li> 
                             <li class="nav-item mt-2"> <h5>Projects</h5> 
                                 <ul class="nav flex-column"> 
@@ -45,17 +39,17 @@
                     <ul class="navbar-nav d-none d-sm-none d-lg-flex flex-fill justify-content-end align-self-stretch"> 
                         <li class="nav-item dropdown d-flex align-items-center me-3"> <a class="nav-link dropdown-toggle text-decoration-none" href="#" id="documentationMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Documentation</a> 
                             <ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="documentationMenu"> 
-                                <li><a class="dropdown-item" href="#">Getting Started</a></li> 
-                                <li><a class="dropdown-item" href="#">Reference</a></li> 
-                                <li><a class="dropdown-item" href="#">API Doc</a></li> 
+                                <li><a class="dropdown-item" href="../../../docs/getting-started/html/index.html">Getting Started</a></li> 
+                                <li><a class="dropdown-item" href="../../../docs/release/reference/html/index.html">Reference Guide</a></li> 
+                                <li><a class="dropdown-item" href="../../../docs/release/api/index.html">API Doc</a></li> 
                             </ul> </li> 
                         <li class="nav-item dropdown d-flex align-items-center"> <a class="nav-link dropdown-toggle text-decoration-none" href="#" id="projectsMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a> 
                             <ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="projectsMenu"> 
-                                <li><a class="dropdown-item" href="#">Core</a></li> 
-                                <li><a class="dropdown-item" href="#">Modules</a></li> 
-                                <li><a class="dropdown-item" href="#">Distribution</a></li> 
-                                <li><a class="dropdown-item" href="#">Tools</a></li> 
-                                <li><a class="dropdown-item" href="#">Examples</a></li> 
+                                <li><a class="dropdown-item" href="https://github.com/winterframework-io/winter">Core</a></li> 
+                                <li><a class="dropdown-item" href="https://github.com/winterframework-io/winter-mods">Modules</a></li> 
+                                <li><a class="dropdown-item" href="https://github.com/winterframework-io/winter-dist">Distribution</a></li> 
+                                <li><a class="dropdown-item" href="https://github.com/winterframework-io/winter-tools">Tools</a></li> 
+                                <li><a class="dropdown-item" href="https://github.com/winterframework-io/winter-examples">Examples</a></li> 
                             </ul> </li> 
                     </ul> 
                 </nav> 
@@ -90,19 +84,17 @@
                 </div> 
             </div> 
             <section class="markdown col p-3 overflow-auto"> 
-                <h1 id="step-1-create-the-maven-project">Step 1: Create the Maven project</h1> 
+                <h1 id="step-1-create-a-winter-project">Step 1: Create a Winter project</h1> 
                 <p>The creation of a Maven project setup with the Winter distribution should always be the first thing to do when developing a Winter component or application.</p> 
                 <p>You can start by creating a regular Maven Java project using your IDE, the Maven <a href="https://maven.apache.org/archetypes/maven-archetype-quickstart/">quickstart archetype</a> or manually using the text editor of your choice. Whatever you choose, you should end up with a project folder with the following file structure as generated by the Maven quickstart archetype:</p> 
                 <pre><code class="language-plaintext">├── pom.xml
 └── src
-    ├── main
-    │&nbsp;&nbsp; └── java
-    │&nbsp;&nbsp;     └── com
-    │&nbsp;&nbsp;         └── example
-    │&nbsp;&nbsp;             └── helloworld
-    │&nbsp;&nbsp;                 └── App.java
-    └── test
-        └── ...
+    └── main
+     &nbsp;&nbsp; └── java
+     &nbsp;&nbsp;     └── com
+     &nbsp;&nbsp;         └── example
+     &nbsp;&nbsp;             └── helloworld
+     &nbsp;&nbsp;                 └── App.java
 </code></pre> 
                 <p>You can now setup the <code>pom.xml</code> build descriptor with the Winter distribution by defining a <code>&lt;parent/&gt;</code> section pointing to <code>io.winterframework.dist:winter-parent:1.0.0</code> parent pom:</p> 
                 <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -112,7 +104,7 @@
     &lt;parent&gt;
         &lt;groupId&gt;io.winterframework.dist&lt;/groupId&gt;
         &lt;artifactId&gt;winter-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+        &lt;version&gt;1.0.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;com.example&lt;/groupId&gt;
     &lt;artifactId&gt;helloworld&lt;/artifactId&gt;
@@ -128,7 +120,7 @@
     &lt;parent&gt;
         &lt;groupId&gt;io.winterframework.dist&lt;/groupId&gt;
         &lt;artifactId&gt;winter-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+        &lt;version&gt;1.0.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;com.example&lt;/groupId&gt;
     &lt;artifactId&gt;helloworld&lt;/artifactId&gt;
@@ -194,7 +186,7 @@ public class App {
                 <pre><code class="language-plaintext">$ mvn winter:run
 </code></pre> 
                 <p>You should see an output similar to the following:</p> 
-                <pre><code class="language-plaintext">[INFO] --- winter-maven-plugin:1.0.0-SNAPSHOT:run (default-cli) @ helloworld ---
+                <pre><code class="language-plaintext">[INFO] --- winter-maven-plugin:1.0.0:run (default-cli) @ helloworld ---
 [INFO] Running project: com.example.helloworld@1.0-SNAPSHOT...
 ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
 INFO Application Winter is starting...
@@ -209,7 +201,7 @@ INFO Application Winter is starting...
      ║                 ,   __\_/\_\__   ,     \  / \  /| || | | || |_ |  __/| |                   ║
      ║                  , /_/ /\/\ \_\ ,       \/   \/ |_||_| |_| \__| \___||_|                   ║
      ║                   ,     /\     ,                                                           ║
-     ║                     ,   \/   ,                        -- 1.0.2-SNAPSHOT --                 ║
+     ║                     ,   \/   ,                        -- 1.0.2 --                          ║
      ║                       ' -- '                                                               ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -270,19 +262,19 @@ Hello, world!
                     <div class="col col-lg-3"> 
                         <h5>Documentation</h5> 
                         <ul class="nav flex-column"> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">Getting Started</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">Reference</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">API Doc</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/getting-started/html/index.html">Getting Started</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/release/reference/html/index.html">Reference</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/release/api/index.html">API Doc</a></li> 
                         </ul> 
                     </div> 
                     <div class="col col-lg-3"> 
                         <h5>Projects</h5> 
                         <ul class="nav flex-column"> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">Core</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">Modules</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">Distribution</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">Tools</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="#">Examples</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/winterframework-io/winter">Core</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/winterframework-io/winter-mods">Modules</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/winterframework-io/winter-dist">Distribution</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/winterframework-io/winter-tools">Tools</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/winterframework-io/winter-examples">Examples</a></li> 
                         </ul> 
                     </div> 
                 </div> 
