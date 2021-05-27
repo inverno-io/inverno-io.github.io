@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /docs/getting-started/markdown/
+Disallow: /docs/release/reference/markdown/
