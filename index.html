@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -28,9 +29,9 @@
 			<div class="container-fluid border-bottom bg-light">
 				<nav class="navbar navbar-expand-lg navbar-light container p-0 py-2 p-lg-1">
 					<a class="navbar-brand p-0" href="/">
-						<img class="logo" src="img/winter_portable.svg" alt="Winter Framework"/>
+						<img class="logo" src="img/winter_portable.svg" alt="The Winter Framework"/>
 					</a>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#smallNavMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#smallNavMenu" aria-controls="smallNavMenu" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 				    </button>
 				    <div class="collapse" id="smallNavMenu" style="flex-basis: 100%;">
@@ -80,14 +81,14 @@
 		</header>
 		<section class="banner container-fluid position-relative text-light overflow-hidden shadow-sm border-bottom" role="banner">
 			<div class="container position-relative" style="z-index: 1000;">
-				<h1 class="display-lg-3 fw-bold mt-3 mt-lg-4 mb-3 mb-lg-4 text-center"><img class="logo text-center" src="img/winter_portable.svg" alt="Winter Framework"/></h1>
-				<h5 class="text-center">The definitive Java<sup>TM</sup> framework for building modern, fast and modular applications.</h5>
+				<h1 class="display-lg-3 fs-3 mt-3 mt-lg-5 mb-3 mb-lg-4 text-center"><img class="logo text-center mb-3 mb-lg-4" src="img/winter_portable.svg" alt="The Winter Framework"/><br/>
+				The definitive Java™ framework for building modern, fast and modular applications.</h1>
 				<div class="container my-4 my-lg-5 d-flex flex-column flex-lg-row justify-content-center align-items-stretch align-items-lg-center">
 					<a class="btn btn-outline-light p-2 p-lg-3" href="docs/getting-started/html/index.html" role="button">Getting Started</a>
 					<a class="btn btn-outline-light p-2 p-lg-3 mx-lg-2 my-1" href="docs/release/reference/html/index.html" role="button">Documentation</a>
 					<a class="btn btn-outline-light p-2 p-lg-3" href="https://github.com/winterframework-io/" role="button">View on GitHub</a>
 				</div>
-				<script type="text/javascript">
+				<script>
 				let featureIndex = 0;
 				setInterval(function(){
 					document.getElementById("feature-" + featureIndex).className = document.getElementById("feature-" + featureIndex).className.replaceAll(" active", "");
@@ -98,19 +99,19 @@
 				<div class="features">
 					<div id="feature-0" class="feature active">
 						<h2 class="feature-title fs-1">Be Modular</h2>
-						<p class="feature-desc" class="col-md-8 fs-5">Modularity is at the core of the framework which fully embraces Java™ module system in order to deliver flexible and solid applications.</p>
+						<p class="feature-desc">Modularity is at the core of the framework which fully embraces Java™ module system in order to deliver flexible and solid applications.</p>
 					</div>
 					<div id="feature-1" class="feature">
 						<h2 class="feature-title fs-1">Be Fast</h2>
-						<p class="feature-desc" class="col-md-8 fs-5">A Winter application is assembled through IoC/DI at compilation time, it starts quickly with a very small runtime footprint and run blazingly fast using high-end threading model and non-blocking I/O.</p>
+						<p class="feature-desc">A Winter application is assembled through IoC/DI at compilation time, it starts quickly with a very small runtime footprint and run blazingly fast using high-end threading model and non-blocking I/O.</p>
 					</div>
 					<div id="feature-2" class="feature">
 						<h2 class="feature-title fs-1">Be Reactive</h2>
-						<p class="feature-desc" class="col-md-8 fs-5">Winter has been built from the ground up to be reactive and non-blocking in order to make full use of computer resources.</p>
+						<p class="feature-desc">Winter has been built from the ground up to be reactive and non-blocking in order to make full use of computer resources.</p>
 					</div>
 					<div id="feature-3" class="feature">
 						<h2 class="feature-title fs-1">Be Reliable</h2>
-						<p class="feature-desc" class="col-md-8 fs-5">The Winter compiler statically checks that the application components fit together eliminating runtime issues caused by the use of reflection and possible security issues related to dynamic linking.</p>
+						<p class="feature-desc">The Winter compiler statically checks that the application components fit together eliminating runtime issues caused by the use of reflection and possible security issues related to dynamic linking.</p>
 					</div>
 				</div>
 			</div>
@@ -148,7 +149,7 @@ public class App {
 }</code></pre>
 					</div>
 					<div class="col-12 col-lg-4">
-						<h4 class="text-center text-lg-start mt-5 mt-lg-0 lh-lg">Create Microservices applications in minutes that start in milliseconds and run blazingly fast.</h4>
+						<h2 class="text-center fs-4 text-lg-start mt-5 mt-lg-0 lh-lg">Create Microservices applications in minutes that start in milliseconds and run blazingly fast.</h2>
 					</div>
 				</div>
 			</section>
@@ -159,7 +160,7 @@ public class App {
 						<div class="card shadow">
 							<div class="card-body">
 								<h3 class="card-title text-center my-3">
-									<img src="img/modularity.svg" style="max-width: 96px;"/>
+									<img src="img/modularity.svg" style="max-width: 96px;" alt="Modularity"/>
 									<span class="d-block mt-4 fw-bold">Modularity</span>
 								</h3>
 								<div class="p-4">
@@ -173,7 +174,7 @@ public class App {
 						<div class="card shadow">
 							<div class="card-body">
 								<h3 class="card-title text-center my-3">
-									<img src="img/performance.svg" style="max-width: 96px;"/>
+									<img src="img/performance.svg" style="max-width: 96px;" alt="Performance"/>
 									<span class="d-block mt-4 fw-bold">Performance</span>
 								</h3>
 								<div class="p-4">
@@ -188,7 +189,7 @@ public class App {
 						<div class="card shadow">
 							<div class="card-body">
 								<h3 class="card-title text-center my-3">
-									<img src="img/reactive.svg" style="max-width: 96px;"/>
+									<img src="img/reactive.svg" style="max-width: 96px;" alt="Reactive"/>
 									<span class="d-block mt-4 fw-bold">Reactive</span>
 								</h3>
 								<div class="p-4">
@@ -202,7 +203,7 @@ public class App {
 						<div class="card shadow">
 							<div class="card-body">
 								<h3 class="card-title text-center my-3">
-									<img src="img/microservices.svg" style="max-width: 96px;"/>
+									<img src="img/microservices.svg" style="max-width: 96px;" alt="Microservices"/>
 									<span class="d-block mt-4 fw-bold">Microservices</span>
 								</h3>
 								<div class="p-4">
@@ -216,7 +217,7 @@ public class App {
 						<div class="card shadow">
 							<div class="card-body">
 								<h3 class="card-title text-center my-3">
-									<img src="img/configurability.svg" style="max-width: 96px;"/>
+									<img src="img/configurability.svg" style="max-width: 96px;" alt="Configurability"/>
 									<span class="d-block mt-4 fw-bold">Configurability</span>
 								</h3>
 								<div class="p-4">
@@ -230,7 +231,7 @@ public class App {
 						<div class="card shadow">
 							<div class="card-body">
 								<h3 class="card-title text-center my-3">
-									<img src="img/maintainability.svg" style="max-width: 96px;"/>
+									<img src="img/maintainability.svg" style="max-width: 96px;" alt="Maintainability"/>
 									<span class="d-block mt-4 fw-bold">Maintainability</span>
 								</h3>
 								<div class="p-4">

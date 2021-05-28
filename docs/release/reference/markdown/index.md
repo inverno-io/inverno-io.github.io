@@ -1,4 +1,4 @@
-$properties(base = ../../../../, title = Winter Reference Guide)
+$properties(base = ../../../../, title = Reference Documentation)
 
 [winter-getting-started]: ${base}docs/getting-started/html/index.html
 [winter-javadoc]: ${base}docs/release/api/index.html
@@ -10,17 +10,17 @@ $properties(base = ../../../../, title = Winter Reference Guide)
 [github-issue]: https://github.com/winterframework-io/winter/issues
 
 <div class="heading"> 
-	<h1 class="heading-title">Winter Reference Guide</h1> 
+	<h1 class="heading-title">Winter Framework Documentation</h1> 
 	<p class="heading-subtitle">Version: 1.0.0</p> 
 	<p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@winterframework.io">Jeremy Kuhn</a></p>
-	<a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="winter-reference-guide-1.0.0.pdf"><i class="bi bi-download"></i> Reference guide.pdf</a>
+	<a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="winter-framework-documentation-1.0.0.pdf"><i class="bi bi-download"></i> Winter Documentation.pdf</a>
 </div>
 
-$toc( level=3 )
+$toc( level=4 )
 
 $doc
 
-# Introduction
+## Introduction
 
 The **Winter Framework** has been created with the objective of facilitating the creation of Java enterprise applications with maximum modularity, performance, maintainability and customizability. 
 
@@ -28,7 +28,7 @@ New technologies are emerging all the time questioning what has been working for
 
 The Winter framework is open source and licensed under version 2.0 of the [Apache License][apache-license].
 
-## Design principles
+### Design principles
 
 A Winter application is inherently modular, **modularity** is a key design principle which guarantees a proper separation of concerns providing flexibility, maintainability, stability and ease of development regardless of the lifespan of an application or the number of people involved to develop it. A Winter module is built as a standard Java module extending the [Java module system][java-module-system] with [Inversion of Control][inversion-of-control] and [Dependency Injection][dependency-injection] performed at compile time.
 
@@ -40,7 +40,7 @@ The inherent modularity of the framework based on the Java module system guarant
 
 Special attention has been paid to **configuration** and **customization** which are often overlooked and yet vital to create applications that can adapt to any environment or context.
 
-## Getting help
+### Getting help
 
 We provide here a reference guide that starts by an overview of the Winter core, modules and tools projects which gives a good idea of what can be done with the framework followed by a more comprehensive documentation that should guide you in the creation of a Winter project using the Winter distribution, the use of the core IoC/DI framework, the various modules including the configuration and the Web server modules and the tools to run, package and distribute Winter components and applications.
 
@@ -48,13 +48,13 @@ The [API documentation][winter-javadoc] provides plenty of details on how to use
 
 Feel free to report bugs and feature requests or simply ask questions using [GitHub][github-issue]'s issue tracking system if you ran in any issue or wish to see some new functionalities implemented in the framework.
 
-# Overview
+## Overview
 
-$include( source=${WINTER_WORKSPACE}/winter-core/README.md, end=121, heading-offset=1)
-$include( source=${WINTER_WORKSPACE}/winter-mods/README.md, end=134, heading-offset=1 )
-$include( source=${WINTER_WORKSPACE}/winter-tools/README.md, end=22, heading-offset=1 )
-$include( source=${WINTER_WORKSPACE}/winter-dist/README.md, end=312 )
-$include( source=${WINTER_WORKSPACE}/winter-core/doc/reference-guide.md, resources = img )
-$include( source=${WINTER_WORKSPACE}/winter-mods/doc/reference-guide.md, resources = img )
-$include( source=${WINTER_WORKSPACE}/winter-tools/winter-maven-plugin/README.md )
-$include( source=${WINTER_WORKSPACE}/winter-oss-parent/README.md )
+$include( source=${WINTER_WORKSPACE}/winter-core/README.md, end=121, heading-offset=2 )
+$include( source=${WINTER_WORKSPACE}/winter-mods/README.md, end=134, heading-offset=2 )
+$include( source=${WINTER_WORKSPACE}/winter-tools/README.md, end=22, heading-offset=2 )
+$include( source=${WINTER_WORKSPACE}/winter-dist/README.md, end=312, heading-offset=1 )
+$include( source=${WINTER_WORKSPACE}/winter-core/doc/reference-guide.md, resources = img, heading-offset=1 )
+$include( source=${WINTER_WORKSPACE}/winter-mods/doc/reference-guide.md, resources = img, heading-offset=1 )
+$include( source=${WINTER_WORKSPACE}/winter-tools/winter-maven-plugin/README.md, heading-offset=1 )
+$include( source=${WINTER_WORKSPACE}/winter-oss-parent/README.md, heading-offset=1 )

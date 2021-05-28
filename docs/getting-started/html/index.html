@@ -1,7 +1,8 @@
+<!DOCTYPE html>
 <html lang="en"> 
     <head> 
         <meta charset="UTF-8" /> 
-        <title>The Winter Framework | Winter Getting Started Guide</title> 
+        <title>The Winter Framework | Getting Started Guide</title> 
         <meta name="viewport" content="width=device-width, initial-scale=1" /> 
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> 
         <meta name="author" content="Jeremy KUHN (jeremy.kuhn@winterframework.io)" /> 
@@ -17,7 +18,7 @@
     <body data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="0" tabindex="0"> 
         <header class="header"> 
             <div class="container-fluid border-bottom bg-light"> 
-                <nav class="navbar navbar-expand-lg navbar-light container p-0 py-2 p-lg-1"> <a class="navbar-brand p-0" href="../../../"> <img class="logo" src="../../../img/winter_portable.svg" alt="Winter Framework" /> </a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#smallNavMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button> 
+                <nav class="navbar navbar-expand-lg navbar-light container p-0 py-2 p-lg-1"> <a class="navbar-brand p-0" href="../../../"> <img class="logo" src="../../../img/winter_portable.svg" alt="The Winter Framework" /> </a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#smallNavMenu" aria-controls="smallNavMenu" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button> 
                     <div class="collapse" id="smallNavMenu" style="flex-basis: 100%;"> 
                         <ul class="navbar-nav border-top mt-2"> 
                             <li class="nav-item mt-2"> <h5>Documentation</h5> 
@@ -57,23 +58,23 @@
         </header> 
         <main id="main" class="main container">
             <div class="heading"> 
-                <h1 class="heading-title">Winter Getting Started Guide</h1> 
+                <h1 class="heading-title">Winter Framework Getting Started Guide</h1> 
                 <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@winterframework.io">Jeremy Kuhn</a></p> 
             </div> 
-            <div class="row row-cols-1 row-cols-lg-2 g-4 my-4"> 
-                <div class="col d-flex align-items-stretch"> 
-                    <div class="card shadow"> 
+            <div class="row align-items-stretch mt-5 mb-2"> 
+                <div class="col-12 col-lg-6 mb-3"> 
+                    <div class="card shadow h-100"> 
                         <div class="card-body p-lg-5"> 
-                            <h5 class="card-title">What you'll learn</h5> 
+                            <h2 class="card-title">What you'll learn</h2> 
                             <p class="card-text">This guide provides insights into how to create a Winter application that exposes a simple <code>Hello World</code> HTTP endpoint.</p> 
                             <p class="card-text">We will guide you through creating a Maven project, creating the Winter module for the application, writing the HTTP endpoint, running the application and finally packaging the application into an optimized runtime image.</p> 
                         </div> 
                     </div> 
                 </div> 
-                <div class="col d-flex align-items-stretch"> 
-                    <div class="card shadow"> 
+                <div class="col-12 col-lg-6 mb-3"> 
+                    <div class="card shadow h-100"> 
                         <div class="card-body p-lg-5"> 
-                            <h5 class="card-title">What you'll need</h5> 
+                            <h2 class="card-title">What you'll need</h2> 
                             <ul> 
                                 <li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 14.</li> 
                                 <li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.6.</li> 
@@ -84,7 +85,7 @@
                 </div> 
             </div> 
             <section class="markdown col p-3 overflow-auto"> 
-                <h1 id="step-1-create-a-winter-project">Step 1: Create a Winter project</h1> 
+                <h2 id="step-1-create-a-winter-project">Step 1: Create a Winter project</h2> 
                 <p>The creation of a Maven project setup with the Winter distribution should always be the first thing to do when developing a Winter component or application.</p> 
                 <p>You can start by creating a regular Maven Java project using your IDE, the Maven <a href="https://maven.apache.org/archetypes/maven-archetype-quickstart/">quickstart archetype</a> or manually using the text editor of your choice. Whatever you choose, you should end up with a project folder with the following file structure as generated by the Maven quickstart archetype:</p> 
                 <pre><code class="language-plaintext">├── pom.xml
@@ -139,7 +140,7 @@
 &lt;/project&gt;
 </code></pre> 
                 <p>Congratulations! you have just created a new Winter project.</p> 
-                <h1 id="step-2-create-the-java-module">Step 2: Create the Java module</h1> 
+                <h2 id="step-2-create-the-java-module">Step 2: Create the Java module</h2> 
                 <p>A Winter component or application is a regular Java module annotated with <code>@io.winterframework.core.annotation.Module</code>. Open up the project in your IDE and create file <code>src/main/java/module-info.java</code>. In this module descriptor, you need to declare the modules required by your application, namely <code>io.winterframework.mod.boot</code> and <code>io.winterframework.mod.web</code> modules:</p> 
                 <pre><code class="language-java">@io.winterframework.core.annotation.Module
 module com.example.helloworld {
@@ -148,7 +149,7 @@ module com.example.helloworld {
 }
 </code></pre> 
                 <p>At compile time, the Winter compiler will assemble the <em>boot</em> and <em>web</em> modules together with your application module and generate a module class. This class contains all the IoC/DI logic required to bootstrap your application.</p> 
-                <h1 id="step-3-add-the-code">Step 3: Add the code</h1> 
+                <h2 id="step-3-add-the-code">Step 3: Add the code</h2> 
                 <p>In your IDE, open the <code>src/main/java/com/example/helloworld/App.java</code> and change the contents in order to create a Winter Web application:</p> 
                 <pre><code class="language-java">package com.example.helloworld;
 
@@ -181,7 +182,7 @@ public class App {
                 <blockquote> 
                     <p>The Winter compiler generates module class <code>com.example.helloworld.Helloworld</code> when the project is compiled (eg. <code>mvn compile</code>), you might want to configure your IDE to make the generated code visible and get rid of the compilation error reported in the <code>main()</code> method by adding folder <code>target/generated-sources/annotations</code> to the project build path. In Eclipse, you can do that in the project properties &gt; Source &gt; Add Folder...</p> 
                 </blockquote> 
-                <h1 id="step-4-run-the-application">Step 4: Run the application</h1> 
+                <h2 id="step-4-run-the-application">Step 4: Run the application</h2> 
                 <p>You are now ready to build and run the application, open a terminal, go to the project folder and simply execute the following command:</p> 
                 <pre><code class="language-plaintext">$ mvn winter:run
 </code></pre> 
@@ -240,8 +241,8 @@ content-length: 13
 Hello, world!
 </code></pre> 
                 <p>Using a Web browser pointing to <code>http://localhost:8080/hello?name=John</code>:</p> 
-                <img class="img-fluid shadow" src="img/hello_browser.png" style="display: block; margin: 2em auto;" /> 
-                <h1 id="step-5-package-and-deploy-the-application">Step 5: Package and deploy the application</h1> 
+                <img class="img-fluid shadow" src="img/hello_browser.png" style="display: block; margin: 2em auto;" alt="Hello World in Web Browser" /> 
+                <h2 id="step-5-package-and-deploy-the-application">Step 5: Package and deploy the application</h2> 
                 <p>You can package the application into a native platform dependent image containing a Java runtime with the exact dependencies needed by the application and deploy it to your local Maven repository or eventually to a remote repository:</p> 
                 <pre><code class="language-plaintext">$ mvn winter:build-app install
 </code></pre> 

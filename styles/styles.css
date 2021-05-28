@@ -463,12 +463,9 @@ html {
 	margin-top: 0 !important;
 }
 
-.markdown h1 {
+.markdown h2 {
 	break-before: always;
 	page-break-before: always;
-}
-
-.markdown h1, .markdown h2 {
 	margin-top: 1.5rem !important;
 	margin-bottom: 1rem !important;
 	padding-bottom: 0.5rem !important;
@@ -488,7 +485,7 @@ html {
 	page-break-inside: avoid;
 }
 
-.markdown h2::after, .markdown h3::after, .markdown h4::after, .markdown h5::after, .markdown h6::after {
+.markdown h3::after, .markdown h4::after, .markdown h5::after, .markdown h6::after {
 	content: "";
     display: block;
     height: 100px;
@@ -772,7 +769,7 @@ html {
 		border-left: 0.25rem solid #6c757d;
 	}
 	
-	.markdown > h1 {
+	.markdown > h2 {
 		padding-top: 30% !important;
 		padding-left: 5rem;
 		margin-left: 25% !important;
@@ -782,7 +779,7 @@ html {
 		position: relative;
 	}
 	
-	.markdown > h1::before {
+	.markdown > h2::before {
 		content: counter(chapterCounter) " ";
 		display: block;
 		position: absolute;

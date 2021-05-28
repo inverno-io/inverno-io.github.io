@@ -1,7 +1,7 @@
-$properties(base = ../../../, title = Winter Getting Started Guide)
+$properties(base = ../../../, title = Getting Started Guide)
 
 <div class="heading">
-	<h1 class="heading-title">Winter Getting Started Guide</h1> 
+	<h1 class="heading-title">Winter Framework Getting Started Guide</h1> 
 	<p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@winterframework.io">Jeremy Kuhn</a></p> 
 </div>
 
@@ -9,7 +9,7 @@ $properties(base = ../../../, title = Winter Getting Started Guide)
 	<div class="col-12 col-lg-6 mb-3">
 		<div class="card shadow h-100">
 			<div class="card-body p-lg-5">
-		    	<h5 class="card-title">What you'll learn</h5>
+		    	<h2 class="card-title">What you'll learn</h2>
 				<p class="card-text">This guide provides insights into how to create a Winter application that exposes a simple <code>Hello World</code> HTTP endpoint.</p>
 				<p class="card-text">We will guide you through creating a Maven project, creating the Winter module for the application, writing the HTTP endpoint, running the application and finally packaging the application into an optimized runtime image.</p>
 			</div>
@@ -18,7 +18,7 @@ $properties(base = ../../../, title = Winter Getting Started Guide)
 	<div class="col-12 col-lg-6 mb-3">
 		<div class="card shadow h-100">
 			<div class="card-body p-lg-5">
-		    	<h5 class="card-title">What you'll need</h5>
+		    	<h2 class="card-title">What you'll need</h2>
 		    	<ul>
 		    		<li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 14.</li>
 		    		<li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.6.</li>
@@ -31,7 +31,7 @@ $properties(base = ../../../, title = Winter Getting Started Guide)
 
 $doc
 
-# Step 1: Create a Winter project
+## Step 1: Create a Winter project
 
 The creation of a Maven project setup with the Winter distribution should always be the first thing to do when developing a Winter component or application.
 
@@ -98,7 +98,7 @@ Then you must declare dependencies to Winter *boot* and *web* modules since you 
 
 Congratulations! you have just created a new Winter project.
 
-# Step 2: Create the Java module
+## Step 2: Create the Java module
 
 A Winter component or application is a regular Java module annotated with `@io.winterframework.core.annotation.Module`. Open up the project in your IDE and create file `src/main/java/module-info.java`. In this module descriptor, you need to declare the modules required by your application, namely `io.winterframework.mod.boot` and `io.winterframework.mod.web` modules:
 
@@ -112,7 +112,7 @@ module com.example.helloworld {
 
 At compile time, the Winter compiler will assemble the *boot* and *web* modules together with your application module and generate a module class. This class contains all the IoC/DI logic required to bootstrap your application.
 
-# Step 3: Add the code
+## Step 3: Add the code
 
 In your IDE, open the `src/main/java/com/example/helloworld/App.java` 	and change the contents in order to create a Winter Web application:
 
@@ -151,7 +151,7 @@ Finally, the application is started in the `main()` method using the `Helloworld
 
 > The Winter compiler generates module class `com.example.helloworld.Helloworld` when the project is compiled (eg. `mvn compile`), you might want to configure your IDE to make the generated code visible and get rid of the compilation error reported in the `main()` method by adding folder `target/generated-sources/annotations` to the project build path. In Eclipse, you can do that in the project properties > Source > Add Folder...
 
-# Step 4: Run the application
+## Step 4: Run the application
 
 You are now ready to build and run the application, open a terminal, go to the project folder and simply execute the following command:
 
@@ -222,9 +222,9 @@ Hello, world!
 
 Using a Web browser pointing to `http://localhost:8080/hello?name=John`:
 
-<img class="shadow" src="img/hello_browser.png" style="display: block; margin: 2em auto;"/>
+<img class="shadow" src="img/hello_browser.png" style="display: block; margin: 2em auto;" alt="Hello World in Web Browser"/>
 
-# Step 5: Package and deploy the application
+## Step 5: Package and deploy the application
 
 You can package the application into a native platform dependent image containing a Java runtime with the exact dependencies needed by the application and deploy it to your local Maven repository or eventually to a remote repository:
 
