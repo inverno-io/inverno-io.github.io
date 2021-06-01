@@ -58,7 +58,7 @@ You can now setup the `pom.xml` build descriptor with the Inverno distribution b
     <parent>
         <groupId>io.inverno.dist</groupId>
         <artifactId>inverno-parent</artifactId>
-        <version>1.0.0</version>
+        <version>1.1.0</version>
     </parent>
     <groupId>com.example</groupId>
     <artifactId>helloworld</artifactId>
@@ -77,7 +77,7 @@ Then you must declare dependencies to Inverno *boot* and *web* modules since you
     <parent>
         <groupId>io.inverno.dist</groupId>
         <artifactId>inverno-parent</artifactId>
-        <version>1.0.0</version>
+        <version>1.1.0</version>
     </parent>
     <groupId>com.example</groupId>
     <artifactId>helloworld</artifactId>
@@ -169,16 +169,16 @@ INFO Application Inverno is starting...
 
 
      ╔════════════════════════════════════════════════════════════════════════════════════════════╗
-     ║                       , ~~ ,                                                               ║
-     ║                   , '   /\   ' ,                 _                                         ║
-     ║                  , __   \/   __ ,       _     _ (_)        _                               ║
-     ║                 ,  \_\_\/\/_/_/  ,     | | _ | | _   ___  | |_   ___   __                  ║
-     ║                 ,    _\_\/_/_    ,     | |/_\| || | / _ \ | __| / _ \ / _|                 ║
-     ║                 ,   __\_/\_\__   ,     \  / \  /| || | | || |_ |  __/| |                   ║
-     ║                  , /_/ /\/\ \_\ ,       \/   \/ |_||_| |_| \__| \___||_|                   ║
-     ║                   ,     /\     ,                                                           ║
-     ║                     ,   \/   ,                        -- 1.0.2 --                          ║
-     ║                       ' -- '                                                               ║
+     ║                      , ~~ ,                                                                ║
+     ║                  , '   /\   ' ,                                                            ║
+     ║                 , __   \/   __ ,      _                                                    ║
+     ║                ,  \_\_\/\/_/_/  ,    | |  ___  _    _  ___   __  ___   ___                 ║
+     ║                ,    _\_\/_/_    ,    | | / _ \\ \  / // _ \ / _|/ _ \ / _ \                ║
+     ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
+     ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
+     ║                  ,     /\     ,                                                            ║
+     ║                    ,   \/   ,                                 -- 1.2.0 --                  ║
+     ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
      ║ Java version        : 16+36-2231                                                           ║
