@@ -59,8 +59,8 @@
         <main id="main" class="main container">
             <div class="heading"> 
                 <h1 class="heading-title">Inverno Framework Documentation</h1> 
-                <p class="heading-subtitle">Version: 1.1.0</p> 
-                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.1.0.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a> 
+                <p class="heading-subtitle">Version: 1.2.0</p> 
+                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.2.0.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a> 
             </div> 
             <div class="d-lg-flex">
                 <section class="toc col-12 col-lg-3">
@@ -116,7 +116,7 @@
                                     <a class="nav-link" href="#converter-api">Converter API</a><a class="nav-link" href="#net-api">Net API</a><a class="nav-link" href="#reflection-api">Reflection API</a><a class="nav-link" href="#resource-api">Resource API</a>
                                 </nav><a class="nav-link" href="#boot">Boot</a>
                                 <nav class="nav nav-pills flex-column ms-2 my-1">
-                                    <a class="nav-link" href="#configuration">Configuration</a><a class="nav-link" href="#net-service">Net service</a><a class="nav-link" href="#media-type-service">Media type service</a><a class="nav-link" href="#resource-service">Resource service</a><a class="nav-link" href="#converters">Converters</a><a class="nav-link" href="#worker-pool">Worker pool</a><a class="nav-link" href="#object-mapper">Object mapper</a>
+                                    <a class="nav-link" href="#configuration">Configuration</a><a class="nav-link" href="#reactor">Reactor</a><a class="nav-link" href="#net-service">Net service</a><a class="nav-link" href="#media-type-service">Media type service</a><a class="nav-link" href="#resource-service">Resource service</a><a class="nav-link" href="#converters">Converters</a><a class="nav-link" href="#worker-pool">Worker pool</a><a class="nav-link" href="#object-mapper">Object mapper</a>
                                 </nav><a class="nav-link" href="#configuration-1">Configuration</a>
                                 <nav class="nav nav-pills flex-column ms-2 my-1">
                                     <a class="nav-link" href="#configuration-source">Configuration source</a><a class="nav-link" href="#configuration-loader">Configuration loader</a>
@@ -129,6 +129,12 @@
                                 </nav><a class="nav-link" href="#web">Web</a>
                                 <nav class="nav nav-pills flex-column ms-2 my-1">
                                     <a class="nav-link" href="#routing">Routing</a><a class="nav-link" href="#static-handler">Static handler</a><a class="nav-link" href="#web-server">Web Server</a><a class="nav-link" href="#web-controller">Web Controller</a>
+                                </nav><a class="nav-link" href="#reactive-template">Reactive Template</a>
+                                <nav class="nav nav-pills flex-column ms-2 my-1">
+                                    <a class="nav-link" href="#creates-an-irt-template">Creates an &lt;code&gt;.irt&lt;/code&gt; template</a><a class="nav-link" href="#irt-syntax">&lt;code&gt;.irt&lt;/code&gt; syntax</a><a class="nav-link" href="#pipes">Pipes</a><a class="nav-link" href="#modes">Modes</a>
+                                </nav><a class="nav-link" href="#sql-client">SQL Client</a>
+                                <nav class="nav nav-pills flex-column ms-2 my-1">
+                                    <a class="nav-link" href="#sql-client-api">SQL client API</a><a class="nav-link" href="#vertx-sql-client-implementation">Vert.x SQL Client implementation</a>
                                 </nav>
                             </nav><a class="nav-link" href="#inverno-maven-plugin-1">Inverno Maven Plugin</a>
                             <nav class="nav nav-pills flex-column ms-2 my-1">
@@ -212,7 +218,7 @@ public class Main {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;version&gt;1.2.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;hello&lt;/artifactId&gt;
@@ -232,7 +238,7 @@ public class Main {
                     <p>You can then run the application:</p> 
                     <pre><code class="language-plaintext">$ mvn inverno:run -Dinverno.run.arguments=John
 
-[INFO] --- inverno-maven-plugin:1.0.0:run (default-cli) @ app-hello ---
+[INFO] --- inverno-maven-plugin:1.2.0:run (default-cli) @ app-hello ---
 [INFO] Running project: io.inverno.example.hello@1.0.0-SNAPSHOT...
 Hello John!!!
 
@@ -288,6 +294,7 @@ public class MainController {
                     <p>The foundational APIs of the Inverno framework modules:</p> 
                     <ul> 
                         <li>Conversion API used to convert objects from/to other objects</li> 
+                        <li>Concurrent API defining the reactive threading model API</li> 
                         <li>Net API providing URI manipulation as well as low level network client and server utilities</li> 
                         <li>Reflect API for manipulating parameterized type at runtime</li> 
                         <li>Resource API to read/write any kind of resources (eg. file, zip, jar, classpath, module...)</li> 
@@ -295,6 +302,7 @@ public class MainController {
                     <h5 id="inverno-boot">inverno-boot</h5> 
                     <p>The boot Inverno module provides base services to an application:</p> 
                     <ul> 
+                        <li>the reactor which defines the reactive threading model of an application</li> 
                         <li>a net service used for the implementation of optimized network clients and servers</li> 
                         <li>a media type service used to determine the media type of a resource</li> 
                         <li>a resource service used to access resources based on URIs</li> 
@@ -331,6 +339,24 @@ public class MainController {
                         <li>URL encoded form data</li> 
                         <li>Multipart form data</li> 
                     </ul> 
+                    <h5 id="inverno-irt">inverno-irt</h5> 
+                    <p>The Inverno Reactive Template module provides a reactive template engine including:</p> 
+                    <ul> 
+                        <li>reactive, near zero-copy rendering</li> 
+                        <li>statically types template generated by the Inverno compiler at compile time</li> 
+                        <li>pipes for data transformation</li> 
+                        <li>functional syntax inspired from XSLT and Erlang on top of the Java language that perfectly embraces reactive principles</li> 
+                    </ul> 
+                    <h5 id="inverno-sql">inverno-sql</h5> 
+                    <p>The Inverno SQL client module specifies a reactive API for executing SQL statements on a RDBMS. It supports:</p> 
+                    <ul> 
+                        <li>prepared statement</li> 
+                        <li>batch execution</li> 
+                        <li>transaction</li> 
+                    </ul> 
+                    <h5 id="inverno-sql-vertx">inverno-sql-vertx</h5> 
+                    <p>The Inverno SQL client Vert.x implementation module provides Sql Client implementations on top of Vert.x pool and pooled client.</p> 
+                    <p>It also exposes a pool based Sql Client bean created using the module's configuration which can be used as is to query a RDBMS.</p> 
                     <h5 id="inverno-web">inverno-web</h5> 
                     <p>The Inverno Web module provides advanced features on top of the HTTP server module, including:</p> 
                     <ul> 
@@ -370,7 +396,7 @@ public class MainController {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;version&gt;1.2.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample-app&lt;/artifactId&gt;
@@ -392,7 +418,7 @@ public class MainController {
             &lt;dependency&gt;
                 &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
                 &lt;artifactId&gt;inverno-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;1.0.0&lt;/version&gt;
+                &lt;version&gt;1.2.0&lt;/version&gt;
                 &lt;type&gt;pom&lt;/type&gt;
                 &lt;scope&gt;import&lt;/scope&gt;
             &lt;/dependency&gt;
@@ -492,7 +518,7 @@ public class App {
                     <pre><code class="language-plaintext">$ mvn inverno:run
 
 ...
-[INFO] --- inverno-maven-plugin:1.0.0:run (default-cli) @ sample-app ---
+[INFO] --- inverno-maven-plugin:1.2.0:run (default-cli) @ sample-app ---
 [INFO] Running project: io.inverno.example.sample_app@1.0.0-SNAPSHOT...
  [═══════════════════════════════════════════════ 100&nbsp;% ══════════════════════════════════════════════] 
 2021-04-08 23:50:35,261 INFO  [main] i.w.c.v.Application - Inverno is starting...
@@ -507,7 +533,7 @@ public class App {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.2.0 --                 ║
+     ║                    ,   \/   ,                                  -- 1.3.0 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -600,7 +626,9 @@ $ ./sample-app-1.0.0-SNAPSHOT/bin/sample-app
 $ sudo dpkg -i sample-app-1.0.0-SNAPSHOT-application_linux_amd64.deb
 ...
 $ /opt/sample-app/bin/sample-app
+...
 </code></pre> 
+                    <p>The Inverno Maven plugin allows to create various application images including Docker or OCI container images, please refer to the <a href="https://github.com/inverno-io/inverno-tools/tree/master/inverno-maven-plugin">Inverno Maven plugin documentation</a> to learn more.</p> 
                     <h2 id="inverno-core-1">Inverno Core</h2> 
                     <h3 id="motivation">Motivation</h3> 
                     <p><a href="https://en.wikipedia.org/wiki/Inversion_of_control">Inversion of Control</a> and <a href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency Injection</a> principles are not new and many Java applications have been developed following these principles over the past two decades using frameworks such as Spring, CDI, Guice... However these recognized solutions might have some issues in practice especially with the way Java has evolved and how applications should be developed nowadays.</p> 
@@ -686,7 +714,7 @@ $ /opt/sample-app/bin/sample-app
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;version&gt;1.2.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample&lt;/artifactId&gt;
@@ -724,9 +752,10 @@ $ /opt/sample-app/bin/sample-app
     
     &lt;properties&gt;
         &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-        &lt;maven.compiler.source&gt;9&lt;/maven.compiler.source&gt;
-        &lt;maven.compiler.target&gt;9&lt;/maven.compiler.target&gt;
-        &lt;version.inverno&gt;1.0.0&lt;/version.inverno&gt;
+        &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
+        &lt;version.inverno&gt;1.3.0&lt;/version.inverno&gt;
+        &lt;version.inverno.dist&gt;1.2.0&lt;/version.inverno.dist&gt;
     &lt;/properties&gt;
 
     &lt;dependencyManagement&gt;
@@ -734,7 +763,7 @@ $ /opt/sample-app/bin/sample-app
             &lt;dependency&gt;
                 &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
                 &lt;artifactId&gt;inverno-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;${version.inverno}&lt;/version&gt;
+                &lt;version&gt;${version.inverno.dist}&lt;/version&gt;
                 &lt;type&gt;pom&lt;/type&gt;
                 &lt;scope&gt;import&lt;/scope&gt;
             &lt;/dependency&gt;
@@ -780,8 +809,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.inverno:inverno-core:1.0.0'
-    annotationProcessor 'io.inverno:inverno-core-compiler:1.0.0'
+    implementation 'io.inverno:inverno-core:1.3.0'
+    annotationProcessor 'io.inverno:inverno-core-compiler:1.3.0'
 }
 
 java {
@@ -1196,7 +1225,7 @@ INFO: Inverno is starting...
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.2.0 --                 ║
+     ║                    ,   \/   ,                                  -- 1.3.0 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -1560,12 +1589,55 @@ boot.stop();
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-base:1.0.0'
+compile 'io.inverno.mod:inverno-base:1.2.0'
 ...
 </code></pre> 
                     <p>The <em>base</em> module is usually provided as a transitive dependency by other modules, mainly the <em>boot</em> module, so defining a direct dependency is usually not necessary at least for an application module.</p> 
                     <h4 id="converter-api">Converter API</h4> 
                     <p>The converter API provides interfaces and classes for building converters, decoders or encoders which are basically used to decode/encode objects of a given type from/to objects of another type.</p> 
+                    <h5 id="scope">Scope</h5> 
+                    <p>The <code>Scope</code> interface specifies a way to expose different bean instances depending on particular scope.</p> 
+                    <p>For instance, let's say we want to use different instances of a <code>Warehouse</code> bean based on a particular region, we can define a prototype bean for the <code>Warehouse</code> and create the following bean which extends <code>KeyScope</code>:</p> 
+                    <pre><code class="language-java">@Bean
+public class WarehouseKeyScope extends KeyScope&lt;Warehouse&gt; {
+
+    private final Supplier&lt;Warehouse&gt; storePrototype;
+    
+    public WarehouseKeyScope(@Lazy Supplier&lt;Warehouse&gt; storePrototype) {
+        this.storePrototype = storePrototype;
+    }
+    
+    @Override
+    protected Warehouse create() {
+        return this.storePrototype.get();
+    }
+}
+</code></pre> 
+                    <p>We can then inject that bean where we need a <code>Warehouse</code> instance for a particular region:</p> 
+                    <pre><code class="language-java">@Bean
+public class WarehouseService {
+
+    private final KeyScope&lt;Warehouse&gt; warehouse;
+
+    public WarehouseService(KeyScope&lt;Warehouse&gt; warehouse) {
+        this.warehouse = warehouse;
+    }
+    
+    public void store(Product product, String region) {
+        Warehouse warehouse = this.warehouse.get(region);
+        ...
+    }
+}
+</code></pre> 
+                    <p>The base module expose three base <code>Scope</code> implementations:</p> 
+                    <ul> 
+                        <li>the <code>KeyScope</code> which binds an instance to an arbitrary key</li> 
+                        <li>the <code>ThreadScope</code> which binds an instance to the current thread</li> 
+                        <li>the <code>ReactorScope</code> which binds an instance to the current reactor's thread. This is very similar to the <code>ThreadScope</code> but this throws an <code>IllegalStateException</code> when used outside the scope of the reactor (ie. the current thread is not a reactor thread).</li> 
+                    </ul> 
+                    <blockquote> 
+                        <p>Particular care must be taken when using this technique in order to avoid resource leaks. For instance, when a scoped instance is no longer in use, it should be cleaned explicitly as references can be strongly reachable. The <code>KeyScope</code> exposes the <code>remove()</code> for this purpose. Also when using prototype bean instance, the destroy method, if any, may not be invoked if the instance is reclaimed before it can be destroyed, as a result you should avoid using such bean instances within scope beans.</p> 
+                    </blockquote> 
                     <h5 id="basic-converter">Basic converter</h5> 
                     <p>The <code>Converter</code> interface defines a basic converter. It simply extends <code>Decoder</code> and <code>Encoder</code> interfaces which defines respectively the basic decoder and the basic encoder.</p> 
                     <p>A basic decoder is used to decode an object of a source type to an object of a target type. For instance, we can create a simple string to integer decoder as follows:</p> 
@@ -1958,13 +2030,15 @@ module io.inverno.example.app {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-boot:1.0.0'
+compile 'io.inverno.mod:inverno-boot:1.2.0'
 ...
 </code></pre> 
                     <h4 id="configuration">Configuration</h4> 
-                    <p>The <em>boot</em> module defines specific configuration for the services it exposes, they can be specified when starting the module to override default values.</p> 
-                    <p>For instance the <code>NetConfiguration</code> is used to configure the net service.</p> 
+                    <p>The <code>BootConfiguration</code> is used to configure the beans exposed in the <em>boot</em> module, the <code>Reactor</code> and the <code>NetService</code> in particular.</p> 
                     <p>Please refer to the <a href="https://inverno.io/docs/release/api/index.html">API documentation</a> to have an exhaustive description of the different configuration properties.</p> 
+                    <h4 id="reactor">Reactor</h4> 
+                    <p>The module provides two <code>Reactor</code> implementations: one generic implementation which creates a regular Netty event loop group and a Vert.x core implementation which uses the event loops of a <code>Vertx</code> instance. The Vert.x implementation is particularly suited when an Inverno application must integrate Vert.x services such as the PostgreSQL client.</p> 
+                    <p>The module exposes one or the other as bean depending on the <em>boot</em> module configuration, parameter <code>reactor_prefer_vertx</code> must be set to true, and whether or not the Vert.x core module is present on the module path.</p> 
                     <h4 id="net-service">Net service</h4> 
                     <p>The module provides a base <code>NetService</code> implementation exposed as a bean for building network applications based on Netty.</p> 
                     <h4 id="media-type-service">Media type service</h4> 
@@ -2051,7 +2125,7 @@ boot.stop();
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-configuration:1.0.0'
+compile 'io.inverno.mod:inverno-configuration:1.2.0'
 ...
 </code></pre> 
                     <h4 id="configuration-source">Configuration source</h4> 
@@ -2569,7 +2643,7 @@ public interface CompositeModuleConfiguration {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-http-base:1.0.0'
+compile 'io.inverno.mod:inverno-http-base:1.2.0'
 ...
 </code></pre> 
                     <p>The <em>http-base</em> module is usually provided as a transitive dependency by other HTTP modules, the <em>http-server</em> module or the <em>web</em> module in particular, so this might not be necessary.</p> 
@@ -2666,8 +2740,8 @@ module io.inverno.example.app_http {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-boot:1.0.0'
-compile 'io.inverno.mod:inverno-http-server:1.0.0'
+compile 'io.inverno.mod:inverno-boot:1.2.0'
+compile 'io.inverno.mod:inverno-http-server:1.2.0'
 ...
 </code></pre> 
                     <h4 id="http-server-exchange-api">HTTP Server exchange API</h4> 
@@ -2984,7 +3058,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.2.0 --                 ║
+     ║                    ,   \/   ,                                  -- 1.3.0 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -3023,12 +3097,12 @@ Hello
                         <p>this module can also be used to embed a HTTP server in any application, unlike other application frameworks, Inverno core IoC/DI framework is not pervasive and any Inverno modules can be safely used in various contexts and applications.</p> 
                     </blockquote> 
                     <h5 id="configuration-2">Configuration</h5> 
-                    <p>The first thing we might want to do is to create a configuration in the <em>app_http</em> module for easy <em>http-server</em> module setup. The HTTP server configuration is actually done in the <code>NetConfiguration</code> defined in the <em>boot</em> module for low level network configuration and <code>HttpServerConfiguration</code> in the <em>http-server</em> module configuration for the HTTP server itself.</p> 
+                    <p>The first thing we might want to do is to create a configuration in the <em>app_http</em> module for easy <em>http-server</em> module setup. The HTTP server configuration is actually done in the <code>BootConfiguration</code> defined in the <em>boot</em> module for low level network configuration and <code>HttpServerConfiguration</code> in the <em>http-server</em> module configuration for the HTTP server itself.</p> 
                     <p>The following configuration can then be created in the <em>app_http</em> module:</p> 
                     <pre><code class="language-java">package io.inverno.example.app_http;
 
 import io.inverno.core.annotation.NestedBean;
-import io.inverno.mod.boot.NetConfiguration;
+import io.inverno.mod.boot.BootConfiguration;
 import io.inverno.mod.configuration.Configuration;
 import io.inverno.mod.http.server.HttpServerConfiguration;
 
@@ -3036,7 +3110,7 @@ import io.inverno.mod.http.server.HttpServerConfiguration;
 public interface App_httpConfiguration {
 
     @NestedBean
-    NetConfiguration net();
+    BootConfiguration boot();
 
     @NestedBean
     HttpServerConfiguration http_server();
@@ -3057,8 +3131,8 @@ public class Main {
                         .server_port(8081)
                         .h2c_enabled(true)
                     )
-                    .net(net -&gt; net
-                        .root_event_loop_group_size(4)
+                    .boot(boot -&gt; boot
+                        .reactor_event_loop_group_size(4)
                     )
                 )
             )
@@ -3066,11 +3140,96 @@ public class Main {
     }
 }
 </code></pre> 
-                    <p>In the above code, we have set the server port to 8081, enabled HTTP/2 over cleartext and set the number of thread allocated to the root event loop group to 4.</p> 
+                    <p>In the above code, we have set the server port to 8081, enabled HTTP/2 over cleartext and set the number of thread allocated to the reactor core IO event loop group to 4.</p> 
                     <p>Please refer to the <a href="javadoc">API documentation</a> to have an exhaustive description of the different configuration properties. We can for instance configure low level network settings like TCP keep alive or TCP no delay as well as HTTP related settings like compression or TLS.</p> 
                     <blockquote> 
                         <p>You can also refer to the <a href="#configuration-1">configuration module documentation</a> to get more details on how configuration works and more especially how you can from here define the HTTP server configuration in command line arguments, property files...</p> 
                     </blockquote> 
+                    <h6 id="logging">Logging</h6> 
+                    <p>The HTTP server can log access and error events at <code>INFO</code> and <code>ERROR</code> level respectively. They can be disabled by configuring <code>io.inverno.mod.http.server.internal.AbstractExchange</code> logger as follows:</p> 
+                    <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;Configuration xmlns="http://logging.apache.org/log4j/2.0/config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://logging.apache.org/log4j/2.0/config https://raw.githubusercontent.com/apache/logging-log4j2/rel/2.14.0/log4j-core/src/main/resources/Log4j-config.xsd" 
+	status="WARN" shutdownHook="disable"&gt;
+
+    &lt;Appenders&gt;
+        &lt;Console name="LogToConsole" target="SYSTEM_OUT"&gt;
+             &lt;PatternLayout pattern="%d{DEFAULT} %highlight{%-5level} [%t] %c{1.} - %msg%n%ex"/&gt;
+        &lt;/Console&gt;
+    &lt;/Appenders&gt;
+    &lt;Loggers&gt;
+    	&lt;!-- Disable HTTP server access and error logs --&gt;
+    	&lt;Logger name="io.inverno.mod.http.server.internal.AbstractExchange" additivity="false" level="off"  /&gt;
+    	
+        &lt;Root level="info"&gt;
+            &lt;AppenderRef ref="LogToConsole"/&gt;
+        &lt;/Root&gt;
+    &lt;/Loggers&gt;
+&lt;/Configuration&gt;
+</code></pre> 
+                    <p>We can also create a more <em>production-like</em> logging configuration for a standard HTTP server that asynchronously logs access and error events in separate files in a JSON format for easy integration with log processing tools with a rolling strategy.</p> 
+                    <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;Configuration status="WARN" name="Website" shutdownHook="disable"&gt;
+    &lt;Appenders&gt;
+        &lt;Console name="Console" target="SYSTEM_OUT"&gt;
+             &lt;PatternLayout pattern="%d{DEFAULT} %highlight{%-5level} [%t] %c{1.} - %msg%n%ex"/&gt;
+        &lt;/Console&gt;
+        &lt;!-- Error log --&gt;
+		&lt;RollingRandomAccessFile name="ErrorRollingFile" fileName="logs/error.log" filePattern="logs/error-%d{yyyy-MM-dd}-%i.log.gz"&gt;
+			&lt;JsonTemplateLayout/&gt;
+			&lt;NoMarkerFilter onMatch="ACCEPT" onMismatch="DENY"/&gt;
+			&lt;Policies&gt;
+				&lt;TimeBasedTriggeringPolicy /&gt;
+				&lt;SizeBasedTriggeringPolicy size="10 MB"/&gt;
+			&lt;/Policies&gt;
+			&lt;DefaultRolloverStrategy&gt;
+				&lt;Delete basePath="logs" maxDepth="2"&gt;
+					&lt;IfFileName glob="error-*.log.gz" /&gt;
+					&lt;IfLastModified age="10d" /&gt;
+				&lt;/Delete&gt;
+			&lt;/DefaultRolloverStrategy&gt;
+		&lt;/RollingRandomAccessFile&gt;
+		&lt;Async name="AsyncErrorRollingFile"&gt;
+			&lt;AppenderRef ref="ErrorRollingFile"/&gt;
+		&lt;/Async&gt;
+		&lt;!-- Access log --&gt;
+		&lt;RollingRandomAccessFile name="AccessRollingFile" fileName="logs/access.log" filePattern="logs/access-%d{yyyy-MM-dd}-%i.log.gz"&gt;
+			&lt;JsonTemplateLayout/&gt;
+			&lt;MarkerFilter marker="HTTP_ACCESS" onMatch="ACCEPT" onMismatch="DENY"/&gt;
+			&lt;Policies&gt;
+				&lt;TimeBasedTriggeringPolicy /&gt;
+				&lt;SizeBasedTriggeringPolicy size="10 MB"/&gt;
+			&lt;/Policies&gt;
+			&lt;DefaultRolloverStrategy&gt;
+				&lt;Delete basePath="logs" maxDepth="2"&gt;
+					&lt;IfFileName glob="access-*.log.gz" /&gt;
+					&lt;IfLastModified age="10d" /&gt;
+				&lt;/Delete&gt;
+			&lt;/DefaultRolloverStrategy&gt;
+		&lt;/RollingRandomAccessFile&gt;
+		&lt;Async name="AsyncAccessRollingFile"&gt;
+			&lt;AppenderRef ref="AccessRollingFile"/&gt;
+		&lt;/Async&gt;
+	&lt;/Appenders&gt;
+    
+    &lt;Loggers&gt;
+		&lt;Logger name="io.inverno.mod.http.server.internal.AbstractExchange" additivity="false" level="info"&gt;
+			&lt;AppenderRef ref="AsyncAccessRollingFile" level="info"/&gt;
+			&lt;AppenderRef ref="AsyncErrorRollingFile" level="error"/&gt;
+		&lt;/Logger&gt;
+
+        &lt;Root level="info" additivity="false"&gt;
+			&lt;AppenderRef ref="Console" level="info" /&gt;
+			&lt;AppenderRef ref="AsyncErrorRollingFile" level="error"/&gt;
+        &lt;/Root&gt;
+    &lt;/Loggers&gt;
+&lt;/Configuration&gt;
+</code></pre> 
+                    <blockquote> 
+                        <p>Note that access and error events are logged by the same logger, they are differentiated by markers, <code>HTTP_ACCESS</code> and <code>HTTP_ERROR</code> respectively.</p> 
+                    </blockquote> 
+                    <h6 id="transport">Transport</h6> 
                     <p>By default, the HTTP server uses the Java NIO transport, but it is possible to use native <a href="https://en.wikipedia.org/wiki/Epoll">epoll</a> transport on Linux or <a href="https://en.wikipedia.org/wiki/Kqueue">kqueue</a> transport on BSD-like systems for optimized performances. This can be done by adding the corresponding Netty dependency with the right classifier in the project descriptor:</p> 
                     <pre><code class="language-xml">&lt;project&gt;
     &lt;dependencies&gt;
@@ -3420,8 +3579,8 @@ module io.inverno.example.app_web {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-boot:1.0.0'
-compile 'io.inverno.mod:inverno-web:1.0.0'
+compile 'io.inverno.mod:inverno-boot:1.2.0'
+compile 'io.inverno.mod:inverno-web:1.2.0'
 ...
 </code></pre> 
                     <h4 id="routing">Routing</h4> 
@@ -3935,7 +4094,7 @@ router
                     <p>For instance, we can create a route to serve files stored in a <code>web-root</code> directory as follows:</p> 
                     <pre><code class="language-java">router
     .route()
-        .path("/static/{path:.*}")                            // 1
+        .path("/static/{path:.*}")                                 // 1
         .handler(new StaticHandler(new FileResource("web-root/"))) // 2
 </code></pre> 
                     <ol> 
@@ -3982,7 +4141,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.2.0 --                 ║
+     ║                    ,   \/   ,                                  -- 1.3.0 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -4028,7 +4187,7 @@ content-length: 47
                     <pre><code class="language-java">package io.inverno.example.app_web;
 
 import io.inverno.core.annotation.NestedBean;
-import io.inverno.mod.boot.NetConfiguration;
+import io.inverno.mod.boot.BootConfiguration;
 import io.inverno.mod.configuration.Configuration;
 import io.inverno.mod.web.WebConfiguration;
 
@@ -4036,7 +4195,7 @@ import io.inverno.mod.web.WebConfiguration;
 public interface App_webConfiguration {
 
     @NestedBean
-    NetConfiguration net();
+    BootConfiguration boot();
 
     @NestedBean
     WebConfiguration web();
@@ -4276,7 +4435,6 @@ public class Main {
         &lt;dependency&gt;
             &lt;groupId&gt;org.webjars&lt;/groupId&gt;
             &lt;artifactId&gt;swagger-ui&lt;/artifactId&gt;
-            &lt;version&gt;3.46.0&lt;/version&gt;
         &lt;/dependency&gt;
     &lt;/dependencies&gt;
 &lt;/project&gt;
@@ -4928,6 +5086,635 @@ info:
     version: ''
 ...
 </code></pre> 
+                    <h3 id="reactive-template">Reactive Template</h3> 
+                    <p>The Inverno <em>reactive template</em> module provides a template engine for efficient reactive data rendering.</p> 
+                    <p>Data are basically rendered by templates which are regrouped in template sets and applied based on the type of data to render. A template set is statically typed and generated by an Inverno compiler plugin which compiles <code>.irt</code> template set source files along with the Java sources of a module.</p> 
+                    <p>The template sets classes thus obtained support reactive rendering, data are rendered as a flow of events for efficient usage of resources. For instance, the complete set of data doesn't have to be available or loaded into memory, the rendering being reactive the output can be generated incrementally by processing each piece of data individually one after the other when they become available. Since the rendering process never blocks it is also possible to lazily load data when/if they need to be rendered.</p> 
+                    <p>The syntax of <code>.irt</code> template set is inspired from functional language such as <a href="https://en.wikipedia.org/wiki/XSLT">XSLT</a> and <a href="https://en.wikipedia.org/wiki/Erlang_(programming_language)">Erlang</a> which are particularly suited for reactive rendering. Since a template is a generated Java class, the Java language is also widely used in a template source file, especially for in dynamic parts of a template.</p> 
+                    <p>In order to use the Inverno <em>reactive template</em> module, we need to declare a dependency in the module descriptor:</p> 
+                    <pre><code class="language-java">module io.inverno.example.app {
+    ...
+    requires io.inverno.mod.irt;
+    ...
+}
+</code></pre> 
+                    <p>And also declare that dependency in the build descriptor:</p> 
+                    <p>Using Maven:</p> 
+                    <pre><code class="language-xml">&lt;project&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.inverno.mod&lt;/groupId&gt;
+            &lt;artifactId&gt;inverno-irt&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre> 
+                    <p>Using Gradle:</p> 
+                    <pre><code class="language-groovy">...
+compile 'io.inverno.mod:inverno-irt:1.2.0'
+...
+</code></pre> 
+                    <h4 id="creates-an-irt-template">Creates an <code>.irt</code> template</h4> 
+                    <p>A template can be created along with other Java source files in the source directory of an Inverno module. At compile time, the Inverno reactive template compiler plugin will scan the module source folder for <code>.irt</code> files and compiles them to generate template set classes that can be used in your module to render data.</p> 
+                    <p>The following <code>Simple.irt</code> template set is a simple example containing one template that renders a <code>Message</code> object as String:</p> 
+                    <pre><code class="language-plaintext">package io.inverno.example.app_irt.templates;
+
+import io.inverno.example.app_irt.model.Message;
+
+option modes = {"STRING"};
+option charset = "utf-8";
+
+(Message message) -&gt; {The message is: {@message.message}}
+</code></pre> 
+                    <pre><code class="language-java">package io.inverno.example.app_irt.model;
+
+public class Message {
+
+	private final String message;
+	
+	private final boolean important;
+	
+	public Message(String message, boolean important) {
+		this.message = message;
+		this.important = important;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+	
+	public boolean isImportant() {
+		return important;
+	}
+}
+</code></pre> 
+                    <p>As for any Java source file, the preceding template source must be created in the same package as the one it declares in a module source folder. The name of the template corresponds to the name of the file.</p> 
+                    <p>After compiling the module, a new Java class <code>Simple.java</code> should have been created in the generated source folder in package <code>io.inverno.example.app_irt.templates</code>.</p> 
+                    <p>A <code>Message</code> object can then be rendered as follows:</p> 
+                    <pre><code class="language-java">CompletableFuture&lt;String&gt; rendered = Simple.string().render(new Message("Hello, world!"));
+System.out.println(rendered.get()); // The message is: Hello, world!
+</code></pre> 
+                    <h4 id="irt-syntax"><code>.irt</code> syntax</h4> 
+                    <h5 id="package-and-imports">Package and imports</h5> 
+                    <p>An <code>.irt</code> template always starts with the declaration of the Java package containing the template, followed by the list of imported Java types or static methods used within the template. This is exactly the same as any Java source file.</p> 
+                    <pre><code class="language-plaintext">package io.inverno.example.app_irt.templates;
+
+import io.inverno.example.app_irt.model.Message;
+...
+</code></pre> 
+                    <h5 id="includes">Includes</h5> 
+                    <p>Then you can specify external template sets to include in the template set using the <code>include</code> keyword. This allows to include templates from an external template set in a template set using the same precedence. For instance, in the following example, template set <code>io.inverno.example.app_irt.templates.Misc</code> is included in the template set which means that its templates can be applied in the including template.</p> 
+                    <pre><code class="language-plaintext">include io.inverno.example.app_irt.templates.Misc;
+</code></pre> 
+                    <blockquote> 
+                        <p>Note that this can lead to conflicts when two included templates defines a template using the same signature (same name and same input parameters), such conflict can be resolved by explicitly overriding the conflicting template in the including template set.</p> 
+                    </blockquote> 
+                    <h5 id="options">Options</h5> 
+                    <p>Rendering options are specified after that using the <code>option</code> keyword. You can for instance declare the charset to use for rendering which defaults to <code>utf-8</code> if not specified:</p> 
+                    <pre><code class="language-plaintext">option charset = "utf-8";
+</code></pre> 
+                    <p>or the template rendering modes supported by the generated template set. There are five template rendering modes, you can choose to specify one or more modes depending on your needs:</p> 
+                    <ul> 
+                        <li><strong>STRING</strong> to expose methods to render data in a <code>String</code>, this is the default behavior</li> 
+                        <li><strong>BYTEBUF</strong> to expose methods to render data in a <code>ByteBuf</code></li> 
+                        <li><strong>STREAM</strong> to expose methods to render data in an <code>OutputStream</code></li> 
+                        <li><strong>PUBLISHER_STRING</strong> to expose methods to render data in a <code>Publisher&lt;String&gt;</code></li> 
+                        <li><strong>PUBLISHER_BYTEBUF</strong> to expose methods to render data in a <code>Publisher&lt;ByteBuf&gt;</code></li> 
+                    </ul> 
+                    <p>The last two modes are particularly suitable for reactive rendering.</p> 
+                    <pre><code class="language-plaintext">option modes = {"STRING", "STREAM", "PUBLISHER_STRING"};
+</code></pre> 
+                    <h5 id="templates">Templates</h5> 
+                    <p>Templates are specified last. A template is a function that defines how a particular input must be rendered, a template can have a name in which case it is referred as a named template. In a template set, there can't be two template with the same signature (ie. defining the same input parameters) unless they have different names.</p> 
+                    <p>A template is declared as follows:</p> 
+                    <pre><code class="language-plaintext">(Message message) -&gt; {...}
+</code></pre> 
+                    <p>A named template is declared as follows:</p> 
+                    <pre><code class="language-plaintext">name(Message message) -&gt; {...}
+</code></pre> 
+                    <p>A template can be defined with zero or more parameters. No parameter templates can be useful to create static templates such as headers or footers, they are usually named:</p> 
+                    <pre><code class="language-plaintext">header() -&gt; {...}
+</code></pre> 
+                    <p>The body of a template is a combination of static content and statements which define how the template input should be rendered. Template statements are specified within braces <code>{...}</code> which must be escaped within static content using <code>\</code>.</p> 
+                    <p>A template can also be specified without a body in order to create aliases or resolve conflicts.</p> 
+                    <p>For instance the following template defines alias <code>apple</code> for template <code>fruit</code> (assuming <code>Apple</code> is an instance of <code>Fruit</code>):</p> 
+                    <pre><code class="language-plaintext">apple(Apple fruit) -&gt; this::fruit
+
+fruit(Fruit fruit) -&gt; {...}
+</code></pre> 
+                    <p>And the following template resolves a conflict induced by the inclusion of template set <code>Include1</code> and <code>Include2</code> which both defines template <code>conflicting</code> with the same input parameters:</p> 
+                    <pre><code class="language-plaintext">...
+include io.inverno.example.app_irt.templates.Include1;
+include io.inverno.example.app_irt.templates.Include2;
+...
+
+conflicting(String input) -&gt; Include1
+</code></pre> 
+                    <h5 id="static-content">Static content</h5> 
+                    <p>Static contents are specified directly in the template body and are rendered as is:</p> 
+                    <pre><code class="language-plaintext">(...) -&gt; {
+This is a static content, braces: \{ and \} must be escaped.
+}
+</code></pre> 
+                    <h5 id="comment">Comment</h5> 
+                    <p>The syntax supports two kinds of comments which can be either outside or inside the body of a template.</p> 
+                    <p>Outside the body of a template, comments are regular Java comments:</p> 
+                    <pre><code class="language-plaintext">/*
+ * This a comment to explain that the following import is commented
+ */
+// import java.util.List; 
+</code></pre> 
+                    <p>Inside the body of a template, comments are statements starting with <code>{%</code> and ending with <code>}</code>:</p> 
+                    <pre><code class="language-plaintext">(Message message) -&gt; {
+Hello {% this is a comment} World.
+}
+</code></pre> 
+                    <h5 id="value-of">Value of</h5> 
+                    <p>A value can be rendered directly in a synchronous way within a statement starting with <code>{@</code> and ending with <code>}</code> as follows:</p> 
+                    <pre><code class="language-plaintext">(Message message) -&gt; {
+The message is: {@message.message}
+}
+</code></pre> 
+                    <p>In the preceding example, we used a syntactic sugar to navigate into the message object hierarchy and access the <code>message</code> properties but it is also possible to evaluate a raw Java expression specified between <code>(</code> and <code>)</code> to get the same result:</p> 
+                    <pre><code class="language-plaintext">(Message message) -&gt; {
+The message is: {@(message.getMessage())}
+}
+</code></pre> 
+                    <p>It is then possible to evaluate any Java expression:</p> 
+                    <pre><code class="language-plaintext">(Message message) -&gt; {
+The message is: {@(5+8)}
+}
+</code></pre> 
+                    <blockquote> 
+                        <p>Note that this can be dangerous when you can't trust the source of a template set.</p> 
+                    </blockquote> 
+                    <h5 id="if">If</h5> 
+                    <p>An if statement can be used to render different contents based on one or more conditions. An if statement starts with <code>{@if</code> and ends with <code>}</code>, it contains one or more branches separated by <code>;</code> defining a condition and a corresponding body, a default branch with an empty condition can be specified last. Each condition is specified as a raw Java if expression between <code>(</code> and <code>)</code>:</p> 
+                    <pre><code class="language-plaintext">(Message message, String lang) -&gt; {
+	{@if
+		(lang.equals("fr")) -&gt; {
+			Le message est: {@message.message}
+		};
+		(lang.equals("de")) -&gt; {
+			Die Nachricht ist: {@message.message}
+		};
+		() -&gt; {
+			The message is: {@message.message}
+		}
+	}
+}
+</code></pre> 
+                    <h5 id="apply-template">Apply template</h5> 
+                    <p>Templates can be applied on data using an apply template statement starting with <code>{</code> and ending with <code>}</code>. The template to apply is selected among the ones available in the template set based on the type of data to render following Java's rules for function overloading.</p> 
+                    <p>As for the value of statement, it is possible to use a syntactic sugar notation or a raw Java expression between <code>(</code> and <code>)</code> to select the data on which a template should be applied. A template set provides a default template for object which simply renders the <code>toString()</code> representation of the input. Considering previous examples, the content of a message object can then also be rendered as follows:</p> 
+                    <pre><code class="language-plaintext">(Message message) -&gt; {
+The message is: {message.message}
+}
+</code></pre> 
+                    <p>Unlike the value of statement which renders data synchronously, applying a template can be an asynchronous operation depending on the type of the data to render. Indeed when the data to render is an an array, an <code>Iterable</code>, a <code>Stream</code> or a <code>Publisher</code>, the template is applied on each element and in the case of the <code>Publisher</code> this is a reactive, non-blocking and therefore asynchronous operation.</p> 
+                    <p>For instance, a list of messages can be rendered synchronously as follows:</p> 
+                    <pre><code class="language-plaintext">(List&lt;Message&gt; messages) -&gt; {
+Messages are: 
+{messages}
+}
+
+(Message message) -&gt; {{@message.message}
+}
+</code></pre> 
+                    <p>resulting in:</p> 
+                    <pre><code class="language-plaintext">Messages are:
+message 1
+message 2
+message 3
+message 4
+message 5
+...
+</code></pre> 
+                    <p>Now if we consider a <code>Publisher</code>, a message is rendered to the output when it is emitted by the publisher following reactive principles.</p> 
+                    <p>As you can see the apply template statement is extremely powerful, it is used to render data based on their types which facilitates composition but it can also be used as a for loop statement to render a list of elements.</p> 
+                    <p>By default, an apply template statement will select the unnamed template within the template set matching the type of the data to render, but it is also possible to select a named templates as follows:</p> 
+                    <pre><code class="language-plaintext">(List&lt;Message&gt; messages) -&gt; {
+Messages are: 
+{messages;bullet}
+}
+
+(Message message) -&gt; {{@message.message}
+}
+
+bullet(Message message) -&gt; {* {@message.message}
+}
+</code></pre> 
+                    <p>resulting in:</p> 
+                    <pre><code class="language-plaintext">Messages are:
+* message 1
+* message 2
+* message 3
+* message 4
+* message 5
+...
+</code></pre> 
+                    <p>Extra parameters can also be passed to a template in which case we have to explicitly specify the inputs:</p> 
+                    <pre><code class="language-plaintext">(List&lt;Message&gt; messages) -&gt; {
+Messages are: 
+{messages; message -&gt; bullet(message, "-")}
+}
+
+bullet(Message message, String marker) -&gt; {{@marker} {@message.message}
+}
+</code></pre> 
+                    <p>resulting in:</p> 
+                    <pre><code class="language-plaintext">Messages are:
+- message 1
+- message 2
+- message 3
+- message 4
+- message 5
+...
+</code></pre> 
+                    <p>It is also possible to specify guard expressions as raw Java expressions and choose to apply different templates based on certain conditions. For instance, let's say we want to render important messages in a specific way, we can do as follows:</p> 
+                    <pre><code class="language-plaintext">(List&lt;Message&gt; messages) -&gt; {
+Messages are: 
+{messages;(message) -&gt; important(message) when (message.isImportant());(message)}
+}
+
+(Message message) -&gt; {{@message.message}
+}
+
+important(Message message) -&gt; {**{@message.message}**
+}
+
+</code></pre> 
+                    <p>In the previous example, the <code>important</code> template is applied when a message is important and the unnamed template is applied otherwise. Assuming message 3 is important, this will result in::</p> 
+                    <pre><code class="language-plaintext">Messages are:
+- message 1
+- message 2
+- **message 3**
+- message 4
+- message 5
+...
+</code></pre> 
+                    <p>The index of an item in a list is made available when selecting the target template. For instance, a numbered list of messages can be rendered as follows:</p> 
+                    <pre><code class="language-plaintext">(List&lt;Message&gt; messages) -&gt; {
+Messages are: 
+{messages;(index, message) -&gt; (index, message)}
+}
+
+(long index, Message message) -&gt; {{@index}. {@message.message}
+}
+</code></pre> 
+                    <p>resulting in:</p> 
+                    <pre><code class="language-plaintext">Messages are:
+0. message 1
+1. message 2
+2. message 3
+3. message 4
+4. message 5
+...
+</code></pre> 
+                    <p>A no-arg named template can be applied by omitting the data part in the statement:</p> 
+                    <pre><code class="language-plaintext">(Message message) -&gt; {
+	{;header}
+	The message is: {@message.message}
+	{;footer}
+}
+
+header() -&gt; {==== HEADER ====
+}
+
+footer() -&gt; {==== FOOTER ====
+}
+</code></pre> 
+                    <p>resulting in:</p> 
+                    <pre><code class="language-plaintext">==== HEADER ====
+The message is: {@message.message}
+==== FOOTER ====
+</code></pre> 
+                    <h4 id="pipes">Pipes</h4> 
+                    <p>A pipe can be used to transform data before they are rendered or before a template is applied, as a result they can be specified in value of and apply template statements. In practice, a pipe is a simple function that accepts a data and transform it into another data. Pipes can be chained to sequentially apply multiple transformations.</p> 
+                    <p>A pipe can be specified as a lambda expression and applied using a <code>|</code> in a value of or apply template statement as follows:</p> 
+                    <pre><code class="language-plaintext">(Message message) -&gt; {
+The message is: {@message.message|((String content) -&gt; content.toUpperCase())}
+}
+</code></pre> 
+                    <p>Lambdas are handy when there's a need for very specific pipes, however the recommended way to create pipes is to define them in Java as static methods returning the <code>Pipe</code> implementation in order to keep the template readable. Above pipe can be defined in a Java class as follows:</p> 
+                    <pre><code class="language-java">package io.inverno.example.app_irt.pipes; 
+
+import io.inverno.mod.irt.Pipe;
+
+public final class SamplePipes {
+
+	public static Pipe&lt;String, String&gt; uppercase() {
+		return String::toUpperCase;
+	}
+}
+</code></pre> 
+                    <p>We can then statically import that class in the template set and simplify above example:</p> 
+                    <pre><code class="language-plaintext">import static io.inverno.example.app_irt.pipes.SamplePipes.*;
+
+(Message message) -&gt; {
+The message is: {@message.message|uppercase}
+}
+</code></pre> 
+                    <p>Several built-in pipes are provided in the module in the <code>Pipes</code>, <code>SteamPipes</code> and <code>PublisherPipes</code> classes. The <code>Pipes</code> class provides pipes used to tranform simple data object before rendering such as strings, dates and numbers. The <code>StreamPipes</code> and <code>PublisherPipes</code> provide pipes used to transformed streams and publishers typically in an apply template statement.</p> 
+                    <p>For instance the following example sort a list of items and map them to their datetime before applying templates:</p> 
+                    <pre><code class="language-plaintext">import static io.inverno.mod.irt.Pipes.*;
+import static io.inverno.mod.irt.PublisherPipes.*;
+
+import java.time.format.DateTimeFormatter;
+
+(Publisher&lt;Item&gt; items) -&gt; {
+	{items|sort|map(Item::getDateTime)}
+}
+
+(ZonedDateTime datetime) -&gt; {
+	{@datetime|dateTime(DateTimeFormatter.ISO_DATE_TIME)}
+}
+</code></pre> 
+                    <h4 id="modes">Modes</h4> 
+                    <p>Template set classes are generated by the Inverno reactive template compiler plugin. Depending on the modes specified in the template set options, the resulting class will expose different <code>render()</code> methods with different outputs.</p> 
+                    <p>The <strong>STRING</strong> mode is the default resulting in the generation of <code>render()</code> methods that return a <code>CompletableFuture&lt;String&gt;</code> which completes once the input data has been fully rendered into the resulting String. For instance, assuming we have created a <code>Simple.irt</code> template set containing a template to render <code>Message</code> object, we can render a <code>Message</code> to a String as follows:</p> 
+                    <pre><code class="language-java">String result = Simple.string().render(new Message("some important message", true)).get();
+</code></pre> 
+                    <p>The rendering process start as soon as the <code>render()</code> method is invoked, the <code>get()</code> operation on the resulting <code>CompletableFuture</code> waits until the message has been fully rendered. In this particular example, the whole process is synchronous since the input data is available from the start but keep in mind that this might not always be the case especially when <code>Publisher</code> objects are rendered in the process.</p> 
+                    <p>The <strong>BYTEBUF</strong> has a similar behavior except that data are rendered in a <strong>ByteBuf</strong>:</p> 
+                    <pre><code class="language-java">ByteBuf result = Simple.bytebuf().render(new Message("some important message", true)).get();
+</code></pre> 
+                    <p>It is possible to provide the <code>ByteBuf</code> instance into which data should be rendered by defining a factory:</p> 
+                    <pre><code class="language-java">ByteBuf result = Simple.bytebuf(() -&gt; Unpooled.unreleasableBuffer(Unpooled.buffer())).render(new Message("some important message", true)).get();
+</code></pre> 
+                    <p>The <strong>STREAM</strong> mode is used to render data in an <code>OutputStream</code>:</p> 
+                    <pre><code class="language-java">ByteArrayOutputStream result = Simple.stream(() -&gt; new ByteArrayOutputStream()).render(new Message("some important message", true)).get();
+</code></pre> 
+                    <p>Finally the <strong>PUBLISHER_STRING</strong> and <strong>PUBLISHER_BYTEBUF</strong> modes are used to generate fully reactive rendering methods which return <code>Publisher&lt;String&gt;</code> and <code>Publisher&lt;ByteBuf&gt;</code> respectively. Unlike for previous modes, the rendering process starts when a subscription is made on the returned <code>Publisher</code> which can emits partial rendering result whenever a partial data is rendered.</p> 
+                    <pre><code class="language-java">String result = Flux.from(Simple.publisherString().render(new Message("some important message", true))).collect(Collectors.joining()).block();
+</code></pre> 
+                    <p>If you consider small data set and require very high performance, you should prefer non-reactive modes. If your concern is more about resources, considering a large amount of data that you do not want to load into memory at once, you should prefer reactive modes with a slight decrease in performance.</p> 
+                    <h3 id="sql-client">SQL Client</h3> 
+                    <p>The Inverno SQL client module specifies a reactive API for executing SQL statement on a RDBMS.</p> 
+                    <p>This module only exposes the API and a proper implementation module must be considered to obtain <code>SqlClient</code> instances.</p> 
+                    <p>In order to use the Inverno <em>SQL client</em> module, we need to declare a dependency to the API and at least one implementation in the module descriptor:</p> 
+                    <pre><code class="language-java">module io.inverno.example.app {
+    ...
+    requires io.inverno.mod.sql; // this is actually optional since implementations should already define a transitive dependency
+    requires io.inverno.mod.sql.vertx; // Vert.x implementation
+    ...
+}
+</code></pre> 
+                    <p>And also declare these dependencies in the build descriptor:</p> 
+                    <p>Using Maven:</p> 
+                    <pre><code class="language-xml">&lt;project&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.inverno.mod&lt;/groupId&gt;
+            &lt;artifactId&gt;inverno-sql&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.inverno.mod&lt;/groupId&gt;
+            &lt;artifactId&gt;inverno-sql-vertx&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre> 
+                    <p>Using Gradle:</p> 
+                    <pre><code class="language-groovy">...
+compile 'io.inverno.mod:inverno-sql:1.2.0'
+compile 'io.inverno.mod:inverno-sql-vertx:1.2.0'
+...
+</code></pre> 
+                    <h4 id="sql-client-api">SQL client API</h4> 
+                    <p>The Sql client API defines the <code>SqlClient</code> interface which provides reactive methods to execute SQL statements on a RDBMS.</p> 
+                    <h5 id="query-and-update">Query and update</h5> 
+                    <p>The <code>SqlClient</code> extends the <code>SqlOperations</code> interface which defines methods for common RDBMS operations such as query or update in addition to the more general statements and prepared statements.</p> 
+                    <p>We can query a database as follows:</p> 
+                    <pre><code class="language-java">SqlClient client = ...
+
+Flux&lt;Person&gt; persons = Flux.from(
+    client.query("SELECT * FROM person")
+)
+.map(row -&gt; new Person(row.getString("firstname"), row.getString("name"), row.getLocalDate("birthdate"))); // Map the resulting rows
+
+persons.subscribe(...); // The query is executed on subscribe following reactive principles
+</code></pre> 
+                    <p>Prepared queries are also supported:</p> 
+                    <pre><code class="language-java">Publisher&lt;Row&gt; results = client.query("SELECT * FROM person WHERE name = $1", "John");
+</code></pre> 
+                    <p>A row mapping function can be specified directly in the query as well</p> 
+                    <pre><code class="language-java">Publisher&lt;Person&gt; results = client.query(
+    "SELECT * FROM person WHERE name = $1", 
+    row -&gt; new Person(row.getString("firstname"), row.getString("name"), row.getLocalDate("birthdate")), 
+    "Smith"
+);
+</code></pre> 
+                    <p>A single result can also be queried as follows:</p> 
+                    <pre><code class="language-java">Mono&lt;Person&gt; person = client.queryForObject( // only consider the first row in the results
+    "SELECT * FROM person WHERE name = $1", 
+    row -&gt; new Person(row.getString("firstname"), row.getString("name"), row.getLocalDate("birthdate")),
+    "Smith"
+);
+</code></pre> 
+                    <blockquote> 
+                        <p>The two previous examples are actually optimizations of the first one which enable implementations to optimize the query, resulting in faster execution.</p> 
+                    </blockquote> 
+                    <p>The database can be updated as follows:</p> 
+                    <pre><code class="language-java">client.update(
+    "UPDATE person SET birthdate = $1 WHERE id = $2", 
+    LocalDate.of(1970, 1, 1), 123
+);
+</code></pre> 
+                    <p>It can also be updated in a batch as follows:</p> 
+                    <pre><code class="language-java">client.batchUpdate(
+    "UPDATE person SET birthdate = $1 WHERE id = $2", 
+    List.of(
+        new Object[]{ LocalDate.of(1970, 1, 1), 123 },
+        new Object[]{ LocalDate.of(1980, 1, 1), 456 },
+        new Object[]{ LocalDate.of(1990, 1, 1), 789 }
+    )
+);
+</code></pre> 
+                    <blockquote> 
+                        <p>Note that all these operations use prepared statements which protect against SQL injection attacks.</p> 
+                    </blockquote> 
+                    <h5 id="statements">Statements</h5> 
+                    <p>The <code>SqlClient</code> also defines methods to create more general statements and prepared statements.</p> 
+                    <p>A static statement can be created and executed as follows:</p> 
+                    <pre><code class="language-java">SqlClient client = ...
+
+Publisher&lt;SqlResult&gt; results = client.statement("SELECT * FROM person").execute();
+
+results.subscribe(...); // The statement is executed on subscribe following reactive principles
+</code></pre> 
+                    <p>The execution of a statement returns <code>SqlResult</code> for each SQL operations in the statement in a publisher.</p> 
+                    <p>The <code>SqlResult</code> exposes row metadata and depending on the operation type either the number of rows affected by the operation (<code>UPDATE</code> or <code>DELETE</code>) or the resulting rows (<code>SELECT</code>).</p> 
+                    <p>Following preceding example:</p> 
+                    <pre><code class="language-java">Flux&lt;Person&gt; persons = Flux.from(client.statement("SELECT * FROM person").execute())
+    .single() // Make sure we have only one result
+    .flatMapMany(SqlResult::rows)
+    .map(row -&gt; new Person(row.getString("firstname"), row.getString("name"), row.getLocalDate("birthdate")))
+
+persons.subscribe(...);
+</code></pre> 
+                    <p>Queries can also be fluently appended to a statement as follows:</p> 
+                    <pre><code class="language-java">Publisher&lt;SqlResult&gt; results = client
+    .statement("SELECT * FROM person")
+    .and("SELECT * FROM city")
+    .and("SELECT * FROM country")
+    .execute();
+</code></pre> 
+                    <p>Unlike prepared statements, static statements are not pre-compiled and do not protect against SQL injection attacks which is why prepared statements should be preferred when there is a need for performance, dynamic or user provided queries.</p> 
+                    <p>A prepared statement can be created and executed as follows:</p> 
+                    <pre><code class="language-java">SqlClient client = ...
+
+Publisher&lt;SqlResult&gt; results = client.preparedStatement("SELECT * FROM person WHERE name = $1")
+    .bind("Smith") // bind the query argument
+    .execute();
+
+results.subscribe(...); // The statement is executed on subscribe following reactive principles
+</code></pre> 
+                    <p>As for a static statement, a prepared statement returns <code>SqlResult</code> for each SQL operations in the statement, however it is not possible to specify multiple operation in a prepared statement. But it is possible to transform it into a batch which will result in multiple operations and therefore multiple <code>SqlResult</code>.</p> 
+                    <p>In order to create a batch statement, we must bind multiple query arguments as follows:</p> 
+                    <pre><code class="language-java">Publisher&lt;SqlResult&gt; results = client.preparedStatement("SELECT * FROM person WHERE name = $1")
+    .bind("Smith")         // first query
+    .and().bind("Cooper")  // second query
+    .and().bind("Johnson") // third query
+    .execute();
+
+long resultCount = Flux.from(results).count().block(); // returns 3 since we have created a batch statement with three queries
+</code></pre> 
+                    <h5 id="transactions">Transactions</h5> 
+                    <p>The API provides two ways to execute statement in a transaction which can be managed explicitly or implicitly.</p> 
+                    <p>We can choose to manage transaction explicitly by obtaining a <code>TransactionalSqlOperations</code> which expose <code>commit()</code> and <code>rollback()</code> methods that we must invoke explicitly to close the transaction:</p> 
+                    <p>In the following example we perform a common <code>SELECT/UPDATE</code> operation within a transaction:</p> 
+                    <pre><code class="language-java">SqlClient client = ...
+
+final float debit = 42.00f;
+final int accountId = 1;
+
+Mono&lt;Integer&gt; affectedRows = Mono.usingWhen(
+    client.transaction(), 
+    tops -&gt; tops
+        .queryForObject("SELECT balance FROM account WHERE id = $1", row -&gt; row.getFloat(0), accountId)
+        .flatMap(balance -&gt; ops
+            .update("UPDATE account SET balance = $1 WHERE id = $2", balance - debit, accountId)
+            .doOnNext(rowCount -&gt; {
+                if(balance - debit &lt; 0) {
+                    throw new IllegalStateException();
+                }
+            })
+        )
+    ,
+    tops -&gt; {                                // Complete
+        // extra processing before commit
+        // ...
+        
+        return tops.commit();
+    },
+    (tops, ex) -&gt; {                          // Error
+        // extra processing before roll back
+        // ...
+        
+        return tops.rollback();
+    }, 
+    tops -&gt; {                                // Cancel
+        // extra processing before commit
+        // ...
+        
+        return tops.rollback();
+    }
+);
+
+affectedRows.subscribe(...); // on subscribe, a transaction is created, the closure method is invoked and the transaction is explicitly committed or rolled back when the publisher terminates.
+</code></pre> 
+                    <p>The following example does the same but with implicit transaction management:</p> 
+                    <pre><code class="language-java">SqlClient client = ...
+
+final float debit = 42.00f;
+final int accountId = 1;
+
+Publisher&lt;Integer&gt; affectedRows = client.transaction(ops -&gt; ops
+    .queryForObject("SELECT balance FROM account WHERE id = $1", row -&gt; row.getFloat(0), accountId)
+    .flatMap(balance -&gt; ops
+        .update("UPDATE account SET balance = $1 WHERE id = $2", balance - debit, accountId)
+        .doOnNext(rowCount -&gt; {
+            if(balance - debit &lt; 0) {
+                throw new IllegalStateException();
+            }
+        })
+    )
+);
+
+affectedRows.subscribe(...); // same as before but the transaction is implicitly committed or rolled back
+</code></pre> 
+                    <blockquote> 
+                        <p>Note that transactions might not be supported by all implementations, for instance the Vert.x pooled client implementation does not support transactions and an <code>UnsupportedOperationException</code> will be thrown if you try to create a transaction.</p> 
+                    </blockquote> 
+                    <h5 id="connections">Connections</h5> 
+                    <p>Some <code>SqlClient</code> implementations backed by a connection pool for instance can be used to execute multiple SQL statements on a single connection released once the resulting publisher terminates (either closed or returned to the pool).</p> 
+                    <p>For instance we can execute multiple statements on a single connection as follows:</p> 
+                    <pre><code class="language-java">SqlClient client = ...
+
+final int postId = 1;
+
+client.connection(ops -&gt; ops
+    .queryForObject("SELECT likes FROM posts WHERE id = $1", row -&gt; row.getInteger(0), postId)
+    .flatMap(likes -&gt; ops.update("UPDATE posts SET likes = $1 WHERE id = $2", likes + 1, postId))
+);
+</code></pre> 
+                    <h4 id="vertx-sql-client-implementation">Vert.x SQL Client implementation</h4> 
+                    <p>The Inverno Vert.x SQL client module is an implementation of the SQL client API on top of the <a href="https://github.com/eclipse-vertx/vertx-sql-client">Vert.x Reactive SQL client</a>.</p> 
+                    <p>It provides multiple <code>SqlClient</code> implementations that wraps Vert.x SQL pooled client, pool or connection and exposes a <code>SqlCLient</code> bean created from the module's configuration and backed by a Vert.x pool. It can be used to execute SQL statements in an application.</p> 
+                    <p>In order to use the Inverno <em>Vert.x SQL client</em> module, we need to declare a dependency in the module descriptor:</p> 
+                    <pre><code class="language-java">module io.inverno.example.app {
+    ...
+    requires io.inverno.mod.sql.vertx;
+    ...
+}
+</code></pre> 
+                    <p>And also declare this dependency as well as a dependency to the Vert.x implementation corresponding to the RDBMS we are targeting in the build descriptor:</p> 
+                    <p>Using Maven:</p> 
+                    <pre><code class="language-xml">&lt;project&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.inverno.mod&lt;/groupId&gt;
+            &lt;artifactId&gt;inverno-sql-vertx&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.vertx&lt;/groupId&gt;
+            &lt;artifactId&gt;vertx-pg-client&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre> 
+                    <p>Using Gradle:</p> 
+                    <pre><code class="language-groovy">...
+compile 'io.inverno.mod:inverno-sql-vertx:1.2.0'
+compile 'io.vertx:vertx-pg-client:4.1.2'
+...
+</code></pre> 
+                    <h5 id="configuration-4">Configuration</h5> 
+                    <p>The <code>VertxSqlClientConfiguration</code> is used to create and configure the SQL client bean exposed by the module.</p> 
+                    <p>Please refer to the <a href="https://inverno.io/docs/release/api/index.html">API documentation</a> to have an exhaustive description of the different configuration properties.</p> 
+                    <h5 id="sql-client-bean">Sql Client bean</h5> 
+                    <p>The module exposes a <code>SqlClient</code> bean which is backed by a Vert.x pool. It is created using the configuration and especially the <code>db_uri</code> property whose scheme indicates the RDBMS system and therefore the Vert.x pool implementation to use.</p> 
+                    <p>For instance, the following configuration can be used to connect to a PostgreSQL database:</p> 
+                    <pre><code class="language-plaintext">db_uri="postgres://user:password@localhost:5432/sample_db"
+</code></pre> 
+                    <blockquote> 
+                        <p>If you want to connect to a particular RDBMS, don't forget to add a dependency to the corresponding Vert.x SQL client implementation. Vert.x currently supports DB2, MSSQL, MySQL and PostgreSQL.</p> 
+                    </blockquote> 
+                    <p>The pool can be configured as well:</p> 
+                    <pre><code class="language-plaintext">pool_maxSize=20
+</code></pre> 
+                    <p>Please refer to the <a href="https://vertx.io/docs/#databases">Vert.x database documentation</a> to get the options supported for each RDBMS implementations.</p> 
+                    <p>The Vert.x SQL client requires a <code>Vertx</code> instance which is provided in the Inverno application reactor when using a <code>VertxReactor</code>, otherwise a dedicated <code>Vertx</code> instance is created. In any case, this instance can be overridden by providing a custom one to the module.</p> 
+                    <h5 id="vertx-wrappers">Vert.x wrappers</h5> 
+                    <p>Depending on our needs, we can also choose to create a custom <code>SqlClient</code> using one the Vert.x SQL client wrappers provided by the module.</p> 
+                    <p>The <code>ConnectionSqlClient</code> wraps a Vert.x SQL connection, you can use to transform a single connection obtained via a Vert.x connection factory into a reactive <code>SqlClient</code>.</p> 
+                    <p>The <code>PooledClientSqlClient</code> wraps a Vert.x pooled SQL client that supports pipelining of queries on a single configuration for optimized performances. This implementation doesn't support transactions.</p> 
+                    <pre><code class="language-java">SqlClient client = new PooledClientSqlClient(PgPool.client(...));
+</code></pre> 
+                    <p>Finally, the <code>PoolSqlClient</code> wraps a Vert.x SQL pool. This is a common implementation supporting transactions and result streaming, it is used to create the module's SQL client bean.</p> 
+                    <pre><code class="language-java">SqlClient client = new PoolSqlClient(PgPool.pool(...));
+</code></pre> 
                     <h2 id="inverno-maven-plugin-1">Inverno Maven Plugin</h2> 
                     <p>The Inverno Maven Plugin is used to run, package and distribute modular applications and Inverno applications in particular. It relies on a set of Java tools to build native runtime or application images as well as Docker or OCI images for modular Java projects.</p> 
                     <h3 id="usage">Usage</h3> 
@@ -5043,7 +5830,12 @@ info:
                         &lt;configuration&gt;
                             &lt;vm&gt;server&lt;/vm&gt;
                             &lt;addModules&gt;jdk.jdwp.agent,jdk.crypto.ec&lt;/addModules&gt;
-                            &lt;vmOptions&gt;-Xms2G -Xmx2G -XX:+UseNUMA -XX:+UseParallelGC&lt;/vmOptions&gt;
+                            &lt;launchers&gt;
+                                &lt;launcher&gt;
+                                    &lt;name&gt;app&lt;/name&gt;
+                                    &lt;vmOptions&gt;-Xms2G -Xmx2G -XX:+UseNUMA -XX:+UseParallelGC&lt;/vmOptions&gt;
+                                &lt;/launcher&gt;
+                            &lt;/launchers&gt;
                             &lt;formats&gt;
                                 &lt;format&gt;zip&lt;/format&gt;
                                 &lt;format&gt;deb&lt;/format&gt;
@@ -5080,7 +5872,13 @@ info:
                         &lt;configuration&gt;
                             &lt;vm&gt;server&lt;/vm&gt;
                             &lt;addModules&gt;jdk.jdwp.agent,jdk.crypto.ec&lt;/addModules&gt;
-                            &lt;vmOptions&gt;-Xms2G -Xmx2G -XX:+UseNUMA -XX:+UseParallelGC&lt;/vmOptions&gt;
+                            &lt;executable&gt;app&lt;/executable&gt;
+                            &lt;launchers&gt;
+                                &lt;launcher&gt;
+                                    &lt;name&gt;app&lt;/name&gt;
+                                    &lt;vmOptions&gt;-Xms2G -Xmx2G -XX:+UseNUMA -XX:+UseParallelGC&lt;/vmOptions&gt;
+                                &lt;/launcher&gt;
+                            &lt;/launchers&gt;
                             &lt;repository&gt;example&lt;/repository&gt;
                         &lt;/configuration&gt;
                     &lt;/execution&gt;
@@ -5117,7 +5915,13 @@ info:
                         &lt;configuration&gt;
                             &lt;vm&gt;server&lt;/vm&gt;
                             &lt;addModules&gt;jdk.jdwp.agent,jdk.crypto.ec&lt;/addModules&gt;
-                            &lt;vmOptions&gt;-Xms2G -Xmx2G -XX:+UseNUMA -XX:+UseParallelGC&lt;/vmOptions&gt;
+                            &lt;executable&gt;app&lt;/executable&gt;
+                            &lt;launchers&gt;
+                                &lt;launcher&gt;
+                                    &lt;name&gt;app&lt;/name&gt;
+                                    &lt;vmOptions&gt;-Xms2G -Xmx2G -XX:+UseNUMA -XX:+UseParallelGC&lt;/vmOptions&gt;
+                                &lt;/launcher&gt;
+                            &lt;/launchers&gt;
                             &lt;repository&gt;example&lt;/repository&gt;
                         &lt;/configuration&gt;
                     &lt;/execution&gt;
@@ -5151,7 +5955,13 @@ info:
                         &lt;configuration&gt;
                             &lt;vm&gt;server&lt;/vm&gt;
                             &lt;addModules&gt;jdk.jdwp.agent,jdk.crypto.ec&lt;/addModules&gt;
-                            &lt;vmOptions&gt;-Xms2G -Xmx2G -XX:+UseNUMA -XX:+UseParallelGC&lt;/vmOptions&gt;
+                            &lt;executable&gt;app&lt;/executable&gt;
+                            &lt;launchers&gt;
+                                &lt;launcher&gt;
+                                    &lt;name&gt;app&lt;/name&gt;
+                                    &lt;vmOptions&gt;-Xms2G -Xmx2G -XX:+UseNUMA -XX:+UseParallelGC&lt;/vmOptions&gt;
+                                &lt;/launcher&gt;
+                            &lt;/launchers&gt;
                             &lt;registryUsername&gt;user&lt;/registryUsername&gt;
                             &lt;registryPassword&gt;password&lt;/registryPassword&gt;
                             &lt;registry&gt;gcr.io&lt;/registry&gt;
@@ -5185,7 +5995,7 @@ info:
                     </ul> 
                     <h4 id="invernobuild-app">inverno:build-app</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.1.0:build-app</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-app</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds the project application package.</p> 
                     <p>A project application package is a native self-contained Java application including all the necessary dependencies. It can be used to distribute a complete application.</p> 
@@ -5819,7 +6629,7 @@ info:
                     </ul> 
                     <h4 id="invernobuild-image">inverno:build-image</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.1.0:build-image</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-image</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds a container image and publishes it to a registry.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -6623,7 +7433,7 @@ info:
                     </ul> 
                     <h4 id="invernobuild-image-docker">inverno:build-image-docker</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.1.0:build-image-docker</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-image-docker</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds a Docker container image to a local Docker daemon.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -7424,7 +8234,7 @@ info:
                     </ul> 
                     <h4 id="invernobuild-image-tar">inverno:build-image-tar</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.1.0:build-image-tar</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-image-tar</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds a container image to a TAR archive that can be later loaded into Docker:</p> 
                     <p>$ docker load --input target/&lt;image&gt;.tar</p> 
@@ -8199,7 +9009,7 @@ info:
                     </ul> 
                     <h4 id="invernobuild-runtime">inverno:build-runtime</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.1.0:build-runtime</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-runtime</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds the project runtime image.</p> 
                     <p>A runtime image is a custom Java runtime containing a set of modules and their dependencies.</p> 
@@ -8684,7 +9494,7 @@ info:
                     </ul> 
                     <h4 id="invernohelp">inverno:help</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.1.0:help</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:help</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Display help information on inverno-maven-plugin. Call mvn inverno:help -Ddetail=true -Dgoal=&lt;goal-name&gt; to display parameter details.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -8769,7 +9579,7 @@ info:
                     </ul> 
                     <h4 id="invernorun">inverno:run</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.1.0:run</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:run</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Runs the project application.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -8971,7 +9781,7 @@ info:
                     </ul> 
                     <h4 id="invernostart">inverno:start</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.1.0:start</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:start</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Starts the project application without blocking the Maven build.</p> 
                     <p>This goal is used together with the stop goal in the pre-integration-test and post-integration-test phases to run integration tests.</p> 
@@ -9176,7 +9986,7 @@ info:
                     </ul> 
                     <h4 id="invernostop">inverno:stop</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.1.0:stop</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:stop</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Stops the project application that has been previously started using the start goal.</p> 
                     <p>This goal is used together with the start goal in the pre-integration-test and post-integration-test phases to run integration tests.</p> 
@@ -9260,89 +10070,154 @@ info:
                                     <th>Version</th> 
                                 </tr> 
                                 <tr> 
+                                    <td>com.aayushatharva.brotli4j</td> 
+                                    <td>brotli4j</td> 
+                                    <td>1.4.2</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>com.aayushatharva.brotli4j</td> 
+                                    <td>native-linux-x86_64</td> 
+                                    <td>1.4.2</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>com.aayushatharva.brotli4j</td> 
+                                    <td>native-osx-x86_64</td> 
+                                    <td>1.4.2</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>com.aayushatharva.brotli4j</td> 
+                                    <td>native-windows-x86_64</td> 
+                                    <td>1.4.2</td> 
+                                </tr> 
+                                <tr> 
                                     <td>com.fasterxml.jackson.core</td> 
                                     <td>jackson-databind</td> 
-                                    <td>2.12.3</td> 
+                                    <td>2.12.4</td> 
                                 </tr> 
                                 <tr> 
                                     <td>com.google.cloud.tools</td> 
                                     <td>jib-core</td> 
-                                    <td>0.18.0</td> 
+                                    <td>0.19.0</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.lettuce</td> 
                                     <td>lettuce-core</td> 
-                                    <td>6.1.1.RELEASE</td> 
+                                    <td>6.1.4.RELEASE</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-all</td> 
-                                    <td>4.1.63.Final</td> 
+                                    <td>4.1.66.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-buffer</td> 
-                                    <td>4.1.63.Final</td> 
+                                    <td>4.1.66.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-codec-http2</td> 
-                                    <td>4.1.63.Final</td> 
+                                    <td>4.1.66.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-common</td> 
-                                    <td>4.1.63.Final</td> 
+                                    <td>4.1.66.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-resolver</td> 
-                                    <td>4.1.63.Final</td> 
+                                    <td>4.1.66.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-tcnative-boringssl-static</td> 
-                                    <td>2.0.39.Final</td> 
+                                    <td>2.0.40.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-transport</td> 
-                                    <td>4.1.63.Final</td> 
+                                    <td>4.1.66.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-transport-native-epoll</td> 
-                                    <td>4.1.63.Final</td> 
+                                    <td>4.1.66.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-transport-native-epoll</td> 
-                                    <td>4.1.63.Final</td> 
+                                    <td>4.1.66.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-transport-native-epoll</td> 
-                                    <td>4.1.63.Final</td> 
+                                    <td>4.1.66.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-transport-native-epoll</td> 
-                                    <td>4.1.63.Final</td> 
+                                    <td>4.1.66.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-transport-native-kqueue</td> 
-                                    <td>4.1.63.Final</td> 
+                                    <td>4.1.66.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.netty</td> 
                                     <td>netty-transport-native-kqueue</td> 
-                                    <td>4.1.63.Final</td> 
+                                    <td>4.1.66.Final</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>io.netty.incubator</td> 
+                                    <td>netty-incubator-transport-native-io_uring</td> 
+                                    <td>0.0.8.Final</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>io.netty.incubator</td> 
+                                    <td>netty-incubator-transport-native-io_uring</td> 
+                                    <td>0.0.8.Final</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>io.netty.incubator</td> 
+                                    <td>netty-incubator-transport-native-io_uring</td> 
+                                    <td>0.0.8.Final</td> 
                                 </tr> 
                                 <tr> 
                                     <td>io.projectreactor</td> 
                                     <td>reactor-core</td> 
-                                    <td>3.4.6</td> 
+                                    <td>3.4.9</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>io.vertx</td> 
+                                    <td>vertx-core</td> 
+                                    <td>4.1.2</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>io.vertx</td> 
+                                    <td>vertx-db2-client</td> 
+                                    <td>4.1.2</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>io.vertx</td> 
+                                    <td>vertx-mssql-client</td> 
+                                    <td>4.1.2</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>io.vertx</td> 
+                                    <td>vertx-mysql-client</td> 
+                                    <td>4.1.2</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>io.vertx</td> 
+                                    <td>vertx-pg-client</td> 
+                                    <td>4.1.2</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>io.vertx</td> 
+                                    <td>vertx-sql-client</td> 
+                                    <td>4.1.2</td> 
                                 </tr> 
                                 <tr> 
                                     <td>net.java.dev.javacc</td> 
@@ -9372,6 +10247,16 @@ info:
                                 <tr> 
                                     <td>org.apache.logging.log4j</td> 
                                     <td>log4j-core</td> 
+                                    <td>2.14.1</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>org.apache.logging.log4j</td> 
+                                    <td>log4j-jul</td> 
+                                    <td>2.14.1</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>org.apache.logging.log4j</td> 
+                                    <td>log4j-layout-template-json</td> 
                                     <td>2.14.1</td> 
                                 </tr> 
                                 <tr> 
@@ -9407,42 +10292,42 @@ info:
                                 <tr> 
                                     <td>org.junit.jupiter</td> 
                                     <td>junit-jupiter-api</td> 
-                                    <td>5.7.1</td> 
+                                    <td>5.7.2</td> 
                                 </tr> 
                                 <tr> 
                                     <td>org.junit.jupiter</td> 
                                     <td>junit-jupiter-engine</td> 
-                                    <td>5.7.1</td> 
+                                    <td>5.7.2</td> 
                                 </tr> 
                                 <tr> 
                                     <td>org.junit.jupiter</td> 
                                     <td>junit-jupiter-params</td> 
-                                    <td>5.7.1</td> 
+                                    <td>5.7.2</td> 
                                 </tr> 
                                 <tr> 
                                     <td>org.junit.platform</td> 
                                     <td>junit-platform-commons</td> 
-                                    <td>1.7.1</td> 
+                                    <td>1.7.2</td> 
                                 </tr> 
                                 <tr> 
                                     <td>org.junit.platform</td> 
                                     <td>junit-platform-launcher</td> 
-                                    <td>1.7.1</td> 
+                                    <td>1.7.2</td> 
                                 </tr> 
                                 <tr> 
                                     <td>org.mockito</td> 
                                     <td>mockito-core</td> 
-                                    <td>3.8.0</td> 
+                                    <td>3.11.2</td> 
                                 </tr> 
                                 <tr> 
                                     <td>org.ow2.asm</td> 
                                     <td>asm</td> 
-                                    <td>9.1</td> 
+                                    <td>9.2</td> 
                                 </tr> 
                                 <tr> 
                                     <td>org.webjars</td> 
                                     <td>swagger-ui</td> 
-                                    <td>3.48.0</td> 
+                                    <td>3.51.2</td> 
                                 </tr> 
                             </tbody>
                         </table>
@@ -9463,6 +10348,11 @@ info:
                                 </tr> 
                                 <tr> 
                                     <td>org.apache.maven.plugins</td> 
+                                    <td>maven-assembly-plugin</td> 
+                                    <td>3.3.0</td> 
+                                </tr> 
+                                <tr> 
+                                    <td>org.apache.maven.plugins</td> 
                                     <td>maven-clean-plugin</td> 
                                     <td>3.1.0</td> 
                                 </tr> 
@@ -9474,7 +10364,7 @@ info:
                                 <tr> 
                                     <td>org.apache.maven.plugins</td> 
                                     <td>maven-dependency-plugin</td> 
-                                    <td>3.1.2</td> 
+                                    <td>3.2.0</td> 
                                 </tr> 
                                 <tr> 
                                     <td>org.apache.maven.plugins</td> 
@@ -9499,7 +10389,7 @@ info:
                                 <tr> 
                                     <td>org.apache.maven.plugins</td> 
                                     <td>maven-javadoc-plugin</td> 
-                                    <td>3.2.0</td> 
+                                    <td>3.3.0</td> 
                                 </tr> 
                                 <tr> 
                                     <td>org.apache.maven.plugins</td> 

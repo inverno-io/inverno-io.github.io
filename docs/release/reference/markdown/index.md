@@ -11,9 +11,9 @@ $properties(base = ../../../../, title = Reference Documentation)
 
 <div class="heading"> 
 	<h1 class="heading-title">Inverno Framework Documentation</h1> 
-	<p class="heading-subtitle">Version: 1.1.0</p> 
+	<p class="heading-subtitle">Version: 1.2.0</p> 
 	<p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p>
-	<a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.1.0.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
+	<a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.2.0.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
 </div>
 
 $toc( level=4 )
@@ -51,9 +51,9 @@ Feel free to report bugs and feature requests or simply ask questions using [Git
 ## Overview
 
 $include( source=${INVERNO_WORKSPACE}/inverno-core/README.md, end=121, heading-offset=2 )
-$include( source=${INVERNO_WORKSPACE}/inverno-mods/README.md, end=134, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/README.md, end=159, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-tools/README.md, end=22, heading-offset=2 )
-$include( source=${INVERNO_WORKSPACE}/inverno-dist/README.md, end=312, heading-offset=1 )
+$include( source=${INVERNO_WORKSPACE}/inverno-dist/README.md, end=317, heading-offset=1 )
 $include( source=${INVERNO_WORKSPACE}/inverno-core/doc/reference-guide.md, resources = img, heading-offset=1 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/doc/reference-guide.md, resources = img, heading-offset=1 )
 $include( source=${INVERNO_WORKSPACE}/inverno-tools/inverno-maven-plugin/README.md, heading-offset=1 )

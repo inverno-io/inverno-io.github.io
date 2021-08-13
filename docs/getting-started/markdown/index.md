@@ -58,7 +58,7 @@ You can now setup the `pom.xml` build descriptor with the Inverno distribution b
     <parent>
         <groupId>io.inverno.dist</groupId>
         <artifactId>inverno-parent</artifactId>
-        <version>1.1.0</version>
+        <version>1.2.0</version>
     </parent>
     <groupId>com.example</groupId>
     <artifactId>helloworld</artifactId>
@@ -77,7 +77,7 @@ Then you must declare dependencies to Inverno *boot* and *web* modules since you
     <parent>
         <groupId>io.inverno.dist</groupId>
         <artifactId>inverno-parent</artifactId>
-        <version>1.1.0</version>
+        <version>1.2.0</version>
     </parent>
     <groupId>com.example</groupId>
     <artifactId>helloworld</artifactId>
@@ -162,7 +162,7 @@ $ mvn inverno:run
 You should see an output similar to the following:
 
 ```plaintext
-[INFO] --- inverno-maven-plugin:1.0.0:run (default-cli) @ helloworld ---
+[INFO] --- inverno-maven-plugin:1.2.0:run (default-cli) @ helloworld ---
 [INFO] Running project: com.example.helloworld@1.0-SNAPSHOT...
 ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
 INFO Application Inverno is starting...
@@ -177,7 +177,7 @@ INFO Application Inverno is starting...
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                 -- 1.2.0 --                  ║
+     ║                    ,   \/   ,                                 -- 1.3.0 --                  ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║

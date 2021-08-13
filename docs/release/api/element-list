@@ -4,6 +4,7 @@ module:io.inverno.core.annotation
 io.inverno.core.annotation
 module:io.inverno.mod.base
 io.inverno.mod.base
+io.inverno.mod.base.concurrent
 io.inverno.mod.base.converter
 io.inverno.mod.base.net
 io.inverno.mod.base.reflect
@@ -18,6 +19,12 @@ io.inverno.mod.http.base
 io.inverno.mod.http.base.header
 module:io.inverno.mod.http.server
 io.inverno.mod.http.server
+module:io.inverno.mod.irt
+io.inverno.mod.irt
+module:io.inverno.mod.sql
+io.inverno.mod.sql
+module:io.inverno.mod.sql.vertx
+io.inverno.mod.sql.vertx
 module:io.inverno.mod.web
 io.inverno.mod.web
 io.inverno.mod.web.annotation
