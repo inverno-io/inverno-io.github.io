@@ -58,7 +58,7 @@ You can now setup the `pom.xml` build descriptor with the Inverno distribution b
     <parent>
         <groupId>io.inverno.dist</groupId>
         <artifactId>inverno-parent</artifactId>
-        <version>1.2.0</version>
+        <version>1.2.1</version>
     </parent>
     <groupId>com.example</groupId>
     <artifactId>helloworld</artifactId>
@@ -77,7 +77,7 @@ Then you must declare dependencies to Inverno *boot* and *web* modules since you
     <parent>
         <groupId>io.inverno.dist</groupId>
         <artifactId>inverno-parent</artifactId>
-        <version>1.2.0</version>
+        <version>1.2.1</version>
     </parent>
     <groupId>com.example</groupId>
     <artifactId>helloworld</artifactId>

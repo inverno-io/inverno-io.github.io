@@ -459,6 +459,10 @@ html {
 	background-color: #52c6ff;
 }
 
+.markdown {
+	overflow-wrap: anywhere;	
+}
+
 .markdown > *:first-child {
 	margin-top: 0 !important;
 }
@@ -506,6 +510,10 @@ html {
 .markdown p, .markdown table, .markdown img {
 	break-inside: avoid;
 	page-break-inside: avoid;
+}
+
+.markdown table {
+	overflow-wrap: normal;
 }
 
 .markdown blockquote {

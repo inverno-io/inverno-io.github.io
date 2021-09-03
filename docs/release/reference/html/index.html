@@ -131,7 +131,7 @@
                                     <a class="nav-link" href="#routing">Routing</a><a class="nav-link" href="#static-handler">Static handler</a><a class="nav-link" href="#web-server">Web Server</a><a class="nav-link" href="#web-controller">Web Controller</a>
                                 </nav><a class="nav-link" href="#reactive-template">Reactive Template</a>
                                 <nav class="nav nav-pills flex-column ms-2 my-1">
-                                    <a class="nav-link" href="#creates-an-irt-template">Creates an &lt;code&gt;.irt&lt;/code&gt; template</a><a class="nav-link" href="#irt-syntax">&lt;code&gt;.irt&lt;/code&gt; syntax</a><a class="nav-link" href="#pipes">Pipes</a><a class="nav-link" href="#modes">Modes</a>
+                                    <a class="nav-link" href="#creates-an-irt-template">Creates an .irt template</a><a class="nav-link" href="#irt-syntax">.irt syntax</a><a class="nav-link" href="#pipes">Pipes</a><a class="nav-link" href="#modes">Modes</a>
                                 </nav><a class="nav-link" href="#sql-client">SQL Client</a>
                                 <nav class="nav nav-pills flex-column ms-2 my-1">
                                     <a class="nav-link" href="#sql-client-api">SQL client API</a><a class="nav-link" href="#vertx-sql-client-implementation">Vert.x SQL Client implementation</a>
@@ -218,7 +218,7 @@ public class Main {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.2.0&lt;/version&gt;
+        &lt;version&gt;1.2.1&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;hello&lt;/artifactId&gt;
@@ -396,7 +396,7 @@ public class MainController {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.2.0&lt;/version&gt;
+        &lt;version&gt;1.2.1&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample-app&lt;/artifactId&gt;
@@ -418,7 +418,7 @@ public class MainController {
             &lt;dependency&gt;
                 &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
                 &lt;artifactId&gt;inverno-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;1.2.0&lt;/version&gt;
+                &lt;version&gt;1.2.1&lt;/version&gt;
                 &lt;type&gt;pom&lt;/type&gt;
                 &lt;scope&gt;import&lt;/scope&gt;
             &lt;/dependency&gt;
@@ -714,7 +714,7 @@ $ /opt/sample-app/bin/sample-app
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.2.0&lt;/version&gt;
+        &lt;version&gt;1.2.1&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample&lt;/artifactId&gt;
@@ -755,7 +755,7 @@ $ /opt/sample-app/bin/sample-app
         &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
         &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
         &lt;version.inverno&gt;1.3.0&lt;/version.inverno&gt;
-        &lt;version.inverno.dist&gt;1.2.0&lt;/version.inverno.dist&gt;
+        &lt;version.inverno.dist&gt;1.2.1&lt;/version.inverno.dist&gt;
     &lt;/properties&gt;
 
     &lt;dependencyManagement&gt;
@@ -1589,7 +1589,7 @@ boot.stop();
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-base:1.2.0'
+compile 'io.inverno.mod:inverno-base:1.2.1'
 ...
 </code></pre> 
                     <p>The <em>base</em> module is usually provided as a transitive dependency by other modules, mainly the <em>boot</em> module, so defining a direct dependency is usually not necessary at least for an application module.</p> 
@@ -2030,7 +2030,7 @@ module io.inverno.example.app {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-boot:1.2.0'
+compile 'io.inverno.mod:inverno-boot:1.2.1'
 ...
 </code></pre> 
                     <h4 id="configuration">Configuration</h4> 
@@ -2125,7 +2125,7 @@ boot.stop();
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-configuration:1.2.0'
+compile 'io.inverno.mod:inverno-configuration:1.2.1'
 ...
 </code></pre> 
                     <h4 id="configuration-source">Configuration source</h4> 
@@ -2643,7 +2643,7 @@ public interface CompositeModuleConfiguration {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-http-base:1.2.0'
+compile 'io.inverno.mod:inverno-http-base:1.2.1'
 ...
 </code></pre> 
                     <p>The <em>http-base</em> module is usually provided as a transitive dependency by other HTTP modules, the <em>http-server</em> module or the <em>web</em> module in particular, so this might not be necessary.</p> 
@@ -2740,8 +2740,8 @@ module io.inverno.example.app_http {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-boot:1.2.0'
-compile 'io.inverno.mod:inverno-http-server:1.2.0'
+compile 'io.inverno.mod:inverno-boot:1.2.1'
+compile 'io.inverno.mod:inverno-http-server:1.2.1'
 ...
 </code></pre> 
                     <h4 id="http-server-exchange-api">HTTP Server exchange API</h4> 
@@ -3579,8 +3579,8 @@ module io.inverno.example.app_web {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-boot:1.2.0'
-compile 'io.inverno.mod:inverno-web:1.2.0'
+compile 'io.inverno.mod:inverno-boot:1.2.1'
+compile 'io.inverno.mod:inverno-web:1.2.1'
 ...
 </code></pre> 
                     <h4 id="routing">Routing</h4> 
@@ -5090,7 +5090,12 @@ info:
                     <p>The Inverno <em>reactive template</em> module provides a template engine for efficient reactive data rendering.</p> 
                     <p>Data are basically rendered by templates which are regrouped in template sets and applied based on the type of data to render. A template set is statically typed and generated by an Inverno compiler plugin which compiles <code>.irt</code> template set source files along with the Java sources of a module.</p> 
                     <p>The template sets classes thus obtained support reactive rendering, data are rendered as a flow of events for efficient usage of resources. For instance, the complete set of data doesn't have to be available or loaded into memory, the rendering being reactive the output can be generated incrementally by processing each piece of data individually one after the other when they become available. Since the rendering process never blocks it is also possible to lazily load data when/if they need to be rendered.</p> 
-                    <p>The syntax of <code>.irt</code> template set is inspired from functional language such as <a href="https://en.wikipedia.org/wiki/XSLT">XSLT</a> and <a href="https://en.wikipedia.org/wiki/Erlang_(programming_language)">Erlang</a> which are particularly suited for reactive rendering. Since a template is a generated Java class, the Java language is also widely used in a template source file, especially for in dynamic parts of a template.</p> 
+                    <p>The syntax of <code>.irt</code> template set is inspired from functional language such as <a href="https://en.wikipedia.org/wiki/XSLT">XSLT</a> and <a href="https://en.wikipedia.org/wiki/Erlang_(programming_language)">Erlang</a> which are particularly suited for reactive rendering. Since a template is a generated Java class, the Java language is also widely used in a template source file, especially for the dynamic parts of a template.</p> 
+                    <p>In terms of raw performance, Inverno templates processing is faster than most Java template engines by an order of magnitude and with lower memory usage. The following <a href="https://github.com/jkuhn1/template-benchmark">benchmark project</a> compares performances of various template engines rendering a list of stock items into an HTML document as a String.</p> 
+                    <img class="img-fluid shadow mb-4 mx-auto d-block" src="img/template_benchmarks.png" alt="Template Benchmarks" /> 
+                    <blockquote> 
+                        <p>Please keep in mind that outcomes might be different considering different scenarios, especially reactive rendering which might appear slower but addresses different concerns such as stream processing and optimized usage of resources.</p> 
+                    </blockquote> 
                     <p>In order to use the Inverno <em>reactive template</em> module, we need to declare a dependency in the module descriptor:</p> 
                     <pre><code class="language-java">module io.inverno.example.app {
     ...
@@ -5111,10 +5116,10 @@ info:
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-irt:1.2.0'
+compile 'io.inverno.mod:inverno-irt:1.2.1'
 ...
 </code></pre> 
-                    <h4 id="creates-an-irt-template">Creates an <code>.irt</code> template</h4> 
+                    <h4 id="creates-an-irt-template">Creates an .irt template</h4> 
                     <p>A template can be created along with other Java source files in the source directory of an Inverno module. At compile time, the Inverno reactive template compiler plugin will scan the module source folder for <code>.irt</code> files and compiles them to generate template set classes that can be used in your module to render data.</p> 
                     <p>The following <code>Simple.irt</code> template set is a simple example containing one template that renders a <code>Message</code> object as String:</p> 
                     <pre><code class="language-plaintext">package io.inverno.example.app_irt.templates;
@@ -5154,7 +5159,7 @@ public class Message {
                     <pre><code class="language-java">CompletableFuture&lt;String&gt; rendered = Simple.string().render(new Message("Hello, world!"));
 System.out.println(rendered.get()); // The message is: Hello, world!
 </code></pre> 
-                    <h4 id="irt-syntax"><code>.irt</code> syntax</h4> 
+                    <h4 id="irt-syntax">.irt syntax</h4> 
                     <h5 id="package-and-imports">Package and imports</h5> 
                     <p>An <code>.irt</code> template always starts with the declaration of the Java package containing the template, followed by the list of imported Java types or static methods used within the template. This is exactly the same as any Java source file.</p> 
                     <pre><code class="language-plaintext">package io.inverno.example.app_irt.templates;
@@ -5477,8 +5482,8 @@ import java.time.format.DateTimeFormatter;
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-sql:1.2.0'
-compile 'io.inverno.mod:inverno-sql-vertx:1.2.0'
+compile 'io.inverno.mod:inverno-sql:1.2.1'
+compile 'io.inverno.mod:inverno-sql-vertx:1.2.1'
 ...
 </code></pre> 
                     <h4 id="sql-client-api">SQL client API</h4> 
@@ -5686,7 +5691,7 @@ client.connection(ops -&gt; ops
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-sql-vertx:1.2.0'
+compile 'io.inverno.mod:inverno-sql-vertx:1.2.1'
 compile 'io.vertx:vertx-pg-client:4.1.2'
 ...
 </code></pre> 
