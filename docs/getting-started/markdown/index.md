@@ -58,7 +58,7 @@ You can now setup the `pom.xml` build descriptor with the Inverno distribution b
     <parent>
         <groupId>io.inverno.dist</groupId>
         <artifactId>inverno-parent</artifactId>
-        <version>1.2.1</version>
+        <version>${VERSION_INVERNO_DIST}</version>
     </parent>
     <groupId>com.example</groupId>
     <artifactId>helloworld</artifactId>
@@ -77,7 +77,7 @@ Then you must declare dependencies to Inverno *boot* and *web* modules since you
     <parent>
         <groupId>io.inverno.dist</groupId>
         <artifactId>inverno-parent</artifactId>
-        <version>1.2.1</version>
+        <version>${VERSION_INVERNO_DIST}</version>
     </parent>
     <groupId>com.example</groupId>
     <artifactId>helloworld</artifactId>
@@ -177,7 +177,7 @@ INFO Application Inverno is starting...
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                 -- 1.3.0 --                  ║
+     ║                    ,   \/   ,                                 -- ${VERSION_INVERNO_CORE} --                  ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
