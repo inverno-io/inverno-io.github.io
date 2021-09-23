@@ -59,7 +59,7 @@
         <main id="main" class="main container">
             <div class="heading"> 
                 <h1 class="heading-title">Inverno Framework Documentation</h1> 
-                <p class="heading-subtitle">Version: 1.2.2</p> 
+                <p class="heading-subtitle">Version: 1.2.3</p> 
                 <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.2.1.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a> 
             </div> 
             <div class="d-lg-flex">
@@ -219,7 +219,7 @@ public class Main {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.2.2&lt;/version&gt;
+        &lt;version&gt;1.2.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;hello&lt;/artifactId&gt;
@@ -400,7 +400,7 @@ public class MainController {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.2.2&lt;/version&gt;
+        &lt;version&gt;1.2.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample-app&lt;/artifactId&gt;
@@ -422,7 +422,7 @@ public class MainController {
             &lt;dependency&gt;
                 &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
                 &lt;artifactId&gt;inverno-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;1.2.2&lt;/version&gt;
+                &lt;version&gt;1.2.3&lt;/version&gt;
                 &lt;type&gt;pom&lt;/type&gt;
                 &lt;scope&gt;import&lt;/scope&gt;
             &lt;/dependency&gt;
@@ -537,7 +537,7 @@ public class App {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.3.1 --                 ║
+     ║                    ,   \/   ,                                  -- 1.3.2 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -718,7 +718,7 @@ $ /opt/sample-app/bin/sample-app
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.2.2&lt;/version&gt;
+        &lt;version&gt;1.2.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample&lt;/artifactId&gt;
@@ -758,8 +758,8 @@ $ /opt/sample-app/bin/sample-app
         &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
         &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
         &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
-        &lt;version.inverno&gt;1.3.1&lt;/version.inverno&gt;
-        &lt;version.inverno.dist&gt;1.2.2&lt;/version.inverno.dist&gt;
+        &lt;version.inverno&gt;1.3.2&lt;/version.inverno&gt;
+        &lt;version.inverno.dist&gt;1.2.3&lt;/version.inverno.dist&gt;
     &lt;/properties&gt;
 
     &lt;dependencyManagement&gt;
@@ -813,8 +813,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.inverno:inverno-core:1.3.1'
-    annotationProcessor 'io.inverno:inverno-core-compiler:1.3.1'
+    implementation 'io.inverno:inverno-core:1.3.2'
+    annotationProcessor 'io.inverno:inverno-core-compiler:1.3.2'
 }
 
 java {
@@ -1229,7 +1229,7 @@ INFO: Inverno is starting...
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.3.1 --                 ║
+     ║                    ,   \/   ,                                  -- 1.3.2 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -1593,7 +1593,7 @@ boot.stop();
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-base:1.2.2'
+compile 'io.inverno.mod:inverno-base:1.2.3'
 ...
 </code></pre> 
                     <p>The <em>base</em> module is usually provided as a transitive dependency by other modules, mainly the <em>boot</em> module, so defining a direct dependency is usually not necessary at least for an application module.</p> 
@@ -2034,7 +2034,7 @@ module io.inverno.example.app {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-boot:1.2.2'
+compile 'io.inverno.mod:inverno-boot:1.2.3'
 ...
 </code></pre> 
                     <h4 id="configuration">Configuration</h4> 
@@ -2129,7 +2129,7 @@ boot.stop();
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-configuration:1.2.2'
+compile 'io.inverno.mod:inverno-configuration:1.2.3'
 ...
 </code></pre> 
                     <h4 id="configuration-source">Configuration source</h4> 
@@ -2331,7 +2331,7 @@ application.greeting.message="""
                         <li>system properties</li> 
                         <li>system environment variables</li> 
                         <li>the <code>configuration.cprops</code> file in <code>./conf/</code> or <code>${inverno.conf.path}/</code> directories if one exists (if the first one exists the second one is ignored)</li> 
-                        <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-utilities/target/inverno-utilities-1.0.0-SNAPSHOT/lib/runtime/conf/</code> directory if it exists</li> 
+                        <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-utilities/target/maven-inverno/application_linux_amd64/inverno-utilities-1.0.0-SNAPSHOT/lib/runtime/conf/</code> directory if it exists</li> 
                         <li>the <code>configuration.cprops</code> file in the application module if it exists</li> 
                     </ul> 
                     <p>This source is typically created in a <code>main</code> method to load the bootstrap configuration on startup.</p> 
@@ -2647,7 +2647,7 @@ public interface CompositeModuleConfiguration {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-http-base:1.2.2'
+compile 'io.inverno.mod:inverno-http-base:1.2.3'
 ...
 </code></pre> 
                     <p>The <em>http-base</em> module is usually provided as a transitive dependency by other HTTP modules, the <em>http-server</em> module or the <em>web</em> module in particular, so this might not be necessary.</p> 
@@ -2744,8 +2744,8 @@ module io.inverno.example.app_http {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-boot:1.2.2'
-compile 'io.inverno.mod:inverno-http-server:1.2.2'
+compile 'io.inverno.mod:inverno-boot:1.2.3'
+compile 'io.inverno.mod:inverno-http-server:1.2.3'
 ...
 </code></pre> 
                     <h4 id="http-server-exchange-api">HTTP Server exchange API</h4> 
@@ -3062,7 +3062,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.3.1 --                 ║
+     ║                    ,   \/   ,                                  -- 1.3.2 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -3583,8 +3583,8 @@ module io.inverno.example.app_web {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-boot:1.2.2'
-compile 'io.inverno.mod:inverno-web:1.2.2'
+compile 'io.inverno.mod:inverno-boot:1.2.3'
+compile 'io.inverno.mod:inverno-web:1.2.3'
 ...
 </code></pre> 
                     <h4 id="routing">Routing</h4> 
@@ -4145,7 +4145,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.3.1 --                 ║
+     ║                    ,   \/   ,                                  -- 1.3.2 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -5120,7 +5120,7 @@ info:
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-irt:1.2.2'
+compile 'io.inverno.mod:inverno-irt:1.2.3'
 ...
 </code></pre> 
                     <h4 id="creates-an-irt-template">Creates an .irt template</h4> 
@@ -5486,8 +5486,8 @@ import java.time.format.DateTimeFormatter;
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-sql:1.2.2'
-compile 'io.inverno.mod:inverno-sql-vertx:1.2.2'
+compile 'io.inverno.mod:inverno-sql:1.2.3'
+compile 'io.inverno.mod:inverno-sql-vertx:1.2.3'
 ...
 </code></pre> 
                     <h4 id="sql-client-api">SQL client API</h4> 
@@ -5695,7 +5695,7 @@ client.connection(ops -&gt; ops
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-sql-vertx:1.2.2'
+compile 'io.inverno.mod:inverno-sql-vertx:1.2.3'
 compile 'io.vertx:vertx-pg-client:4.1.2'
 ...
 </code></pre> 
