@@ -13,7 +13,7 @@ $properties(base = ../../../../, title = Reference Documentation)
 	<h1 class="heading-title">Inverno Framework Documentation</h1> 
 	<p class="heading-subtitle">Version: ${VERSION_INVERNO_DIST}</p> 
 	<p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p>
-	<a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.2.1.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
+	<a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-${VERSION_INVERNO_DIST}.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
 </div>
 
 $toc( level=4 )
@@ -55,6 +55,15 @@ $include( source=${INVERNO_WORKSPACE}/inverno-mods/README.md, end=161, heading-o
 $include( source=${INVERNO_WORKSPACE}/inverno-tools/README.md, end=24, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-dist/README.md, end=319, heading-offset=1 )
 $include( source=${INVERNO_WORKSPACE}/inverno-core/doc/reference-guide.md, resources = img, heading-offset=1 )
-$include( source=${INVERNO_WORKSPACE}/inverno-mods/doc/reference-guide.md, resources = img, heading-offset=1 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/doc/reference-guide.md, heading-offset=1 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-base/README.md, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-boot/README.md, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-configuration/README.md, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-http-base/README.md, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-http-server/README.md, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-web/README.md, resources = doc/img, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-irt/README.md, resources = doc/img, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-sql/README.md, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-redis/README.md, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-tools/inverno-maven-plugin/README.md, heading-offset=1 )
 $include( source=${INVERNO_WORKSPACE}/inverno-oss-parent/README.md, heading-offset=1 )
