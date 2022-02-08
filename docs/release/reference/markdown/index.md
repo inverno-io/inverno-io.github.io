@@ -24,7 +24,7 @@ $doc
 
 The **Inverno Framework** has been created with the objective of facilitating the creation of Java enterprise applications with maximum modularity, performance, maintainability and customizability. 
 
-New technologies are emerging all the time questioning what has been working for years, We strongly believe that we must instead recognize and preserve proven solutions and only provide what is missing or change what is no longer in line with widely accepted evolutions. The Java platform has proven to be resilient to change and offers features that make it an ideal choice to create durable and efficient applications in complex technical and organizational environments which is precisely what is expected in an enterprise world. The Inverno Framework is a fully integrated suite of modules built for the Java platform that fully embrace its philosophy by keeping things well organized, strict and explicit with clean APIs and comprehensive documentation.
+New technologies are emerging all the time questioning what has been working for years, We strongly believe that we must instead recognize and preserve proven solutions and only provide what is missing or change what is no longer in line with widely accepted evolutions. The Java platform has proven to be resilient to change and offers features that make it an ideal choice to create durable and efficient applications in complex technical and organizational environments which is precisely what is expected in an enterprise world. The Inverno Framework is a fully integrated suite of modules built for the Java platform that fully embrace this philosophy by keeping things well organized, strict and explicit with clean APIs and comprehensive documentation.
 
 The Inverno framework is open source and licensed under version 2.0 of the [Apache License][apache-license].
 
@@ -51,7 +51,7 @@ Feel free to report bugs and feature requests or simply ask questions using [Git
 ## Overview
 
 $include( source=${INVERNO_WORKSPACE}/inverno-core/README.md, end=123, heading-offset=2 )
-$include( source=${INVERNO_WORKSPACE}/inverno-mods/README.md, end=161, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/README.md, end=177, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-tools/README.md, end=24, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-dist/README.md, end=319, heading-offset=1 )
 $include( source=${INVERNO_WORKSPACE}/inverno-core/doc/reference-guide.md, resources = img, heading-offset=1 )
@@ -64,6 +64,8 @@ $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-http-server/README.md
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-web/README.md, resources = doc/img, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-irt/README.md, resources = doc/img, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-sql/README.md, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-sql-vertx/README.md, heading-offset=3 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-redis/README.md, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-redis-lettuce/README.md, heading-offset=3 )
 $include( source=${INVERNO_WORKSPACE}/inverno-tools/inverno-maven-plugin/README.md, heading-offset=1 )
 $include( source=${INVERNO_WORKSPACE}/inverno-oss-parent/README.md, heading-offset=1 )

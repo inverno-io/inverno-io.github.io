@@ -59,8 +59,8 @@
         <main id="main" class="main container">
             <div class="heading"> 
                 <h1 class="heading-title">Inverno Framework Documentation</h1> 
-                <p class="heading-subtitle">Version: 1.3.0</p> 
-                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.2.1.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a> 
+                <p class="heading-subtitle">Version: 1.4.0</p> 
+                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.4.0.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a> 
             </div> 
             <div class="d-lg-flex">
                 <section class="toc col-12 col-lg-3">
@@ -135,6 +135,9 @@
                               </nav><a class="nav-link" href="#sql-client">SQL Client</a>
                               <nav class="nav nav-pills flex-column ms-2 my-1">
                               <a class="nav-link" href="#sql-client-api">SQL client API</a><a class="nav-link" href="#vertx-sql-client-implementation">Vert.x SQL Client implementation</a>
+                              </nav><a class="nav-link" href="#redis-client">Redis Client</a>
+                              <nav class="nav nav-pills flex-column ms-2 my-1">
+                              <a class="nav-link" href="#redis-client-api">Redis Client API</a><a class="nav-link" href="#lettuce-redis-client-implementation">Lettuce Redis Client implementation</a>
                               </nav>
                             </nav><a class="nav-link" href="#inverno-maven-plugin-1">Inverno Maven Plugin</a>
                             <nav class="nav nav-pills flex-column ms-2 my-1">
@@ -155,7 +158,7 @@
                 <section class="markdown col p-3 overflow-auto"> 
                     <h2 id="introduction">Introduction</h2> 
                     <p>The <strong>Inverno Framework</strong> has been created with the objective of facilitating the creation of Java enterprise applications with maximum modularity, performance, maintainability and customizability.</p> 
-                    <p>New technologies are emerging all the time questioning what has been working for years, We strongly believe that we must instead recognize and preserve proven solutions and only provide what is missing or change what is no longer in line with widely accepted evolutions. The Java platform has proven to be resilient to change and offers features that make it an ideal choice to create durable and efficient applications in complex technical and organizational environments which is precisely what is expected in an enterprise world. The Inverno Framework is a fully integrated suite of modules built for the Java platform that fully embrace its philosophy by keeping things well organized, strict and explicit with clean APIs and comprehensive documentation.</p> 
+                    <p>New technologies are emerging all the time questioning what has been working for years, We strongly believe that we must instead recognize and preserve proven solutions and only provide what is missing or change what is no longer in line with widely accepted evolutions. The Java platform has proven to be resilient to change and offers features that make it an ideal choice to create durable and efficient applications in complex technical and organizational environments which is precisely what is expected in an enterprise world. The Inverno Framework is a fully integrated suite of modules built for the Java platform that fully embrace this philosophy by keeping things well organized, strict and explicit with clean APIs and comprehensive documentation.</p> 
                     <p>The Inverno framework is open source and licensed under version 2.0 of the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License</a>.</p> 
                     <h3 id="design-principles">Design principles</h3> 
                     <p>A Inverno application is inherently modular, <strong>modularity</strong> is a key design principle which guarantees a proper separation of concerns providing flexibility, maintainability, stability and ease of development regardless of the lifespan of an application or the number of people involved to develop it. A Inverno module is built as a standard Java module extending the <a href="https://en.wikipedia.org/wiki/Java_Platform_Module_System">Java module system</a> with <a href="https://en.wikipedia.org/wiki/Inversion_of_control">Inversion of Control</a> and <a href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency Injection</a> performed at compile time.</p> 
@@ -219,7 +222,7 @@ public class Main {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.3.0&lt;/version&gt;
+        &lt;version&gt;1.4.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;hello&lt;/artifactId&gt;
@@ -239,7 +242,7 @@ public class Main {
                     <p>You can then run the application:</p> 
                     <pre><code class="language-plaintext">$ mvn inverno:run -Dinverno.run.arguments=John
 
-[INFO] --- inverno-maven-plugin:1.2.2:run (default-cli) @ app-hello ---
+[INFO] --- inverno-maven-plugin:1.2.3:run (default-cli) @ app-hello ---
 [INFO] Running project: io.inverno.example.hello@1.0.0-SNAPSHOT...
 Hello John!!!
 
@@ -349,6 +352,15 @@ public class MainController {
                         <li>pipes for data transformation</li> 
                         <li>functional syntax inspired from XSLT and Erlang on top of the Java language that perfectly embraces reactive principles</li> 
                     </ul> 
+                    <h5 id="inverno-redis">inverno-redis</h5> 
+                    <p>The Inverno Redis client module specified a reactive API for executing Redis commands on a <a href="https://redis.io/">Redis</a> data store. It supports:</p> 
+                    <ul> 
+                        <li>batch queries</li> 
+                        <li>transaction</li> 
+                    </ul> 
+                    <h5 id="inverno-redis-lettuce">inverno-redis-lettuce</h5> 
+                    <p>The Inverno Redis client Lettuce implementation module provides Redis implementation on top of <a href="https://lettuce.io">Lettuce</a> async pool.</p> 
+                    <p>It also exposes a Redis Client bean backed by a Lettuce client and created using the module's configuration. It can be used as is to send commands to a Redis data store.</p> 
                     <h5 id="inverno-sql">inverno-sql</h5> 
                     <p>The Inverno SQL client module specifies a reactive API for executing SQL statements on a RDBMS. It supports:</p> 
                     <ul> 
@@ -357,8 +369,8 @@ public class MainController {
                         <li>transaction</li> 
                     </ul> 
                     <h5 id="inverno-sql-vertx">inverno-sql-vertx</h5> 
-                    <p>The Inverno SQL client Vert.x implementation module provides Sql Client implementations on top of Vert.x pool and pooled client.</p> 
-                    <p>It also exposes a pool based Sql Client bean created using the module's configuration which can be used as is to query a RDBMS.</p> 
+                    <p>The Inverno SQL client Vert.x implementation module provides SQL Client implementations on top of <a href="https://github.com/eclipse-vertx/vertx-sql-client">Vert.x</a> pool and pooled client.</p> 
+                    <p>It also exposes a pool based Sql Client bean created using the module's configuration that can be used as is to query a RDBMS.</p> 
                     <h5 id="inverno-web">inverno-web</h5> 
                     <p>The Inverno Web module provides advanced features on top of the HTTP server module, including:</p> 
                     <ul> 
@@ -401,7 +413,7 @@ public class MainController {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.3.0&lt;/version&gt;
+        &lt;version&gt;1.4.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample-app&lt;/artifactId&gt;
@@ -423,7 +435,7 @@ public class MainController {
             &lt;dependency&gt;
                 &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
                 &lt;artifactId&gt;inverno-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;1.3.0&lt;/version&gt;
+                &lt;version&gt;1.4.0&lt;/version&gt;
                 &lt;type&gt;pom&lt;/type&gt;
                 &lt;scope&gt;import&lt;/scope&gt;
             &lt;/dependency&gt;
@@ -523,7 +535,7 @@ public class App {
                     <pre><code class="language-plaintext">$ mvn inverno:run
 
 ...
-[INFO] --- inverno-maven-plugin:1.2.2:run (default-cli) @ sample-app ---
+[INFO] --- inverno-maven-plugin:1.2.3:run (default-cli) @ sample-app ---
 [INFO] Running project: io.inverno.example.sample_app@1.0.0-SNAPSHOT...
  [═══════════════════════════════════════════════ 100&nbsp;% ══════════════════════════════════════════════] 
 2021-04-08 23:50:35,261 INFO  [main] i.w.c.v.Application - Inverno is starting...
@@ -538,7 +550,7 @@ public class App {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.4.0 --                 ║
+     ║                    ,   \/   ,                                  -- 1.4.1 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -719,7 +731,7 @@ $ /opt/sample-app/bin/sample-app
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.3.0&lt;/version&gt;
+        &lt;version&gt;1.4.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample&lt;/artifactId&gt;
@@ -759,8 +771,8 @@ $ /opt/sample-app/bin/sample-app
         &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
         &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
         &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
-        &lt;version.inverno&gt;1.4.0&lt;/version.inverno&gt;
-        &lt;version.inverno.dist&gt;1.3.0&lt;/version.inverno.dist&gt;
+        &lt;version.inverno&gt;1.4.1&lt;/version.inverno&gt;
+        &lt;version.inverno.dist&gt;1.4.0&lt;/version.inverno.dist&gt;
     &lt;/properties&gt;
 
     &lt;dependencyManagement&gt;
@@ -814,8 +826,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.inverno:inverno-core:1.4.0'
-    annotationProcessor 'io.inverno:inverno-core-compiler:1.4.0'
+    implementation 'io.inverno:inverno-core:1.4.1'
+    annotationProcessor 'io.inverno:inverno-core-compiler:1.4.1'
 }
 
 java {
@@ -1230,7 +1242,7 @@ INFO: Inverno is starting...
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.4.0 --                 ║
+     ║                    ,   \/   ,                                  -- 1.4.1 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -1593,8 +1605,8 @@ boot.stop();
 &lt;/project&gt;
 </code></pre> 
                     <p>Using Gradle:</p> 
-                    <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-base:1.3.0'
+                    <pre><code class="language-java">...
+compile 'io.inverno.mod:inverno-base:1.4.0'
 ...
 </code></pre> 
                     <p>The <em>base</em> module is usually provided as a transitive dependency by other modules, mainly the <em>boot</em> module, so defining a direct dependency is usually not necessary at least for an application module.</p> 
@@ -2054,8 +2066,8 @@ module io.inverno.example.app {
 &lt;/project&gt;
 </code></pre> 
                     <p>Using Gradle:</p> 
-                    <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-boot:1.3.0'
+                    <pre><code class="language-java">...
+compile 'io.inverno.mod:inverno-boot:1.4.0'
 ...
 </code></pre> 
                     <h4 id="configuration">Configuration</h4> 
@@ -2116,6 +2128,7 @@ boot.stop();
                     <p>The default worker pool bean is a simple <a href="https://docs.oracle.com/javase/9/docs/api/java/util/concurrent/Executors.html#newCachedThreadPool--">cached Thread pool</a> which can be overridden by providing a different instance to the <em>boot</em> module.</p> 
                     <h4 id="object-mapper">Object mapper</h4> 
                     <p>A standard JSON reader/writer based on Jackson <code>ObjectMapper</code> is also provided. This instance is used across the application to perform JSON conversion operations, a global configuration can then be applied to that particular instance or it can be overridden when creating the <em>boot</em> module.</p> 
+                    <p>The global object mapper is configured to use JSR310 for dates which are serialized as timestamps following ISO 8601 representation.</p> 
                     <h3 id="configuration-1">Configuration</h3> 
                     <p>The Inverno <em>configuration</em> module defines a unified configuration API for building agile highly configurable applications.</p> 
                     <p>Configuration is one of the most important aspect of an application and sadly one of the most neglected. There are very few decent configuration frameworks and most of the time they relate to one part of the issue. It is important to approach configuration by considering it as a whole and not as something that can be solved by a property file here and a database there. Besides, it must be the first issue to tackle during the design phase as it will impact all aspects of the application. For instance, we can imagine an application where configuration is defined in simple property files, a complete configuration would probably be needed for each environment where the application is deployed, maintenance would be probably problematic even more when we know that configuration properties can be added, modified or removed over time.</p> 
@@ -2149,8 +2162,8 @@ boot.stop();
 &lt;/project&gt;
 </code></pre> 
                     <p>Using Gradle:</p> 
-                    <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-configuration:1.3.0'
+                    <pre><code class="language-java">...
+compile 'io.inverno.mod:inverno-configuration:1.4.0'
 ...
 </code></pre> 
                     <h4 id="configuration-source">Configuration source</h4> 
@@ -2245,6 +2258,50 @@ cachedConfigurationLoader.subscribe(config -&gt; {
                     <pre><code class="language-java">SplittablePrimitiveDecoder&lt;String&gt; customDecoder = ...
 
 PropertyFileConfigurationSource source = new PropertyFileConfigurationSource(new ClasspathResource(URI.create("classpath:/path/to/configuration")), customDecoder)
+</code></pre> 
+                    <p>The regular and most efficient way to query a configuration source is to target specific configuration properties identified by a name and a set of parameters, however there are some cases that actually require to list all values defined for a particular property name and matching a particular set of parameters.</p> 
+                    <p>for instance, this is typically the case when configuring log levels, since we can hardly know the name of each and every loggers used in an application, it is easier, safer and more efficient in that case to list all the configuration properties defined for a <code>logging.level</code> property and apply the configuration to the loggers based on the parameters of the returned properties.</p> 
+                    <p>For instance, the following properties can be defined in the configuration:</p> 
+                    <pre><code>logging.level[]=info
+logging.level[logger="logger1"]=debug
+logging.level[logger="logger2"]=trace
+logging.level[logger="logger3"]=error
+</code></pre> 
+                    <p>These configuration properties can then be listed in the application as follows:</p> 
+                    <pre><code class="language-java">// Returns all logging.level properties defined in the configuration source
+List&lt;ConfigurationProperty&gt; result = source.list("logging.level")
+	.executeAll()
+	.collectList()
+	.block();
+
+// Apply logging configuration
+for(ConfigurationProperty p : result) {
+    Optional&lt;String&gt; loggerName = p.getKey().getParameter("logger");
+    Level level = p.as(Level.class).get();
+	// Configure logger...
+}
+</code></pre> 
+                    <p>The <code>executeAll()</code> method returns all the properties defined in the configuration source for a particular property name and matching the set of parameters defined in the query whether they are defined with extra parameters or not. For instance, if we extend our example by adding an <code>environment</code> parameter:</p> 
+                    <pre><code>logging.level[]=info
+logging.level[environment="dev",logger="logger1"]=debug
+logging.level[environment="prod",logger="logger2"]=trace
+logging.level[logger="logger3"]=error
+</code></pre> 
+                    <p>The following list query will return all values that are defined with a <code>logger</code> parameter whether they are defined with an <code>environment</code> parameter or not. Please note how the <code>logger</code> parameter is specified in the query as a wildcard:</p> 
+                    <pre><code class="language-java">// Returns logging.level[environment="dev", logger="logger1"], logging.level[environment="prod", logger="logger2"] and logging.level[logger="logger3"]=error which are all defined with parameter logger
+List&lt;ConfigurationProperty&gt; result = source.list("logging.level")
+	.withParameters(Parameter.wildcard("logger"))
+	.executeAll()
+	.collectList()
+	.block();
+</code></pre> 
+                    <p>On the other hand, the <code>execute()</code> method is exact and returns all the properties defined in the configuration source for a particular property name and which parameters exactly match the set of parameters defined in the query, excluding those that are defined with extra parameters:</p> 
+                    <pre><code class="language-java">// Returns logging.level[logger="logger3"]=error which exactly defines parameter logger
+List&lt;ConfigurationProperty&gt; result = source.list("logging.level")
+	.withParameters(Parameter.wildcard("logger"))
+	.execute()
+	.collectList()
+	.block();
 </code></pre> 
                     <h5 id="map-configuration-source">Map configuration source</h5> 
                     <p>The map configuration is the most basic configuration source implementation. It exposes configuration properties stored in a map in memory. It doesn't support parameterized properties, regardless of the parameters specified in a query, only the property name is considered when resolving a value.</p> 
@@ -2352,7 +2409,7 @@ application.greeting.message="""
                         <li>system properties</li> 
                         <li>system environment variables</li> 
                         <li>the <code>configuration.cprops</code> file in <code>./conf/</code> or <code>${inverno.conf.path}/</code> directories if one exists (if the first one exists the second one is ignored)</li> 
-                        <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-utilities/target/maven-inverno/application_linux_amd64/inverno-utilities-1.0.0-SNAPSHOT/lib/runtime/conf/</code> directory if it exists</li> 
+                        <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-apps/inverno-utilities/target/maven-inverno/application_linux_amd64/inverno-utilities-1.0.0-SNAPSHOT/lib/runtime/conf/</code> directory if it exists</li> 
                         <li>the <code>configuration.cprops</code> file in the application module if it exists</li> 
                     </ul> 
                     <p>This source is typically created in a <code>main</code> method to load the bootstrap configuration on startup.</p> 
@@ -2406,7 +2463,7 @@ source.activate(2).block();
                     <p>The composite configuration source is a configuration source implementation with two particular features: first it allows to compose multiple configuration sources into one configuration source and then it supports defaulting strategies to determine the best matching value for a given configuration query key.</p> 
                     <p>The property returned for a configuration query key then depends on two factors: the order in which configuration sources were defined in the composite configuration source, from the highest priority to the lowest, and then how close is a property from the configuration query key.</p> 
                     <p>The <code>CompositeConfigurationSource</code> resolves a configuration property by querying its sources in sequence from the highest priority to the lowest. It relies on a <code>CompositeConfigurationStrategy</code> to determine at each round which queries to execute and retain the best matching property from the results. The best matching property is the property whose key is the closest to the original configuration query key according to a metric implemented in the strategy. The algorithm stops when an exact match is found or when there's no more configuration source to query.</p> 
-                    <p>The <code>DefaultCompositeConfigurationStrategy</code> defines the default strategy implementation. It determines the best matching property for a given original query by prioritizing query parameters from left to right: the best matching property is the one matching the most continuous parameters from right to left. In practice, if we consider query key <code>property[p1=v1,...pn=vn]</code>, it supersedes key <code>property[p2=v2,...pn=vn]</code> which supersedes key <code>property[p3=v3,...pn=vn]</code>... which supersedes key <code>property[]</code>. As a result, an original query with <code>n</code> parameters results in <code>n+1</code> queries being actually executed if no property was retained in previous rounds and <code>n-p</code> queries if a property with p parameters (p&lt;n) was retained in previous rounds. The order into which parameters are specified in the original query is then significant: <code>property[p1=v1,p2=v2] != property[p2=v2,p1=v1]</code>.</p> 
+                    <p>The <code>DefaultCompositeConfigurationStrategy</code> defines the default strategy implementation. It determines the best matching property for a given original query by prioritizing query parameters from left to right: the best matching property is then the one matching the most continuous parameters from right to left. In practice, if we consider query key <code>property[p1=v1,...pn=vn]</code>, it supersedes key <code>property[p2=v2,...pn=vn]</code> which supersedes key <code>property[p3=v3,...pn=vn]</code>... which supersedes key <code>property[]</code>. As a result, an original query with <code>n</code> parameters results in <code>n+1</code> queries being actually executed if no property was retained in previous rounds and <code>n-p</code> queries if a property with p parameters (p&lt;n) was retained in previous rounds. The order into which parameters are specified in the original query is then significant: <code>property[p1=v1,p2=v2] != property[p2=v2,p1=v1]</code>.</p> 
                     <p>When defining configuration parameters, we should then order them from the most specific to the most general when querying a composite source. For example, the <code>node</code> parameter which is more specific than the <code>zone</code> parameter should come first then the <code>zone</code> parameter which is more specific than the <code>environment</code> parameter should come next and finally the <code>environment</code> parameter which is the most general should come last.</p> 
                     <p>For instance, we can consider two parameterized configuration sources: <code>source1</code> and <code>source2</code>.</p> 
                     <p><code>source1</code> holds the following properties:</p> 
@@ -2468,12 +2525,79 @@ source                                                         // 5
                     <p>As you can see, the order into which parameters are specified in a query is significant and different results might be returned.</p> 
                     <p>When considering multiple configuration sources, properties can be defined with the exact same key in two different sources, the source with the highest priority wins. In the last example we've been able to set the value of <code>server.url[]</code> to <code>null</code> in <code>source1</code>, however <code>null</code> is itself a value with a different meaning than a missing property, the <code>unset</code> value can be used in such situation to <em>unset</em> a property defined in a source with a lower priority.</p> 
                     <p>For instance, considering previous example, we could have defined <code>server.url[]=unset</code> instead of <code>server.url[]=null</code> in <code>source1</code>, the query would then have returned an empty query result indicating an undefined property.</p> 
+                    <p>Prioritization and defaulting also apply when listing configuration properties on a composite configuration source. In case of conflict between two configuration sources, the default strategy retains the one defined by the source with the highest priority. Results also contains all properties defined with less parameters than the list query from right to left.</p> 
+                    <p>For instance, if we consider the following sources: <code>source1</code> and <code>source2</code>.</p> 
+                    <p><code>source1</code> holds the following properties:</p> 
+                    <ul> 
+                        <li><code>logging.level[environment="dev"]=info</code></li> 
+                        <li><code>logging.level[environment="dev",name="test1"]=info</code></li> 
+                        <li><code>logging.level[environment="prod",name="test1"]=info</code></li> 
+                        <li><code>logging.level[environment="prod",name="test4"]=error</code></li> 
+                        <li><code>logging.level[environment="prod",name="test5"]=info</code></li> 
+                        <li><code>logging.level[environment="prod",name="test1",node="node-1"]=trace</code></li> 
+                    </ul> 
+                    <p><code>source2</code> holds the following properties:</p> 
+                    <ul> 
+                        <li><code>logging.level[environment="dev",node="node-1"]=info</code></li> 
+                        <li><code>logging.level[environment="dev",name="test1"]=debug</code></li> 
+                        <li><code>logging.level[environment="dev",name="test2"]=debug</code></li> 
+                        <li><code>logging.level[environment="dev",name="test2",node="node-1"]=debug</code></li> 
+                        <li><code>logging.level[environment="prod",name="test1"]=warn</code></li> 
+                        <li><code>logging.level[environment="prod",name="test2"]=error</code></li> 
+                        <li><code>logging.level[environment="prod",name="test3"]=info</code></li> 
+                    </ul> 
+                    <p>If we can compose them in a composite configuration source, we can list configuration properties as follows:</p> 
+                    <pre><code class="language-java">ConfigurationSource&lt;?, ?, ?&gt; source1 = ...
+ConfigurationSource&lt;?, ?, ?&gt; source2 = ...
+
+CompositeConfigurationSource source = new CompositeConfigurationSource(List.of(source1, source2));
+
+source                                       // 1
+    .list("logging.level")
+    .withParameters(
+        Parameter.of("environment", "prod"), 
+        Parameter.wildcard("name")
+    )
+    .execute()
+    ...
+
+source                                       // 2
+    .list("logging.level")
+    .withParameters(
+        Parameter.of("environment", "dev"), 
+        Parameter.wildcard("name")
+    )
+    .executeAll()
+    ...
+
+</code></pre> 
+                    <p>In the example above:</p> 
+                    <ol> 
+                        <li><code>execute()</code> is exact and returns properties defined with parameters <code>environment</code> and <code>name</code>, with parameter <code>environment</code> only and with no parameter following defaulting rules implemented in the default strategy. As a result the following properties are returned: 
+                            <ul> 
+                              <li><code>logging.level[environment="prod",name="test1"]=info</code> defined in <code>source1</code> and overriding the property defined in <code>source2</code></li> 
+                              <li><code>logging.level[environment="prod",name="test2"]=error</code> defined in <code>source2</code></li> 
+                              <li><code>logging.level[environment="prod",name="test3"]=info</code> defined in <code>source2</code></li> 
+                              <li><code>logging.level[environment="prod",name="test4"]=error</code> defined in <code>source1</code></li> 
+                              <li><code>logging.level[environment="prod",name="test5"]=info</code> defined in <code>source1</code></li> 
+                            </ul> </li> 
+                        <li><code>executeAll()</code> returns all properties defined with parameters <code>environment</code>, <code>name</code> and any other parameter, with parameter <code>environment</code> only and with no parameter following defaulting rules implemented in the default strategy. As a result the following properties are returned: 
+                            <ul> 
+                              <li><code>logging.level[environment="dev"]=info</code> defined in <code>source1</code> which is the property that would be returned when querying the source with an unspecified name (eg. <code>logging.level[environment="dev",name="unspecifiedLogger"]</code>)</li> 
+                              <li><code>logging.level[environment="dev",name="test1"]=info</code> defined in <code>source1</code> and overriding the property defined in <code>source2</code></li> 
+                              <li><code>logging.level[environment="dev",name="test2"]=debug</code> defined in <code>source2</code></li> 
+                              <li><code>logging.level[environment="dev",name="test2",node="node-1"]=debug</code> defined in <code>source2</code></li> 
+                            </ul> </li> 
+                    </ol> 
+                    <blockquote> 
+                        <p>it is important to note that list operations, especially on a very large set of data can become quite expensive and impact performances, as a result they must be used wisely.</p> 
+                    </blockquote> 
                     <h5 id="configurable-configuration-source">Configurable configuration source</h5> 
                     <p>A configurable configuration source is a particular configuration source which supports configuration properties updates. The <a href="#redis-configuration-source">Redis configuration source</a> is an example of configurable configuration source.</p> 
                     <p>The <code>ConfigurableConfigurationSource</code> interface is the main entry point for updating configuration properties, it shall be used every time there's a need to retrieve or set configuration properties.</p> 
                     <p>It extends the <code>ConfigurationSource</code> with one method for creating a <code>ConfigurationUpdate</code> instance eventually executed in order to set one or more configuration properties in the configuration source.</p> 
                     <p>For instance, a parameterized property <code>server.port</code> can be set in a configuration source as follows:</p> 
-                    <pre><code class="language-java">ConfigurableConfigurationSource&lt;?, ?, ?, ?, ?, ?&gt; source = null;
+                    <pre><code class="language-java">ConfigurableConfigurationSource&lt;?, ?, ?, ?, ?&gt; source = null;
 
 source.set("server.port", 8080)
     .withParameters("environment", "production", "zone", "us")
@@ -2667,8 +2791,8 @@ public interface CompositeModuleConfiguration {
 &lt;/project&gt;
 </code></pre> 
                     <p>Using Gradle:</p> 
-                    <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-http-base:1.3.0'
+                    <pre><code class="language-java">...
+compile 'io.inverno.mod:inverno-http-base:1.4.0'
 ...
 </code></pre> 
                     <p>The <em>http-base</em> module is usually provided as a transitive dependency by other HTTP modules, the <em>http-server</em> module or the <em>web</em> module in particular, so this might not be necessary.</p> 
@@ -2766,9 +2890,9 @@ module io.inverno.example.app_http {
 &lt;/project&gt;
 </code></pre> 
                     <p>Using Gradle:</p> 
-                    <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-boot:1.3.0'
-compile 'io.inverno.mod:inverno-http-server:1.3.0'
+                    <pre><code class="language-java">...
+compile 'io.inverno.mod:inverno-boot:1.4.0'
+compile 'io.inverno.mod:inverno-http-server:1.4.0'
 ...
 </code></pre> 
                     <h4 id="http-server-exchange-api">HTTP Server exchange API</h4> 
@@ -2892,7 +3016,7 @@ compile 'io.inverno.mod:inverno-http-server:1.3.0'
                         <p>If a specific resource is created as in above example the media type service used is the one defined when creating the resource or a default implementation if none was specified. If the resource is obtained with the resource service provided in the <em>boot</em> module the media type service used is the one provided in the <em>boot</em> module.</p> 
                     </blockquote> 
                     <h5 id="server-sent-events">Server-sent events</h5> 
-                    <p><a href="https://www.w3.org/TR/eventsource/">Server-sent events</a> provide a way to send server push notifications to a client. It is based on <a href="https://en.wikipedia.org/wiki/Chunked_transfer_encoding">chunked transfer encoding</a> over HTTP/1.x and regular streams over HTTP/2. The API provides an easy way to create SSE endpoints.</p> 
+                    <p>[Server-sent events][server-sent-events] provide a way to send server push notifications to a client. It is based on <a href="https://en.wikipedia.org/wiki/Chunked_transfer_encoding">chunked transfer encoding</a> over HTTP/1.x and regular streams over HTTP/2. The API provides an easy way to create SSE endpoints.</p> 
                     <pre><code class="language-java">ExchangeHandler&lt;ExchangeContext, Exchange&lt;ExchangeContext&gt;&gt; handler = exchange -&gt; {
     exchange.response().body().sse().from(
         (events, data) -&gt; data.stream(Flux.interval(Duration.ofSeconds(1))
@@ -3155,7 +3279,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.4.0 --                 ║
+     ║                    ,   \/   ,                                  -- 1.4.1 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -3238,7 +3362,7 @@ public class Main {
 }
 </code></pre> 
                     <p>In the above code, we have set the server port to 8081, enabled HTTP/2 over cleartext and set the number of thread allocated to the reactor core IO event loop group to 4.</p> 
-                    <p>Please refer to the <a href="javadoc">API documentation</a> to have an exhaustive description of the different configuration properties. We can for instance configure low level network settings like TCP keep alive or TCP no delay as well as HTTP related settings like compression or TLS.</p> 
+                    <p>Please refer to the <a href="https://inverno.io/docs/release/api/index.html">API documentation</a> to have an exhaustive description of the different configuration properties. We can for instance configure low level network settings like TCP keep alive or TCP no delay as well as HTTP related settings like compression or TLS.</p> 
                     <blockquote> 
                         <p>You can also refer to the <a href="#configuration-1">configuration module documentation</a> to get more details on how configuration works and more especially how you can from here define the HTTP server configuration in command line arguments, property files...</p> 
                     </blockquote> 
@@ -3528,7 +3652,7 @@ content-length: 39
 
 Hello
 </code></pre> 
-                    <h5 id="tls-configuration">TLS configuration</h5> 
+                    <h5 id="tls">TLS</h5> 
                     <p>In order to activate TLS, we need first to obtain a private key and a certificate stored in a keystore.</p> 
                     <p>A self-signed certificate can be generated using <code>keytool</code>, the resulting keystore should be placed in <code>src/main/resources</code> to make it available as a module resource:</p> 
                     <pre><code class="language-plaintext">$ keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -storepass password -validity 360 -keysize 2048
@@ -3681,9 +3805,9 @@ module io.inverno.example.app_web {
 &lt;/project&gt;
 </code></pre> 
                     <p>Using Gradle:</p> 
-                    <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-boot:1.3.0'
-compile 'io.inverno.mod:inverno-web:1.3.0'
+                    <pre><code class="language-java">...
+compile 'io.inverno.mod:inverno-boot:1.4.0'
+compile 'io.inverno.mod:inverno-web:1.4.0'
 ...
 </code></pre> 
                     <h4 id="routing">Routing</h4> 
@@ -4200,7 +4324,7 @@ router
 </code></pre> 
                     <h5 id="error-router">Error router</h5> 
                     <p>An <code>ErrorWebRouter</code> routes an error exchange to an error exchange handler attached to an <code>ErrorWebRoute</code> by matching it against a combination of routing rules specified in the route. An error route can combine the following routing rules which are matched in that order: the type of the error, the media ranges and language ranges accepted by the client. For instance, the error router matches an error exchange against the error type routing rule first, then the produce routing rule... Multiples routes can then match a given exchange but only one will be retained to actually process the exchange which is the one matching the highest routing rules.</p> 
-                    <p>Unlike the <code>WebRouter</code>, the <code>ErrorWebRouter</code> only extends <code>WebRoutable</code> and doesn't extends <code>WebInterceptable</code>, as a result error web route can't be intercepted.</p> 
+                    <p>Unlike the <code>WebRouter</code>, the <code>ErrorWebRouter</code> only extends <code>WebRoutable</code> and doesn't extends <code>WebInterceptable</code>, as a result error web routes can't be intercepted.</p> 
                     <blockquote> 
                         <p>The choice to prevent error web route to be intercepted has been motivated by the fact that error web routes are usually invoked on errors thrown during the normal processing of an exchange ie. after the exchange handler and then route interceptors have been invoked.</p> 
                     </blockquote> 
@@ -4286,7 +4410,7 @@ router
         .filter(route -&gt; route.getProduce().equals(MediaTypes.APPLICATION_JSON))
         .forEach(WebRoute::remove);
 </code></pre> 
-                    <p><em>Error type routing rule</em></p> 
+                    <h6 id="error-type-routing-rule">Error type routing rule</h6> 
                     <p>The error type routing rule matches error exchanges whose error is of a particular type.</p> 
                     <p>For instance, in order to handle all error exchanges whose error is an instance of <code>SomeCustomException</code>, we can do:</p> 
                     <pre><code class="language-java">errorRouter
@@ -4296,10 +4420,10 @@ router
             ...
         });
 </code></pre> 
-                    <p><em>Produce routing rule</em></p> 
+                    <h6 id="produce-routing-rule-1">Produce routing rule</h6> 
                     <p>The produce routing rule, when applied to an error route behaves exactly the same as for a <a href="#produce-routing-rule">Web route</a>. It allows to define error handlers that produce responses of different types based on the set of media range accepted by the client.</p> 
                     <p>This is particularly useful to returned specific error responses to a particular client in a particular context. For instance, a backend application might want to receive errors in a parseable format like <code>application/json</code> whereas a Web browser might want to receive errors in a human readable format like <code>text/html</code>.</p> 
-                    <p><em>Language routing rule</em></p> 
+                    <h6 id="language-routing-rule-1">Language routing rule</h6> 
                     <p>The language routing rule, when applied to an error route behaves exactly the same as for a <a href="#language-routing-rule">Web route</a>. It allows to define error handlers that produce responses with different languages based on the set of language range accepted by the client fallbacking to the default route when content negotiation did not give any match.</p> 
                     <h4 id="web-server">Web Server</h4> 
                     <p>The <em>web</em> module composes the <em>http-server</em> module and as a result it requires a <code>NetService</code> and a <code>ResourceService</code>. A set of <a href="#media-type-converter">media type converters</a> is also required for message payload conversion. All these services are provided by the <em>boot</em> module, so one way to create an application with a Web server is to create an Inverno module composing <em>boot</em> and <em>web</em> modules.</p> 
@@ -4334,7 +4458,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.4.0 --                 ║
+     ║                    ,   \/   ,                                  -- 1.4.1 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -4372,7 +4496,7 @@ content-length: 47
 {"status":"404","path":"/","error":"Not Found"}
 </code></pre> 
                     <p>If you open <code>http://locahost:8080</code> in a Web browser, you should see the following (404) whitelabel error page:</p> 
-                    <img class="img-fluid shadow mb-4" src="img/404_whitelabel.png" alt="HTTP 404 whitelabel error page" /> 
+                    <img class="img-fluid shadow mb-4" src="doc/img/404_whitelabel.png" alt="HTTP 404 whitelabel error page" /> 
                     <h5 id="configuration-3">Configuration</h5> 
                     <p>The Web server configuration is done in the the <em>web</em> module configuration <code>WebConfiguration</code> which includes the <em>http-server</em> module configuration <code>HttpServerConfiguration</code>. As for the <em>http-server</em> module, the net service configuration can also be considered to set low level network configuration in the <em>boot</em> module.</p> 
                     <p>The following configuration can then be created in the <em>app_http</em> module:</p> 
@@ -5379,9 +5503,9 @@ module io.inverno.example.web_modular.book {
 </code></pre> 
                     <p>These specifications can also be exposed in the Web server as described in the <a href="#web-server">Web server documentation</a>.</p> 
                     <p>If we build and run the <a href="#composite-web-module">modular book application</a> and access <code>http://locahost:8080/open-api</code> in a Web browser we should see a Swagger UI loaded with the Open API specifications of the <em>admin</em> and <em>book</em> modules:</p> 
-                    <img class="img-fluid shadow mb-4" src="img/swaggerUI_root.png" alt="General Swagger UI" /> 
+                    <img class="img-fluid shadow mb-4" src="doc/img/swaggerUI_root.png" alt="General Swagger UI" /> 
                     <p>It is also possible to target a single specification by specifying the module name in the URI, for instance <code>http://locahost:8080/open-api/io.inverno.example.web_modular.book</code>:</p> 
-                    <img class="img-fluid shadow mb-4" src="img/swaggerUI_module.png" alt="Module Swagger UI" /> 
+                    <img class="img-fluid shadow mb-4" src="doc/img/swaggerUI_module.png" alt="Module Swagger UI" /> 
                     <p>Finally, Open API specifications formatted in <a href="https://en.wikipedia.org/wiki/YAML">YAML</a> can be retrieved as follows:</p> 
                     <pre><code class="language-plaintext">$ curl http://locahost:8080/open-api/io.inverno.example.web_modular.admin
 
@@ -5468,7 +5592,7 @@ public class App_webWebRoutesConfigurer implements WebRoutesConfigurer&lt;Interc
                     <p>The template sets classes thus obtained support reactive rendering, data are rendered as a flow of events for efficient usage of resources. For instance, the complete set of data doesn't have to be available or loaded into memory, the rendering being reactive the output can be generated incrementally by processing each piece of data individually one after the other when they become available. Since the rendering process never blocks it is also possible to lazily load data when/if they need to be rendered.</p> 
                     <p>The syntax of <code>.irt</code> template set is inspired from functional language such as <a href="https://en.wikipedia.org/wiki/XSLT">XSLT</a> and <a href="https://en.wikipedia.org/wiki/Erlang_(programming_language)">Erlang</a> which are particularly suited for reactive rendering. Since a template is a generated Java class, the Java language is also widely used in a template source file, especially for the dynamic parts of a template.</p> 
                     <p>In terms of raw performance, Inverno templates processing is faster than most Java template engines by an order of magnitude and with lower memory usage. The following <a href="https://github.com/jkuhn1/template-benchmark">benchmark project</a> compares performances of various template engines rendering a list of stock items into an HTML document as a String.</p> 
-                    <img class="img-fluid shadow mb-4 mx-auto d-block" src="img/template_benchmarks.png" alt="Template Benchmarks" /> 
+                    <img class="img-fluid shadow mb-4 mx-auto d-block" src="doc/img/template_benchmarks.png" alt="Template Benchmarks" /> 
                     <blockquote> 
                         <p>Please keep in mind that outcomes might be different considering different scenarios, especially reactive rendering which might appear slower but addresses different concerns such as stream processing and optimized usage of resources.</p> 
                     </blockquote> 
@@ -5491,8 +5615,8 @@ public class App_webWebRoutesConfigurer implements WebRoutesConfigurer&lt;Interc
 &lt;/project&gt;
 </code></pre> 
                     <p>Using Gradle:</p> 
-                    <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-irt:1.3.0'
+                    <pre><code class="language-java">...
+compile 'io.inverno.mod:inverno-irt:1.4.0'
 ...
 </code></pre> 
                     <h4 id="creates-an-irt-template">Creates an .irt template</h4> 
@@ -5857,9 +5981,9 @@ import java.time.format.DateTimeFormatter;
 &lt;/project&gt;
 </code></pre> 
                     <p>Using Gradle:</p> 
-                    <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-sql:1.3.0'
-compile 'io.inverno.mod:inverno-sql-vertx:1.3.0'
+                    <pre><code class="language-java">...
+compile 'io.inverno.mod:inverno-sql:1.4.0'
+compile 'io.inverno.mod:inverno-sql-vertx:1.4.0'
 ...
 </code></pre> 
                     <h4 id="sql-client-api">SQL client API</h4> 
@@ -5963,7 +6087,7 @@ long resultCount = Flux.from(results).count().block(); // returns 3 since we hav
 </code></pre> 
                     <h5 id="transactions">Transactions</h5> 
                     <p>The API provides two ways to execute statement in a transaction which can be managed explicitly or implicitly.</p> 
-                    <p>We can choose to manage transaction explicitly by obtaining a <code>TransactionalSqlOperations</code> which expose <code>commit()</code> and <code>rollback()</code> methods that we must invoke explicitly to close the transaction:</p> 
+                    <p>We can choose to manage transaction explicitly by obtaining a <code>TransactionalSqlOperations</code> which exposes <code>commit()</code> and <code>rollback()</code> methods that we must invoke explicitly to close the transaction:</p> 
                     <p>In the following example we perform a common <code>SELECT/UPDATE</code> operation within a transaction:</p> 
                     <pre><code class="language-java">SqlClient client = ...
 
@@ -6042,7 +6166,7 @@ client.connection(ops -&gt; ops
 </code></pre> 
                     <h4 id="vertx-sql-client-implementation">Vert.x SQL Client implementation</h4> 
                     <p>The Inverno Vert.x SQL client module is an implementation of the SQL client API on top of the <a href="https://github.com/eclipse-vertx/vertx-sql-client">Vert.x Reactive SQL client</a>.</p> 
-                    <p>It provides multiple <code>SqlClient</code> implementations that wraps Vert.x SQL pooled client, pool or connection and exposes a <code>SqlCLient</code> bean created from the module's configuration and backed by a Vert.x pool. It can be used to execute SQL statements in an application.</p> 
+                    <p>It provides multiple <code>SqlClient</code> implementations that wrap Vert.x SQL pooled client, pool or connection and exposes a <code>SqlCLient</code> bean created from the module's configuration and backed by a Vert.x pool. It can be used to execute SQL statements in an application.</p> 
                     <p>In order to use the Inverno <em>Vert.x SQL client</em> module, we need to declare a dependency in the module descriptor:</p> 
                     <pre><code class="language-java">module io.inverno.example.app {
     ...
@@ -6066,8 +6190,8 @@ client.connection(ops -&gt; ops
 &lt;/project&gt;
 </code></pre> 
                     <p>Using Gradle:</p> 
-                    <pre><code class="language-groovy">...
-compile 'io.inverno.mod:inverno-sql-vertx:1.3.0'
+                    <pre><code class="language-java">...
+compile 'io.inverno.mod:inverno-sql-vertx:1.4.0'
 compile 'io.vertx:vertx-pg-client:4.1.2'
 ...
 </code></pre> 
@@ -6080,9 +6204,9 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                     <pre><code class="language-plaintext">db_uri="postgres://user:password@localhost:5432/sample_db"
 </code></pre> 
                     <blockquote> 
-                        <p>If you want to connect to a particular RDBMS, don't forget to add a dependency to the corresponding Vert.x SQL client implementation. Vert.x currently supports DB2, MSSQL, MySQL and PostgreSQL.</p> 
+                        <p>If you want to connect to a particular RDBMS, don't forget to add a dependency to the corresponding Vert.x SQL client implementation. Vert.x currently supports DB2, MSSQL, MySQL, PostgreSQL and Oracle.</p> 
                     </blockquote> 
-                    <p>The pool can be configured as well:</p> 
+                    <p>The connection pool can be configured as well:</p> 
                     <pre><code class="language-plaintext">pool_maxSize=20
 </code></pre> 
                     <p>Please refer to the <a href="https://vertx.io/docs/#databases">Vert.x database documentation</a> to get the options supported for each RDBMS implementations.</p> 
@@ -6096,6 +6220,229 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                     <p>Finally, the <code>PoolSqlClient</code> wraps a Vert.x SQL pool. This is a common implementation supporting transactions and result streaming, it is used to create the module's SQL client bean.</p> 
                     <pre><code class="language-java">SqlClient client = new PoolSqlClient(PgPool.pool(...));
 </code></pre> 
+                    <h3 id="redis-client">Redis Client</h3> 
+                    <p>The Inverno Redis client module specifies a reactive API for executing commands on a <a href="https://redis.io/">Redis</a> data store.</p> 
+                    <p>This module only exposes the API and a proper implementation module must be considered to obtain <code>RedisClient</code> instances.</p> 
+                    <p>In order to use the Inverno <em>Redis client</em> module, we need to declare a dependency to the API and at least one implementation in the module descriptor:</p> 
+                    <pre><code class="language-java">module io.inverno.example.app {
+    ...
+    requires io.inverno.mod.redis; // this is actually optional since implementations should already define a transitive dependency
+    requires io.inverno.mod.redis.lettuce; // Lettuce implementation
+    ...
+}
+</code></pre> 
+                    <p>And also declare these dependencies in the build descriptor:</p> 
+                    <p>Using Maven:</p> 
+                    <pre><code class="language-xml">&lt;project&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.inverno.mod&lt;/groupId&gt;
+            &lt;artifactId&gt;inverno-redis&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.inverno.mod&lt;/groupId&gt;
+            &lt;artifactId&gt;inverno-redis-lettuce&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre> 
+                    <p>Using Gradle:</p> 
+                    <pre><code class="language-java">...
+compile 'io.inverno.mod:inverno-redis:1.4.0'
+compile 'io.inverno.mod:inverno-redis-vertx:1.4.0'
+...
+</code></pre> 
+                    <h4 id="redis-client-api">Redis Client API</h4> 
+                    <p>The Redis client API defines the <code>RedisClient</code> and <code>RedisTransactionalClient</code> interfaces which provide reactive methods to create and execute <a href="https://redis.io/commands">Redis commands</a>.</p> 
+                    <p>The <code>RedisTransactionalClient</code> interface extends the <code>RedisClient</code> interface with Redis transactional support (ie. <code>MULTI</code>, <code>DISCARD</code>, <code>EXEC</code>...).</p> 
+                    <h5 id="redis-operations">Redis Operations</h5> 
+                    <p>The API exposes mutiple <code>*Operations</code> interfaces which are all extended by the <code>RedisCLient</code> and which allows to fluently send commands to a Redis data store.</p> 
+                    <p>There are currently ten such interfaces that exposes the &gt;200 commands supported in Redis:</p> 
+                    <ul> 
+                        <li><code>RedisHashReactiveOperations</code></li> 
+                        <li><code>RedisKeyReactiveOperations</code></li> 
+                        <li><code>RedisScriptingReactiveOperations</code></li> 
+                        <li><code>RedisSortedSetReactiveOperations</code></li> 
+                        <li><code>RedisStringReactiveOperations</code></li> 
+                        <li><code>RedisGeoReactiveOperations</code></li> 
+                        <li><code>RedisHLLReactiveOperations</code></li> 
+                        <li><code>RedisListReactiveOperations</code></li> 
+                        <li><code>RedisSetReactiveOperations</code></li> 
+                        <li><code>RedisStreamReactiveOperations</code></li> 
+                    </ul> 
+                    <p>The API is pretty straighfoward and provides guidance on how to create and send commands to the Redis data store. For instance a simple string value can be queried as follows:</p> 
+                    <pre><code class="language-java">RedisClient&lt;String, String&gt; client = ...
+
+Mono&lt;String&gt; getSomeKey = client.get("someKey");
+
+getSomeKey.subscribe(...); // The command is sent on subscribe following reactive principles
+
+</code></pre> 
+                    <p>Complex commands are created using builders, for instance command <code>ZRANGE mySortedSet 0 +inf BYSCORE REV LIMIT 0 1 WITHSCORES</code> can be created and executed as follows:</p> 
+                    <pre><code class="language-java">RedisClient&lt;String, String&gt; client = ...
+
+Flux&lt;SortedSetScoredMember&lt;String&gt;&gt; zrangeWithScores = client.zrangeWithScores()
+    .reverse()
+    .byScore()
+    .limit(0, 1)
+    .build("mySortedSet", Bound.inclusive(0), Bound.unbounded());
+
+zrangeWithScores.subscribe(...); // The command is sent on subscribe following reactive principles
+
+</code></pre> 
+                    <h5 id="keys-and-values-codecs">Keys and Values codecs</h5> 
+                    <p>The <code>RedisClient</code> supports encoding and decoding of Redis keys and values, as a result the <code>RedisClient</code> client is a generic type which allows to specified the types of key and values.</p> 
+                    <p>The actual encoding/decoding logic is implementation specific.</p> 
+                    <h5 id="connections-1">Connections</h5> 
+                    <p>Commands can be executed directly on the client instance in which case a connection is obtained each time an operation method is invoked on the client and released once the resulting publisher terminates. This might not be an issue when a single command is issued or when using an implementation based on a single connection, However if there's a need to exectute multiuple commands or when using an implementation backed by a connection pool, it is often better to execute multiple SQL statements on a single connection released once the resulting publisher terminates (the connection can be either closed or returned to the pool).</p> 
+                    <p>Multiple commands can be executed on a single connection as follows:</p> 
+                    <pre><code class="language-java">RedisClient&lt;String, String&gt; client = ...
+
+Flux&lt;String&gt; results = Flux.from(client.connection(operations -&gt; 
+    Flux.concat(
+        operations.get("key1"),
+        operations.get("key2"),
+        operations.get("key3")
+    )
+));
+
+results.subscribe(...); // Commands are sent sent on subscribe following reactive principles
+
+</code></pre> 
+                    <h5 id="batch">Batch</h5> 
+                    <p>Commands can also be executed in batch, delaying the network flush so that multiple commands are sent to the server in one shot. This can have a significant positive impact on performances as the client doesn't have to wait for a response to send the next command.</p> 
+                    <p>A batch of commands can be executed as follows:</p> 
+                    <pre><code class="language-java">RedisClient&lt;String, String&gt; client = ...
+
+Flux&lt;String&gt; results = Flux.from(client.batch(operations -&gt; 
+    Flux.just(
+        operations.get("key1"),
+        operations.get("key2"),
+        operations.get("key3")
+    )
+));
+
+results.subscribe(...); // Commands are sent on subscribe following reactive principles
+
+</code></pre> 
+                    <h5 id="transactions-1">Transactions</h5> 
+                    <p>Redis supports transactions through <code>MULTI</code>, <code>EXEC</code> and <code>DISCARD</code> commands which is a bit different than traditional begin/commit/rollback we can find in RDBMS. Please have a look at <a href="https://redis.io/topics/transactions">Redis trasnactions documentation</a> to have a proper understanding on how transactions work in Redis.</p> 
+                    <p>Commands can be executed within a transaction using a <code>RedisTransactionalClient</code>, a transaction can be managed implicitly or explicitly by obtaining a <code>RedisTransactionalOperations</code> and explicitly invoke <code>exec()</code> or <code>rollback()</code>.</p> 
+                    <p>In the following example, two <code>SET</code> commands are executed within a transaction, when subscribing to the returned <code>Mono&lt;RedisTransactionResult&gt;</code>, the two set publishers are subscribed on and the transaction is executed implicitly and a <code>RedisTransactionResult</code> is eventually emitted and holds transaction results:</p> 
+                    <pre><code class="language-java">RedisClient&lt;String, String&gt; client = ...
+
+Mono&lt;RedisTransactionResult&gt; transaction = client
+    .multi(operations -&gt; 
+        Flux.just(
+            operations.set("key_1", "value_1"), 
+            operations.set("key_2", "value_2")
+        )
+    );
+
+RedisTransactionResult result = transaction.block(); // Commands are sent on subscribe following reactive principles
+
+if(!result.wasDiscarded()) {
+    Assertions.assertEquals("OK", result.get(0));
+    Assertions.assertEquals("OK", result.get(1));
+}
+else {
+    // Report error
+}
+
+</code></pre> 
+                    <p>If any error is raised during the processing, typically when the client subscribes to the returned command publishers, the transaction is discarded.</p> 
+                    <p>The same transaction can be explicitly managed as follows:</p> 
+                    <pre><code class="language-java">RedisClient&lt;String, String&gt; client = ...
+
+Mono&lt;RedisTransactionResult&gt; transaction = client
+    .multi()
+    .flatMap(operations -&gt; {
+        operations.set("key_1", "value_1").subscribe();
+        operations.set("key_2", "value_2").subscribe();
+
+        return operations.exec();
+    });
+
+RedisTransactionResult result = transaction.block(); // Commands are sent on subscribe following reactive principles
+
+</code></pre> 
+                    <p>In above example, it is important to subscribe to command publishers explicitly otherwise they won't be part of the transaction.</p> 
+                    <p>Redis uses optimistic locking using check-and-set through the <code>WATCH</code> command which is used to indicate which keys should be monitored for changes during a transaction. When creating a transaction, it is possible to specified watches that would discard the transaction if any change is detected.</p> 
+                    <p>For instance, the following transaction will be discarded if the value of key <code>key_3</code> is changed after the transaction begin:</p> 
+                    <pre><code class="language-java">RedisClient&lt;String, String&gt; client = ...
+
+Mono&lt;RedisTransactionResult&gt; transaction = client
+    .multi("key_3") // watch 'key_3'
+    // let's change the value of 'key_3' using another connection to get the transaction discarded
+    .doOnNext(ign -&gt; client.set("key_3", "value_3").block()) 
+    .flatMap(operations -&gt; {
+        operations.set("key_3", "value_3").subscribe();
+        
+        return operations.exec();
+    });
+
+RedisTransactionResult result = transaction.block();
+
+// Transaction was discarded since 'key_3' changed before the transaction after the start of the transaction and before it ended
+Assertions.assertTrue(result.wasDiscarded());
+</code></pre> 
+                    <h4 id="lettuce-redis-client-implementation">Lettuce Redis Client implementation</h4> 
+                    <p>The Inverno Lettuce Redis client module is an implementation of the Redis client API on top of the <a href="https://lettuce.io">Lettuce client</a>.</p> 
+                    <p>It provides <code>PoolRedisClient</code> and <code>PoolRedisClusterClient</code> implementations that wrap a Lettuce <code>AsyncPool</code> used to acquire <code>StatefulRedisConnection</code> and <code>StatefulRedisClusterConnection</code> respectively. The <code>PoolRedisClusterClient</code> doesn't implement <code>RedisTransactionalClient</code> since transactions are not supported by Redis in a clustered environment.</p> 
+                    <p>The module also exposes a <code>RedisClient&lt;String, String&gt;</code> bean created from the module's configuration and backed by a Lettuce <code>BoundedAsyncPool&lt;StatefulRedisConnection&lt;String, String&gt;&gt;</code> instance.</p> 
+                    <p>SQL pooled client, pool or connection and exposes a <code>RedisCLient</code> bean created from the module's configuration and backed by a Vert.x pool. It can be used to execute SQL statements in an application.</p> 
+                    <p>In order to use the Inverno <em>Lettuce Redis client</em> module, we need to declare a dependency in the module descriptor:</p> 
+                    <pre><code class="language-java">module io.inverno.example.app {
+    ...
+    requires io.inverno.mod.redis.lettuce;
+    ...
+}
+</code></pre> 
+                    <p>And also declare this dependencies in the build descriptor:</p> 
+                    <p>Using Maven:</p> 
+                    <pre><code class="language-xml">&lt;project&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.inverno.mod&lt;/groupId&gt;
+            &lt;artifactId&gt;inverno-redis-lettuce&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre> 
+                    <p>Using Gradle:</p> 
+                    <pre><code class="language-java">...
+compile 'io.inverno.mod:inverno-redis-lettuce:1.4.0'
+...
+</code></pre> 
+                    <h5 id="configuration-5">Configuration</h5> 
+                    <p>The <code>LettuceRedisClientConfiguration</code> is used to create and configure the Redis client bean exposed by the module.</p> 
+                    <p>Please refer to the [API documentation][inverno-javadoc] to have an exhaustive description of the different configuration properties.</p> 
+                    <h5 id="redis-client-bean">Redis Client bean</h5> 
+                    <p>The module exposes a <code>RedisClient&lt;String, String&gt;</code> bean which is backed by a Lettuce <code>BoundedAsyncPool&lt;StatefulRedisConnection&lt;String, String&gt;&gt;</code> instance. It is created using the configuration and especially the <code>uri</code> property which specified the Redis server to connect to which is <code>redis://localhost:6379</code> by default</p> 
+                    <p>For instance, the following configuration can be used to connect to a remote Redis server:</p> 
+                    <pre><code class="language-plaintext">uri="redis://remoteRedis"
+</code></pre> 
+                    <p>The connection pool can be configured as well:</p> 
+                    <pre><code class="language-plaintext">pool_max_active=8
+pool_min_idle=0
+pool_max_idle=8
+</code></pre> 
+                    <p>Secured connection using TLS and/or authentication can also be configured as follows:</p> 
+                    <pre><code class="language-plaintext">tls=true
+username=user
+password=password
+</code></pre> 
+                    <p>By default, this Redis client relies on a dedicated event loop group but it can also rely on Inverno's reactor when a <code>Reactor</code> instance is available. This is transparent when assembling an application with the <em>boot</em> module which exposes Inverno's reactor.</p> 
+                    <h5 id="lettuce-wrappers">Lettuce wrappers</h5> 
+                    <p>Depending on our needs, we can also choose to create a custom <code>RedisClient</code> using one the Lettuce Redis client wrappers provided by the module.</p> 
+                    <p>The <code>PoolRedisClient</code> implementation wraps a Lettuce <code>AsyncPool&lt;StatefulRedisConnection&lt;K, V&gt;&gt;</code>, it is then possible to create a <code>RedisClient</code> client instance using specific key/value codecs:</p> 
+                    <pre><code class="language-java">BoundedAsyncPool&lt;StatefulRedisConnection&lt;byte[], byte[]&gt;&gt; pool = AsyncConnectionPoolSupport.createBoundedObjectPool(
+        () -&gt; this.client.connectAsync(ByteArrayCodec.INSTANCE, RedisURI.create("redis://localhost"), 
+        BoundedPoolConfig.create()
+    );
+	RedisClient&lt;byte[], byte[]&gt; byteArrayClient = new PoolRedisClient&lt;&gt;(pool, byte[].class, byte[].class);
+</code></pre> 
+                    <p>The <code>PoolRedisClusterClient</code> implementation should be used to connect to a Redis cluster, it wraps a Lettuce <code>AsyncPool&lt;StatefulRedisClusterConnection&lt;K, V&gt;&gt;</code></p> 
                     <h2 id="inverno-maven-plugin-1">Inverno Maven Plugin</h2> 
                     <p>The Inverno Maven Plugin is used to run, package and distribute modular applications and Inverno applications in particular. It relies on a set of Java tools to build native runtime or application images as well as Docker or OCI images for modular Java projects.</p> 
                     <h3 id="usage">Usage</h3> 
@@ -6376,7 +6723,7 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                     </ul> 
                     <h4 id="invernobuild-app">inverno:build-app</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-app</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:build-app</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds the project application package.</p> 
                     <p>A project application package is a native self-contained Java application including all the necessary dependencies. It can be used to distribute a complete application.</p> 
@@ -7010,7 +7357,7 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                     </ul> 
                     <h4 id="invernobuild-image">inverno:build-image</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-image</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:build-image</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds a container image and publishes it to a registry.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -7814,7 +8161,7 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                     </ul> 
                     <h4 id="invernobuild-image-docker">inverno:build-image-docker</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-image-docker</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:build-image-docker</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds a Docker container image to a local Docker daemon.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -8615,7 +8962,7 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                     </ul> 
                     <h4 id="invernobuild-image-tar">inverno:build-image-tar</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-image-tar</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:build-image-tar</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds a container image to a TAR archive that can be later loaded into Docker:</p> 
                     <p>$ docker load --input target/&lt;image&gt;.tar</p> 
@@ -9390,7 +9737,7 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                     </ul> 
                     <h4 id="invernobuild-runtime">inverno:build-runtime</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-runtime</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:build-runtime</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds the project runtime image.</p> 
                     <p>A runtime image is a custom Java runtime containing a set of modules and their dependencies.</p> 
@@ -9875,7 +10222,7 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                     </ul> 
                     <h4 id="invernohelp">inverno:help</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:help</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:help</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Display help information on inverno-maven-plugin. Call mvn inverno:help -Ddetail=true -Dgoal=&lt;goal-name&gt; to display parameter details.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -9960,7 +10307,7 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                     </ul> 
                     <h4 id="invernorun">inverno:run</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:run</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:run</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Runs the project application.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -10162,7 +10509,7 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                     </ul> 
                     <h4 id="invernostart">inverno:start</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:start</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:start</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Starts the project application without blocking the Maven build.</p> 
                     <p>This goal is used together with the stop goal in the pre-integration-test and post-integration-test phases to run integration tests.</p> 
@@ -10367,7 +10714,7 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                     </ul> 
                     <h4 id="invernostop">inverno:stop</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:stop</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:stop</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Stops the project application that has been previously started using the start goal.</p> 
                     <p>This goal is used together with the start goal in the pre-integration-test and post-integration-test phases to run integration tests.</p> 
@@ -10474,7 +10821,12 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                               <tr> 
                               <td>com.fasterxml.jackson.core</td> 
                               <td>jackson-databind</td> 
-                              <td>2.13.0</td> 
+                              <td>2.13.1</td> 
+                              </tr> 
+                              <tr> 
+                              <td>com.fasterxml.jackson.datatype</td> 
+                              <td>jackson-datatype-jsr310</td> 
+                              <td>2.13.1</td> 
                               </tr> 
                               <tr> 
                               <td>com.google.cloud.tools</td> 
@@ -10484,122 +10836,137 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                               <tr> 
                               <td>io.lettuce</td> 
                               <td>lettuce-core</td> 
-                              <td>6.1.5.RELEASE</td> 
+                              <td>6.1.6.RELEASE</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty</td> 
                               <td>netty-all</td> 
-                              <td>4.1.69.Final</td> 
+                              <td>4.1.73.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty</td> 
                               <td>netty-buffer</td> 
-                              <td>4.1.69.Final</td> 
+                              <td>4.1.73.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty</td> 
                               <td>netty-codec-http2</td> 
-                              <td>4.1.69.Final</td> 
+                              <td>4.1.73.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty</td> 
                               <td>netty-common</td> 
-                              <td>4.1.69.Final</td> 
+                              <td>4.1.73.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty</td> 
                               <td>netty-resolver</td> 
-                              <td>4.1.69.Final</td> 
+                              <td>4.1.73.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty</td> 
                               <td>netty-tcnative-boringssl-static</td> 
-                              <td>2.0.46.Final</td> 
+                              <td>2.0.48.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty</td> 
                               <td>netty-transport</td> 
-                              <td>4.1.69.Final</td> 
+                              <td>4.1.73.Final</td> 
+                              </tr> 
+                              <tr> 
+                              <td>io.netty</td> 
+                              <td>netty-transport-classes-epoll</td> 
+                              <td>4.1.73.Final</td> 
+                              </tr> 
+                              <tr> 
+                              <td>io.netty</td> 
+                              <td>netty-transport-classes-kqueue</td> 
+                              <td>4.1.73.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty</td> 
                               <td>netty-transport-native-epoll</td> 
-                              <td>4.1.69.Final</td> 
+                              <td>4.1.73.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty</td> 
                               <td>netty-transport-native-epoll</td> 
-                              <td>4.1.69.Final</td> 
+                              <td>4.1.73.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty</td> 
                               <td>netty-transport-native-epoll</td> 
-                              <td>4.1.69.Final</td> 
+                              <td>4.1.73.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty</td> 
                               <td>netty-transport-native-epoll</td> 
-                              <td>4.1.69.Final</td> 
+                              <td>4.1.73.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty</td> 
                               <td>netty-transport-native-kqueue</td> 
-                              <td>4.1.69.Final</td> 
+                              <td>4.1.73.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty</td> 
                               <td>netty-transport-native-kqueue</td> 
-                              <td>4.1.69.Final</td> 
+                              <td>4.1.73.Final</td> 
+                              </tr> 
+                              <tr> 
+                              <td>io.netty.incubator</td> 
+                              <td>netty-incubator-transport-classes-io_uring</td> 
+                              <td>0.0.12.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty.incubator</td> 
                               <td>netty-incubator-transport-native-io_uring</td> 
-                              <td>0.0.10.Final</td> 
+                              <td>0.0.12.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty.incubator</td> 
                               <td>netty-incubator-transport-native-io_uring</td> 
-                              <td>0.0.10.Final</td> 
+                              <td>0.0.12.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.netty.incubator</td> 
                               <td>netty-incubator-transport-native-io_uring</td> 
-                              <td>0.0.10.Final</td> 
+                              <td>0.0.12.Final</td> 
                               </tr> 
                               <tr> 
                               <td>io.projectreactor</td> 
                               <td>reactor-core</td> 
-                              <td>3.4.12</td> 
+                              <td>3.4.14</td> 
                               </tr> 
                               <tr> 
                               <td>io.vertx</td> 
                               <td>vertx-core</td> 
-                              <td>4.2.1</td> 
+                              <td>4.2.4</td> 
                               </tr> 
                               <tr> 
                               <td>io.vertx</td> 
                               <td>vertx-db2-client</td> 
-                              <td>4.2.1</td> 
+                              <td>4.2.4</td> 
                               </tr> 
                               <tr> 
                               <td>io.vertx</td> 
                               <td>vertx-mssql-client</td> 
-                              <td>4.2.1</td> 
+                              <td>4.2.4</td> 
                               </tr> 
                               <tr> 
                               <td>io.vertx</td> 
                               <td>vertx-mysql-client</td> 
-                              <td>4.2.1</td> 
+                              <td>4.2.4</td> 
                               </tr> 
                               <tr> 
                               <td>io.vertx</td> 
                               <td>vertx-pg-client</td> 
-                              <td>4.2.1</td> 
+                              <td>4.2.4</td> 
                               </tr> 
                               <tr> 
                               <td>io.vertx</td> 
                               <td>vertx-sql-client</td> 
-                              <td>4.2.1</td> 
+                              <td>4.2.4</td> 
                               </tr> 
                               <tr> 
                               <td>net.java.dev.javacc</td> 
@@ -10624,22 +10991,22 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                               <tr> 
                               <td>org.apache.logging.log4j</td> 
                               <td>log4j-api</td> 
-                              <td>2.14.1</td> 
+                              <td>2.17.1</td> 
                               </tr> 
                               <tr> 
                               <td>org.apache.logging.log4j</td> 
                               <td>log4j-core</td> 
-                              <td>2.14.1</td> 
+                              <td>2.17.1</td> 
                               </tr> 
                               <tr> 
                               <td>org.apache.logging.log4j</td> 
                               <td>log4j-jul</td> 
-                              <td>2.14.1</td> 
+                              <td>2.17.1</td> 
                               </tr> 
                               <tr> 
                               <td>org.apache.logging.log4j</td> 
                               <td>log4j-layout-template-json</td> 
-                              <td>2.14.1</td> 
+                              <td>2.17.1</td> 
                               </tr> 
                               <tr> 
                               <td>org.apache.maven</td> 
@@ -10674,7 +11041,7 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                               <tr> 
                               <td>org.junit</td> 
                               <td>junit-bom</td> 
-                              <td>5.8.1</td> 
+                              <td>5.8.2</td> 
                               </tr> 
                               <tr> 
                               <td>org.mockito</td> 
@@ -10689,7 +11056,7 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                               <tr> 
                               <td>org.webjars</td> 
                               <td>swagger-ui</td> 
-                              <td>4.1.0</td> 
+                              <td>4.5.0</td> 
                               </tr> 
                             </tbody>
                         </table>
@@ -10746,7 +11113,7 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                               <tr> 
                               <td>org.apache.maven.plugins</td> 
                               <td>maven-jar-plugin</td> 
-                              <td>3.2.0</td> 
+                              <td>3.2.2</td> 
                               </tr> 
                               <tr> 
                               <td>org.apache.maven.plugins</td> 
@@ -10756,7 +11123,7 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
                               <tr> 
                               <td>org.apache.maven.plugins</td> 
                               <td>maven-plugin-plugin</td> 
-                              <td>3.6.1</td> 
+                              <td>3.6.4</td> 
                               </tr> 
                               <tr> 
                               <td>org.apache.maven.plugins</td> 

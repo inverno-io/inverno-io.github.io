@@ -21,6 +21,11 @@ module:io.inverno.mod.http.server
 io.inverno.mod.http.server
 module:io.inverno.mod.irt
 io.inverno.mod.irt
+module:io.inverno.mod.redis
+io.inverno.mod.redis
+io.inverno.mod.redis.operations
+module:io.inverno.mod.redis.lettuce
+io.inverno.mod.redis.lettuce
 module:io.inverno.mod.sql
 io.inverno.mod.sql
 module:io.inverno.mod.sql.vertx
@@ -28,3 +33,4 @@ io.inverno.mod.sql.vertx
 module:io.inverno.mod.web
 io.inverno.mod.web
 io.inverno.mod.web.annotation
+io.inverno.mod.web.spi
