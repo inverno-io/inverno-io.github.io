@@ -59,8 +59,8 @@
         <main id="main" class="main container">
             <div class="heading"> 
                 <h1 class="heading-title">Inverno Framework Documentation</h1> 
-                <p class="heading-subtitle">Version: 1.4.0</p> 
-                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.4.0.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a> 
+                <p class="heading-subtitle">Version: 1.4.1</p> 
+                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.4.1.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a> 
             </div> 
             <div class="d-lg-flex">
                 <section class="toc col-12 col-lg-3">
@@ -222,7 +222,7 @@ public class Main {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.4.0&lt;/version&gt;
+        &lt;version&gt;1.4.1&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;hello&lt;/artifactId&gt;
@@ -413,7 +413,7 @@ public class MainController {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.4.0&lt;/version&gt;
+        &lt;version&gt;1.4.1&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample-app&lt;/artifactId&gt;
@@ -435,7 +435,7 @@ public class MainController {
             &lt;dependency&gt;
                 &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
                 &lt;artifactId&gt;inverno-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;1.4.0&lt;/version&gt;
+                &lt;version&gt;1.4.1&lt;/version&gt;
                 &lt;type&gt;pom&lt;/type&gt;
                 &lt;scope&gt;import&lt;/scope&gt;
             &lt;/dependency&gt;
@@ -731,7 +731,7 @@ $ /opt/sample-app/bin/sample-app
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.4.0&lt;/version&gt;
+        &lt;version&gt;1.4.1&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample&lt;/artifactId&gt;
@@ -772,7 +772,7 @@ $ /opt/sample-app/bin/sample-app
         &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
         &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
         &lt;version.inverno&gt;1.4.1&lt;/version.inverno&gt;
-        &lt;version.inverno.dist&gt;1.4.0&lt;/version.inverno.dist&gt;
+        &lt;version.inverno.dist&gt;1.4.1&lt;/version.inverno.dist&gt;
     &lt;/properties&gt;
 
     &lt;dependencyManagement&gt;
@@ -1606,7 +1606,7 @@ boot.stop();
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-base:1.4.0'
+compile 'io.inverno.mod:inverno-base:1.4.1'
 ...
 </code></pre> 
                     <p>The <em>base</em> module is usually provided as a transitive dependency by other modules, mainly the <em>boot</em> module, so defining a direct dependency is usually not necessary at least for an application module.</p> 
@@ -2067,7 +2067,7 @@ module io.inverno.example.app {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.4.0'
+compile 'io.inverno.mod:inverno-boot:1.4.1'
 ...
 </code></pre> 
                     <h4 id="configuration">Configuration</h4> 
@@ -2163,7 +2163,7 @@ boot.stop();
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-configuration:1.4.0'
+compile 'io.inverno.mod:inverno-configuration:1.4.1'
 ...
 </code></pre> 
                     <h4 id="configuration-source">Configuration source</h4> 
@@ -2792,7 +2792,7 @@ public interface CompositeModuleConfiguration {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-http-base:1.4.0'
+compile 'io.inverno.mod:inverno-http-base:1.4.1'
 ...
 </code></pre> 
                     <p>The <em>http-base</em> module is usually provided as a transitive dependency by other HTTP modules, the <em>http-server</em> module or the <em>web</em> module in particular, so this might not be necessary.</p> 
@@ -2891,8 +2891,8 @@ module io.inverno.example.app_http {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.4.0'
-compile 'io.inverno.mod:inverno-http-server:1.4.0'
+compile 'io.inverno.mod:inverno-boot:1.4.1'
+compile 'io.inverno.mod:inverno-http-server:1.4.1'
 ...
 </code></pre> 
                     <h4 id="http-server-exchange-api">HTTP Server exchange API</h4> 
@@ -3806,8 +3806,8 @@ module io.inverno.example.app_web {
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.4.0'
-compile 'io.inverno.mod:inverno-web:1.4.0'
+compile 'io.inverno.mod:inverno-boot:1.4.1'
+compile 'io.inverno.mod:inverno-web:1.4.1'
 ...
 </code></pre> 
                     <h4 id="routing">Routing</h4> 
@@ -5616,7 +5616,7 @@ public class App_webWebRoutesConfigurer implements WebRoutesConfigurer&lt;Interc
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-irt:1.4.0'
+compile 'io.inverno.mod:inverno-irt:1.4.1'
 ...
 </code></pre> 
                     <h4 id="creates-an-irt-template">Creates an .irt template</h4> 
@@ -5982,8 +5982,8 @@ import java.time.format.DateTimeFormatter;
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-sql:1.4.0'
-compile 'io.inverno.mod:inverno-sql-vertx:1.4.0'
+compile 'io.inverno.mod:inverno-sql:1.4.1'
+compile 'io.inverno.mod:inverno-sql-vertx:1.4.1'
 ...
 </code></pre> 
                     <h4 id="sql-client-api">SQL client API</h4> 
@@ -6191,7 +6191,7 @@ client.connection(ops -&gt; ops
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-sql-vertx:1.4.0'
+compile 'io.inverno.mod:inverno-sql-vertx:1.4.1'
 compile 'io.vertx:vertx-pg-client:4.1.2'
 ...
 </code></pre> 
@@ -6248,8 +6248,8 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-redis:1.4.0'
-compile 'io.inverno.mod:inverno-redis-vertx:1.4.0'
+compile 'io.inverno.mod:inverno-redis:1.4.1'
+compile 'io.inverno.mod:inverno-redis-vertx:1.4.1'
 ...
 </code></pre> 
                     <h4 id="redis-client-api">Redis Client API</h4> 
@@ -6411,7 +6411,7 @@ Assertions.assertTrue(result.wasDiscarded());
 </code></pre> 
                     <p>Using Gradle:</p> 
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-redis-lettuce:1.4.0'
+compile 'io.inverno.mod:inverno-redis-lettuce:1.4.1'
 ...
 </code></pre> 
                     <h5 id="configuration-5">Configuration</h5> 
@@ -6723,7 +6723,7 @@ password=password
                     </ul> 
                     <h4 id="invernobuild-app">inverno:build-app</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:build-app</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-app</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds the project application package.</p> 
                     <p>A project application package is a native self-contained Java application including all the necessary dependencies. It can be used to distribute a complete application.</p> 
@@ -7357,7 +7357,7 @@ password=password
                     </ul> 
                     <h4 id="invernobuild-image">inverno:build-image</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:build-image</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-image</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds a container image and publishes it to a registry.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -8161,7 +8161,7 @@ password=password
                     </ul> 
                     <h4 id="invernobuild-image-docker">inverno:build-image-docker</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:build-image-docker</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-image-docker</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds a Docker container image to a local Docker daemon.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -8962,7 +8962,7 @@ password=password
                     </ul> 
                     <h4 id="invernobuild-image-tar">inverno:build-image-tar</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:build-image-tar</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-image-tar</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds a container image to a TAR archive that can be later loaded into Docker:</p> 
                     <p>$ docker load --input target/&lt;image&gt;.tar</p> 
@@ -9737,7 +9737,7 @@ password=password
                     </ul> 
                     <h4 id="invernobuild-runtime">inverno:build-runtime</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:build-runtime</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:build-runtime</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Builds the project runtime image.</p> 
                     <p>A runtime image is a custom Java runtime containing a set of modules and their dependencies.</p> 
@@ -10222,7 +10222,7 @@ password=password
                     </ul> 
                     <h4 id="invernohelp">inverno:help</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:help</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:help</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Display help information on inverno-maven-plugin. Call mvn inverno:help -Ddetail=true -Dgoal=&lt;goal-name&gt; to display parameter details.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -10307,7 +10307,7 @@ password=password
                     </ul> 
                     <h4 id="invernorun">inverno:run</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:run</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:run</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Runs the project application.</p> 
                     <p><strong>Attributes:</strong></p> 
@@ -10509,7 +10509,7 @@ password=password
                     </ul> 
                     <h4 id="invernostart">inverno:start</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:start</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:start</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Starts the project application without blocking the Maven build.</p> 
                     <p>This goal is used together with the stop goal in the pre-integration-test and post-integration-test phases to run integration tests.</p> 
@@ -10714,7 +10714,7 @@ password=password
                     </ul> 
                     <h4 id="invernostop">inverno:stop</h4> 
                     <p><strong>Full name:</strong></p> 
-                    <p>io.inverno.tool:inverno-maven-plugin:1.2.3:stop</p> 
+                    <p>io.inverno.tool:inverno-maven-plugin:1.3.0-SNAPSHOT:stop</p> 
                     <p><strong>Description:</strong></p> 
                     <p>Stops the project application that has been previously started using the start goal.</p> 
                     <p>This goal is used together with the start goal in the pre-integration-test and post-integration-test phases to run integration tests.</p> 
