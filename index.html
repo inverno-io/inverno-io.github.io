@@ -39,9 +39,12 @@
 							<li class="nav-item mt-2">
 								<h5>Documentation</h5>
 								<ul class="nav flex-column">
-									<li class="nav-item ms-4"><a class="nav-link" href="docs/getting-started/html/index.html">Getting Started</a></li>
 									<li class="nav-item ms-4"><a class="nav-link" href="docs/release/reference/html/index.html">Reference Guide</a></li>
 									<li class="nav-item ms-4"><a class="nav-link" href="docs/release/api/index.html">API Doc</a></li>
+									<li><hr class="dropdown-divider"></li>
+									<li><h6 class="dropdown-header">User guides</h6></li>
+									<li class="nav-item ms-4"><a class="nav-link" href="docs/getting-started/html/index.html">Getting Started</a></li>
+									<li><a class="dropdown-item" href="docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li>
 								</ul>
 							</li>
 							<li class="nav-item mt-2">
@@ -52,6 +55,7 @@
 									<li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-dist">Distribution</a></li>
 									<li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-tools">Tools</a></li>
 									<li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
+									<li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -60,9 +64,12 @@
 						<li class="nav-item dropdown d-flex align-items-center me-3">
 							<a class="nav-link dropdown-toggle text-decoration-none" href="#" id="documentationMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Documentation</a>
 							<ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="documentationMenu">
-								<li><a class="dropdown-item" href="docs/getting-started/html/index.html">Getting Started</a></li>
 								<li><a class="dropdown-item" href="docs/release/reference/html/index.html">Reference Guide</a></li>
 								<li><a class="dropdown-item" href="docs/release/api/index.html">API Doc</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><h6 class="dropdown-header">User guides</h6></li>
+								<li><a class="dropdown-item" href="docs/getting-started/html/index.html">Getting Started</a></li>
+								<li><a class="dropdown-item" href="docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li>
 							</ul>
 						</li>
 						<li class="nav-item dropdown d-flex align-items-center">
@@ -73,6 +80,7 @@
 								<li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-dist">Distribution</a></li>
 								<li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-tools">Tools</a></li>
 								<li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
+								<li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -164,7 +172,7 @@ public class App {
 									<span class="d-block mt-4 fw-bold">Modularity</span>
 								</h3>
 								<div class="p-4">
-									<p class="card-text">Modularity is a key aspect of modern applications development. It allows to properly separate the concerns by isolating the different parts of an application into modules with clear interfaces. A modular application can then be effectively developed by a large group of people while promoting reusability resulting in highly maintainable and extensible applications.</p>
+									<p class="card-text">Modularity is a key aspect of modern application development. It allows to properly separate the concerns by isolating the different parts of an application into modules with clear interfaces. A modular application can then be effectively developed by a large group of people while promoting reusability resulting in highly maintainable and extensible applications.</p>
 									<p class="card-text">The Inverno Framework embraces the <a href="https://en.wikipedia.org/wiki/Java_Platform_Module_System">Java™ module system</a>. An Inverno module is assembled through IoC/DI at compile time, it exposes a clear interface describing the features provided and the dependencies required for the module to operate. This greatly improves program stability over time and clarifies module usage.</p>
 								</div>
 							</div>
@@ -237,7 +245,7 @@ public class App {
 								<div class="p-4">
 									<p class="card-text">Information systems must adapt to an ever-changing environment. Features must be continuously added or removed while guaranteeing limited defects with the lowest MTTR.</p>
 									<p class="card-text">The Inverno Framework produces modular applications which makes it easy to replace a faulty or worn-out module or add a new one without impacting the rest of the application. Modules expose clear interfaces generated at compile time and only expose what needs to be exposed, the rest of the implementation being properly encapsulated by the Java™ module system protecting against intentional or unintentional misuse.</p>
-									<p class="card-text">There is no magic, the generated code is human readable, it can be debugged and we can actually see how objects are created and wired together.</p>
+									<p class="card-text">There is no magic, the generated code is human-readable, it can be debugged, and we can actually see how objects are created and wired together.</p>
 								</div>
 							</div>
 						</div>
@@ -287,6 +295,7 @@ public class App {
 							<li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-dist">Distribution</a></li>
 							<li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-tools">Tools</a></li>
 							<li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
+							<li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
 						</ul>
 					</div>
 				</div>
