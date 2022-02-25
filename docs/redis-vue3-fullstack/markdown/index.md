@@ -2453,7 +2453,7 @@ $ ./target/maven-inverno/application_linux_amd64/ticket-1.0-SNAPSHOT/bin/ticket 
 
 ## Step 11: Run the application with Docker Compose
 
-Now that the ticket application image is in a Docker repository, it is ready to be deployed and run in the cloud using on Docker, Docker Swarm or a Kubernetes cluster.
+Now that the ticket application image is in a Docker repository, it is ready to be deployed and run in the cloud on Docker, Docker Swarm or a Kubernetes cluster.
 
 Let's create a `docker-compose.yml` file to define all services composing the application and that must be run together in an isolated environment.
 
@@ -2480,7 +2480,7 @@ volumes:
 
 The complete application is composed of the ticket application service and the Redis data store service, `logs` and `data` volumes are defined and bound to ticket application `/opt/ticket/logs` folder and Redis `/data` folder respectively.
 
-You can now deploy the complete application using `docker-compose` command in the folder containing the `docker-compose.yml` file:
+You can now deploy the complete application using `docker-compose` command from the folder containing the `docker-compose.yml` file:
 
 > Use `--file` and `--project-name` options if you want to run `docker-compose` from another location. By default, the project name is the name of the parent folder.
 
