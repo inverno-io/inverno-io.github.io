@@ -2067,6 +2067,7 @@ The access log layout expected by AWS is a bit specific and requires to define a
 Log4j can be configured in `log4j2.xml` file in project resources folder `src/main/resources`:
 
 ```xml
+{% raw %}
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" name="Website" shutdownHook="disable">
     <Appenders>
@@ -2141,6 +2142,7 @@ Log4j can be configured in `log4j2.xml` file in project resources folder `src/ma
         </Root>
     </Loggers>
 </Configuration>
+{% endraw %}
 ```
 
 If you restart the application, you should now see three properly formatted log files `application.log`, `access.log` and `error.log` under the `logs/` directory:
