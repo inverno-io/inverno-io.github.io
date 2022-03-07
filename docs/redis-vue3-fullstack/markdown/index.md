@@ -2486,11 +2486,11 @@ You can now deploy the complete application using `docker-compose` command from 
 
 ```text
 $ docker-compose up -d
-Creating network "ioinvernoguideticket_default" with the default driver
+`Creating network "ioinvernoguideticket_default" with the default driver
 Creating volume "ioinvernoguideticket_logs" with default driver
 Creating volume "ioinvernoguideticket_data" with default driver
 Creating ioinvernoguideticket_redis_1  ... done
-Creating ioinvernoguideticket_ticket_1 ... done
+Creating ioinvernoguideticket_ticket_1 ... done`
 ```
 
 The `up` command initializes networks, volumes and containers, and eventually starts the applications's services. You can see that a dedicated network has been created, as well as two volumes: one to persist ticket application logs and one to persist Redis data. Data stored in volumes are not deleted when containers are stopped or removed which means application data are safe and can be easily backed up as well. Two services have been started in dedicated containers: one running the Redis data store and one running the ticket application. The 8080 port of the ticket application container is mapped to the 8080 port of the host, as a result the ticket application is accessible at [http://localhost:8080](http://localhost:8080).

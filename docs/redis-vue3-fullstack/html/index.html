@@ -288,7 +288,7 @@ public class App {
                     <li>system properties</li> 
                     <li>system environment variables</li> 
                     <li>the <code>configuration.cprops</code> file in <code>./conf/</code> or <code>${inverno.config.path}/</code> directories if one exists (if the first one exists the second one is ignored)</li> 
-                    <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-apps/inverno-utilities/target/maven-inverno/application_linux_amd64/inverno-utilities-1.0.0-SNAPSHOT/lib/runtime/conf/</code> directory if it exists</li> 
+                    <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-apps/inverno-utilities/target/inverno-utilities-1.0.0-SNAPSHOT/lib/runtime/conf/</code> directory if it exists</li> 
                     <li>the <code>configuration.cprops</code> file in the application module if it exists</li> 
                 </ul> 
                 <p>It is then possible to define a default configuration in a configuration file inside the module and override any properties from the command line, a system property or an external configuration file.</p> 
@@ -1861,7 +1861,8 @@ module io.inverno.guide.ticket {
 }
 </code></pre> 
                 <p>Log4j can be configured in <code>log4j2.xml</code> file in project resources folder <code>src/main/resources</code>:</p> 
-                <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+                <pre><code class="language-xml">{% raw %}
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;Configuration status="WARN" name="Website" shutdownHook="disable"&gt;
     &lt;Appenders&gt;
         &lt;Console name="Console" target="SYSTEM_OUT"&gt;
@@ -1935,6 +1936,7 @@ module io.inverno.guide.ticket {
         &lt;/Root&gt;
     &lt;/Loggers&gt;
 &lt;/Configuration&gt;
+{% endraw %}
 </code></pre> 
                 <p>If you restart the application, you should now see three properly formatted log files <code>application.log</code>, <code>access.log</code> and <code>error.log</code> under the <code>logs/</code> directory:</p> 
                 <pre><code class="language-text">$ mvn inverno:run
@@ -2201,7 +2203,7 @@ ticket           1.0-SNAPSHOT     1837e3e29277   6 minutes ago   222MB
 2022-02-24 11:46:52,009 INFO  [main] i.i.c.v.Application - Application io.inverno.guide.ticket started in 692ms
 </code></pre> 
                 <h2 id="step-11-run-the-application-with-docker-compose">Step 11: Run the application with Docker Compose</h2> 
-                <p>Now that the ticket application image is in a Docker repository, it is ready to be deployed and run in the cloud using on Docker, Docker Swarm or a Kubernetes cluster.</p> 
+                <p>Now that the ticket application image is in a Docker repository, it is ready to be deployed and run in the cloud on Docker, Docker Swarm or a Kubernetes cluster.</p> 
                 <p>Let's create a <code>docker-compose.yml</code> file to define all services composing the application and that must be run together in an isolated environment.</p> 
                 <pre><code class="language-yaml">version: '3'
 
@@ -2223,16 +2225,16 @@ volumes:
   data:
 </code></pre> 
                 <p>The complete application is composed of the ticket application service and the Redis data store service, <code>logs</code> and <code>data</code> volumes are defined and bound to ticket application <code>/opt/ticket/logs</code> folder and Redis <code>/data</code> folder respectively.</p> 
-                <p>You can now deploy the complete application using <code>docker-compose</code> command in the folder containing the <code>docker-compose.yml</code> file:</p> 
+                <p>You can now deploy the complete application using <code>docker-compose</code> command from the folder containing the <code>docker-compose.yml</code> file:</p> 
                 <blockquote> 
                     <p>Use <code>--file</code> and <code>--project-name</code> options if you want to run <code>docker-compose</code> from another location. By default, the project name is the name of the parent folder.</p> 
                 </blockquote> 
                 <pre><code class="language-text">$ docker-compose up -d
-Creating network "ioinvernoguideticket_default" with the default driver
+`Creating network "ioinvernoguideticket_default" with the default driver
 Creating volume "ioinvernoguideticket_logs" with default driver
 Creating volume "ioinvernoguideticket_data" with default driver
 Creating ioinvernoguideticket_redis_1  ... done
-Creating ioinvernoguideticket_ticket_1 ... done
+Creating ioinvernoguideticket_ticket_1 ... done`
 </code></pre> 
                 <p>The <code>up</code> command initializes networks, volumes and containers, and eventually starts the applications's services. You can see that a dedicated network has been created, as well as two volumes: one to persist ticket application logs and one to persist Redis data. Data stored in volumes are not deleted when containers are stopped or removed which means application data are safe and can be easily backed up as well. Two services have been started in dedicated containers: one running the Redis data store and one running the ticket application. The 8080 port of the ticket application container is mapped to the 8080 port of the host, as a result the ticket application is accessible at <a href="http://localhost:8080">http://localhost:8080</a>.</p> 
                 <p>You can list the two running containers and their opened ports:</p> 
@@ -2282,9 +2284,10 @@ Removing volume ioinvernoguideticket_data
                     <div class="col col-lg-3"> 
                         <h5>Documentation</h5> 
                         <ul class="nav flex-column"> 
-                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/getting-started/html/index.html">Getting Started</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/release/reference/html/index.html">Reference</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/release/api/index.html">API Doc</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="docs/release/reference/html/index.html">Reference</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="docs/release/api/index.html">API Doc</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="docs/getting-started/html/index.html">Getting Started</a></li> 
+                            <li class="nav-item"><a class="nav-link px-0" href="docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li> 
                         </ul> 
                     </div> 
                     <div class="col col-lg-3"> 
