@@ -1,103 +1,103 @@
 <!DOCTYPE html>
-<html lang="en"> 
-    <head> 
-        <meta charset="UTF-8" /> 
-        <title>The Inverno Framework | Getting Started Guide</title> 
-        <meta name="viewport" content="width=device-width, initial-scale=1" /> 
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> 
-        <meta name="author" content="Jeremy KUHN (jeremy.kuhn@inverno.io)" /> 
-        <link rel="icon" type="image/svg" href="../../../img/snowflake.svg" /> 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" /> 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" /> 
-        <link rel="stylesheet" type="text/css" href="../../../styles/styles.css" /> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/stackoverflow-dark.min.css" media="screen" /> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ascetic.min.css" media="print" /> 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script> 
-        <script>hljs.initHighlightingOnLoad();</script> 
-    </head> 
-    <body data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="0" tabindex="0"> 
-        <header class="header"> 
-            <div class="container-fluid border-bottom bg-light"> 
-                <nav class="navbar navbar-expand-lg navbar-light container p-0 py-2 p-lg-1"> <a class="navbar-brand p-0" href="../../../"> <img class="logo" src="../../../img/inverno_portable.svg" alt="The Inverno Framework" /> </a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#smallNavMenu" aria-controls="smallNavMenu" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button> 
-                    <div class="collapse" id="smallNavMenu" style="flex-basis: 100%;"> 
-                        <ul class="navbar-nav border-top mt-2"> 
-                            <li class="nav-item mt-2"> <h5>Documentation</h5> 
-                              <ul class="nav flex-column"> 
-                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/release/reference/html/index.html">Reference Guide</a></li> 
-                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/release/api/index.html">API Doc</a></li> 
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>The Inverno Framework | Getting Started Guide</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="author" content="Jeremy KUHN (jeremy.kuhn@inverno.io)" />
+        <link rel="icon" type="image/svg" href="../../../img/snowflake.svg" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+        <link rel="stylesheet" type="text/css" href="../../../styles/styles.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/stackoverflow-dark.min.css" media="screen" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ascetic.min.css" media="print" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="0" tabindex="0">
+        <header class="header">
+            <div class="container-fluid border-bottom bg-light">
+                <nav class="navbar navbar-expand-lg navbar-light container p-0 py-2 p-lg-1"><a class="navbar-brand p-0" href="../../../"> <img class="logo" src="../../../img/inverno_portable.svg" alt="The Inverno Framework" /> </a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#smallNavMenu" aria-controls="smallNavMenu" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+                    <div class="collapse" id="smallNavMenu" style="flex-basis: 100%;">
+                        <ul class="navbar-nav border-top mt-2">
+                            <li class="nav-item mt-2"><h5>Documentation</h5>
+                              <ul class="nav flex-column">
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/release/reference/html/index.html">Reference Guide</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/release/api/index.html">API Doc</a></li>
                               <li>
-                              <hr class="dropdown-divider" /></li> 
-                              <li><h6 class="dropdown-header">User guides</h6></li> 
-                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/getting-started/html/index.html">Getting Started</a></li> 
-                              <li><a class="dropdown-item" href="../../../docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li> 
-                              </ul> </li> 
-                            <li class="nav-item mt-2"> <h5>Projects</h5> 
-                              <ul class="nav flex-column"> 
-                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-core">Core</a></li> 
-                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-mods">Modules</a></li> 
-                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-dist">Distribution</a></li> 
-                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-tools">Tools</a></li> 
-                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-examples">Examples</a></li> 
-                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-apps">Apps</a></li> 
-                              </ul> </li> 
-                        </ul> 
-                    </div> 
-                    <ul class="navbar-nav d-none d-sm-none d-lg-flex flex-fill justify-content-end align-self-stretch"> 
-                        <li class="nav-item dropdown d-flex align-items-center me-3"> <a class="nav-link dropdown-toggle text-decoration-none" href="#" id="documentationMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Documentation</a> 
-                            <ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="documentationMenu"> 
-                              <li><a class="dropdown-item" href="../../../docs/release/reference/html/index.html">Reference Guide</a></li> 
-                              <li><a class="dropdown-item" href="../../../docs/release/api/index.html">API Doc</a></li> 
+                              <hr class="dropdown-divider" /></li>
+                              <li><h6 class="dropdown-header">User guides</h6></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/getting-started/html/index.html">Getting Started</a></li>
+                              <li><a class="dropdown-item" href="../../../docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li>
+                              </ul></li>
+                            <li class="nav-item mt-2"><h5>Projects</h5>
+                              <ul class="nav flex-column">
+                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-core">Core</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-mods">Modules</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-dist">Distribution</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-tools">Tools</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
+                              </ul></li>
+                        </ul>
+                    </div>
+                    <ul class="navbar-nav d-none d-sm-none d-lg-flex flex-fill justify-content-end align-self-stretch">
+                        <li class="nav-item dropdown d-flex align-items-center me-3"><a class="nav-link dropdown-toggle text-decoration-none" href="#" id="documentationMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Documentation</a>
+                            <ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="documentationMenu">
+                              <li><a class="dropdown-item" href="../../../docs/release/reference/html/index.html">Reference Guide</a></li>
+                              <li><a class="dropdown-item" href="../../../docs/release/api/index.html">API Doc</a></li>
                               <li>
-                              <hr class="dropdown-divider" /></li> 
-                              <li><h6 class="dropdown-header">User guides</h6></li> 
-                              <li><a class="dropdown-item" href="../../../docs/getting-started/html/index.html">Getting Started</a></li> 
-                              <li><a class="dropdown-item" href="../../../docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li> 
-                            </ul> </li> 
-                        <li class="nav-item dropdown d-flex align-items-center"> <a class="nav-link dropdown-toggle text-decoration-none" href="#" id="projectsMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a> 
-                            <ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="projectsMenu"> 
-                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-core">Core</a></li> 
-                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-mods">Modules</a></li> 
-                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-dist">Distribution</a></li> 
-                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-tools">Tools</a></li> 
-                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-examples">Examples</a></li> 
-                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-apps">Apps</a></li> 
-                            </ul> </li> 
-                    </ul> 
-                </nav> 
-            </div> 
-        </header> 
+                              <hr class="dropdown-divider" /></li>
+                              <li><h6 class="dropdown-header">User guides</h6></li>
+                              <li><a class="dropdown-item" href="../../../docs/getting-started/html/index.html">Getting Started</a></li>
+                              <li><a class="dropdown-item" href="../../../docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li>
+                            </ul></li>
+                        <li class="nav-item dropdown d-flex align-items-center"><a class="nav-link dropdown-toggle text-decoration-none" href="#" id="projectsMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
+                            <ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="projectsMenu">
+                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-core">Core</a></li>
+                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-mods">Modules</a></li>
+                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-dist">Distribution</a></li>
+                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-tools">Tools</a></li>
+                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
+                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
+                            </ul></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
         <main id="main" class="main container">
-            <div class="heading"> 
-                <h1 class="heading-title">Inverno Framework Getting Started Guide</h1> 
-                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> 
-            </div> 
-            <div class="row align-items-stretch mt-5 mb-2"> 
-                <div class="col-12 col-lg-6 mb-3"> 
-                    <div class="card shadow h-100"> 
-                        <div class="card-body p-lg-5"> 
-                            <h2 class="card-title">What you'll learn</h2> 
-                            <p class="card-text">This guide provides insights into how to create an Inverno application that exposes a simple <code>Hello World</code> HTTP endpoint.</p> 
-                            <p class="card-text">We will guide you through creating a Maven project, creating the Inverno module for the application, writing the HTTP endpoint, running the application and finally packaging the application into an optimized runtime image.</p> 
-                        </div> 
-                    </div> 
-                </div> 
-                <div class="col-12 col-lg-6 mb-3"> 
-                    <div class="card shadow h-100"> 
-                        <div class="card-body p-lg-5"> 
-                            <h2 class="card-title">What you'll need</h2> 
-                            <ul> 
-                              <li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 14.</li> 
-                              <li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.6.</li> 
-                              <li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li> 
-                            </ul> 
-                        </div> 
-                    </div> 
-                </div> 
-            </div> 
-            <section class="markdown col p-3 overflow-auto"> 
-                <h2 id="step-1-create-an-inverno-project">Step 1: Create an Inverno project</h2> 
-                <p>The creation of a Maven project set up with the Inverno distribution should always be the first thing to do when developing an Inverno component or application.</p> 
-                <p>You can start by creating a regular Maven Java project with groupId <code>io.inverno.guide</code> and artifactId <code>getting-started</code> using your IDE, the Maven <a href="https://maven.apache.org/archetypes/maven-archetype-quickstart/">quickstart archetype</a> or manually using the text editor of your choice. Whatever you choose, you should end up with a project folder with the following file structure as generated by the Maven quickstart archetype:</p> 
+            <div class="heading">
+                <h1 class="heading-title">Inverno Framework Getting Started Guide</h1>
+                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p>
+            </div>
+            <div class="row align-items-stretch mt-5 mb-2">
+                <div class="col-12 col-lg-6 mb-3">
+                    <div class="card shadow h-100">
+                        <div class="card-body p-lg-5">
+                            <h2 class="card-title">What you'll learn</h2>
+                            <p class="card-text">This guide provides insights into how to create an Inverno application that exposes a simple <code>Hello World</code> HTTP endpoint.</p>
+                            <p class="card-text">We will guide you through creating a Maven project, creating the Inverno module for the application, writing the HTTP endpoint, running the application and finally packaging the application into an optimized runtime image.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 mb-3">
+                    <div class="card shadow h-100">
+                        <div class="card-body p-lg-5">
+                            <h2 class="card-title">What you'll need</h2>
+                            <ul>
+                              <li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 15.</li>
+                              <li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.6.</li>
+                              <li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section class="markdown col p-3 overflow-auto">
+                <h2 id="step-1-create-an-inverno-project">Step 1: Create an Inverno project</h2>
+                <p>The creation of a Maven project set up with the Inverno distribution should always be the first thing to do when developing an Inverno component or application.</p>
+                <p>You can start by creating a regular Maven Java project with groupId <code>io.inverno.guide</code> and artifactId <code>getting-started</code> using your IDE, the Maven <a href="https://maven.apache.org/archetypes/maven-archetype-quickstart/">quickstart archetype</a> or manually using the text editor of your choice. Whatever you choose, you should end up with a project folder with the following file structure as generated by the Maven quickstart archetype:</p>
                 <pre><code class="language-plaintext">├── pom.xml
 └── src
     └── main
@@ -107,8 +107,8 @@
                     └── guide
                         └── getting_started
                             └── App.java
-</code></pre> 
-                <p>You can now set up the <code>pom.xml</code> build descriptor with the Inverno distribution by defining a <code>&lt;parent/&gt;</code> section pointing to <code>io.inverno.dist:inverno-parent:1.4.2</code> parent pom:</p> 
+</code></pre>
+                <p>You can now set up the <code>pom.xml</code> build descriptor with the Inverno distribution by defining a <code>&lt;parent/&gt;</code> section pointing to <code>io.inverno.dist:inverno-parent:1.5.0</code> parent pom:</p>
                 <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
@@ -116,15 +116,15 @@
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.4.2&lt;/version&gt;
+        &lt;version&gt;1.5.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;getting-started&lt;/artifactId&gt;
     &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
 
 &lt;/project&gt;
-</code></pre> 
-                <p>Then you must declare dependencies to Inverno <em>boot</em> and <em>web</em> modules since you want to create a Web application. The <em>boot</em> module provides common services, it should be included in any Inverno application. The <em>web</em> module provides the Web server and APIs for creating HTTP endpoints.</p> 
+</code></pre>
+                <p>Then you must declare dependencies to Inverno <em>boot</em> and <em>web</em> modules since you want to create a Web application. The <em>boot</em> module provides common services, it should be included in any Inverno application. The <em>web</em> module provides the Web server and APIs for creating HTTP endpoints.</p>
                 <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
@@ -132,7 +132,7 @@
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.4.2&lt;/version&gt;
+        &lt;version&gt;1.5.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;getting-started&lt;/artifactId&gt;
@@ -149,19 +149,19 @@
         &lt;/dependency&gt;
     &lt;/dependencies&gt;
 &lt;/project&gt;
-</code></pre> 
-                <p>Congratulations! you have just created a new Inverno project.</p> 
-                <h2 id="step-2-create-the-java-module">Step 2: Create the Java module</h2> 
-                <p>An Inverno component or application is a regular Java module annotated with <code>@io.inverno.core.annotation.Module</code>. Open up the project in your IDE and create file <code>src/main/java/module-info.java</code>. In this module descriptor, you need to declare the modules required by your application, namely <code>io.inverno.mod.boot</code> and <code>io.inverno.mod.web</code> modules:</p> 
+</code></pre>
+                <p>Congratulations! you have just created a new Inverno project.</p>
+                <h2 id="step-2-create-the-java-module">Step 2: Create the Java module</h2>
+                <p>An Inverno component or application is a regular Java module annotated with <code>@io.inverno.core.annotation.Module</code>. Open up the project in your IDE and create file <code>src/main/java/module-info.java</code>. In this module descriptor, you need to declare the modules required by your application, namely <code>io.inverno.mod.boot</code> and <code>io.inverno.mod.web</code> modules:</p>
                 <pre><code class="language-java">@io.inverno.core.annotation.Module
 module io.inverno.guide.getting_started {
     requires io.inverno.mod.boot;
     requires io.inverno.mod.web;
 }
-</code></pre> 
-                <p>At compile time, the Inverno compiler will assemble the <em>boot</em> and <em>web</em> modules together with your application module and generate a module class. This class contains all the IoC/DI logic required to bootstrap your application.</p> 
-                <h2 id="step-3-add-the-code">Step 3: Add the code</h2> 
-                <p>In your IDE, open the <code>src/main/java/io/inverno/guide/getting_started/App.java</code> and change the contents in order to create an Inverno Web application:</p> 
+</code></pre>
+                <p>At compile time, the Inverno compiler will assemble the <em>boot</em> and <em>web</em> modules together with your application module and generate a module class. This class contains all the IoC/DI logic required to bootstrap your application.</p>
+                <h2 id="step-3-add-the-code">Step 3: Add the code</h2>
+                <p>In your IDE, open the <code>src/main/java/io/inverno/guide/getting_started/App.java</code> and change the contents in order to create an Inverno Web application:</p>
                 <pre><code class="language-java">package io.inverno.guide.getting_started;
 
 import io.inverno.core.annotation.Bean;
@@ -186,19 +186,19 @@ public class App {
         Application.run(new Getting_started.Builder());
     }
 }
-</code></pre> 
-                <p>The <code>@Bean</code> annotation tells the Inverno compiler that the <code>App</code> class is a bean participating in IoC/DI. The <code>@WebController</code> annotation indicates that the bean is also a Web controller defining Web routes.</p> 
-                <p>The <code>hello()</code> method annotated with <code>@WebRoute( path = "/hello")</code> defines a Web route which is invoked when an HTTP request is sent to <code>http://localhost:8080/hello</code> location. The <code>@QueryParam</code> annotation indicates that the route accept a query parameter named after the annotated method parameter <code>name</code>. This query parameter is optional since the method parameter is of type <code>Optional&lt;String&gt;</code>.</p> 
-                <p>Finally, the application is started in the <code>main()</code> method using the <code>Helloworld</code> module class generated by the Inverno compiler.</p> 
-                <blockquote> 
-                    <p>The Inverno compiler generates module class <code>io.inverno.guide.getting_started.Getting_started</code> when the project is compiled (e.g. <code>mvn compile</code>), you might want to configure your IDE to make the generated code visible and get rid of the compilation error reported in the <code>main()</code> method by adding folder <code>target/generated-sources/annotations</code> to the project build path. In Eclipse, you can do that in the project properties &gt; Source &gt; Add Folder...</p> 
-                </blockquote> 
-                <h2 id="step-4-run-the-application">Step 4: Run the application</h2> 
-                <p>You are now ready to build and run the application, open a terminal, go to the project folder and simply execute the following command:</p> 
+</code></pre>
+                <p>The <code>@Bean</code> annotation tells the Inverno compiler that the <code>App</code> class is a bean participating in IoC/DI. The <code>@WebController</code> annotation indicates that the bean is also a Web controller defining Web routes.</p>
+                <p>The <code>hello()</code> method annotated with <code>@WebRoute( path = "/hello")</code> defines a Web route which is invoked when an HTTP request is sent to <code>http://localhost:8080/hello</code> location. The <code>@QueryParam</code> annotation indicates that the route accept a query parameter named after the annotated method parameter <code>name</code>. This query parameter is optional since the method parameter is of type <code>Optional&lt;String&gt;</code>.</p>
+                <p>Finally, the application is started in the <code>main()</code> method using the <code>Helloworld</code> module class generated by the Inverno compiler.</p>
+                <blockquote>
+                    <p>The Inverno compiler generates module class <code>io.inverno.guide.getting_started.Getting_started</code> when the project is compiled (e.g. <code>mvn compile</code>), you might want to configure your IDE to make the generated code visible and get rid of the compilation error reported in the <code>main()</code> method by adding folder <code>target/generated-sources/annotations</code> to the project build path. In Eclipse, you can do that in the project properties &gt; Source &gt; Add Folder...</p>
+                </blockquote>
+                <h2 id="step-4-run-the-application">Step 4: Run the application</h2>
+                <p>You are now ready to build and run the application, open a terminal, go to the project folder and simply execute the following command:</p>
                 <pre><code class="language-plaintext">$ mvn inverno:run
-</code></pre> 
-                <p>You should see an output similar to the following:</p> 
-                <pre><code class="language-plaintext">[INFO] --- inverno-maven-plugin:1.2.4:run (default-cli) @ getting-started ---
+</code></pre>
+                <p>You should see an output similar to the following:</p>
+                <pre><code class="language-plaintext">[INFO] --- inverno-maven-plugin:1.3.0:run (default-cli) @ getting-started ---
 [INFO] Running project: io.inverno.guide.getting-started@1.0-SNAPSHOT...
 ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
 INFO Application Inverno is starting...
@@ -213,7 +213,7 @@ INFO Application Inverno is starting...
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                 -- 1.4.1 --                  ║
+     ║                    ,   \/   ,                                 -- 1.5.0 --                  ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -243,63 +243,62 @@ INFO Server Module io.inverno.mod.http.server started in 111ms
 INFO Web Module io.inverno.mod.web started in 112ms
 INFO Getting_started Module io.inverno.guide.getting_started started in 377ms
 INFO Application Application io.inverno.guide.getting_started started in 458ms
-</code></pre> 
-                <p>A Web server has been started listening on port 8080, you can now test the <code>/hello</code> endpoint:</p> 
-                <p>Using <code>curl</code> in a terminal:</p> 
+</code></pre>
+                <p>A Web server has been started listening on port 8080, you can now test the <code>/hello</code> endpoint:</p>
+                <p>Using <code>curl</code> in a terminal:</p>
                 <pre><code class="language-plaintext">$ curl -i http://localhost:8080/hello
 HTTP/1.1 200 OK
 content-length: 13
 
 Hello, world!
-</code></pre> 
-                <p>Using a Web browser pointing to <code>http://localhost:8080/hello?name=John</code>:</p> 
-                <img class="img-fluid shadow" src="img/hello_browser.png" style="display: block; margin: 2em auto;" alt="Hello World in Web Browser" /> 
-                <h2 id="step-5-package-and-deploy-the-application">Step 5: Package and deploy the application</h2> 
-                <p>You can package the application into a native platform dependent image containing a Java runtime with the exact dependencies needed by the application and deploy it to your local Maven repository or eventually to a remote repository:</p> 
+</code></pre>
+                <p>Using a Web browser pointing to <code>http://localhost:8080/hello?name=John</code>:</p> <img class="img-fluid shadow" src="img/hello_browser.png" style="display: block; margin: 2em auto;" alt="Hello World in Web Browser" />
+                <h2 id="step-5-package-and-deploy-the-application">Step 5: Package and deploy the application</h2>
+                <p>You can package the application into a native platform dependent image containing a Java runtime with the exact dependencies needed by the application and deploy it to your local Maven repository or eventually to a remote repository:</p>
                 <pre><code class="language-plaintext">$ mvn inverno:build-app install
-</code></pre> 
-                <blockquote> 
-                    <p>Note that if you are using a JDK&lt;16, you'll need to explicitly add the <code>jdk.incubator.jpackage</code> module in MAVEN_OPTS: <code>MAVEN_OPTS="--add-modules jdk.incubator.jpackage"</code></p> 
-                </blockquote> 
-                <p>Then you can install the application on any compatible platform by downloading and unpacking the application image using Maven dependency plugin:</p> 
+</code></pre>
+                <blockquote>
+                    <p>Note that if you are using a JDK&lt;16, you'll need to explicitly add the <code>jdk.incubator.jpackage</code> module in MAVEN_OPTS: <code>MAVEN_OPTS="--add-modules jdk.incubator.jpackage"</code></p>
+                </blockquote>
+                <p>Then you can install the application on any compatible platform by downloading and unpacking the application image using Maven dependency plugin:</p>
                 <pre><code class="language-plaintext">$ mvn dependency:unpack -Dartifact=io.inverno.guide:getting-started:1.0-SNAPSHOT:zip:application_linux_amd64 -DoutputDirectory=./
-</code></pre> 
-                <p>You can run it using a native command:</p> 
+</code></pre>
+                <p>You can run it using a native command:</p>
                 <pre><code class="language-plaintext">$ ./getting-started-1.0-SNAPSHOT/bin/getting-started
-</code></pre> 
-                <p>Congratulations! You've just built and deployed your first Inverno application.</p> 
+</code></pre>
+                <p>Congratulations! You've just built and deployed your first Inverno application.</p>
             </section>
-        </main> 
-        <footer class="footer bg-light border-top mt-5"> 
-            <div class="container p-5"> 
-                <div class="row mb-5"> 
-                    <div class="col col-lg-3"> 
-                        <h5>Documentation</h5> 
-                        <ul class="nav flex-column"> 
-                            <li class="nav-item"><a class="nav-link px-0" href="docs/release/reference/html/index.html">Reference</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="docs/release/api/index.html">API Doc</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="docs/getting-started/html/index.html">Getting Started</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li> 
-                        </ul> 
-                    </div> 
-                    <div class="col col-lg-3"> 
-                        <h5>Projects</h5> 
-                        <ul class="nav flex-column"> 
-                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-core">Core</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-mods">Modules</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-dist">Distribution</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-tools">Tools</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-examples">Examples</a></li> 
-                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-apps">Apps</a></li> 
-                        </ul> 
-                    </div> 
-                </div> 
-            </div> 
-            <div class="p-3 mb-5 text-center"> 
-                <p class="fw-light fs-6">The Inverno Framework is released under version 2.0 of the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License</a>.</p> 
-                <p class="fw-light fs-6">Copyright © 2021, The Inverno Framework</p> 
-            </div> 
-        </footer> 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>  
+        </main>
+        <footer class="footer bg-light border-top mt-5">
+            <div class="container p-5">
+                <div class="row mb-5">
+                    <div class="col col-lg-3">
+                        <h5>Documentation</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/release/reference/html/index.html">Reference</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/release/api/index.html">API Doc</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/getting-started/html/index.html">Getting Started</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li>
+                        </ul>
+                    </div>
+                    <div class="col col-lg-3">
+                        <h5>Projects</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-core">Core</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-mods">Modules</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-dist">Distribution</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-tools">Tools</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="p-3 mb-5 text-center">
+                <p class="fw-light fs-6">The Inverno Framework is released under version 2.0 of the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License</a>.</p>
+                <p class="fw-light fs-6">Copyright © 2021, The Inverno Framework</p>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
     </body>
 </html>

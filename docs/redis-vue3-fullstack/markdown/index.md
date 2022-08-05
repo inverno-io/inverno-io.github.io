@@ -9,9 +9,9 @@ $properties(base = ../../../, title = Full-Stack application Guide)
 	<div class="col-12 col-lg-6 mb-3">
 		<div class="card shadow h-100">
 			<div class="card-body p-lg-5">
-		    	<h2 class="card-title">What you'll learn</h2>
-                <p class="card-text">This guide demonstrates how the Inverno framework can be used to develop a full-stack application exposing REST services, accessing data in <a href="https://redis.io">Redis</a> data store and exposing a <a href="https://v3.vuejs.org/">Vue.js</a> front-end.</p>
-                <p class="card-text">The application consists in a Task/Ticket Management System which demonstrates multiple Inverno's features such as: IoC/DI, configuration, Web Controllers, automatic OpenAPI specifications, WebJars and static resources, Redis client, <a href="https://www.docker.com/">Docker</a> packaging and deployment to the cloud.</p>
+				<h2 class="card-title">What you'll learn</h2>
+				<p class="card-text">This guide demonstrates how the Inverno framework can be used to develop a full-stack application exposing REST services, accessing data in <a href="https://redis.io">Redis</a> data store and exposing a <a href="https://v3.vuejs.org/">Vue.js</a> front-end.</p>
+				<p class="card-text">The application consists in a Task/Ticket Management System which demonstrates multiple Inverno's features such as: IoC/DI, configuration, Web Controllers, automatic OpenAPI specifications, WebJars and static resources, Redis client, <a href="https://www.docker.com/">Docker</a> packaging and deployment to the cloud.</p>
 				<p class="card-text">We will guide you through the setup of a Maven project containing the Inverno module of the application, configuration setup, TLS setup, the creation of backend services to access Redis data store, the creation of Web controllers to expose these services as REST resources, the setup of Web routes to expose WebJars and static resources, running the application and finally packaging and deploying the application to <a href="https://www.docker.com/">Docker</a>.</p>
 			</div>
 		</div>
@@ -19,16 +19,16 @@ $properties(base = ../../../, title = Full-Stack application Guide)
 	<div class="col-12 col-lg-6 mb-3">
 		<div class="card shadow h-100">
 			<div class="card-body p-lg-5">
-		    	<h2 class="card-title">What you'll need</h2>
-		    	<ul>
-		    		<li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 16.</li>
-		    		<li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.6.</li>
-		    		<li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
-                    <li>A <a href="https://www.docker.com/">Docker</a> installation.</li>
-                    <li>A basic understanding of <a href="https://redis.io">Redis</a> data store.</li>
-                    <li>A basic understanding of Inverno's core IoC/DI framework (see <a href="${base}docs/getting-started/html/index.html">Getting Started guide</a>).</li>
-                    <li>A basic understanding of reactive programming using <a href="https://projectreactor.io/">Project reactor</a> library.</li>
-		    	</ul>
+				<h2 class="card-title">What you'll need</h2>
+				<ul>
+					<li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 16.</li>
+					<li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.6.</li>
+					<li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
+					<li>A <a href="https://www.docker.com/">Docker</a> installation.</li>
+					<li>A basic understanding of <a href="https://redis.io">Redis</a> data store.</li>
+					<li>A basic understanding of Inverno's core IoC/DI framework (see <a href="${base}docs/getting-started/html/index.html">Getting Started guide</a>).</li>
+					<li>A basic understanding of reactive programming using <a href="https://projectreactor.io/">Project reactor</a> library.</li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -56,7 +56,7 @@ All static resources, including front-end libraries, will be exposed by the appl
 
 The application will be eventually packaged and deployed to local [Docker](https://www.docker.com/) repository and run using [Docker Compose](https://docs.docker.com/compose/).
 
-The full source code of the resulting application can be found in [GitHub](https://github.com/inverno-io/inverno-apps/tree/1.0.0/inverno-ticket).
+The full source code of the resulting application can be found in [GitHub](https://github.com/inverno-io/inverno-apps/tree/1.1.0/inverno-ticket).
 
 ## Step 1: Bootstrap the application project
 
@@ -688,7 +688,7 @@ A new ticket is created when there's no ticket id in the ticket argument. A tick
 
 The Redis client API is quite self-explanatory, but we can differentiate between simple and complex commands: a simple command is run by subscribing to a `Publisher` directly returned by a `RedisOperations` method whereas a complex command is run by subscribing to a `Publisher` obtained from a builder returned by a `RedisOperations` method which allows defining more complex arguments. In above code, the `SADD` command is considered a simple command and the `SET` command a complex command.
 
-The rest of the implementation is done in a similar way, the complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.0.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/service/TicketService.java).
+The rest of the implementation is done in a similar way, the complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.1.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/service/TicketService.java).
 
 The `io.inverno.guide.ticket.internal.service.PlanService` class manages plans in the Redis data store. It must be annotated with `io.inverno.core.annotation.Bean` to take part in IoC/DI when the application module is started. As for the `TicketService` bean, it requires a `RedisTransactionalClient<String, String>` instance and an `ObjectMapper` instance but also a `TicketService` instance to retrieve tickets associated to a plan. These are required dependencies that must be injected in the constructor.
 
@@ -828,7 +828,7 @@ Retrieving a plan is pretty straightforward using Redis `GET` command, the filte
 
 Using a `Flux<Ticket>` allows to lazily load plan's ticket when required. This is one advantage of being reactive since nothing happens until the publisher is subscribed.
 
-The rest of the `PlanService` implementation is done in a similar way as for the `TicketService`, the complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.0.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/service/PlanService.java).
+The rest of the `PlanService` implementation is done in a similar way as for the `TicketService`, the complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.1.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/service/PlanService.java).
 
 The `io.inverno.guide.ticket.internal.service.NoteService` class manages ticket notes in the Redis data store. It must be annotated with `io.inverno.core.annotation.Bean` to take part in IoC/DI when the application module is started. It requires a `RedisTransactionalClient<String, String>` instance and an `ObjectMapper` instance. These are required dependencies that must be injected in the constructor.
 
@@ -870,7 +870,7 @@ public class NoteService {
 
 Notes associated to a ticket are stored in a Redis `list` whose key derives from the ticket id: `APP:Ticket:Ticket:2:Notes`.
 
-The `NoteService` implementation is a basic CRUD implementation which is similar to what we've seen so far in `TicketService` and `PlanService`, the complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.0.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/service/NoteService.java).
+The `NoteService` implementation is a basic CRUD implementation which is similar to what we've seen so far in `TicketService` and `PlanService`, the complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.1.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/service/NoteService.java).
 
 Inverno fully embraces the [Java Platform Module System](https://en.wikipedia.org/wiki/Java_Platform_Module_System) to create modular and secure applications. Unfortunately, not all Java libraries have been properly migrated to Java modules. This is especially the case for [Lettuce](https://lettuce.io/) and [Project Reactor](https://projectreactor.io/). This might result in self-explanatory runtime errors such as: `java.lang.reflect.InaccessibleObjectException: ... module reactor.core does not "opens reactor.core.publisher" to module lettuce.core`. Until external libraries are properly modularized, such issues can be fixed by specifying `--add-opens` or `--add-exports` arguments to the JVM.
 
@@ -1047,7 +1047,7 @@ public class TicketDtoMapper implements DtoMapper<TicketDto, Ticket> {
 }
 ```
 
-The code of the `NoteDtoMapper` implementation can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.0.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/rest/v1/mapper/NoteDtoMapper.java).
+The code of the `NoteDtoMapper` implementation can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.1.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/rest/v1/mapper/NoteDtoMapper.java).
 
 The `PlanDtoMapper` is a bit more complex since `Flux<Ticket>` must be mapped to `List<TicketDto>`, implementation then requires some logic and a `DtoMapper<TicketDto, Ticket>` which can be easily injected in the constructor since both `PlanDtoMapper` and `TicketDtoMapper` are declared as beans in the same module.
 
@@ -1553,7 +1553,7 @@ public class TicketWebController {
 }
 ```
 
-The complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.0.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/rest/v1/TicketWebController.java)
+The complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.1.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/rest/v1/TicketWebController.java)
 
 As for the Domain model, you must add the following `exports` directive to the module descriptor to allow Jackson to access DTOs.
 
@@ -1706,7 +1706,7 @@ src/main/resources/static/
 └── index.html
 ```
 
-Web UI development using Bootstrap and Vue.js is not the purpose of this guide, so please refer to appropriate documentations if you want to go deeper. The complete UI code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/tree/1.0.0/inverno-ticket/src/main/resources/static).
+Web UI development using Bootstrap and Vue.js is not the purpose of this guide, so please refer to appropriate documentations if you want to go deeper. The complete UI code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/tree/1.1.0/inverno-ticket/src/main/resources/static).
 
 The Web UI requires multiple JavaScript libraries that are packaged as [WebJars](https://www.webjars.org/), you'll also need Swagger UI resources which also comes as a WebJar. These are quite easy to include into the application by declaring corresponding dependencies in the Maven project descriptor:
 
@@ -1791,17 +1791,17 @@ public class StaticWebRoutesConfigurer implements WebRoutesConfigurer<ExchangeCo
     }
 
     @Override
-    public void accept(WebRoutable<ExchangeContext, ?> routable) {
-        routable
+    public void accept(WebRoutable<ExchangeContext, ?> routes) {
+        routes
             // OpenAPI specifications
-            .configureRoutes(new OpenApiRoutesConfigurer(this.resourceService, true))
+            .configureRoutes(new OpenApiRoutesConfigurer<>(this.resourceService, true))
             // WebJars
-            .configureRoutes(new WebJarsRoutesConfigurer(this.resourceService))
+            .configureRoutes(new WebJarsRoutesConfigurer<>(this.resourceService))
             // Static resources: html, javascript, css, images...
             .route()
                 .path("/static/{path:.*}", true)
                 .method(Method.GET)
-                .handler(new StaticHandler(this.resourceService.getResource(this.configuration.web_root())))
+                .handler(new StaticHandler<>(this.resourceService.getResource(this.configuration.web_root())))
             // Welcome page
             .route()
                 .path("/", true)
@@ -2067,7 +2067,6 @@ The access log layout expected by AWS is a bit specific and requires to define a
 Log4j can be configured in `log4j2.xml` file in project resources folder `src/main/resources`:
 
 ```xml
-{% raw %}
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" name="Website" shutdownHook="disable">
     <Appenders>

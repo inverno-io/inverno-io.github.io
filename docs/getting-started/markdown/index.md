@@ -20,7 +20,7 @@ $properties(base = ../../../, title = Getting Started Guide)
 			<div class="card-body p-lg-5">
 		    	<h2 class="card-title">What you'll need</h2>
 		    	<ul>
-		    		<li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 14.</li>
+		    		<li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 15.</li>
 		    		<li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.6.</li>
 		    		<li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
 		    	</ul>

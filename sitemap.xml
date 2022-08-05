@@ -4,31 +4,31 @@
 	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" >
 	<url>
 		<loc>https://inverno.io/</loc>
-		<lastmod>2022-02-24</lastmod>
+		<lastmod>2022-08-05</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>1</priority>
 	</url>
 	<url>
 		<loc>https://inverno.io/docs/getting-started/html/index.html</loc>
-		<lastmod>2022-02-24</lastmod>
+		<lastmod>2022-08-05</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://inverno.io/docs/redis-vue3-fullstack/html/index.html</loc>
-		<lastmod>2022-02-24</lastmod>
+		<lastmod>2022-08-05</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://inverno.io/docs/release/reference/html/index.html</loc>
-		<lastmod>2022-02-24</lastmod>
+		<lastmod>2022-08-05</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://inverno.io/docs/release/api/index.html</loc>
-		<lastmod>2022-04-24</lastmod>
+		<lastmod>2022-08-05</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
