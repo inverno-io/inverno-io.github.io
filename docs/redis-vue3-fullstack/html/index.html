@@ -29,7 +29,7 @@
                               <hr class="dropdown-divider" /></li>
                               <li><h6 class="dropdown-header">User guides</h6></li>
                               <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/getting-started/html/index.html">Getting Started</a></li>
-                              <li><a class="dropdown-item" href="../../../docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li>
                               </ul></li>
                             <li class="nav-item mt-2"><h5>Projects</h5>
                               <ul class="nav flex-column">
@@ -287,7 +287,7 @@ public class App {
                     <li>system properties</li>
                     <li>system environment variables</li>
                     <li>the <code>configuration.cprops</code> file in <code>./conf/</code> or <code>${inverno.config.path}/</code> directories if one exists (if the first one exists the second one is ignored)</li>
-                    <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-apps/inverno-utilities/target/maven-inverno/application_linux_amd64/inverno-utilities-1.1.0-SNAPSHOT/lib/runtime/conf/</code> directory if it exists</li>
+                    <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-apps/inverno-utilities/target/maven-inverno/application_linux_amd64/inverno-utilities-1.2.0-SNAPSHOT/lib/runtime/conf/</code> directory if it exists</li>
                     <li>the <code>configuration.cprops</code> file in the application module if it exists</li>
                 </ul>
                 <p>It is then possible to define a default configuration in a configuration file inside the module and override any properties from the command line, a system property or an external configuration file.</p>
@@ -1856,7 +1856,8 @@ module io.inverno.guide.ticket {
 }
 </code></pre>
                 <p>Log4j can be configured in <code>log4j2.xml</code> file in project resources folder <code>src/main/resources</code>:</p>
-                <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+                <pre><code class="language-xml">{% raw %}
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;Configuration status="WARN" name="Website" shutdownHook="disable"&gt;
     &lt;Appenders&gt;
         &lt;Console name="Console" target="SYSTEM_OUT"&gt;
@@ -1930,6 +1931,7 @@ module io.inverno.guide.ticket {
         &lt;/Root&gt;
     &lt;/Loggers&gt;
 &lt;/Configuration&gt;
+{% endraw %}
 </code></pre>
                 <p>If you restart the application, you should now see three properly formatted log files <code>application.log</code>, <code>access.log</code> and <code>error.log</code> under the <code>logs/</code> directory:</p>
                 <pre><code class="language-text">$ mvn inverno:run
