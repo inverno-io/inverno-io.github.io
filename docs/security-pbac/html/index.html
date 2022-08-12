@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>The Inverno Framework | Permission-based Access Control Guide</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="author" content="Jeremy KUHN (jeremy.kuhn@inverno.io)" />
+        <link rel="icon" type="image/svg" href="../../../img/snowflake.svg" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+        <link rel="stylesheet" type="text/css" href="../../../styles/styles.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/stackoverflow-dark.min.css" media="screen" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/ascetic.min.css" media="print" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="0" tabindex="0">
+        <header class="header">
+            <div class="container-fluid border-bottom bg-light">
+                <nav class="navbar navbar-expand-lg navbar-light container p-0 py-2 p-lg-1"><a class="navbar-brand p-0" href="../../../"> <img class="logo" src="../../../img/inverno_portable.svg" alt="The Inverno Framework" /> </a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#smallNavMenu" aria-controls="smallNavMenu" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+                    <div class="collapse" id="smallNavMenu" style="flex-basis: 100%;">
+                        <ul class="navbar-nav border-top mt-2">
+                            <li class="nav-item mt-2"><h5>Documentation</h5>
+                              <ul class="nav flex-column">
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/release/reference/html/index.html">Reference Guide</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/release/api/index.html">API Doc</a></li>
+                              <li>
+                              <hr class="dropdown-divider" /></li>
+                              <li><h6 class="dropdown-header">User guides</h6></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/getting-started/html/index.html">Getting Started</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/security-form-jws/html/index.html">Secure a Web application</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/security-rbac/html/index.html">Role-based Access Control</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/security-pbac/html/index.html">Permission-based Access Control</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/security-ldap/html/index.html">LDAP Security</a></li>
+                              </ul></li>
+                            <li class="nav-item mt-2"><h5>Projects</h5>
+                              <ul class="nav flex-column">
+                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-core">Core</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-mods">Modules</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-dist">Distribution</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-tools">Tools</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
+                              </ul></li>
+                        </ul>
+                    </div>
+                    <ul class="navbar-nav d-none d-sm-none d-lg-flex flex-fill justify-content-end align-self-stretch">
+                        <li class="nav-item dropdown d-flex align-items-center me-3"><a class="nav-link dropdown-toggle text-decoration-none" href="#" id="documentationMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Documentation</a>
+                            <ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="documentationMenu">
+                              <li><a class="dropdown-item" href="../../../docs/release/reference/html/index.html">Reference Guide</a></li>
+                              <li><a class="dropdown-item" href="../../../docs/release/api/index.html">API Doc</a></li>
+                              <li>
+                              <hr class="dropdown-divider" /></li>
+                              <li><h6 class="dropdown-header">User guides</h6></li>
+                              <li><a class="dropdown-item" href="../../../docs/getting-started/html/index.html">Getting Started</a></li>
+                              <li><a class="dropdown-item" href="../../../docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li>
+                              <li><a class="dropdown-item" href="../../../docs/security-form-jws/html/index.html">Secure a Web application</a></li>
+                              <li><a class="dropdown-item" href="../../../docs/security-rbac/html/index.html">Role-based Access Control</a></li>
+                              <li><a class="dropdown-item" href="../../../docs/security-pbac/html/index.html">Permission-based Access Control</a></li>
+                              <li><a class="dropdown-item" href="../../../docs/security-ldap/html/index.html">LDAP Security</a></li>
+                            </ul></li>
+                        <li class="nav-item dropdown d-flex align-items-center"><a class="nav-link dropdown-toggle text-decoration-none" href="#" id="projectsMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
+                            <ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="projectsMenu">
+                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-core">Core</a></li>
+                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-mods">Modules</a></li>
+                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-dist">Distribution</a></li>
+                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-tools">Tools</a></li>
+                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
+                              <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
+                            </ul></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main id="main" class="main container">
+            <div class="heading">
+                <h1 class="heading-title">Inverno Framework Permission-based Access Control Guide</h1>
+                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p>
+            </div>
+            <div class="row align-items-stretch mt-5 mb-2">
+                <div class="col-12 col-lg-6 mb-3">
+                    <div class="card shadow h-100">
+                        <div class="card-body p-lg-5">
+                            <h2 class="card-title">What you'll learn</h2>
+                            <p class="card-text">This guide shows how to resolve a Permission-based access controller and use it to control access to services or resources in an Inverno Web application.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 mb-3">
+                    <div class="card shadow h-100">
+                        <div class="card-body p-lg-5">
+                            <h2 class="card-title">What you'll need</h2>
+                            <ul>
+                              <li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 16.</li>
+                              <li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.6.</li>
+                              <li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
+                              <li>An Inverno Web application to protect, such as the <a href="https://github.com/inverno-io/inverno-apps/tree/1.2.0/inverno-ticket">Inverno Ticket</a> application properly secured following the <a href="../../../docs/security-form-jws/html/index.html">Inverno Framework Web Spplication Security Guide</a>.</li>
+                              <li>A basic understanding of Inverno's unified configuration API (see configuration module documentation in the <a href="../../../docs/release/reference/html/index/html">Reference documentation</a>).</li>
+                              <li>A basic understanding of permission-based access control.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section class="markdown col p-3 overflow-auto">
+                <p>This guide directly follows the <a href="../../../docs/security-form-jws/html/index.html">Inverno Framework Web Application Security Guide</a>. In this guide you will continue protecting the Inverno Ticket application using permission-based access control to provide finer access control to services and resources.</p>
+                <p>The objective is to be able to control the access to particular services or resources based on the permissions that have been granted to users and stored in a <a href="https://redis.io">Redis</a> data store.</p>
+                <p>The complete Inverno Ticket application can be found in <a href="https://github.com/inverno-io/inverno-apps/tree/pbac/inverno-ticket">GitHub</a>.</p>
+                <h2 id="step-1-resolve-a-permission-based-access-controller">Step 1: Resolve a Permission-based access controller</h2>
+                <p>In order to control whether a user authenticated in the ticket application has access to a particular service or resource, an <code>AccessController</code> must be present in the <code>SecurityContext</code>. Following the Inverno security model, an entity accessing an application can be authenticated, maybe identified and it may be possible to control its access based on more complex approaches such as role-based or permissions-based access control. It might then not always be possible to get an access controller, this greatly depends on the authentication process and how the application is architectured.</p>
+                <p>A <code>PermissionBasedAccessController</code> allows to determine whether an authenticated entity has a particular permissions in a particular context. The fact that the current functional context is considered when evaluating permissions provides even finer access control than roles or simple permissions. The Inverno <em>security</em> module provides the <code>ConfigurationSourcePermissionBasedAccessController</code> implementation which relies on a <code>ConfigurationSource</code> to resolve such <em>parameterized</em> permissions.</p>
+                <blockquote>
+                    <p>The unified configuration API is extremely powerful and can be used in many use cases including permission-based access control since it supports parameterized configuration properties which is exactly what is needed here.</p>
+                </blockquote>
+                <p>The Inverno Ticket application already uses a Redis data store for authentication, a <code>RedisConfigurationSource</code> can then be used to manage user permissions.</p>
+                <p>So the first thing to do is to resolve a <code>PermissionBasedAccessController</code> using a <code>ConfigurationSourcePermissionBasedAccessControllerResolver</code>. This must be done in the <code>SecurityConfigurer</code>, the <code>SecurityContext</code> and the <code>InterceptingSecurityContext</code> declared respectively in <code>WebRoutesConfigurer</code> and <code>WebInterceptorsConfigurer</code> should now be defined with a <code>PermissionBasedAccessController</code>, the <code>RedisClient</code> should be injected to create the underlying <code>RedisConfigurationSource</code> and a <code>ConfigurationSourcePermissionBasedAccessControllerResolver</code> should be used in the <code>SecurityInterceptor</code> to resolve the access controller:</p>
+                <pre><code class="language-java">package io.inverno.app.ticket.internal.security;
+
+...
+import io.inverno.mod.configuration.source.RedisConfigurationSource;
+import io.inverno.mod.redis.RedisClient;
+import io.inverno.mod.security.accesscontrol.ConfigurationSourcePermissionBasedAccessControllerResolver;
+import io.inverno.mod.security.accesscontrol.PermissionBasedAccessController;
+...
+
+@WebRoutes({
+	@WebRoute(path = { "/login" }, method = { Method.GET }),
+	@WebRoute(path = { "/login" }, method = { Method.POST }),
+	@WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
+})
+@Bean( visibility = Bean.Visibility.PRIVATE )
+public class SecurityConfigurer implements WebRoutesConfigurer&lt;SecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, WebInterceptorsConfigurer&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, ErrorWebRouterConfigurer&lt;ExchangeContext&gt; {
+
+	...
+	private final RedisConfigurationSource permissionsSource;
+
+	public SecurityConfigurer(UserRepository&lt;PersonIdentity, User&lt;PersonIdentity&gt;&gt; userRepository, JWSService jwsService, RedisClient&lt;String, String&gt; redisClient) {
+		this.userRepository = userRepository;
+		this.jwsService = jwsService;
+		this.permissionsSource = new RedisConfigurationSource(redisClient).withDefaultingStrategy(DefaultingStrategy.wildcard());
+		this.permissionsSource.setKeyPrefix("SEC");
+	}
+
+	@Override
+	public void configure(WebRoutable&lt;SecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;, ?&gt; routes) {
+		...
+	}
+
+	@Override
+	public void configure(WebInterceptable&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;, ?&gt; interceptors) {
+		interceptors
+			.intercept()
+				...
+				.interceptors(List.of(
+					SecurityInterceptor.of(
+						new CookieTokenCredentialsExtractor(),
+						new JWSAuthenticator&lt;UserAuthentication&lt;PersonIdentity&gt;&gt;(
+							this.jwsService,
+							Types.type(UserAuthentication.class).type(PersonIdentity.class).and().build()
+						)
+						.failOnDenied()
+						.map(jwsAuthentication -&gt; jwsAuthentication.getJws().getPayload()),
+						new UserIdentityResolver&lt;&gt;(),
+						new ConfigurationSourcePermissionBasedAccessControllerResolver(this.permissionsSource)
+					),
+					AccessControlInterceptor.authenticated()
+				));
+	}
+	...
+}
+</code></pre>
+                <p>In order to facilitate the definition of permissions, the <code>DefaultingStrategy.wildcard()</code> has been applied to the <code>RedisConfigurationSource</code>. This basically allows to support defaulting when evaluating permissions, it is then possible to define default permissions that can be overridden in specific contexts, depending on how permissions are evaluated we can imagine having a user that can update all tickets except one specific ticket or the opposite.</p>
+                <p>The configuration source is also configured to use the <code>SEC</code> prefix to differentiates permissions keys from other entries (e.g. configuration entries) in the Redis data store.</p>
+                <blockquote>
+                    <p>Note that it is important to define <code>PermissionBasedAccessController</code> in both <code>WebRoutesConfigurer</code> and <code>WebInterceptorsConfigurer</code>. Since the <code>InterceptingSecurityContext</code> also extends the <code>SecurityContext</code>, they cannot be defined with different bounds and the compilation will fail with inconsistent context types errors when this happens. It is also interesting to notice that it is not required to change this in the <code>SecurityController</code> since bounds could have been declared using upper wildcards (i.e. <code>SecurityContext&lt;? extends PersonIdentity, ? extends AccessController&gt;</code>) which is perfectly fine. Please consult the <a href="../../../docs/release/reference/html/index.html">reference documentation</a> to better understand how the exchange context is generated when defining multiple Web configurers and Web controllers.</p>
+                </blockquote>
+                <p>A <code>PermissionBasedAccessController</code> should now be present in the <code>SecurityContext</code> and accessible to subsequent interceptors and route handlers.</p>
+                <h2 id="step-2-control-access-to-services-and-resources">Step 2: Control access to services and resources</h2>
+                <p>From there, you have two ways to control access to protected services and resources: you can do it globally in the <code>SecurityConfigurer</code> using a specific <code>AccessControlInterceptor</code> on specific routes or you can directly use the <code>PermissionBasedAccessController</code> in route handlers. These basically cover two different use cases: the first approach allows to control access in a non-intrusive way by configuration whereas the other one allows to implement specific behaviours based on permissions in a particular context, access control takes then an active part in the functionality.</p>
+                <p>Considering permission-based access control, the global approach might be used to evaluate permissions with no particular context or with a global context, while the second approach allows to evaluate permissions in a precise functional context. In practice it is then possible to determine whether the authenticated entity can perform a particular action like an update on a particular resource (e.g. a document) depending on some specific properties of that resource or any other contextual parameter (e.g. document type, current user's location...).</p>
+                <p>Let's start by limiting the access to the <code>/open-api/**</code> routes to users with the <code>access-api</code> permission without considering any context. You can do this globally in the <code>SecurityConfigurer</code> by defining an access control interceptor:</p>
+                <pre><code class="language-java">package io.inverno.app.ticket.internal.security;
+
+...
+import io.inverno.mod.http.base.ForbiddenException;
+...
+
+@WebRoutes({
+	@WebRoute(path = { "/login" }, method = { Method.GET }),
+	@WebRoute(path = { "/login" }, method = { Method.POST }),
+	@WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
+})
+@Bean( visibility = Bean.Visibility.PRIVATE )
+public class SecurityConfigurer implements WebRoutesConfigurer&lt;SecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, WebInterceptorsConfigurer&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, ErrorWebRouterConfigurer&lt;ExchangeContext&gt; {
+
+	...
+	@Override
+	public void configure(WebInterceptable&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;, ?&gt; interceptors) {
+		interceptors
+			...
+			.intercept()
+				.path("/open-api/**")
+				.interceptor(AccessControlInterceptor.verify(securityContext -&gt; securityContext.getAccessController()
+					.orElseThrow(() -&gt; new ForbiddenException("Missing access controller"))
+					.hasPermission("access-api")
+				));
+	}
+	...
+}
+</code></pre>
+                <p>With above configuration, only authenticated users with permission <code>access-api</code> should have access to <code>open-api/**</code> routes. Following Inverno security model, the <code>PermissionBasedAccessController</code> exposed in the <code>SecurityContext</code> is an <code>Optional</code> and <code>ForbiddenException</code> is thrown if it is empty resulting in a forbidden (403) response.</p>
+                <p>Now you can do more complex access control in the applicative code by defining a functional context when evaluating permissions. Let's say you want to control in which plan a user can push or remove a ticket, to do so you can evaluate permissions <code>push</code> or <code>remove</code> in the context defined by the targeted plan.</p>
+                <p>You can do this by injecting the <code>SecurityContext</code> in <code>pushTicket()</code> and <code>removeTicket()</code> methods in <code>PlanWebController</code>:</p>
+                <pre><code class="language-java">package io.inverno.app.ticket.internal.rest.v1;
+
+...
+import io.inverno.mod.http.base.ForbiddenException;
+import io.inverno.mod.security.accesscontrol.PermissionBasedAccessController;
+import io.inverno.mod.security.http.context.SecurityContext;
+import io.inverno.mod.security.identity.Identity;
+...
+
+@Bean( visibility = Bean.Visibility.PRIVATE )
+@WebController( path = "/api/v1/plan" )
+public class PlanWebController {
+
+	...
+	@WebRoute( path = "/{planId}/ticket", method = Method.POST, consumes= MediaTypes.APPLICATION_X_WWW_FORM_URLENCODED )
+	public Mono&lt;Void&gt; pushTicket(@PathParam long planId, @FormParam long ticketId, @FormParam Optional&lt;Long&gt; referenceTicketId, SecurityContext&lt;? extends Identity, ? extends PermissionBasedAccessController&gt; securityContext) {
+		return securityContext.getAccessController()
+			.orElseThrow(() -&gt; new ForbiddenException("Missing access controller"))
+			.hasPermission("push", "plan", Long.toString(planId))
+				.flatMap(hasPermission -&gt; {
+					if(!hasPermission) {
+						throw new ForbiddenException();
+					}
+					return referenceTicketId
+						.map(refTicketId -&gt; this.planService.insertTicketBefore(planId, ticketId, refTicketId))
+						.orElse(this.planService.addTicket(planId, ticketId));
+				});
+	}
+
+	@WebRoute( path = "/{planId}/ticket/{ticketId}", method = Method.DELETE, produces = MediaTypes.TEXT_PLAIN )
+	public Mono&lt;Long&gt; removeTicket(@PathParam long planId, @PathParam long ticketId, SecurityContext&lt;? extends Identity, ? extends PermissionBasedAccessController&gt; securityContext) {
+		return securityContext.getAccessController()
+			.orElseThrow(() -&gt; new ForbiddenException("Missing access controller"))
+			.hasPermission("remove", "plan", Long.toString(planId))
+			.flatMap(hasPermission -&gt; {
+				if(!hasPermission) {
+					throw new ForbiddenException();
+				}
+				return this.planService.removeTicket(planId, ticketId);
+			});
+	}
+	...
+}
+</code></pre>
+                <p>As you can see, it is quite easy to use the <code>SecurityContext</code> in pure applicative code and use it to access user's identity or control access. The expected <code>Identity</code> and <code>AccessController</code> types are also clearly specified in the Web configurers and the Web route handlers, defining a clear contract with the application. Inconsistent contexts can then easily be spotted during compilation and the application is required to provide the expected context types.</p>
+                <h2 id="step-3-manage-user-permissions">Step 3: Manage user permissions</h2>
+                <p>When using a <code>ConfigurationSourcePermissionBasedAccessController</code>, permissions are defined as configuration properties in a <code>ConfigurationSource</code>, since you are using a <code>RedisConfigurationSource</code> which is a <code>ConfigurableConfigurationSource</code>, you can then use it to set user permissions in the Redis data store.</p>
+                <p>In order to keep things simple, let's just simply add an <code>@Init</code> method to the <code>SecurityConfigurer</code> and initialize permissions for user <code>jsmith</code>:</p>
+                <pre><code class="language-java">package io.inverno.app.ticket.internal.security;
+
+...
+import io.inverno.core.annotation.Init;
+...
+
+@WebRoutes({
+	@WebRoute(path = { "/login" }, method = { Method.GET }),
+	@WebRoute(path = { "/login" }, method = { Method.POST }),
+	@WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
+})
+@Bean( visibility = Bean.Visibility.PRIVATE )
+public class SecurityConfigurer implements WebRoutesConfigurer&lt;SecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, WebInterceptorsConfigurer&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, ErrorWebRouterConfigurer&lt;ExchangeContext&gt; {
+
+	...
+	@Init
+	public void init() {
+		this.permissionsSource.set("jsmith", "remove")
+			.and()
+			.set("jsmith", "*").withParameters("plan", "1")
+			.execute()
+			.blockLast();
+	}
+	...
+}
+</code></pre>
+                <p>Permissions are defined for a specific user as properties with the username as name and a comma-separated list of permissions as values, <code>*</code> is used to grant all permissions. In above code, permission <code>remove</code> is granted to user <code>jsmith</code> whatever the context, this is the default set of permissions, and all permissions are granted when considering plan <code>1</code>.</p>
+                <blockquote>
+                    <p>Note that permissions can also be granted to roles rather than users, a user with a given role inheriting its permissions.</p>
+                </blockquote>
+                <p>Please refer to the <em>security</em> module in the <a href="../../../docs/release/reference/html/index.html">reference documentation</a> for more in-deph explanation on how permissions defaulting works and how they should be defined in a configuration source. From there, it is quite easy to imagine a user management UI targeting a <code>UserRepository</code> and a <code>ConfigurableConfigurationSource</code> exposed in a Web controller for managing both users and permissions .</p>
+                <blockquote>
+                    <p>if you look into the Redis data store you should be able to see how permissions are actually defined:</p>
+                    <pre><code class="language-plaintext">redis:6379&gt; keys SEC:PROP*
+1) "SEC:PROP:jsmith"
+2) "SEC:PROP:jsmith[plan=\"1\"]"
+winter-redis:6379&gt; get "SEC:PROP:jsmith"
+"\"remove\""
+redis:6379&gt; get "SEC:PROP:jsmith[plan=\"1\"]"
+"\"*\""
+winter-redis:6379&gt; 
+</code></pre>
+                </blockquote>
+                <h2 id="step-4-run-the-application">Step 4: Run the application</h2>
+                <p>you should now be able to run and test the application:</p>
+                <pre><code class="language-plaintext">$ docker run -d -p6379:6379 redis
+</code></pre>
+                <pre><code class="language-plaintext">$ mvn inverno:run
+...
+[INFO] --- inverno-maven-plugin:1.3.1:run (default-cli) @ inverno-ticket ---
+[INFO] Running project: io.inverno.app.ticket@1.2.0-SNAPSHOT...
+ [═══════════════════════════════════════════════ 100&nbsp;% ══════════════════════════════════════════════] 
+2022-08-12 11:57:45,750 INFO  [main] i.i.a.t.TicketApp - Active profile: default
+2022-08-12 11:57:45,839 INFO  [main] i.i.c.v.Application - Inverno is starting...
+
+
+     ╔════════════════════════════════════════════════════════════════════════════════════════════╗
+     ║                      , ~~ ,                                                                ║
+     ║                  , '   /\   ' ,                                                            ║
+     ║                 , __   \/   __ ,      _                                                    ║
+     ║                ,  \_\_\/\/_/_/  ,    | |  ___  _    _  ___   __  ___   ___                 ║
+     ║                ,    _\_\/_/_    ,    | | / _ \\ \  / // _ \ / _|/ _ \ / _ \                ║
+     ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
+     ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
+     ║                  ,     /\     ,                                                            ║
+     ║                    ,   \/   ,                                 -- 1.5.1 --                  ║
+     ║                      ' -- '                                                                ║
+     ╠════════════════════════════════════════════════════════════════════════════════════════════╣
+     ║ Java runtime        : OpenJDK Runtime Environment                                          ║
+     ║ Java version        : 17.0.2+8-86                                                          ║
+     ║ Java home           : /home/jkuhn/Devel/jdk/jdk-17.0.2                                     ║
+     ║                                                                                            ║
+     ║ Application module  : io.inverno.app.ticket                                                ║
+     ║ Application version : 1.2.0-SNAPSHOT                                                       ║
+     ║ Application class   : io.inverno.app.ticket.TicketApp                                      ║
+     ║                                                                                            ║
+     ║ Modules             :                                                                      ║
+     ║  * ...                                                                                     ║
+     ╚════════════════════════════════════════════════════════════════════════════════════════════╝
+
+
+2022-08-12 11:57:45,846 INFO  [main] i.i.a.t.Ticket - Starting Module io.inverno.app.ticket...
+2022-08-12 11:57:45,847 INFO  [main] i.i.m.b.Boot - Starting Module io.inverno.mod.boot...
+2022-08-12 11:57:46,143 INFO  [main] i.i.m.b.Boot - Module io.inverno.mod.boot started in 296ms
+2022-08-12 11:57:46,143 INFO  [main] i.i.m.r.l.Lettuce - Starting Module io.inverno.mod.redis.lettuce...
+2022-08-12 11:57:46,186 INFO  [main] i.i.m.r.l.Lettuce - Module io.inverno.mod.redis.lettuce started in 43ms
+2022-08-12 11:57:46,187 INFO  [main] i.i.m.s.j.Jose - Starting Module io.inverno.mod.security.jose...
+2022-08-12 11:57:46,254 INFO  [main] i.i.m.s.j.Jose - Module io.inverno.mod.security.jose started in 67ms
+2022-08-12 11:57:46,255 INFO  [main] i.i.m.w.Web - Starting Module io.inverno.mod.web...
+2022-08-12 11:57:46,255 INFO  [main] i.i.m.h.s.Server - Starting Module io.inverno.mod.http.server...
+2022-08-12 11:57:46,255 INFO  [main] i.i.m.h.b.Base - Starting Module io.inverno.mod.http.base...
+2022-08-12 11:57:46,260 INFO  [main] i.i.m.h.b.Base - Module io.inverno.mod.http.base started in 5ms
+2022-08-12 11:57:46,906 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (epoll) listening on http://0.0.0.0:8080
+2022-08-12 11:57:46,907 INFO  [main] i.i.m.h.s.Server - Module io.inverno.mod.http.server started in 651ms
+2022-08-12 11:57:46,907 INFO  [main] i.i.m.w.Web - Module io.inverno.mod.web started in 652ms
+2022-08-12 11:57:46,911 INFO  [main] i.i.a.t.Ticket - Module io.inverno.app.ticket started in 1067ms
+2022-08-12 11:57:46,912 INFO  [main] i.i.c.v.Application - Application io.inverno.app.ticket started in 1159ms
+</code></pre>
+                <p>Now if you log in as <code>jsmith</code>, you should not be able to access the Swagger UI exposing the REST API at [http://localhost:8080/open-api] since user <code>jsmith</code> does not have permission <code>access-api</code>:</p> <img class="img-fluid shadow" src="img/inverno_ticket_openapi_forbidden.png" style="display: block; margin: 2em auto;" alt="Inverno Ticket REST API forbidden" />
+                <p>You can create two plans whose ids should be respectively <code>1</code> and <code>2</code>, you should be able to create a ticket in plan <code>1</code>:</p> <img class="img-fluid shadow" src="img/inverno_ticket_plan1.png" style="display: block; margin: 2em auto;" alt="Inverno Ticket Plan 1" />
+                <p>But you should not be able to add this ticket to any other plan and in particular plan <code>2</code>:</p> <img class="img-fluid shadow" src="img/inverno_ticket_plan2_forbidden.png" style="display: block; margin: 2em auto;" alt="Inverno add ticket to plan 2" />
+                <p>Congratulations! You've just used a Permission-based access controller to control access to an Inverno Web application.</p>
+            </section>
+        </main>
+        <footer class="footer bg-light border-top mt-5">
+            <div class="container p-5">
+                <div class="row mb-5">
+                    <div class="col col-lg-3">
+                        <h5>Documentation</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/release/reference/html/index.html">Reference</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/release/api/index.html">API Doc</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/getting-started/html/index.html">Getting Started</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/security-form-jws/html/index.html">Secure a Web application</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/security-rbac/html/index.html">Role-based Access Control</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/security-pbac/html/index.html">Permission-based Access Control</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/security-ldap/html/index.html">LDAP Security</a></li>
+                        </ul>
+                    </div>
+                    <div class="col col-lg-3">
+                        <h5>Projects</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-core">Core</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-mods">Modules</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-dist">Distribution</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-tools">Tools</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="p-3 mb-5 text-center">
+                <p class="fw-light fs-6">The Inverno Framework is released under version 2.0 of the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License</a>.</p>
+                <p class="fw-light fs-6">Copyright © 2021, The Inverno Framework</p>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    </body>
+</html>

@@ -69,7 +69,7 @@ $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-redis/README.md, head
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-redis-lettuce/README.md, heading-offset=3 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-ldap/README.md, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-security/README.md, heading-offset=2 )
-$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-security-http/README.md, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-security-http/README.md, resources = doc/img, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-security-ldap/README.md, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-security-jose/README.md, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-tools/inverno-maven-plugin/README.md, heading-offset=1 )

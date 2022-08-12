@@ -30,6 +30,10 @@
                               <li><h6 class="dropdown-header">User guides</h6></li>
                               <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/getting-started/html/index.html">Getting Started</a></li>
                               <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/security-form-jws/html/index.html">Secure a Web application</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/security-rbac/html/index.html">Role-based Access Control</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/security-pbac/html/index.html">Permission-based Access Control</a></li>
+                              <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/security-ldap/html/index.html">LDAP Security</a></li>
                               </ul></li>
                             <li class="nav-item mt-2"><h5>Projects</h5>
                               <ul class="nav flex-column">
@@ -52,6 +56,10 @@
                               <li><h6 class="dropdown-header">User guides</h6></li>
                               <li><a class="dropdown-item" href="../../../docs/getting-started/html/index.html">Getting Started</a></li>
                               <li><a class="dropdown-item" href="../../../docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li>
+                              <li><a class="dropdown-item" href="../../../docs/security-form-jws/html/index.html">Secure a Web application</a></li>
+                              <li><a class="dropdown-item" href="../../../docs/security-rbac/html/index.html">Role-based Access Control</a></li>
+                              <li><a class="dropdown-item" href="../../../docs/security-pbac/html/index.html">Permission-based Access Control</a></li>
+                              <li><a class="dropdown-item" href="../../../docs/security-ldap/html/index.html">LDAP Security</a></li>
                             </ul></li>
                         <li class="nav-item dropdown d-flex align-items-center"><a class="nav-link dropdown-toggle text-decoration-none" href="#" id="projectsMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
                             <ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="projectsMenu">
@@ -123,7 +131,7 @@
                         └── ticket
                             └── App.java
 </code></pre>
-                <p>You can now set up the <code>pom.xml</code> build descriptor with the Inverno distribution by defining a <code>&lt;parent/&gt;</code> section pointing to <code>io.inverno.dist:inverno-parent:1.5.2</code> parent pom:</p>
+                <p>You can now set up the <code>pom.xml</code> build descriptor with the Inverno distribution by defining a <code>&lt;parent/&gt;</code> section pointing to <code>io.inverno.dist:inverno-parent:1.5.3</code> parent pom:</p>
                 <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
@@ -131,7 +139,7 @@
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.5.2&lt;/version&gt;
+        &lt;version&gt;1.5.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -147,7 +155,7 @@
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.5.2&lt;/version&gt;
+        &lt;version&gt;1.5.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -287,7 +295,7 @@ public class App {
                     <li>system properties</li>
                     <li>system environment variables</li>
                     <li>the <code>configuration.cprops</code> file in <code>./conf/</code> or <code>${inverno.config.path}/</code> directories if one exists (if the first one exists the second one is ignored)</li>
-                    <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-apps/inverno-utilities/target/maven-inverno/application_linux_amd64/inverno-utilities-1.2.0-SNAPSHOT/lib/runtime/conf/</code> directory if it exists</li>
+                    <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-apps/inverno-utilities/target/maven-inverno/application_linux_amd64/inverno-utilities-1.3.0-SNAPSHOT/lib/runtime/conf/</code> directory if it exists</li>
                     <li>the <code>configuration.cprops</code> file in the application module if it exists</li>
                 </ul>
                 <p>It is then possible to define a default configuration in a configuration file inside the module and override any properties from the command line, a system property or an external configuration file.</p>
@@ -430,7 +438,7 @@ module io.inverno.guide.ticket {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.5.2&lt;/version&gt;
+        &lt;version&gt;1.5.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -822,7 +830,7 @@ public class NoteService {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.5.2&lt;/version&gt;
+        &lt;version&gt;1.5.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -1035,7 +1043,7 @@ public class PlanDtoMapper implements DtoMapper&lt;PlanDto, Plan&gt; {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.5.2&lt;/version&gt;
+        &lt;version&gt;1.5.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -1439,7 +1447,7 @@ module io.inverno.guide.ticket {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.5.2&lt;/version&gt;
+        &lt;version&gt;1.5.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -1560,7 +1568,7 @@ content-length: 174
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.5.2&lt;/version&gt;
+        &lt;version&gt;1.5.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -1765,7 +1773,7 @@ public class App {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.5.2&lt;/version&gt;
+        &lt;version&gt;1.5.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -1805,7 +1813,7 @@ module io.inverno.guide.ticket {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.5.2&lt;/version&gt;
+        &lt;version&gt;1.5.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -2031,7 +2039,7 @@ $ mvn inverno:run
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.5.2&lt;/version&gt;
+        &lt;version&gt;1.5.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -2283,6 +2291,10 @@ Removing volume ioinvernoguideticket_data
                             <li class="nav-item"><a class="nav-link px-0" href="../../../docs/release/api/index.html">API Doc</a></li>
                             <li class="nav-item"><a class="nav-link px-0" href="../../../docs/getting-started/html/index.html">Getting Started</a></li>
                             <li class="nav-item"><a class="nav-link px-0" href="../../../docs/redis-vue3-fullstack/html/index.html">Build a Full-Stack application</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/security-form-jws/html/index.html">Secure a Web application</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/security-rbac/html/index.html">Role-based Access Control</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/security-pbac/html/index.html">Permission-based Access Control</a></li>
+                            <li class="nav-item"><a class="nav-link px-0" href="../../../docs/security-ldap/html/index.html">LDAP Security</a></li>
                         </ul>
                     </div>
                     <div class="col col-lg-3">
