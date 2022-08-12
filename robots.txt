@@ -1,5 +1,10 @@
 User-agent: *
 Disallow: /docs/getting-started/markdown/
+Disallow: /docs/redis-vue3-fullstack/markdown/
+Disallow: /docs/security-form-jws/markdown/
+Disallow: /docs/security-ldap/markdown/
+Disallow: /docs/security-pbac/markdown/
+Disallow: /docs/security-rbac/markdown/
 Disallow: /docs/release/reference/markdown/
 
 Sitemap: https://inverno.io/sitemap.xml
