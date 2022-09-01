@@ -5,34 +5,34 @@ $properties(base = ../../../, title = Permission-based Access Control Guide)
 [redis]: https://redis.io
 
 <div class="heading">
-	<h1 class="heading-title">Inverno Framework Permission-based Access Control Guide</h1> 
-	<p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> 
+    <h1 class="heading-title">Inverno Framework Permission-based Access Control Guide</h1> 
+    <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> 
 </div>
 
 <div class="row align-items-stretch mt-5 mb-2">
-	<div class="col-12 col-lg-6 mb-3">
-		<div class="card shadow h-100">
-			<div class="card-body p-lg-5">
-		    	<h2 class="card-title">What you'll learn</h2>
-				<p class="card-text">This guide shows how to resolve a Permission-based access controller and use it to control access to services or resources in an Inverno Web application.</p>
-			</div>
-		</div>
-	</div>
-	<div class="col-12 col-lg-6 mb-3">
-		<div class="card shadow h-100">
-			<div class="card-body p-lg-5">
-		    	<h2 class="card-title">What you'll need</h2>
-		    	<ul>
-		    		<li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 16.</li>
-		    		<li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.6.</li>
-		    		<li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
-					<li>An Inverno Web application to protect, such as the <a href="https://github.com/inverno-io/inverno-apps/tree/1.2.0/inverno-ticket">Inverno Ticket</a> application properly secured following the <a href="${base}docs/security-form-jws/html/index.html">Inverno Framework Web Spplication Security Guide</a>.</li>
-					<li>A basic understanding of Inverno's unified configuration API (see configuration module documentation in the <a href="${base}docs/release/reference/html/index/html">Reference documentation</a>)</a>.</li>
-					<li>A basic understanding of permission-based access control</a>.</li>
-		    	</ul>
-			</div>
-		</div>
-	</div>
+    <div class="col-12 col-lg-6 mb-3">
+        <div class="card shadow h-100">
+            <div class="card-body p-lg-5">
+                <h2 class="card-title">What you'll learn</h2>
+                <p class="card-text">This guide shows how to resolve a Permission-based access controller and use it to control access to services or resources in an Inverno Web application.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 mb-3">
+        <div class="card shadow h-100">
+            <div class="card-body p-lg-5">
+                <h2 class="card-title">What you'll need</h2>
+                <ul>
+                    <li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 16.</li>
+                    <li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.6.</li>
+                    <li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
+                    <li>An Inverno Web application to protect, such as the <a href="https://github.com/inverno-io/inverno-apps/tree/1.2.0/inverno-ticket">Inverno Ticket</a> application properly secured following the <a href="${base}docs/security-form-jws/html/index.html">Inverno Framework Web Spplication Security Guide</a>.</li>
+                    <li>A basic understanding of Inverno's unified configuration API (see configuration module documentation in the <a href="${base}docs/release/reference/html/index/html">Reference documentation</a>)</a>.</li>
+                    <li>A basic understanding of permission-based access control</a>.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 $doc
@@ -66,49 +66,49 @@ import io.inverno.mod.security.accesscontrol.PermissionBasedAccessController;
 ...
 
 @WebRoutes({
-	@WebRoute(path = { "/login" }, method = { Method.GET }),
-	@WebRoute(path = { "/login" }, method = { Method.POST }),
-	@WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
+    @WebRoute(path = { "/login" }, method = { Method.GET }),
+    @WebRoute(path = { "/login" }, method = { Method.POST }),
+    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
 public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<PersonIdentity, PermissionBasedAccessController>>, WebInterceptorsConfigurer<InterceptingSecurityContext<PersonIdentity, PermissionBasedAccessController>>, ErrorWebRouterConfigurer<ExchangeContext> {
 
-	...
-	private final RedisConfigurationSource permissionsSource;
+    ...
+    private final RedisConfigurationSource permissionsSource;
 
-	public SecurityConfigurer(UserRepository<PersonIdentity, User<PersonIdentity>> userRepository, JWSService jwsService, RedisClient<String, String> redisClient) {
-		this.userRepository = userRepository;
-		this.jwsService = jwsService;
-		this.permissionsSource = new RedisConfigurationSource(redisClient).withDefaultingStrategy(DefaultingStrategy.wildcard());
-		this.permissionsSource.setKeyPrefix("SEC");
-	}
+    public SecurityConfigurer(UserRepository<PersonIdentity, User<PersonIdentity>> userRepository, JWSService jwsService, RedisClient<String, String> redisClient) {
+        this.userRepository = userRepository;
+        this.jwsService = jwsService;
+        this.permissionsSource = new RedisConfigurationSource(redisClient).withDefaultingStrategy(DefaultingStrategy.wildcard());
+        this.permissionsSource.setKeyPrefix("SEC");
+    }
 
-	@Override
-	public void configure(WebRoutable<SecurityContext<PersonIdentity, PermissionBasedAccessController>, ?> routes) {
-		...
-	}
+    @Override
+    public void configure(WebRoutable<SecurityContext<PersonIdentity, PermissionBasedAccessController>, ?> routes) {
+        ...
+    }
 
-	@Override
-	public void configure(WebInterceptable<InterceptingSecurityContext<PersonIdentity, PermissionBasedAccessController>, ?> interceptors) {
-		interceptors
-			.intercept()
-				...
-				.interceptors(List.of(
-					SecurityInterceptor.of(
-						new CookieTokenCredentialsExtractor(),
-						new JWSAuthenticator<UserAuthentication<PersonIdentity>>(
-							this.jwsService,
-							Types.type(UserAuthentication.class).type(PersonIdentity.class).and().build()
-						)
-						.failOnDenied()
-						.map(jwsAuthentication -> jwsAuthentication.getJws().getPayload()),
-						new UserIdentityResolver<>(),
-						new ConfigurationSourcePermissionBasedAccessControllerResolver(this.permissionsSource)
-					),
-					AccessControlInterceptor.authenticated()
-				));
-	}
-	...
+    @Override
+    public void configure(WebInterceptable<InterceptingSecurityContext<PersonIdentity, PermissionBasedAccessController>, ?> interceptors) {
+        interceptors
+            .intercept()
+                ...
+                .interceptors(List.of(
+                    SecurityInterceptor.of(
+                        new CookieTokenCredentialsExtractor(),
+                        new JWSAuthenticator<UserAuthentication<PersonIdentity>>(
+                            this.jwsService,
+                            Types.type(UserAuthentication.class).type(PersonIdentity.class).and().build()
+                        )
+                        .failOnDenied()
+                        .map(jwsAuthentication -> jwsAuthentication.getJws().getPayload()),
+                        new UserIdentityResolver<>(),
+                        new ConfigurationSourcePermissionBasedAccessControllerResolver(this.permissionsSource)
+                    ),
+                    AccessControlInterceptor.authenticated()
+                ));
+    }
+    ...
 }
 ```
 
@@ -136,26 +136,26 @@ import io.inverno.mod.http.base.ForbiddenException;
 ...
 
 @WebRoutes({
-	@WebRoute(path = { "/login" }, method = { Method.GET }),
-	@WebRoute(path = { "/login" }, method = { Method.POST }),
-	@WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
+    @WebRoute(path = { "/login" }, method = { Method.GET }),
+    @WebRoute(path = { "/login" }, method = { Method.POST }),
+    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
 public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<PersonIdentity, PermissionBasedAccessController>>, WebInterceptorsConfigurer<InterceptingSecurityContext<PersonIdentity, PermissionBasedAccessController>>, ErrorWebRouterConfigurer<ExchangeContext> {
 
-	...
-	@Override
-	public void configure(WebInterceptable<InterceptingSecurityContext<PersonIdentity, PermissionBasedAccessController>, ?> interceptors) {
-		interceptors
-			...
-			.intercept()
-				.path("/open-api/**")
-				.interceptor(AccessControlInterceptor.verify(securityContext -> securityContext.getAccessController()
-					.orElseThrow(() -> new ForbiddenException("Missing access controller"))
-					.hasPermission("access-api")
-				));
-	}
-	...
+    ...
+    @Override
+    public void configure(WebInterceptable<InterceptingSecurityContext<PersonIdentity, PermissionBasedAccessController>, ?> interceptors) {
+        interceptors
+            ...
+            .intercept()
+                .path("/open-api/**")
+                .interceptor(AccessControlInterceptor.verify(securityContext -> securityContext.getAccessController()
+                    .orElseThrow(() -> new ForbiddenException("Missing access controller"))
+                    .hasPermission("access-api")
+                ));
+    }
+    ...
 }
 ```
 
@@ -179,35 +179,35 @@ import io.inverno.mod.security.identity.Identity;
 @WebController( path = "/api/v1/plan" )
 public class PlanWebController {
 
-	...
-	@WebRoute( path = "/{planId}/ticket", method = Method.POST, consumes= MediaTypes.APPLICATION_X_WWW_FORM_URLENCODED )
-	public Mono<Void> pushTicket(@PathParam long planId, @FormParam long ticketId, @FormParam Optional<Long> referenceTicketId, SecurityContext<? extends Identity, ? extends PermissionBasedAccessController> securityContext) {
-		return securityContext.getAccessController()
-			.orElseThrow(() -> new ForbiddenException("Missing access controller"))
-			.hasPermission("push", "plan", Long.toString(planId))
-				.flatMap(hasPermission -> {
-					if(!hasPermission) {
-						throw new ForbiddenException();
-					}
-					return referenceTicketId
-						.map(refTicketId -> this.planService.insertTicketBefore(planId, ticketId, refTicketId))
-						.orElse(this.planService.addTicket(planId, ticketId));
-				});
-	}
+    ...
+    @WebRoute( path = "/{planId}/ticket", method = Method.POST, consumes= MediaTypes.APPLICATION_X_WWW_FORM_URLENCODED )
+    public Mono<Void> pushTicket(@PathParam long planId, @FormParam long ticketId, @FormParam Optional<Long> referenceTicketId, SecurityContext<? extends Identity, ? extends PermissionBasedAccessController> securityContext) {
+        return securityContext.getAccessController()
+            .orElseThrow(() -> new ForbiddenException("Missing access controller"))
+            .hasPermission("push", "plan", Long.toString(planId))
+                .flatMap(hasPermission -> {
+                    if(!hasPermission) {
+                        throw new ForbiddenException();
+                    }
+                    return referenceTicketId
+                        .map(refTicketId -> this.planService.insertTicketBefore(planId, ticketId, refTicketId))
+                        .orElse(this.planService.addTicket(planId, ticketId));
+                });
+    }
 
-	@WebRoute( path = "/{planId}/ticket/{ticketId}", method = Method.DELETE, produces = MediaTypes.TEXT_PLAIN )
-	public Mono<Long> removeTicket(@PathParam long planId, @PathParam long ticketId, SecurityContext<? extends Identity, ? extends PermissionBasedAccessController> securityContext) {
-		return securityContext.getAccessController()
-			.orElseThrow(() -> new ForbiddenException("Missing access controller"))
-			.hasPermission("remove", "plan", Long.toString(planId))
-			.flatMap(hasPermission -> {
-				if(!hasPermission) {
-					throw new ForbiddenException();
-				}
-				return this.planService.removeTicket(planId, ticketId);
-			});
-	}
-	...
+    @WebRoute( path = "/{planId}/ticket/{ticketId}", method = Method.DELETE, produces = MediaTypes.TEXT_PLAIN )
+    public Mono<Long> removeTicket(@PathParam long planId, @PathParam long ticketId, SecurityContext<? extends Identity, ? extends PermissionBasedAccessController> securityContext) {
+        return securityContext.getAccessController()
+            .orElseThrow(() -> new ForbiddenException("Missing access controller"))
+            .hasPermission("remove", "plan", Long.toString(planId))
+            .flatMap(hasPermission -> {
+                if(!hasPermission) {
+                    throw new ForbiddenException();
+                }
+                return this.planService.removeTicket(planId, ticketId);
+            });
+    }
+    ...
 }
 ```
 
@@ -227,23 +227,23 @@ import io.inverno.core.annotation.Init;
 ...
 
 @WebRoutes({
-	@WebRoute(path = { "/login" }, method = { Method.GET }),
-	@WebRoute(path = { "/login" }, method = { Method.POST }),
-	@WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
+    @WebRoute(path = { "/login" }, method = { Method.GET }),
+    @WebRoute(path = { "/login" }, method = { Method.POST }),
+    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
 public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<PersonIdentity, PermissionBasedAccessController>>, WebInterceptorsConfigurer<InterceptingSecurityContext<PersonIdentity, PermissionBasedAccessController>>, ErrorWebRouterConfigurer<ExchangeContext> {
 
-	...
-	@Init
-	public void init() {
-		this.permissionsSource.set("jsmith", "remove")
-			.and()
-			.set("jsmith", "*").withParameters("plan", "1")
-			.execute()
-			.blockLast();
-	}
-	...
+    ...
+    @Init
+    public void init() {
+        this.permissionsSource.set("jsmith", "remove")
+            .and()
+            .set("jsmith", "*").withParameters("plan", "1")
+            .execute()
+            .blockLast();
+    }
+    ...
 }
 ```
 

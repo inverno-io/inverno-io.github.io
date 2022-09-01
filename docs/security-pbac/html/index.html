@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head><!-- Google tag (gtag.js) -->
+        <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GQCEQ9P38V"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-GQCEQ9P38V');
+        </script>
         <meta charset="UTF-8" />
         <title>The Inverno Framework | Permission-based Access Control Guide</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -126,49 +133,49 @@ import io.inverno.mod.security.accesscontrol.PermissionBasedAccessController;
 ...
 
 @WebRoutes({
-	@WebRoute(path = { "/login" }, method = { Method.GET }),
-	@WebRoute(path = { "/login" }, method = { Method.POST }),
-	@WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
+    @WebRoute(path = { "/login" }, method = { Method.GET }),
+    @WebRoute(path = { "/login" }, method = { Method.POST }),
+    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
 public class SecurityConfigurer implements WebRoutesConfigurer&lt;SecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, WebInterceptorsConfigurer&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, ErrorWebRouterConfigurer&lt;ExchangeContext&gt; {
 
-	...
-	private final RedisConfigurationSource permissionsSource;
+    ...
+    private final RedisConfigurationSource permissionsSource;
 
-	public SecurityConfigurer(UserRepository&lt;PersonIdentity, User&lt;PersonIdentity&gt;&gt; userRepository, JWSService jwsService, RedisClient&lt;String, String&gt; redisClient) {
-		this.userRepository = userRepository;
-		this.jwsService = jwsService;
-		this.permissionsSource = new RedisConfigurationSource(redisClient).withDefaultingStrategy(DefaultingStrategy.wildcard());
-		this.permissionsSource.setKeyPrefix("SEC");
-	}
+    public SecurityConfigurer(UserRepository&lt;PersonIdentity, User&lt;PersonIdentity&gt;&gt; userRepository, JWSService jwsService, RedisClient&lt;String, String&gt; redisClient) {
+        this.userRepository = userRepository;
+        this.jwsService = jwsService;
+        this.permissionsSource = new RedisConfigurationSource(redisClient).withDefaultingStrategy(DefaultingStrategy.wildcard());
+        this.permissionsSource.setKeyPrefix("SEC");
+    }
 
-	@Override
-	public void configure(WebRoutable&lt;SecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;, ?&gt; routes) {
-		...
-	}
+    @Override
+    public void configure(WebRoutable&lt;SecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;, ?&gt; routes) {
+        ...
+    }
 
-	@Override
-	public void configure(WebInterceptable&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;, ?&gt; interceptors) {
-		interceptors
-			.intercept()
-				...
-				.interceptors(List.of(
-					SecurityInterceptor.of(
-						new CookieTokenCredentialsExtractor(),
-						new JWSAuthenticator&lt;UserAuthentication&lt;PersonIdentity&gt;&gt;(
-							this.jwsService,
-							Types.type(UserAuthentication.class).type(PersonIdentity.class).and().build()
-						)
-						.failOnDenied()
-						.map(jwsAuthentication -&gt; jwsAuthentication.getJws().getPayload()),
-						new UserIdentityResolver&lt;&gt;(),
-						new ConfigurationSourcePermissionBasedAccessControllerResolver(this.permissionsSource)
-					),
-					AccessControlInterceptor.authenticated()
-				));
-	}
-	...
+    @Override
+    public void configure(WebInterceptable&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;, ?&gt; interceptors) {
+        interceptors
+            .intercept()
+                ...
+                .interceptors(List.of(
+                    SecurityInterceptor.of(
+                        new CookieTokenCredentialsExtractor(),
+                        new JWSAuthenticator&lt;UserAuthentication&lt;PersonIdentity&gt;&gt;(
+                            this.jwsService,
+                            Types.type(UserAuthentication.class).type(PersonIdentity.class).and().build()
+                        )
+                        .failOnDenied()
+                        .map(jwsAuthentication -&gt; jwsAuthentication.getJws().getPayload()),
+                        new UserIdentityResolver&lt;&gt;(),
+                        new ConfigurationSourcePermissionBasedAccessControllerResolver(this.permissionsSource)
+                    ),
+                    AccessControlInterceptor.authenticated()
+                ));
+    }
+    ...
 }
 </code></pre>
                 <p>In order to facilitate the definition of permissions, the <code>DefaultingStrategy.wildcard()</code> has been applied to the <code>RedisConfigurationSource</code>. This basically allows to support defaulting when evaluating permissions, it is then possible to define default permissions that can be overridden in specific contexts, depending on how permissions are evaluated we can imagine having a user that can update all tickets except one specific ticket or the opposite.</p>
@@ -188,26 +195,26 @@ import io.inverno.mod.http.base.ForbiddenException;
 ...
 
 @WebRoutes({
-	@WebRoute(path = { "/login" }, method = { Method.GET }),
-	@WebRoute(path = { "/login" }, method = { Method.POST }),
-	@WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
+    @WebRoute(path = { "/login" }, method = { Method.GET }),
+    @WebRoute(path = { "/login" }, method = { Method.POST }),
+    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
 public class SecurityConfigurer implements WebRoutesConfigurer&lt;SecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, WebInterceptorsConfigurer&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, ErrorWebRouterConfigurer&lt;ExchangeContext&gt; {
 
-	...
-	@Override
-	public void configure(WebInterceptable&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;, ?&gt; interceptors) {
-		interceptors
-			...
-			.intercept()
-				.path("/open-api/**")
-				.interceptor(AccessControlInterceptor.verify(securityContext -&gt; securityContext.getAccessController()
-					.orElseThrow(() -&gt; new ForbiddenException("Missing access controller"))
-					.hasPermission("access-api")
-				));
-	}
-	...
+    ...
+    @Override
+    public void configure(WebInterceptable&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;, ?&gt; interceptors) {
+        interceptors
+            ...
+            .intercept()
+                .path("/open-api/**")
+                .interceptor(AccessControlInterceptor.verify(securityContext -&gt; securityContext.getAccessController()
+                    .orElseThrow(() -&gt; new ForbiddenException("Missing access controller"))
+                    .hasPermission("access-api")
+                ));
+    }
+    ...
 }
 </code></pre>
                 <p>With above configuration, only authenticated users with permission <code>access-api</code> should have access to <code>open-api/**</code> routes. Following Inverno security model, the <code>PermissionBasedAccessController</code> exposed in the <code>SecurityContext</code> is an <code>Optional</code> and <code>ForbiddenException</code> is thrown if it is empty resulting in a forbidden (403) response.</p>
@@ -226,35 +233,35 @@ import io.inverno.mod.security.identity.Identity;
 @WebController( path = "/api/v1/plan" )
 public class PlanWebController {
 
-	...
-	@WebRoute( path = "/{planId}/ticket", method = Method.POST, consumes= MediaTypes.APPLICATION_X_WWW_FORM_URLENCODED )
-	public Mono&lt;Void&gt; pushTicket(@PathParam long planId, @FormParam long ticketId, @FormParam Optional&lt;Long&gt; referenceTicketId, SecurityContext&lt;? extends Identity, ? extends PermissionBasedAccessController&gt; securityContext) {
-		return securityContext.getAccessController()
-			.orElseThrow(() -&gt; new ForbiddenException("Missing access controller"))
-			.hasPermission("push", "plan", Long.toString(planId))
-				.flatMap(hasPermission -&gt; {
-					if(!hasPermission) {
-						throw new ForbiddenException();
-					}
-					return referenceTicketId
-						.map(refTicketId -&gt; this.planService.insertTicketBefore(planId, ticketId, refTicketId))
-						.orElse(this.planService.addTicket(planId, ticketId));
-				});
-	}
+    ...
+    @WebRoute( path = "/{planId}/ticket", method = Method.POST, consumes= MediaTypes.APPLICATION_X_WWW_FORM_URLENCODED )
+    public Mono&lt;Void&gt; pushTicket(@PathParam long planId, @FormParam long ticketId, @FormParam Optional&lt;Long&gt; referenceTicketId, SecurityContext&lt;? extends Identity, ? extends PermissionBasedAccessController&gt; securityContext) {
+        return securityContext.getAccessController()
+            .orElseThrow(() -&gt; new ForbiddenException("Missing access controller"))
+            .hasPermission("push", "plan", Long.toString(planId))
+                .flatMap(hasPermission -&gt; {
+                    if(!hasPermission) {
+                        throw new ForbiddenException();
+                    }
+                    return referenceTicketId
+                        .map(refTicketId -&gt; this.planService.insertTicketBefore(planId, ticketId, refTicketId))
+                        .orElse(this.planService.addTicket(planId, ticketId));
+                });
+    }
 
-	@WebRoute( path = "/{planId}/ticket/{ticketId}", method = Method.DELETE, produces = MediaTypes.TEXT_PLAIN )
-	public Mono&lt;Long&gt; removeTicket(@PathParam long planId, @PathParam long ticketId, SecurityContext&lt;? extends Identity, ? extends PermissionBasedAccessController&gt; securityContext) {
-		return securityContext.getAccessController()
-			.orElseThrow(() -&gt; new ForbiddenException("Missing access controller"))
-			.hasPermission("remove", "plan", Long.toString(planId))
-			.flatMap(hasPermission -&gt; {
-				if(!hasPermission) {
-					throw new ForbiddenException();
-				}
-				return this.planService.removeTicket(planId, ticketId);
-			});
-	}
-	...
+    @WebRoute( path = "/{planId}/ticket/{ticketId}", method = Method.DELETE, produces = MediaTypes.TEXT_PLAIN )
+    public Mono&lt;Long&gt; removeTicket(@PathParam long planId, @PathParam long ticketId, SecurityContext&lt;? extends Identity, ? extends PermissionBasedAccessController&gt; securityContext) {
+        return securityContext.getAccessController()
+            .orElseThrow(() -&gt; new ForbiddenException("Missing access controller"))
+            .hasPermission("remove", "plan", Long.toString(planId))
+            .flatMap(hasPermission -&gt; {
+                if(!hasPermission) {
+                    throw new ForbiddenException();
+                }
+                return this.planService.removeTicket(planId, ticketId);
+            });
+    }
+    ...
 }
 </code></pre>
                 <p>As you can see, it is quite easy to use the <code>SecurityContext</code> in pure applicative code and use it to access user's identity or control access. The expected <code>Identity</code> and <code>AccessController</code> types are also clearly specified in the Web configurers and the Web route handlers, defining a clear contract with the application. Inconsistent contexts can then easily be spotted during compilation and the application is required to provide the expected context types.</p>
@@ -268,23 +275,23 @@ import io.inverno.core.annotation.Init;
 ...
 
 @WebRoutes({
-	@WebRoute(path = { "/login" }, method = { Method.GET }),
-	@WebRoute(path = { "/login" }, method = { Method.POST }),
-	@WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
+    @WebRoute(path = { "/login" }, method = { Method.GET }),
+    @WebRoute(path = { "/login" }, method = { Method.POST }),
+    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
 public class SecurityConfigurer implements WebRoutesConfigurer&lt;SecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, WebInterceptorsConfigurer&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, ErrorWebRouterConfigurer&lt;ExchangeContext&gt; {
 
-	...
-	@Init
-	public void init() {
-		this.permissionsSource.set("jsmith", "remove")
-			.and()
-			.set("jsmith", "*").withParameters("plan", "1")
-			.execute()
-			.blockLast();
-	}
-	...
+    ...
+    @Init
+    public void init() {
+        this.permissionsSource.set("jsmith", "remove")
+            .and()
+            .set("jsmith", "*").withParameters("plan", "1")
+            .execute()
+            .blockLast();
+    }
+    ...
 }
 </code></pre>
                 <p>Permissions are defined for a specific user as properties with the username as name and a comma-separated list of permissions as values, <code>*</code> is used to grant all permissions. In above code, permission <code>remove</code> is granted to user <code>jsmith</code> whatever the context, this is the default set of permissions, and all permissions are granted when considering plan <code>1</code>.</p>
