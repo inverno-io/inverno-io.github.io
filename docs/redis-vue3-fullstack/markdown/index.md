@@ -1186,7 +1186,7 @@ public interface AppConfiguration {
 
 Since the `WebConfiguration` is declared as a nested bean in the `AppConfiguration`, it will be automatically injected in the Web module and used to configure the HTTP server among other things.
 
-The Web module provides several ways to create REST endpoint, it can be done by defining Web routes programmatically or by defining Web controllers later processed by the Inverno Web compiler at build time to generate Web router configurers injected in the Web module to configure the corresponding Web routes. As well as being simpler, using Web controllers allows generating [OpenAPI](https://www.openapis.org/) specifications automatically based on JavaDoc.
+The Web module provides several ways to create REST endpoint, it can be done by defining Web routes programmatically or by defining Web controllers later processed by the Inverno Web compiler at build time to generate the Web server controller configurer injected in the Web module to configure the corresponding Web routes. As well as being simpler, using Web controllers allows generating [OpenAPI](https://www.openapis.org/) specifications automatically based on JavaDoc.
 
 Let's start by creating the `PlanWebController` which exposes the `PlanService` in a REST interface. It must be annotated with both `@io.inverno.core.annotation.Bean` and `@io.inverno.mod.web.annotation.WebController` to make it a Web controller, it also requires a `PlanService` instance and a `DtoMapper<PlanDto, Plan>` instance which must be declared in the constructor as required dependencies.
 
