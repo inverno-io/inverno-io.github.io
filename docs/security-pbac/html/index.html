@@ -28,7 +28,7 @@
             <div class="container-fluid border-bottom bg-light">
                 <nav class="navbar navbar-expand-lg navbar-light container p-0 py-2 p-lg-1"><a class="navbar-brand p-0" href="../../../"> <img class="logo" src="../../../img/inverno_portable.svg" alt="The Inverno Framework" /> </a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#smallNavMenu" aria-controls="smallNavMenu" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
                     <div class="collapse" id="smallNavMenu" style="flex-basis: 100%;">
-                        <ul class="navbar-nav border-top mt-2">
+                        <ul class="navbar-nav navbar-nav-scroll border-top" style="max-height: calc(100vh - 3.75rem);">
                             <li class="nav-item mt-2"><h5>Documentation</h5>
                               <ul class="nav flex-column">
                               <li class="nav-item ms-4"><a class="nav-link" href="../../../docs/release/reference/html/index.html">Reference Guide</a></li>
@@ -52,6 +52,7 @@
                               <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
                               <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                               </ul></li>
+                            <li class="nav-item mt-2"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill"></i> Sponsor</a></li>
                         </ul>
                     </div>
                     <ul class="navbar-nav d-none d-sm-none d-lg-flex flex-fill justify-content-end align-self-stretch">
@@ -69,7 +70,7 @@
                               <li><a class="dropdown-item" href="../../../docs/security-pbac/html/index.html">Permission-based Access Control</a></li>
                               <li><a class="dropdown-item" href="../../../docs/security-ldap/html/index.html">LDAP Security</a></li>
                             </ul></li>
-                        <li class="nav-item dropdown d-flex align-items-center"><a class="nav-link dropdown-toggle text-decoration-none" href="#" id="projectsMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
+                        <li class="nav-item dropdown d-flex align-items-center me-3"><a class="nav-link dropdown-toggle text-decoration-none" href="#" id="projectsMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
                             <ul class="dropdown-menu mt-1 border-0 shadow p-3 mb-5 bg-body rounded" aria-labelledby="projectsMenu">
                               <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-core">Core</a></li>
                               <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-mods">Modules</a></li>
@@ -78,6 +79,7 @@
                               <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
                               <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                             </ul></li>
+                        <li class="nav-item d-flex align-items-center"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill"></i> Sponsor</a></li>
                     </ul>
                 </nav>
             </div>
@@ -399,6 +401,8 @@ winter-redis:6379&gt;
                             <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
                             <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                         </ul>
+                    </div>
+                    <div class="col"><iframe src="https://github.com/sponsors/inverno-io/card" title="Sponsor inverno-io" height="225" width="600" style="border: 0;"></iframe>
                     </div>
                 </div>
             </div>
