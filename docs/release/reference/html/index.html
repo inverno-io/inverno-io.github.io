@@ -87,8 +87,8 @@
         <main id="main" class="main container">
             <div class="heading">
                 <h1 class="heading-title">Inverno Framework Documentation</h1>
-                <p class="heading-subtitle">Version: 1.5.3</p>
-                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.5.3.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
+                <p class="heading-subtitle">Version: 1.5.4</p>
+                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.5.4.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
             </div>
             <div class="d-lg-flex">
                 <section class="toc col-12 col-lg-3">
@@ -265,7 +265,7 @@ public class Main {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.5.3&lt;/version&gt;
+        &lt;version&gt;1.5.4&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;hello&lt;/artifactId&gt;
@@ -285,7 +285,7 @@ public class Main {
                     <p>You can then run the application:</p>
                     <pre><code class="language-plaintext">$ mvn inverno:run -Dinverno.run.arguments=John
 
-[INFO] --- inverno-maven-plugin:1.3.1:run (default-cli) @ app-hello ---
+[INFO] --- inverno-maven-plugin:1.3.2:run (default-cli) @ app-hello ---
 [INFO] Running project: io.inverno.example.hello@1.0.0-SNAPSHOT...
 Hello John!!!
 
@@ -492,7 +492,7 @@ public class MainController {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.5.3&lt;/version&gt;
+        &lt;version&gt;1.5.4&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample-app&lt;/artifactId&gt;
@@ -514,7 +514,7 @@ public class MainController {
             &lt;dependency&gt;
                 &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
                 &lt;artifactId&gt;inverno-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;1.5.3&lt;/version&gt;
+                &lt;version&gt;1.5.4&lt;/version&gt;
                 &lt;type&gt;pom&lt;/type&gt;
                 &lt;scope&gt;import&lt;/scope&gt;
             &lt;/dependency&gt;
@@ -614,7 +614,7 @@ public class App {
                     <pre><code class="language-plaintext">$ mvn inverno:run
 
 ...
-[INFO] --- inverno-maven-plugin:1.3.1:run (default-cli) @ sample-app ---
+[INFO] --- inverno-maven-plugin:1.3.2:run (default-cli) @ sample-app ---
 [INFO] Running project: io.inverno.example.sample_app@1.0.0-SNAPSHOT...
  [═══════════════════════════════════════════════ 100&nbsp;% ══════════════════════════════════════════════] 
 2021-04-08 23:50:35,261 INFO  [main] i.w.c.v.Application - Inverno is starting...
@@ -629,7 +629,7 @@ public class App {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.1 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.2 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -810,7 +810,7 @@ $ /opt/sample-app/bin/sample-app
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.5.3&lt;/version&gt;
+        &lt;version&gt;1.5.4&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample&lt;/artifactId&gt;
@@ -850,8 +850,8 @@ $ /opt/sample-app/bin/sample-app
         &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
         &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
         &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
-        &lt;version.inverno&gt;1.5.1&lt;/version.inverno&gt;
-        &lt;version.inverno.dist&gt;1.5.3&lt;/version.inverno.dist&gt;
+        &lt;version.inverno&gt;1.5.2&lt;/version.inverno&gt;
+        &lt;version.inverno.dist&gt;1.5.4&lt;/version.inverno.dist&gt;
     &lt;/properties&gt;
 
     &lt;dependencyManagement&gt;
@@ -905,8 +905,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.inverno:inverno-core:1.5.1'
-    annotationProcessor 'io.inverno:inverno-core-compiler:1.5.1'
+    implementation 'io.inverno:inverno-core:1.5.2'
+    annotationProcessor 'io.inverno:inverno-core-compiler:1.5.2'
 }
 
 java {
@@ -1321,7 +1321,7 @@ INFO: Inverno is starting...
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.1 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.2 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -1421,7 +1421,7 @@ public class CoffeMakerImpl implements CoffeMaker {
 }
 </code></pre>
                     <p>The <code>io.inverno.sample.coffeeMakerModule:coffeeMakerImpl</code> bean now specifies one optional socket: <code>io.inverno.sample.coffeeMakerModule:coffeeMakerImpl:milkFrother</code>.</p>
-                    <p>By convention, every setter method on a bean is considered an optional socket, this enforces proper bean design. However in some situations you might need to explicitly specify which setter methods are sockets. In order to do that, you need to annotate every socket setter method of the bean with the <code>@BeanSocket</code> annotation.</p>
+                    <p>By convention, every setter method on a bean is considered an optional socket, this enforces proper bean design. However in some situations you might need to explicitly specify which setter methods are sockets. In order to do that, you need to annotate every socket setter methods of the bean with the <code>@BeanSocket</code> annotation. Any setter method which is not annotated is then ignored by the compiler but it is also possible to explicitly ignore a setter method by setting the <code>enabled</code> attribute to <code>false</code>.</p>
                     <pre><code class="language-java">@Bean
 public class CoffeMakerImpl implements CoffeMaker {
     
@@ -1432,9 +1432,16 @@ public class CoffeMakerImpl implements CoffeMaker {
     }
 
     ...
+    // Implicitly Ignored
     public void setSomethingElse() {
         ...
-    }    
+    }
+
+    // Explicitly Ignored
+    @BeanSocket(enabled = false)
+    public void setSomethingElseAgain() {
+        ...
+    }
 }
 </code></pre>
                     <blockquote>
@@ -3058,7 +3065,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.1 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.2 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -3385,9 +3392,9 @@ Hello
 
 import io.inverno.core.annotation.Bean;
 import io.inverno.core.v1.Application;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.server.ErrorExchange;
 import io.inverno.mod.http.server.Exchange;
-import io.inverno.mod.http.server.ExchangeContext;
 import io.inverno.mod.http.server.ServerController;
 import java.util.function.Supplier;
 
@@ -3410,9 +3417,9 @@ public class Main {
 
 import io.inverno.core.annotation.Bean;
 import io.inverno.core.v1.Application;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.server.ErrorExchange;
 import io.inverno.mod.http.server.Exchange;
-import io.inverno.mod.http.server.ExchangeContext;
 import io.inverno.mod.http.server.ServerController;
 import java.util.function.Supplier;
 
@@ -3445,9 +3452,9 @@ public class Main {
 
 import io.inverno.core.annotation.Bean;
 import io.inverno.mod.http.base.HttpException;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.server.ErrorExchange;
 import io.inverno.mod.http.server.Exchange;
-import io.inverno.mod.http.server.ExchangeContext;
 import io.inverno.mod.http.server.ServerController;
 
 @Bean
@@ -3505,7 +3512,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.1 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.2 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -4078,10 +4085,10 @@ import io.inverno.core.annotation.Init;
 import io.inverno.mod.base.resource.MediaTypes;
 import io.inverno.mod.base.resource.PathResource;
 import io.inverno.mod.base.resource.Resource;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.HttpException;
 import io.inverno.mod.http.server.ErrorExchange;
 import io.inverno.mod.http.server.Exchange;
-import io.inverno.mod.http.server.ExchangeContext;
 import io.inverno.mod.http.server.ServerController;
 import io.inverno.mod.http.server.ws.WebSocketFrame;
 import reactor.core.publisher.Flux;
@@ -4150,9 +4157,9 @@ public class ChatServerController implements ServerController&lt;ExchangeContext
 import io.inverno.core.annotation.Bean;
 import io.inverno.core.v1.Application;
 import io.inverno.mod.base.Charsets;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.server.ErrorExchange;
 import io.inverno.mod.http.server.Exchange;
-import io.inverno.mod.http.server.ExchangeContext;
 import io.inverno.mod.http.server.ServerController;
 import io.netty.buffer.Unpooled;
 import java.net.URI;
@@ -4985,7 +4992,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.1 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.2 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -5076,7 +5083,7 @@ public class Main {
 
 import io.inverno.core.annotation.Bean;
 import io.inverno.mod.base.resource.MediaTypes;
-import io.inverno.mod.http.server.ExchangeContext;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.web.WebRouter;
 import io.inverno.mod.web.WebRouterConfigurer;
 
@@ -5118,10 +5125,10 @@ public class App_webWebRouterConfigurer implements WebRouterConfigurer&lt;Exchan
 
 import io.inverno.core.annotation.Bean;
 import io.inverno.mod.base.resource.MediaTypes;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.Status;
 import io.inverno.mod.http.base.UnauthorizedException;
 import io.inverno.mod.http.base.header.Headers;
-import io.inverno.mod.http.server.ExchangeContext;
 import io.inverno.mod.web.ErrorWebRouter;
 import io.inverno.mod.web.ErrorWebRouterConfigurer;
 import reactor.core.publisher.Mono;
@@ -5209,7 +5216,7 @@ A custom exception was raised
                     <p>Exchange contexts must be defined as interfaces extending <code>ExchangeContext</code>:</p>
                     <pre><code class="language-java">package io.inverno.example.app_web.test;
 
-import io.inverno.mod.http.server.ExchangeContext;
+import io.inverno.mod.http.base.ExchangeContext;
 
 public interface FrontOfficeContext extends ExchangeContext {
     
@@ -5220,7 +5227,7 @@ public interface FrontOfficeContext extends ExchangeContext {
 </code></pre>
                     <pre><code class="language-java">package io.inverno.example.app_web.test;
 
-import io.inverno.mod.http.server.ExchangeContext;
+import io.inverno.mod.http.base.ExchangeContext;
 
 public interface BackOfficeContext extends ExchangeContext {
 
@@ -5354,7 +5361,7 @@ public static interface Context extends BackOfficeContext, FrontOfficeContext, E
                     <p>Finally, the Inverno Web compiler plugin only generates concrete implementations for getter and setter methods which might seem simplistic but actual logic can still be provided using default implementations in the context interface. For example, role based access control can be implemented in a security context as follows:</p>
                     <pre><code class="language-java">package io.inverno.example.app_web;
 
-import io.inverno.mod.http.server.ExchangeContext;
+import io.inverno.mod.http.base.ExchangeContext;
 import java.util.Set;
 
 public interface SecurityContext extends ExchangeContext {
@@ -5371,7 +5378,7 @@ public interface SecurityContext extends ExchangeContext {
                     <p>Exposing <code>setRoles()</code> methods to actual services which should only be concerned by controlling access might not be ideal. There are two concerns to consider here: first resolving the roles of the authenticated user and set them into the context which is the responsability of a security interceptor and then controlling the access to a secured service or resource which is the responsability of a service or another security interceptor. Since we can compose multiple configurers using multiple context types automatically aggregated into one server controller configurer we can easily solve that issue by splitting previous security context:</p>
                     <pre><code class="language-java">package io.inverno.example.app_web;
 
-import io.inverno.mod.http.server.ExchangeContext;
+import io.inverno.mod.http.base.ExchangeContext;
 import java.util.Set;
 
 public interface SecurityContext extends ExchangeContext {
@@ -5448,7 +5455,7 @@ if(exchange.request().headers().contains(Headers.NAME_EXPECT, Headers.VALUE_100_
 
 import io.inverno.core.annotation.Bean;
 import io.inverno.mod.base.resource.ResourceService;
-import io.inverno.mod.http.server.ExchangeContext;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.web.WebJarsRoutesConfigurer;
 import io.inverno.mod.web.WebRouter;
 import io.inverno.mod.web.WebRouterConfigurer;
@@ -5502,7 +5509,7 @@ public class App_webWebRouterConfigurer implements WebRouterConfigurer&lt;Exchan
 
 import io.inverno.core.annotation.Bean;
 import io.inverno.mod.base.resource.ResourceService;
-import io.inverno.mod.http.server.ExchangeContext;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.web.OpenApiRoutesConfigurer;
 import io.inverno.mod.web.WebRouter;
 import io.inverno.mod.web.WebRouterConfigurer;
@@ -7535,7 +7542,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.1 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.2 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -8542,7 +8549,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.1 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.2 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -8581,8 +8588,8 @@ Hello world!
                     <pre><code class="language-java">package io.inverno.example.app_web_security;
 
 import io.inverno.core.annotation.Bean;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.UnauthorizedException;
-import io.inverno.mod.http.server.ExchangeContext;
 import io.inverno.mod.security.accesscontrol.AccessController;
 import io.inverno.mod.security.authentication.LoginCredentialsMatcher;
 import io.inverno.mod.security.authentication.password.RawPassword;
@@ -8668,8 +8675,8 @@ Hello world!
                     <pre><code class="language-java">package io.inverno.example.app_web_security;
 
 import io.inverno.core.annotation.Bean;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.UnauthorizedException;
-import io.inverno.mod.http.server.ExchangeContext;
 import io.inverno.mod.security.accesscontrol.AccessController;
 import io.inverno.mod.security.authentication.LoginCredentialsMatcher;
 import io.inverno.mod.security.authentication.password.RawPassword;
@@ -8802,8 +8809,8 @@ public class Main {
                     <pre><code class="language-java">package io.inverno.example.app_web_security;
 
 import io.inverno.core.annotation.Bean;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.UnauthorizedException;
-import io.inverno.mod.http.server.ExchangeContext;
 import io.inverno.mod.security.accesscontrol.GroupsRoleBasedAccessControllerResolver;
 import io.inverno.mod.security.accesscontrol.RoleBasedAccessController;
 import io.inverno.mod.security.authentication.LoginCredentialsMatcher;
@@ -8887,9 +8894,9 @@ content-length: 0
                     <pre><code class="language-java">package io.inverno.example.app_web_security;
 
 import io.inverno.core.annotation.Bean;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.ForbiddenException;
 import io.inverno.mod.http.base.UnauthorizedException;
-import io.inverno.mod.http.server.ExchangeContext;
 import io.inverno.mod.security.accesscontrol.GroupsRoleBasedAccessControllerResolver;
 import io.inverno.mod.security.accesscontrol.RoleBasedAccessController;
 import io.inverno.mod.security.authentication.LoginCredentialsMatcher;
@@ -9458,9 +9465,9 @@ public class SecurityConfigurer implements WebRoutesConfigurer&lt;SecurityContex
 
 import io.inverno.core.annotation.Bean;
 import io.inverno.mod.base.resource.MediaTypes;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.Method;
 import io.inverno.mod.http.base.UnauthorizedException;
-import io.inverno.mod.http.server.ExchangeContext;
 import io.inverno.mod.security.accesscontrol.AccessController;
 import io.inverno.mod.security.authentication.InMemoryLoginCredentialsResolver;
 import io.inverno.mod.security.authentication.LoginCredentials;
@@ -9603,7 +9610,7 @@ public class SecurityConfigurer implements WebRoutesConfigurer&lt;SecurityContex
                     <p>Assuming the HTTP server runs locally on port <code>8080</code>, the following example shows how to authorize all requests from <code>http://127.0.0.1:9090</code>:</p>
                     <pre><code class="language-java">package io.inverno.example.app_web_security;
 
-import io.inverno.mod.http.server.ExchangeContext;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.security.http.cors.CORSInterceptor;
 import io.inverno.mod.web.WebInterceptable;
 import io.inverno.mod.web.WebInterceptorsConfigurer;
@@ -9625,7 +9632,7 @@ public class SecurityConfigurer implements WebInterceptorsConfigurer&lt;Exchange
                     <p>The following example shows how to configure the Web server in order to prevent CSRF attacks:</p>
                     <pre><code class="language-java">package io.inverno.example.app_web_security;
 
-import io.inverno.mod.http.server.ExchangeContext;
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.security.http.csrf.CSRFDoubleSubmitCookieInterceptor;
 import io.inverno.mod.web.WebInterceptable;
 import io.inverno.mod.web.WebInterceptorsConfigurer;
@@ -16170,7 +16177,7 @@ Message message = jweService.&lt;JWS&lt;Message&gt;&gt;reader(Types.type(JWS.cla
             </div>
             <div class="p-3 mb-5 text-center">
                 <p class="fw-light fs-6">The Inverno Framework is released under version 2.0 of the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License</a>.</p>
-                <p class="fw-light fs-6">Copyright © 2021, The Inverno Framework</p>
+                <p class="fw-light fs-6">Copyright © 2023, The Inverno Framework</p>
             </div>
         </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
