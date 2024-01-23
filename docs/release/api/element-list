@@ -19,6 +19,9 @@ module:io.inverno.mod.http.base
 io.inverno.mod.http.base
 io.inverno.mod.http.base.header
 io.inverno.mod.http.base.ws
+module:io.inverno.mod.http.client
+io.inverno.mod.http.client
+io.inverno.mod.http.client.ws
 module:io.inverno.mod.http.server
 io.inverno.mod.http.server
 io.inverno.mod.http.server.ws
@@ -72,3 +75,5 @@ module:io.inverno.mod.web
 io.inverno.mod.web
 io.inverno.mod.web.annotation
 io.inverno.mod.web.spi
+module:io.inverno.tool.buildtools
+io.inverno.tool.buildtools

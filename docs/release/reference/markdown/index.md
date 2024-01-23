@@ -51,8 +51,8 @@ Feel free to report bugs and feature requests or simply ask questions using [Git
 ## Overview
 
 $include( source=${INVERNO_WORKSPACE}/inverno-core/README.md, end=124, heading-offset=2 )
-$include( source=${INVERNO_WORKSPACE}/inverno-mods/README.md, end=232, heading-offset=2 )
-$include( source=${INVERNO_WORKSPACE}/inverno-tools/README.md, end=24, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/README.md, end=246, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-tools/README.md, end=29, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-dist/README.md, end=319, heading-offset=1 )
 $include( source=${INVERNO_WORKSPACE}/inverno-core/doc/reference-guide.md, resources = img, heading-offset=1 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/doc/reference-guide.md, heading-offset=1 )
@@ -60,6 +60,7 @@ $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-base/README.md, headi
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-boot/README.md, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-configuration/README.md, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-http-base/README.md, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-http-client/README.md, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-http-server/README.md, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-web/README.md, resources = doc/img, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-irt/README.md, resources = doc/img, heading-offset=2 )
@@ -72,5 +73,6 @@ $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-security/README.md, h
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-security-http/README.md, resources = doc/img, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-security-ldap/README.md, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-security-jose/README.md, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-tools/inverno-build-tools/README.md, heading-offset=1 )
 $include( source=${INVERNO_WORKSPACE}/inverno-tools/inverno-maven-plugin/README.md, heading-offset=1 )
 $include( source=${INVERNO_WORKSPACE}/inverno-oss-parent/README.md, heading-offset=1 )
