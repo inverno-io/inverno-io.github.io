@@ -87,8 +87,8 @@
         <main id="main" class="main container">
             <div class="heading">
                 <h1 class="heading-title">Inverno Framework Documentation</h1>
-                <p class="heading-subtitle">Version: 1.6.0</p>
-                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.6.0.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
+                <p class="heading-subtitle">Version: 1.6.1</p>
+                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.6.1.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
             </div>
             <div class="d-lg-flex">
                 <section class="toc col-12 col-lg-3">
@@ -274,7 +274,7 @@ public class Main {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.6.0&lt;/version&gt;
+        &lt;version&gt;1.6.1&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;hello&lt;/artifactId&gt;
@@ -294,7 +294,7 @@ public class Main {
                     <p>You can then run the application:</p>
                     <pre><code class="language-plaintext">$ mvn inverno:run -Dinverno.run.arguments=John
 
-[INFO] --- inverno-maven-plugin:1.4.0:run (default-cli) @ app-hello ---
+[INFO] --- inverno-maven-plugin:1.4.1:run (default-cli) @ app-hello ---
 [INFO] Running project: io.inverno.example.hello@1.0.0-SNAPSHOT...
 Hello John!!!
 
@@ -506,6 +506,9 @@ public class MainController {
                     <p>The Inverno distribution thus defines a consistent sets of dependencies and configuration for developing, building, packaging and distributing Inverno components and applications. Upgrading the Inverno framework version of a project boils down to upgrade the Inverno distribution version which is the version of the Inverno parent POM or the Inverno BOM.</p>
                     <h3 id="requirements">Requirements</h3>
                     <p>The Inverno framework requires <a href="https://jdk.java.net/">JDK</a> 15 or later and <a href="https://maven.apache.org/download.cgi">Apache Maven</a> 3.6.0 or later.</p>
+                    <blockquote>
+                        <p>The Inverno compiler (when displaying bean dependency cycles), the Inverno tools (when displaying the progress bar) and the standard application banner (displayed when bootstrapping an Inverno application) output unicode characters which are supported out of the box by Linux or MacOS terminals but unfortunately not by the Windows terminal for which the unicode support must be enabled explicitly, this can be done in Regional Settings &gt; Administrative &gt; Change System Local &gt; Use Unicode UTF-8 for worldwide language support. Another viable solution is to use the Git bash on Windows which also supports unicode out of the box. Please note that this is purely cosmetic and has no impact on the applications.</p>
+                    </blockquote>
                     <h3 id="creating-an-inverno-project">Creating an Inverno project</h3>
                     <p>The recommended way to start a new Inverno project is to create a Maven project which inherits from the <code>io.inverno.dist:inverno-parent</code> project, we might also want to add a dependency to <code>io.inverno:inverno-core</code> in order to create an Inverno module with IoC/DI:</p>
                     <pre><code class="language-xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -515,7 +518,7 @@ public class MainController {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.6.0&lt;/version&gt;
+        &lt;version&gt;1.6.1&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample-app&lt;/artifactId&gt;
@@ -537,7 +540,7 @@ public class MainController {
             &lt;dependency&gt;
                 &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
                 &lt;artifactId&gt;inverno-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;1.6.0&lt;/version&gt;
+                &lt;version&gt;1.6.1&lt;/version&gt;
                 &lt;type&gt;pom&lt;/type&gt;
                 &lt;scope&gt;import&lt;/scope&gt;
             &lt;/dependency&gt;
@@ -637,7 +640,7 @@ public class App {
                     <pre><code class="language-plaintext">$ mvn inverno:run
 
 ...
-[INFO] --- inverno-maven-plugin:1.4.0:run (default-cli) @ sample-app ---
+[INFO] --- inverno-maven-plugin:1.4.1:run (default-cli) @ sample-app ---
 [INFO] Running project: io.inverno.example.sample_app@1.0.0-SNAPSHOT...
  [═══════════════════════════════════════════════ 100&nbsp;% ══════════════════════════════════════════════] 
 2021-04-08 23:50:35,261 INFO  [main] i.w.c.v.Application - Inverno is starting...
@@ -747,7 +750,6 @@ $ sudo dpkg -i sample-app-1.0.0-SNAPSHOT-application_linux_amd64.deb
 $ /opt/sample-app/bin/sample-app
 ...
 </code></pre>
-                    <p>The Inverno Maven plugin allows to create various application images including Docker or OCI container images, please refer to the <a href="https://github.com/inverno-io/inverno-tools/tree/master/inverno-maven-plugin">Inverno Maven plugin documentation</a> to learn more.</p>
                     <h2 id="inverno-core-1">Inverno Core</h2>
                     <h3 id="motivation">Motivation</h3>
                     <p><a href="https://en.wikipedia.org/wiki/Inversion_of_control">Inversion of Control</a> and <a href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency Injection</a> principles are not new and many Java applications have been developed following these principles over the past two decades using frameworks such as Spring, CDI, Guice... However these recognized solutions might have some issues in practice especially with the way Java has evolved and how applications should be developed nowadays.</p>
@@ -833,7 +835,7 @@ $ /opt/sample-app/bin/sample-app
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.6.0&lt;/version&gt;
+        &lt;version&gt;1.6.1&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample&lt;/artifactId&gt;
@@ -874,7 +876,7 @@ $ /opt/sample-app/bin/sample-app
         &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
         &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
         &lt;version.inverno&gt;1.5.3&lt;/version.inverno&gt;
-        &lt;version.inverno.dist&gt;1.6.0&lt;/version.inverno.dist&gt;
+        &lt;version.inverno.dist&gt;1.6.1&lt;/version.inverno.dist&gt;
     &lt;/properties&gt;
 
     &lt;dependencyManagement&gt;
@@ -1714,7 +1716,7 @@ boot.stop();
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-base:1.6.0'
+compile 'io.inverno.mod:inverno-base:1.6.1'
 ...
 </code></pre>
                     <p>The <em>base</em> module is usually provided as a transitive dependency by other modules, mainly the <em>boot</em> module, so defining a direct dependency is usually not necessary at least for an application module.</p>
@@ -2175,7 +2177,7 @@ module io.inverno.example.app {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.6.0'
+compile 'io.inverno.mod:inverno-boot:1.6.1'
 ...
 </code></pre>
                     <h4 id="configuration">Configuration</h4>
@@ -2271,7 +2273,7 @@ boot.stop();
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-configuration:1.6.0'
+compile 'io.inverno.mod:inverno-configuration:1.6.1'
 ...
 </code></pre>
                     <h4 id="configuration-source">Configuration source</h4>
@@ -2769,7 +2771,7 @@ source                                       // 2
                         <li>system properties</li>
                         <li>system environment variables</li>
                         <li>the <code>configuration.cprops</code> file in <code>./conf/</code> or <code>${inverno.conf.path}/</code> directories if one exists (if the first one exists the second one is ignored)</li>
-                        <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-apps/inverno-utilities/target/inverno-utilities-1.3.0-SNAPSHOT-application_linux_amd64/lib/runtime/conf/</code> directory if it exists</li>
+                        <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-apps/inverno-utilities/target/inverno-utilities-1.5.0-SNAPSHOT-application_linux_amd64/lib/runtime/conf/</code> directory if it exists</li>
                         <li>the <code>configuration.cprops</code> file in the application module if it exists</li>
                     </ul>
                     <p>This source is typically created in a <code>main</code> method to load the bootstrap configuration on startup.</p>
@@ -2958,7 +2960,7 @@ public interface CompositeModuleConfiguration {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-http-base:1.6.0'
+compile 'io.inverno.mod:inverno-http-base:1.6.1'
 ...
 </code></pre>
                     <p>The <em>http-base</em> module is usually provided as a transitive dependency by other HTTP modules, the <em>http-server</em> module or the <em>web</em> module in particular, so this might not be necessary.</p>
@@ -3055,8 +3057,8 @@ module io.inverno.example.app_http_client {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.6.0'
-compile 'io.inverno.mod:inverno-http-client:1.6.0'
+compile 'io.inverno.mod:inverno-boot:1.6.1'
+compile 'io.inverno.mod:inverno-http-client:1.6.1'
 ...
 </code></pre>
                     <p>An HTTP client is basically created from the <code>HttpClient</code> service exposed in the module and which is used to create the <code>Endpoint</code> connecting to the HTTP server:</p>
@@ -4104,8 +4106,8 @@ module io.inverno.example.app_http {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.6.0'
-compile 'io.inverno.mod:inverno-http-server:1.6.0'
+compile 'io.inverno.mod:inverno-boot:1.6.1'
+compile 'io.inverno.mod:inverno-http-server:1.6.1'
 ...
 </code></pre>
                     <p>The resulting <em>app_http</em> module, thus created, can then be started as an application as follows:</p>
@@ -5344,8 +5346,8 @@ module io.inverno.example.app_web {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.6.0'
-compile 'io.inverno.mod:inverno-web:1.6.0'
+compile 'io.inverno.mod:inverno-boot:1.6.1'
+compile 'io.inverno.mod:inverno-web:1.6.1'
 ...
 </code></pre>
                     <h4 id="web-routing-api">Web Routing API</h4>
@@ -7511,7 +7513,7 @@ info:
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-irt:1.6.0'
+compile 'io.inverno.mod:inverno-irt:1.6.1'
 ...
 </code></pre>
                     <p>Dependencies to <code>io.netty.common</code> and <code>io.netty.buffer</code> are also required when using <code>BYTEBUF</code> or <code>PUBLISHER_BYTEBUF</code> <a href="#modes">modes</a> which require Netty's <code>ByteBuf</code>. They are defined as optional in the <em>irt</em> module and won't be included by default. In order to use <code>ByteBuf</code> based generation modes, the following dependencies must be declared as well in the module descriptor:</p>
@@ -7912,8 +7914,8 @@ import java.time.format.DateTimeFormatter;
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-sql:1.6.0'
-compile 'io.inverno.mod:inverno-sql-vertx:1.6.0'
+compile 'io.inverno.mod:inverno-sql:1.6.1'
+compile 'io.inverno.mod:inverno-sql-vertx:1.6.1'
 ...
 </code></pre>
                     <h4 id="sql-client-api">SQL client API</h4>
@@ -8126,7 +8128,7 @@ client.connection(ops -&gt; ops
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-sql-vertx:1.6.0'
+compile 'io.inverno.mod:inverno-sql-vertx:1.6.1'
 compile 'io.vertx:vertx-pg-client:4.1.2'
 ...
 </code></pre>
@@ -8183,8 +8185,8 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-redis:1.6.0'
-compile 'io.inverno.mod:inverno-redis-vertx:1.6.0'
+compile 'io.inverno.mod:inverno-redis:1.6.1'
+compile 'io.inverno.mod:inverno-redis-vertx:1.6.1'
 ...
 </code></pre>
                     <h4 id="redis-client-api">Redis Client API</h4>
@@ -8346,7 +8348,7 @@ Assertions.assertTrue(result.wasDiscarded());
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-redis-lettuce:1.6.0'
+compile 'io.inverno.mod:inverno-redis-lettuce:1.6.1'
 ...
 </code></pre>
                     <h5 id="configuration-6">Configuration</h5>
@@ -8407,8 +8409,8 @@ module io.inverno.example.app {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.6.0'
-compile 'io.inverno.mod:inverno-ldap:1.6.0'
+compile 'io.inverno.mod:inverno-boot:1.6.1'
+compile 'io.inverno.mod:inverno-ldap:1.6.1'
 ...
 </code></pre>
                     <h4 id="configuration-7">Configuration</h4>
@@ -8588,7 +8590,7 @@ admin_credentials="admin_password"
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security:1.6.0'
+compile 'io.inverno.mod:inverno-security:1.6.1'
 ...
 </code></pre>
                     <p>Before looking into details of the security API, let's see how to secure a simple standalone application composed of a single <code>HelloService</code> bean exposing <code>sayHello()</code> method. Initially the application might look like:</p>
@@ -9598,7 +9600,7 @@ pbac.hasPermission("manage", "domain", "printer", "printer", "C400V-DN").block()
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security-http:1.6.0'
+compile 'io.inverno.mod:inverno-security-http:1.6.1'
 ...
 </code></pre>
                     <p>Let's quickly see how to secure a simple Web application exposing a single hello world service using basic authentication. The application might initially look like:</p>
@@ -10771,8 +10773,8 @@ public class SecurityConfigurer implements WebInterceptorsConfigurer&lt;Exchange
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security-http:1.6.0'
-compile 'io.inverno.mod:inverno-security-ldap:1.6.0'
+compile 'io.inverno.mod:inverno-security-http:1.6.1'
+compile 'io.inverno.mod:inverno-security-ldap:1.6.1'
 ...
 </code></pre>
                     <p>The following example shows how to configure a security manager to authenticate login credentials against an LDAP server, resolving the authenticated user's identity from the LDAP server and a role-based access controller from user's groups.</p>
@@ -10867,7 +10869,7 @@ module io.inverno.example.app {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security-jose:1.6.0'
+compile 'io.inverno.mod:inverno-security-jose:1.6.1'
 ...
 </code></pre>
                     <p>The <em>security-jose</em> module is an Inverno module which exposes four services:</p>
@@ -12479,7 +12481,7 @@ Message message = jweService.&lt;JWS&lt;Message&gt;&gt;reader(Types.type(JWS.cla
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.tool:inverno-build-tools:1.4.0'
+compile 'io.inverno.tool:inverno-build-tools:1.4.1'
 ...
 </code></pre>
                     <h3 id="project-and-dependencies">Project and Dependencies</h3>
@@ -12931,6 +12933,9 @@ project
                             <li>it can be quoted: <code>"Hello World"</code> or <code>'Hello World'</code></li>
                         </ul>
                         <p>Since quotes or double quotes are used as delimiters, they might need to be escaped as well to declare an argument that contains some: <code>I\'m\ happy</code>, <code>"I'm happy"</code>, <code>'I\'m happy'</code>.</p>
+                    </blockquote>
+                    <blockquote>
+                        <p>The way quotes are escaped greatly depends on the operating system. Above examples refers to Unix systems with proper shells, please look for the right documentation if you are using a different one.</p>
                     </blockquote>
                     <p>In order to debug the application, we need to specify the appropriate options to the JVM:</p>
                     <pre><code class="language-plaintext">$ mvn inverno:run -Dinverno.exec.vmOptions="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000"

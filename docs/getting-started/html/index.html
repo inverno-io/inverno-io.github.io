@@ -126,7 +126,7 @@
                         └── getting_started
                             └── App.java
 </code></pre>
-                <p>You can now set up the <code>pom.xml</code> build descriptor with the Inverno distribution by defining a <code>&lt;parent/&gt;</code> section pointing to <code>io.inverno.dist:inverno-parent:1.6.0</code> parent pom:</p>
+                <p>You can now set up the <code>pom.xml</code> build descriptor with the Inverno distribution by defining a <code>&lt;parent/&gt;</code> section pointing to <code>io.inverno.dist:inverno-parent:1.6.1</code> parent pom:</p>
                 <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
@@ -134,7 +134,7 @@
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.6.0&lt;/version&gt;
+        &lt;version&gt;1.6.1&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;getting-started&lt;/artifactId&gt;
@@ -150,7 +150,7 @@
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.6.0&lt;/version&gt;
+        &lt;version&gt;1.6.1&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;getting-started&lt;/artifactId&gt;
@@ -216,7 +216,7 @@ public class App {
                 <pre><code class="language-plaintext">$ mvn inverno:run
 </code></pre>
                 <p>You should see an output similar to the following:</p>
-                <pre><code class="language-plaintext">[INFO] --- inverno-maven-plugin:1.4.0:run (default-cli) @ getting-started ---
+                <pre><code class="language-plaintext">[INFO] --- inverno-maven-plugin:1.4.1:run (default-cli) @ getting-started ---
 [INFO] Running project: io.inverno.guide.getting-started@1.0-SNAPSHOT...
 ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
 INFO Application Inverno is starting...
