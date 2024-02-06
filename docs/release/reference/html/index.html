@@ -87,8 +87,8 @@
         <main id="main" class="main container">
             <div class="heading">
                 <h1 class="heading-title">Inverno Framework Documentation</h1>
-                <p class="heading-subtitle">Version: 1.6.1</p>
-                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.6.1.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
+                <p class="heading-subtitle">Version: 1.6.2</p>
+                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.6.2.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
             </div>
             <div class="d-lg-flex">
                 <section class="toc col-12 col-lg-3">
@@ -274,7 +274,7 @@ public class Main {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.6.1&lt;/version&gt;
+        &lt;version&gt;1.6.2&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;hello&lt;/artifactId&gt;
@@ -518,7 +518,7 @@ public class MainController {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.6.1&lt;/version&gt;
+        &lt;version&gt;1.6.2&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample-app&lt;/artifactId&gt;
@@ -540,7 +540,7 @@ public class MainController {
             &lt;dependency&gt;
                 &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
                 &lt;artifactId&gt;inverno-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;1.6.1&lt;/version&gt;
+                &lt;version&gt;1.6.2&lt;/version&gt;
                 &lt;type&gt;pom&lt;/type&gt;
                 &lt;scope&gt;import&lt;/scope&gt;
             &lt;/dependency&gt;
@@ -835,7 +835,7 @@ $ /opt/sample-app/bin/sample-app
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.6.1&lt;/version&gt;
+        &lt;version&gt;1.6.2&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample&lt;/artifactId&gt;
@@ -876,7 +876,7 @@ $ /opt/sample-app/bin/sample-app
         &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
         &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
         &lt;version.inverno&gt;1.5.3&lt;/version.inverno&gt;
-        &lt;version.inverno.dist&gt;1.6.1&lt;/version.inverno.dist&gt;
+        &lt;version.inverno.dist&gt;1.6.2&lt;/version.inverno.dist&gt;
     &lt;/properties&gt;
 
     &lt;dependencyManagement&gt;
@@ -1716,7 +1716,7 @@ boot.stop();
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-base:1.6.1'
+compile 'io.inverno.mod:inverno-base:1.6.2'
 ...
 </code></pre>
                     <p>The <em>base</em> module is usually provided as a transitive dependency by other modules, mainly the <em>boot</em> module, so defining a direct dependency is usually not necessary at least for an application module.</p>
@@ -2177,7 +2177,7 @@ module io.inverno.example.app {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.6.1'
+compile 'io.inverno.mod:inverno-boot:1.6.2'
 ...
 </code></pre>
                     <h4 id="configuration">Configuration</h4>
@@ -2273,7 +2273,7 @@ boot.stop();
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-configuration:1.6.1'
+compile 'io.inverno.mod:inverno-configuration:1.6.2'
 ...
 </code></pre>
                     <h4 id="configuration-source">Configuration source</h4>
@@ -2960,7 +2960,7 @@ public interface CompositeModuleConfiguration {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-http-base:1.6.1'
+compile 'io.inverno.mod:inverno-http-base:1.6.2'
 ...
 </code></pre>
                     <p>The <em>http-base</em> module is usually provided as a transitive dependency by other HTTP modules, the <em>http-server</em> module or the <em>web</em> module in particular, so this might not be necessary.</p>
@@ -3057,8 +3057,8 @@ module io.inverno.example.app_http_client {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.6.1'
-compile 'io.inverno.mod:inverno-http-client:1.6.1'
+compile 'io.inverno.mod:inverno-boot:1.6.2'
+compile 'io.inverno.mod:inverno-http-client:1.6.2'
 ...
 </code></pre>
                     <p>An HTTP client is basically created from the <code>HttpClient</code> service exposed in the module and which is used to create the <code>Endpoint</code> connecting to the HTTP server:</p>
@@ -4106,8 +4106,8 @@ module io.inverno.example.app_http {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.6.1'
-compile 'io.inverno.mod:inverno-http-server:1.6.1'
+compile 'io.inverno.mod:inverno-boot:1.6.2'
+compile 'io.inverno.mod:inverno-http-server:1.6.2'
 ...
 </code></pre>
                     <p>The resulting <em>app_http</em> module, thus created, can then be started as an application as follows:</p>
@@ -5346,8 +5346,8 @@ module io.inverno.example.app_web {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.6.1'
-compile 'io.inverno.mod:inverno-web:1.6.1'
+compile 'io.inverno.mod:inverno-boot:1.6.2'
+compile 'io.inverno.mod:inverno-web:1.6.2'
 ...
 </code></pre>
                     <h4 id="web-routing-api">Web Routing API</h4>
@@ -7513,7 +7513,7 @@ info:
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-irt:1.6.1'
+compile 'io.inverno.mod:inverno-irt:1.6.2'
 ...
 </code></pre>
                     <p>Dependencies to <code>io.netty.common</code> and <code>io.netty.buffer</code> are also required when using <code>BYTEBUF</code> or <code>PUBLISHER_BYTEBUF</code> <a href="#modes">modes</a> which require Netty's <code>ByteBuf</code>. They are defined as optional in the <em>irt</em> module and won't be included by default. In order to use <code>ByteBuf</code> based generation modes, the following dependencies must be declared as well in the module descriptor:</p>
@@ -7914,8 +7914,8 @@ import java.time.format.DateTimeFormatter;
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-sql:1.6.1'
-compile 'io.inverno.mod:inverno-sql-vertx:1.6.1'
+compile 'io.inverno.mod:inverno-sql:1.6.2'
+compile 'io.inverno.mod:inverno-sql-vertx:1.6.2'
 ...
 </code></pre>
                     <h4 id="sql-client-api">SQL client API</h4>
@@ -8128,7 +8128,7 @@ client.connection(ops -&gt; ops
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-sql-vertx:1.6.1'
+compile 'io.inverno.mod:inverno-sql-vertx:1.6.2'
 compile 'io.vertx:vertx-pg-client:4.1.2'
 ...
 </code></pre>
@@ -8185,8 +8185,8 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-redis:1.6.1'
-compile 'io.inverno.mod:inverno-redis-vertx:1.6.1'
+compile 'io.inverno.mod:inverno-redis:1.6.2'
+compile 'io.inverno.mod:inverno-redis-vertx:1.6.2'
 ...
 </code></pre>
                     <h4 id="redis-client-api">Redis Client API</h4>
@@ -8348,7 +8348,7 @@ Assertions.assertTrue(result.wasDiscarded());
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-redis-lettuce:1.6.1'
+compile 'io.inverno.mod:inverno-redis-lettuce:1.6.2'
 ...
 </code></pre>
                     <h5 id="configuration-6">Configuration</h5>
@@ -8409,8 +8409,8 @@ module io.inverno.example.app {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.6.1'
-compile 'io.inverno.mod:inverno-ldap:1.6.1'
+compile 'io.inverno.mod:inverno-boot:1.6.2'
+compile 'io.inverno.mod:inverno-ldap:1.6.2'
 ...
 </code></pre>
                     <h4 id="configuration-7">Configuration</h4>
@@ -8590,7 +8590,7 @@ admin_credentials="admin_password"
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security:1.6.1'
+compile 'io.inverno.mod:inverno-security:1.6.2'
 ...
 </code></pre>
                     <p>Before looking into details of the security API, let's see how to secure a simple standalone application composed of a single <code>HelloService</code> bean exposing <code>sayHello()</code> method. Initially the application might look like:</p>
@@ -9600,7 +9600,7 @@ pbac.hasPermission("manage", "domain", "printer", "printer", "C400V-DN").block()
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security-http:1.6.1'
+compile 'io.inverno.mod:inverno-security-http:1.6.2'
 ...
 </code></pre>
                     <p>Let's quickly see how to secure a simple Web application exposing a single hello world service using basic authentication. The application might initially look like:</p>
@@ -10773,8 +10773,8 @@ public class SecurityConfigurer implements WebInterceptorsConfigurer&lt;Exchange
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security-http:1.6.1'
-compile 'io.inverno.mod:inverno-security-ldap:1.6.1'
+compile 'io.inverno.mod:inverno-security-http:1.6.2'
+compile 'io.inverno.mod:inverno-security-ldap:1.6.2'
 ...
 </code></pre>
                     <p>The following example shows how to configure a security manager to authenticate login credentials against an LDAP server, resolving the authenticated user's identity from the LDAP server and a role-based access controller from user's groups.</p>
@@ -10869,7 +10869,7 @@ module io.inverno.example.app {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security-jose:1.6.1'
+compile 'io.inverno.mod:inverno-security-jose:1.6.2'
 ...
 </code></pre>
                     <p>The <em>security-jose</em> module is an Inverno module which exposes four services:</p>
