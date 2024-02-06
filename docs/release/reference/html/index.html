@@ -87,8 +87,8 @@
         <main id="main" class="main container">
             <div class="heading">
                 <h1 class="heading-title">Inverno Framework Documentation</h1>
-                <p class="heading-subtitle">Version: 1.6.2</p>
-                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.6.2.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
+                <p class="heading-subtitle">Version: 1.6.3</p>
+                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.6.3.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
             </div>
             <div class="d-lg-flex">
                 <section class="toc col-12 col-lg-3">
@@ -274,7 +274,7 @@ public class Main {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.6.2&lt;/version&gt;
+        &lt;version&gt;1.6.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;hello&lt;/artifactId&gt;
@@ -294,7 +294,7 @@ public class Main {
                     <p>You can then run the application:</p>
                     <pre><code class="language-plaintext">$ mvn inverno:run -Dinverno.run.arguments=John
 
-[INFO] --- inverno-maven-plugin:1.4.1:run (default-cli) @ app-hello ---
+[INFO] --- inverno-maven-plugin:1.4.2:run (default-cli) @ app-hello ---
 [INFO] Running project: io.inverno.example.hello@1.0.0-SNAPSHOT...
 Hello John!!!
 
@@ -518,7 +518,7 @@ public class MainController {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.6.2&lt;/version&gt;
+        &lt;version&gt;1.6.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample-app&lt;/artifactId&gt;
@@ -540,7 +540,7 @@ public class MainController {
             &lt;dependency&gt;
                 &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
                 &lt;artifactId&gt;inverno-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;1.6.2&lt;/version&gt;
+                &lt;version&gt;1.6.3&lt;/version&gt;
                 &lt;type&gt;pom&lt;/type&gt;
                 &lt;scope&gt;import&lt;/scope&gt;
             &lt;/dependency&gt;
@@ -640,7 +640,7 @@ public class App {
                     <pre><code class="language-plaintext">$ mvn inverno:run
 
 ...
-[INFO] --- inverno-maven-plugin:1.4.1:run (default-cli) @ sample-app ---
+[INFO] --- inverno-maven-plugin:1.4.2:run (default-cli) @ sample-app ---
 [INFO] Running project: io.inverno.example.sample_app@1.0.0-SNAPSHOT...
  [═══════════════════════════════════════════════ 100&nbsp;% ══════════════════════════════════════════════] 
 2021-04-08 23:50:35,261 INFO  [main] i.w.c.v.Application - Inverno is starting...
@@ -835,7 +835,7 @@ $ /opt/sample-app/bin/sample-app
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.6.2&lt;/version&gt;
+        &lt;version&gt;1.6.3&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample&lt;/artifactId&gt;
@@ -876,7 +876,7 @@ $ /opt/sample-app/bin/sample-app
         &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
         &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
         &lt;version.inverno&gt;1.5.3&lt;/version.inverno&gt;
-        &lt;version.inverno.dist&gt;1.6.2&lt;/version.inverno.dist&gt;
+        &lt;version.inverno.dist&gt;1.6.3&lt;/version.inverno.dist&gt;
     &lt;/properties&gt;
 
     &lt;dependencyManagement&gt;
@@ -12481,7 +12481,7 @@ Message message = jweService.&lt;JWS&lt;Message&gt;&gt;reader(Types.type(JWS.cla
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.tool:inverno-build-tools:1.4.1'
+compile 'io.inverno.tool:inverno-build-tools:1.4.2'
 ...
 </code></pre>
                     <h3 id="project-and-dependencies">Project and Dependencies</h3>
