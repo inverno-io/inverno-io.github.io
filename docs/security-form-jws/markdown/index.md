@@ -433,8 +433,8 @@ You must then modify the `SecurityConfigurer` one more time to make it implement
 package io.inverno.app.ticket.internal.security;
 
 ...
+import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.UnauthorizedException;
-import io.inverno.mod.http.server.ExchangeContext;
 import io.inverno.mod.web.ErrorWebRouter;
 import io.inverno.mod.web.ErrorWebRouterConfigurer;
 
