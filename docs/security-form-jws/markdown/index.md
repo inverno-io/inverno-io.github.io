@@ -228,8 +228,8 @@ import io.inverno.mod.security.identity.PersonIdentity;
 import io.inverno.mod.security.jose.jwa.OCTAlgorithm;
 import io.inverno.mod.security.jose.jws.JWSAuthentication;
 import io.inverno.mod.security.jose.jws.JWSService;
-import io.inverno.mod.web.WebRoutable;
-import io.inverno.mod.web.WebRoutesConfigurer;
+import io.inverno.mod.web.server.WebRoutable;
+import io.inverno.mod.web.server.WebRoutesConfigurer;
 
 @WebRoutes({
     @WebRoute(path = { "/login" }, method = { Method.GET }),
@@ -372,8 +372,8 @@ import io.inverno.mod.security.http.SecurityInterceptor;
 import io.inverno.mod.security.http.context.InterceptingSecurityContext;
 import io.inverno.mod.security.http.token.CookieTokenCredentialsExtractor;
 import io.inverno.mod.security.jose.jws.JWSAuthenticator;
-import io.inverno.mod.web.WebInterceptable;
-import io.inverno.mod.web.WebInterceptorsConfigurer;
+import io.inverno.mod.web.server.WebInterceptable;
+import io.inverno.mod.web.server.WebInterceptorsConfigurer;
 import java.util.List;
 
 @WebRoutes({
@@ -435,8 +435,8 @@ package io.inverno.app.ticket.internal.security;
 ...
 import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.UnauthorizedException;
-import io.inverno.mod.web.ErrorWebRouter;
-import io.inverno.mod.web.ErrorWebRouterConfigurer;
+import io.inverno.mod.web.server.ErrorWebRouter;
+import io.inverno.mod.web.server.ErrorWebRouterConfigurer;
 
 @WebRoutes({
     @WebRoute(path = { "/login" }, method = { Method.GET }),
@@ -524,8 +524,8 @@ import io.inverno.mod.http.base.Method;
 import io.inverno.mod.security.accesscontrol.AccessController;
 import io.inverno.mod.security.http.context.SecurityContext;
 import io.inverno.mod.security.identity.Identity;
-import io.inverno.mod.web.annotation.WebController;
-import io.inverno.mod.web.annotation.WebRoute;
+import io.inverno.mod.web.server.annotation.WebController;
+import io.inverno.mod.web.server.annotation.WebRoute;
 
 @Bean( visibility = Bean.Visibility.PRIVATE )
 @WebController( path = "/api/security" )
@@ -638,13 +638,13 @@ $ mvn inverno:run
 2022-08-10 16:15:40,404 INFO  [main] i.i.m.r.l.Lettuce - Module io.inverno.mod.redis.lettuce started in 61ms
 2022-08-10 16:15:40,405 INFO  [main] i.i.m.s.j.Jose - Starting Module io.inverno.mod.security.jose...
 2022-08-10 16:15:40,490 INFO  [main] i.i.m.s.j.Jose - Module io.inverno.mod.security.jose started in 85ms
-2022-08-10 16:15:40,490 INFO  [main] i.i.m.w.Web - Starting Module io.inverno.mod.web...
+2022-08-10 16:15:40,490 INFO  [main] i.i.m.w.Server - Starting Module io.inverno.mod.web.server...
 2022-08-10 16:15:40,491 INFO  [main] i.i.m.h.s.Server - Starting Module io.inverno.mod.http.server...
 2022-08-10 16:15:40,491 INFO  [main] i.i.m.h.b.Base - Starting Module io.inverno.mod.http.base...
 2022-08-10 16:15:40,496 INFO  [main] i.i.m.h.b.Base - Module io.inverno.mod.http.base started in 5ms
 2022-08-10 16:15:40,701 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (epoll) listening on http://0.0.0.0:8080
 2022-08-10 16:15:40,701 INFO  [main] i.i.m.h.s.Server - Module io.inverno.mod.http.server started in 210ms
-2022-08-10 16:15:40,702 INFO  [main] i.i.m.w.Web - Module io.inverno.mod.web started in 211ms
+2022-08-10 16:15:40,702 INFO  [main] i.i.m.w.Server - Module io.inverno.mod.web.server started in 211ms
 2022-08-10 16:15:40,707 INFO  [main] i.i.a.t.Ticket - Module io.inverno.app.ticket started in 627ms
 2022-08-10 16:15:40,708 INFO  [main] i.i.c.v.Application - Application io.inverno.app.ticket started in 739ms
 ```

@@ -1113,7 +1113,7 @@ public class PlanDtoMapper implements DtoMapper<PlanDto, Plan> {
 }
 ```
 
-You can now move to the creation of the two REST endpoints. Inverno provides a Web module that facilitates the creation of REST endpoints, you need then to declare a dependency to the Web module in the Maven project descriptor and in the Java module descriptor.
+You can now move to the creation of the two REST endpoints. Inverno provides a Web server module that facilitates the creation of REST endpoints, you need then to declare a dependency to the Web server module in the Maven project descriptor and in the Java module descriptor.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1140,7 +1140,7 @@ You can now move to the creation of the two REST endpoints. Inverno provides a W
         </dependency>
         <dependency>
             <groupId>io.inverno.mod</groupId>
-            <artifactId>inverno-web</artifactId>
+            <artifactId>inverno-web-server</artifactId>
         </dependency>
     </dependencies>
     
@@ -1155,11 +1155,11 @@ You must also declare the dependency in the `module-info.java` descriptor of the
 module io.inverno.guide.ticket {
     requires io.inverno.mod.boot;
     requires io.inverno.mod.redis.lettuce;
-    requires io.inverno.mod.web;
+    requires io.inverno.mod.web.server;
 }
 ```
 
-`io.inverno.mod.web` is an Inverno module which embeds the HTTP server and allows defining Web routes used to route HTTP requests to the right handler. It can be configured by injecting a `WebConfiguration` which should then be exposed in the `AppConfiguration` as follows:
+`io.inverno.mod.web.server` is an Inverno module which embeds the HTTP server and allows defining Web routes used to route HTTP requests to the right handler. It can be configured by injecting a `WebConfiguration` which should then be exposed in the `AppConfiguration` as follows:
 
 ```java
 package io.inverno.guide.ticket;
@@ -1168,7 +1168,7 @@ import io.inverno.core.annotation.NestedBean;
 import io.inverno.mod.boot.BootConfiguration;
 import io.inverno.mod.configuration.Configuration;
 import io.inverno.mod.redis.lettuce.LettuceRedisClientConfiguration;
-import io.inverno.mod.web.WebConfiguration;
+import io.inverno.mod.web.server.WebConfiguration;
 
 @Configuration
 public interface AppConfiguration {
@@ -1184,11 +1184,11 @@ public interface AppConfiguration {
 }
 ```
 
-Since the `WebConfiguration` is declared as a nested bean in the `AppConfiguration`, it will be automatically injected in the Web module and used to configure the HTTP server among other things.
+Since the `WebConfiguration` is declared as a nested bean in the `AppConfiguration`, it will be automatically injected in the Web server module and used to configure the HTTP server among other things.
 
-The Web module provides several ways to create REST endpoint, it can be done by defining Web routes programmatically or by defining Web controllers later processed by the Inverno Web compiler at build time to generate the Web server controller configurer injected in the Web module to configure the corresponding Web routes. As well as being simpler, using Web controllers allows generating [OpenAPI](https://www.openapis.org/) specifications automatically based on JavaDoc.
+The Web server module provides several ways to create REST endpoint, it can be done by defining Web routes programmatically or by defining Web controllers later processed by the Inverno Web compiler at build time to generate the Web server controller configurer injected in the Web server module to configure the corresponding Web routes. As well as being simpler, using Web controllers allows generating [OpenAPI](https://www.openapis.org/) specifications automatically based on JavaDoc.
 
-Let's start by creating the `PlanWebController` which exposes the `PlanService` in a REST interface. It must be annotated with both `@io.inverno.core.annotation.Bean` and `@io.inverno.mod.web.annotation.WebController` to make it a Web controller, it also requires a `PlanService` instance and a `DtoMapper<PlanDto, Plan>` instance which must be declared in the constructor as required dependencies.
+Let's start by creating the `PlanWebController` which exposes the `PlanService` in a REST interface. It must be annotated with both `@io.inverno.core.annotation.Bean` and `@io.inverno.mod.web.server.annotation.WebController` to make it a Web controller, it also requires a `PlanService` instance and a `DtoMapper<PlanDto, Plan>` instance which must be declared in the constructor as required dependencies.
 
 ```java
 package io.inverno.guide.ticket.internal.rest.v1;
@@ -1204,8 +1204,8 @@ import io.inverno.mod.http.base.Method;
 import io.inverno.mod.http.base.NotFoundException;
 import io.inverno.mod.http.base.Status;
 import io.inverno.mod.http.base.header.Headers;
-import io.inverno.mod.web.WebExchange;
-import io.inverno.mod.web.annotation.*;
+import io.inverno.mod.web.server.WebExchange;
+import io.inverno.mod.web.server.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -1272,7 +1272,7 @@ public class PlanWebController {
 }
 ```
 
-A Web route is defined as a regular method annotated with `@io.inverno.mod.web.annotation.WebRoute` whose arguments are bound to the request (body, parameters, headers, cookies...). The method's return value is bound to the response body and thrown exceptions represent error responses.
+A Web route is defined as a regular method annotated with `@io.inverno.mod.web.server.annotation.WebRoute` whose arguments are bound to the request (body, parameters, headers, cookies...). The method's return value is bound to the response body and thrown exceptions represent error responses.
 
 The `@WebRoute` annotation specifies routing information used to configure the Web router that routes HTTP requests to the right handler, here the `createPlan()` method which is invoked when receiving a `POST` HTTP request targeting `/api/v1/plan` (since no path is defined, the root path defined at Web controller level is used) with an `application/json` content type and accepting `application/json` in response body. Specifying `consumes` and `produces` are actually very important since it also tells the Web router which converters should be used to respectively deserialize and serialize request and response bodies.
 
@@ -1344,9 +1344,9 @@ public class PlanWebController {
 }
 ```
 
-A path `/{planId}` is defined in the route, it is relative to the root path which is defined in the Web controller, so in order to get a plan, the HTTP request must target `/api/v1/plan/{planId}` where `{planId}` is the id of the plan to get. A path parameter specified between curly braces `{}` must match a method argument annotated with `@io.inverno.mod.web.annotation.PathParam`, here it is bound to `planId`.
+A path `/{planId}` is defined in the route, it is relative to the root path which is defined in the Web controller, so in order to get a plan, the HTTP request must target `/api/v1/plan/{planId}` where `{planId}` is the id of the plan to get. A path parameter specified between curly braces `{}` must match a method argument annotated with `@io.inverno.mod.web.server.annotation.PathParam`, here it is bound to `planId`.
 
-An optional query parameter named after the method argument `statuses` annotated with `@io.inverno.mod.web.annotation.QueryParam` is also defined. This parameter is of type `Optional<List<Ticket.Status>>` which indicates that it is not required to invoke the route and that the parameter value, if present, must be converted to a list of `Ticket.Status`. The conversion is done automatically using a parameter converter which converts comma-separated lists of strings to lists of enums.
+An optional query parameter named after the method argument `statuses` annotated with `@io.inverno.mod.web.server.annotation.QueryParam` is also defined. This parameter is of type `Optional<List<Ticket.Status>>` which indicates that it is not required to invoke the route and that the parameter value, if present, must be converted to a list of `Ticket.Status`. The conversion is done automatically using a parameter converter which converts comma-separated lists of strings to lists of enums.
 
 A `404` HTTP response is returned when no ticket exists with the specified plan id. In such situation, the plan service returns an empty `Mono` which can be switched to an error `Mono` raising a `NotFoundException`. This exception extends `HttpException` which is handled by the Web Error router that eventually returns a `404` HTTP response.
 
@@ -1431,7 +1431,7 @@ public class PlanWebController {
 }
 ```
 
-In addition to the `planId` path parameter, there are two form parameters named after the method arguments annotated with `@io.inverno.mod.web.annotation.FormParameter`. Unlike the `referenceTicketId` parameter which is optional and not required to invoke the route, the `ticketId` parameter is required and a `MissingRequiredParameterException`, resulting in a `400` HTTP response, will be raised if it is missing from the request.
+In addition to the `planId` path parameter, there are two form parameters named after the method arguments annotated with `@io.inverno.mod.web.server.annotation.FormParameter`. Unlike the `referenceTicketId` parameter which is optional and not required to invoke the route, the `ticketId` parameter is required and a `MissingRequiredParameterException`, resulting in a `400` HTTP response, will be raised if it is missing from the request.
 
 Finally, the `removeTicket()` route handler achieves the `PlanWebController` class.
 
@@ -1479,8 +1479,8 @@ import io.inverno.mod.http.base.Method;
 import io.inverno.mod.http.base.NotFoundException;
 import io.inverno.mod.http.base.Status;
 import io.inverno.mod.http.base.header.Headers;
-import io.inverno.mod.web.WebExchange;
-import io.inverno.mod.web.annotation.*;
+import io.inverno.mod.web.server.WebExchange;
+import io.inverno.mod.web.server.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -1653,13 +1653,13 @@ INFO Boot Starting Module io.inverno.mod.boot...
 INFO Boot Module io.inverno.mod.boot started in 337ms
 INFO Lettuce Starting Module io.inverno.mod.redis.lettuce...
 INFO Lettuce Module io.inverno.mod.redis.lettuce started in 44ms
-INFO Web Starting Module io.inverno.mod.web...
+INFO Web Starting Module io.inverno.mod.web.server...
 INFO Server Starting Module io.inverno.mod.http.server...
 INFO Base Starting Module io.inverno.mod.http.base...
 INFO Base Module io.inverno.mod.http.base started in 4ms
 INFO HttpServer HTTP Server (nio) listening on http://0.0.0.0:8080
 INFO Server Module io.inverno.mod.http.server started in 95ms
-INFO Web Module io.inverno.mod.web started in 95ms
+INFO Server Module io.inverno.mod.web.server started in 95ms
 INFO Ticket Module io.inverno.guide.ticket started in 480ms
 INFO Application Application io.inverno.guide.ticket started in 554ms
 ```
@@ -1764,7 +1764,7 @@ The Web UI requires multiple JavaScript libraries that are packaged as [WebJars]
 
 > The Swagger UI artifact is managed by Inverno's distribution, so you don't need to specify its version.
 
-You must now configure the application's Web router by defining appropriate Web routes to serve all these resources. The Inverno Web module provides built-in configurers and route handlers to easily expose WebJars and any kind of static resources. Let's create a `StaticWebRoutesConfigurer` that will let you programmatically configure the Web router.
+You must now configure the application's Web router by defining appropriate Web routes to serve all these resources. The Inverno Web server module provides built-in configurers and route handlers to easily expose WebJars and any kind of static resources. Let's create a `StaticWebRoutesConfigurer` that will let you programmatically configure the Web router.
 
 ```java
 package io.inverno.guide.ticket.internal;
@@ -1775,7 +1775,7 @@ import io.inverno.mod.base.resource.Resource;
 import io.inverno.mod.base.resource.ResourceService;
 import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.Method;
-import io.inverno.mod.web.*;
+import io.inverno.mod.web.server.*;
 
 @Bean(visibility = Bean.Visibility.PRIVATE)
 public class StaticWebRoutesConfigurer implements WebRoutesConfigurer<ExchangeContext> {
@@ -1823,7 +1823,7 @@ import io.inverno.core.annotation.NestedBean;
 import io.inverno.mod.boot.BootConfiguration;
 import io.inverno.mod.configuration.Configuration;
 import io.inverno.mod.redis.lettuce.LettuceRedisClientConfiguration;
-import io.inverno.mod.web.WebConfiguration;
+import io.inverno.mod.web.server.WebConfiguration;
 
 import java.net.URI;
 
@@ -1989,7 +1989,7 @@ At this stage, you might also want to declare a dependency to the Log4j2 API mod
 module io.inverno.guide.ticket {
     requires io.inverno.mod.boot;
     requires io.inverno.mod.redis.lettuce;
-    requires io.inverno.mod.web;
+    requires io.inverno.mod.web.server;
 
     requires org.apache.logging.log4j;
 
@@ -2175,7 +2175,7 @@ $ keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -storepas
 
 > Do not use self-signed certificate for any other purposes than development and testing.
 
-Since Web module configuration should be already exposed in `AppConfiguration`, you can now configure the HTTP server in `src/main/resources/configuration.cprops`:
+Since Web server module configuration should be already exposed in `AppConfiguration`, you can now configure the HTTP server in `src/main/resources/configuration.cprops`:
 
 ```text
 io.inverno.guide.ticket.appConfiguration {
@@ -2440,13 +2440,13 @@ $ ./target/maven-inverno/application_linux_amd64/ticket-1.0-SNAPSHOT/bin/ticket 
 2022-02-24 11:46:51,581 INFO  [main] i.i.m.b.Boot - Module io.inverno.mod.boot started in 207ms
 2022-02-24 11:46:51,581 INFO  [main] i.i.m.r.l.Lettuce - Starting Module io.inverno.mod.redis.lettuce...
 2022-02-24 11:46:51,621 INFO  [main] i.i.m.r.l.Lettuce - Module io.inverno.mod.redis.lettuce started in 39ms
-2022-02-24 11:46:51,621 INFO  [main] i.i.m.w.Web - Starting Module io.inverno.mod.web...
+2022-02-24 11:46:51,621 INFO  [main] i.i.m.w.Server - Starting Module io.inverno.mod.web.server...
 2022-02-24 11:46:51,621 INFO  [main] i.i.m.h.s.Server - Starting Module io.inverno.mod.http.server...
 2022-02-24 11:46:51,622 INFO  [main] i.i.m.h.b.Base - Starting Module io.inverno.mod.http.base...
 2022-02-24 11:46:51,627 INFO  [main] i.i.m.h.b.Base - Module io.inverno.mod.http.base started in 5ms
 2022-02-24 11:46:52,008 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (epoll) listening on https://0.0.0.0:8443
 2022-02-24 11:46:52,008 INFO  [main] i.i.m.h.s.Server - Module io.inverno.mod.http.server started in 387ms
-2022-02-24 11:46:52,009 INFO  [main] i.i.m.w.Web - Module io.inverno.mod.web started in 387ms
+2022-02-24 11:46:52,009 INFO  [main] i.i.m.w.Server - Module io.inverno.mod.web.server started in 387ms
 2022-02-24 11:46:52,009 INFO  [main] i.i.g.t.Ticket - Module io.inverno.guide.ticket started in 637ms
 2022-02-24 11:46:52,009 INFO  [main] i.i.c.v.Application - Application io.inverno.guide.ticket started in 692ms
 ```

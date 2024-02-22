@@ -91,7 +91,7 @@ Then you must declare dependencies to Inverno *boot* and *web* modules since you
         </dependency>
         <dependency>
             <groupId>io.inverno.mod</groupId>
-            <artifactId>inverno-web</artifactId>
+            <artifactId>inverno-web-server</artifactId>
         </dependency>
     </dependencies>
 </project>
@@ -101,13 +101,13 @@ Congratulations! you have just created a new Inverno project.
 
 ## Step 2: Create the Java module
 
-An Inverno component or application is a regular Java module annotated with `@io.inverno.core.annotation.Module`. Open up the project in your IDE and create file `src/main/java/module-info.java`. In this module descriptor, you need to declare the modules required by your application, namely `io.inverno.mod.boot` and `io.inverno.mod.web` modules:
+An Inverno component or application is a regular Java module annotated with `@io.inverno.core.annotation.Module`. Open up the project in your IDE and create file `src/main/java/module-info.java`. In this module descriptor, you need to declare the modules required by your application, namely `io.inverno.mod.boot` and `io.inverno.mod.web.server` modules:
 
 ```java
 @io.inverno.core.annotation.Module
 module io.inverno.guide.getting_started {
     requires io.inverno.mod.boot;
-    requires io.inverno.mod.web;
+    requires io.inverno.mod.web.server;
 }
 ```
 
@@ -123,9 +123,9 @@ package io.inverno.guide.getting_started;
 import io.inverno.core.annotation.Bean;
 import io.inverno.core.v1.Application;
 import io.inverno.mod.base.resource.MediaTypes;
-import io.inverno.mod.web.annotation.QueryParam;
-import io.inverno.mod.web.annotation.WebController;
-import io.inverno.mod.web.annotation.WebRoute;
+import io.inverno.mod.web.server.annotation.QueryParam;
+import io.inverno.mod.web.server.annotation.WebController;
+import io.inverno.mod.web.server.annotation.WebRoute;
 
 import java.util.Optional;
 
@@ -199,13 +199,13 @@ INFO Application Inverno is starting...
 INFO Getting_started Starting Module io.inverno.guide.getting_started...
 INFO Boot Starting Module io.inverno.mod.boot...
 INFO Boot Module io.inverno.mod.boot started in 260ms
-INFO Web Starting Module io.inverno.mod.web...
+INFO Web Starting Module io.inverno.mod.web.server...
 INFO Server Starting Module io.inverno.mod.http.server...
 INFO Base Starting Module io.inverno.mod.http.base...
 INFO Base Module io.inverno.mod.http.base started in 4ms
 INFO HttpServer HTTP Server (nio) listening on http://0.0.0.0:8080
 INFO Server Module io.inverno.mod.http.server started in 111ms
-INFO Web Module io.inverno.mod.web started in 112ms
+INFO Web Module io.inverno.mod.web.server started in 112ms
 INFO Getting_started Module io.inverno.guide.getting_started started in 377ms
 INFO Application Application io.inverno.guide.getting_started started in 458ms
 ```

@@ -62,7 +62,7 @@ $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-configuration/README.
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-http-base/README.md, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-http-client/README.md, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-http-server/README.md, heading-offset=2 )
-$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-web/README.md, resources = doc/img, heading-offset=2 )
+$include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-web-server/README.md, resources = doc/img, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-irt/README.md, resources = doc/img, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-sql/README.md, heading-offset=2 )
 $include( source=${INVERNO_WORKSPACE}/inverno-mods/inverno-sql-vertx/README.md, heading-offset=3 )

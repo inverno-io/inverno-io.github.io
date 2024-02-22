@@ -71,9 +71,9 @@ module:io.inverno.mod.sql
 io.inverno.mod.sql
 module:io.inverno.mod.sql.vertx
 io.inverno.mod.sql.vertx
-module:io.inverno.mod.web
-io.inverno.mod.web
-io.inverno.mod.web.annotation
-io.inverno.mod.web.spi
+module:io.inverno.mod.web.server
+io.inverno.mod.web.server
+io.inverno.mod.web.server.annotation
+io.inverno.mod.web.server.spi
 module:io.inverno.tool.buildtools
 io.inverno.tool.buildtools

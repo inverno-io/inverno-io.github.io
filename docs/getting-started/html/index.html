@@ -126,7 +126,7 @@
                         └── getting_started
                             └── App.java
 </code></pre>
-                <p>You can now set up the <code>pom.xml</code> build descriptor with the Inverno distribution by defining a <code>&lt;parent/&gt;</code> section pointing to <code>io.inverno.dist:inverno-parent:1.6.3</code> parent pom:</p>
+                <p>You can now set up the <code>pom.xml</code> build descriptor with the Inverno distribution by defining a <code>&lt;parent/&gt;</code> section pointing to <code>io.inverno.dist:inverno-parent:1.7.0</code> parent pom:</p>
                 <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
@@ -134,7 +134,7 @@
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.6.3&lt;/version&gt;
+        &lt;version&gt;1.7.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;getting-started&lt;/artifactId&gt;
@@ -150,7 +150,7 @@
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.6.3&lt;/version&gt;
+        &lt;version&gt;1.7.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;getting-started&lt;/artifactId&gt;
@@ -163,18 +163,18 @@
         &lt;/dependency&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;io.inverno.mod&lt;/groupId&gt;
-            &lt;artifactId&gt;inverno-web&lt;/artifactId&gt;
+            &lt;artifactId&gt;inverno-web-server&lt;/artifactId&gt;
         &lt;/dependency&gt;
     &lt;/dependencies&gt;
 &lt;/project&gt;
 </code></pre>
                 <p>Congratulations! you have just created a new Inverno project.</p>
                 <h2 id="step-2-create-the-java-module">Step 2: Create the Java module</h2>
-                <p>An Inverno component or application is a regular Java module annotated with <code>@io.inverno.core.annotation.Module</code>. Open up the project in your IDE and create file <code>src/main/java/module-info.java</code>. In this module descriptor, you need to declare the modules required by your application, namely <code>io.inverno.mod.boot</code> and <code>io.inverno.mod.web</code> modules:</p>
+                <p>An Inverno component or application is a regular Java module annotated with <code>@io.inverno.core.annotation.Module</code>. Open up the project in your IDE and create file <code>src/main/java/module-info.java</code>. In this module descriptor, you need to declare the modules required by your application, namely <code>io.inverno.mod.boot</code> and <code>io.inverno.mod.web.server</code> modules:</p>
                 <pre><code class="language-java">@io.inverno.core.annotation.Module
 module io.inverno.guide.getting_started {
     requires io.inverno.mod.boot;
-    requires io.inverno.mod.web;
+    requires io.inverno.mod.web.server;
 }
 </code></pre>
                 <p>At compile time, the Inverno compiler will assemble the <em>boot</em> and <em>web</em> modules together with your application module and generate a module class. This class contains all the IoC/DI logic required to bootstrap your application.</p>
@@ -185,9 +185,9 @@ module io.inverno.guide.getting_started {
 import io.inverno.core.annotation.Bean;
 import io.inverno.core.v1.Application;
 import io.inverno.mod.base.resource.MediaTypes;
-import io.inverno.mod.web.annotation.QueryParam;
-import io.inverno.mod.web.annotation.WebController;
-import io.inverno.mod.web.annotation.WebRoute;
+import io.inverno.mod.web.server.annotation.QueryParam;
+import io.inverno.mod.web.server.annotation.WebController;
+import io.inverno.mod.web.server.annotation.WebRoute;
 
 import java.util.Optional;
 
@@ -216,7 +216,7 @@ public class App {
                 <pre><code class="language-plaintext">$ mvn inverno:run
 </code></pre>
                 <p>You should see an output similar to the following:</p>
-                <pre><code class="language-plaintext">[INFO] --- inverno-maven-plugin:1.4.2:run (default-cli) @ getting-started ---
+                <pre><code class="language-plaintext">[INFO] --- inverno-maven-plugin:1.4.3:run (default-cli) @ getting-started ---
 [INFO] Running project: io.inverno.guide.getting-started@1.0-SNAPSHOT...
 ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
 INFO Application Inverno is starting...
@@ -231,7 +231,7 @@ INFO Application Inverno is starting...
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                 -- 1.5.3 --                  ║
+     ║                    ,   \/   ,                                 -- 1.5.4 --                  ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -252,13 +252,13 @@ INFO Application Inverno is starting...
 INFO Getting_started Starting Module io.inverno.guide.getting_started...
 INFO Boot Starting Module io.inverno.mod.boot...
 INFO Boot Module io.inverno.mod.boot started in 260ms
-INFO Web Starting Module io.inverno.mod.web...
+INFO Web Starting Module io.inverno.mod.web.server...
 INFO Server Starting Module io.inverno.mod.http.server...
 INFO Base Starting Module io.inverno.mod.http.base...
 INFO Base Module io.inverno.mod.http.base started in 4ms
 INFO HttpServer HTTP Server (nio) listening on http://0.0.0.0:8080
 INFO Server Module io.inverno.mod.http.server started in 111ms
-INFO Web Module io.inverno.mod.web started in 112ms
+INFO Web Module io.inverno.mod.web.server started in 112ms
 INFO Getting_started Module io.inverno.guide.getting_started started in 377ms
 INFO Application Application io.inverno.guide.getting_started started in 458ms
 </code></pre>
