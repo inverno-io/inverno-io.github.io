@@ -87,8 +87,8 @@
         <main id="main" class="main container">
             <div class="heading">
                 <h1 class="heading-title">Inverno Framework Documentation</h1>
-                <p class="heading-subtitle">Version: 1.7.1</p>
-                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.7.1.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
+                <p class="heading-subtitle">Version: 1.8.0</p>
+                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.8.0.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
             </div>
             <div class="d-lg-flex">
                 <section class="toc col-12 col-lg-3">
@@ -274,7 +274,7 @@ public class Main {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.7.1&lt;/version&gt;
+        &lt;version&gt;1.8.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;hello&lt;/artifactId&gt;
@@ -294,7 +294,7 @@ public class Main {
                     <p>You can then run the application:</p>
                     <pre><code class="language-plaintext">$ mvn inverno:run -Dinverno.run.arguments=John
 
-[INFO] --- inverno-maven-plugin:1.4.3:run (default-cli) @ app-hello ---
+[INFO] --- inverno-maven-plugin:1.4.4:run (default-cli) @ app-hello ---
 [INFO] Running project: io.inverno.example.hello@1.0.0-SNAPSHOT...
 Hello John!!!
 
@@ -518,7 +518,7 @@ public class MainController {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.7.1&lt;/version&gt;
+        &lt;version&gt;1.8.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample-app&lt;/artifactId&gt;
@@ -540,7 +540,7 @@ public class MainController {
             &lt;dependency&gt;
                 &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
                 &lt;artifactId&gt;inverno-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;1.7.1&lt;/version&gt;
+                &lt;version&gt;1.8.0&lt;/version&gt;
                 &lt;type&gt;pom&lt;/type&gt;
                 &lt;scope&gt;import&lt;/scope&gt;
             &lt;/dependency&gt;
@@ -640,7 +640,7 @@ public class App {
                     <pre><code class="language-plaintext">$ mvn inverno:run
 
 ...
-[INFO] --- inverno-maven-plugin:1.4.3:run (default-cli) @ sample-app ---
+[INFO] --- inverno-maven-plugin:1.4.4:run (default-cli) @ sample-app ---
 [INFO] Running project: io.inverno.example.sample_app@1.0.0-SNAPSHOT...
  [═══════════════════════════════════════════════ 100&nbsp;% ══════════════════════════════════════════════] 
 2021-04-08 23:50:35,261 INFO  [main] i.w.c.v.Application - Inverno is starting...
@@ -655,7 +655,7 @@ public class App {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.5 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.6 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -835,7 +835,7 @@ $ /opt/sample-app/bin/sample-app
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.7.1&lt;/version&gt;
+        &lt;version&gt;1.8.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample&lt;/artifactId&gt;
@@ -875,8 +875,8 @@ $ /opt/sample-app/bin/sample-app
         &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
         &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
         &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
-        &lt;version.inverno&gt;1.5.5&lt;/version.inverno&gt;
-        &lt;version.inverno.dist&gt;1.7.1&lt;/version.inverno.dist&gt;
+        &lt;version.inverno&gt;1.5.6&lt;/version.inverno&gt;
+        &lt;version.inverno.dist&gt;1.8.0&lt;/version.inverno.dist&gt;
     &lt;/properties&gt;
 
     &lt;dependencyManagement&gt;
@@ -930,8 +930,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.inverno:inverno-core:1.5.5'
-    annotationProcessor 'io.inverno:inverno-core-compiler:1.5.5'
+    implementation 'io.inverno:inverno-core:1.5.6'
+    annotationProcessor 'io.inverno:inverno-core-compiler:1.5.6'
 }
 
 java {
@@ -1346,7 +1346,7 @@ INFO: Inverno is starting...
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.5 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.6 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -1716,7 +1716,7 @@ boot.stop();
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-base:1.7.1'
+compile 'io.inverno.mod:inverno-base:1.8.0'
 ...
 </code></pre>
                     <p>The <em>base</em> module is usually provided as a transitive dependency by other modules, mainly the <em>boot</em> module, so defining a direct dependency is usually not necessary at least for an application module.</p>
@@ -2148,6 +2148,67 @@ Resource resource = resourceService.getResource(URI.create("classpath:/path/to/r
 
 Stream&lt;Resource&gt; resources = resourceService.getResources(URI.create("file:/path/to/resources/**/*"));
 </code></pre>
+                    <p>A resource content can be read using a <code>ReadableByteChannel</code> as follows:</p>
+                    <pre><code class="language-java">try (Resource resource = new FileResource("/path/to/file")) {
+	String content = resource.openReadableByteChannel()
+		.map(channel -&gt; {
+			try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+				ByteBuffer buffer = ByteBuffer.allocate(256);
+				while (channel.read(buffer) &gt; 0) {
+					out.write(buffer.array(), 0, buffer.position());
+					buffer.clear();
+				}
+				return new String(out.toByteArray(), Charsets.UTF_8);
+			}
+			finally {
+				channel.close();
+			}
+		})
+		.orElseThrow(() -&gt; new IllegalStateException("Resource is not readable"));
+}
+</code></pre>
+                    <p>It can also be read in a reactive way:</p>
+                    <pre><code class="language-java">try(Resource resource = new FileResource("/path/to/resource")) {
+	String content = Flux.from(resource.read())
+		.map(chunk -&gt; {
+			try {
+				return chunk.toString(Charsets.UTF_8);
+			}
+			finally {
+				chunk.release();
+			}
+		})
+		.collect(Collectors.joining())
+		.block();
+}
+</code></pre>
+                    <p>In a similar way, content can be written to a resource using a <code>WritableByteChannel</code> as follows:</p>
+                    <pre><code class="language-java">try (Resource resource = new FileResource("/path/to/file")) {
+	resource.openWritableByteChannel()
+		.ifPresentOrElse(
+			channel -&gt; {
+				try {
+					ByteBuffer buffer = ByteBuffer.wrap("Hello world".getBytes(Charsets.UTF_8));
+					channel.write(buffer);
+				}
+				finally {
+					channel.close();
+				}
+			},
+			() -&gt; {
+				throw new IllegalStateException("Resource is not writable");
+			}
+		);
+}
+</code></pre>
+                    <p>Data can also be written in a reactive way:</p>
+                    <pre><code class="language-java">try (Resource resource = new FileResource("/path/to/resource")) {
+	int nbBytes = Flux.from(resource.write(Flux.just(Unpooled.unreleasableBuffer(Unpooled.wrappedBuffer("Hello world".getBytes(Charsets.UTF_8))))))
+		.collect(Collectors.summingInt(i -&gt; i))
+		.block();
+	System.out.println(nbBytes + " bytes written");
+}
+</code></pre>
                     <p>The <code>MediaTypeService</code> interface specifies a service used to determine the media type of a resource based on its extension, name, path or URI. As for the resource service, a base implementation is provided in the <em>boot</em> module.</p>
                     <pre><code class="language-java">MediaTypeService mediaTypeService = ...
 
@@ -2177,7 +2238,7 @@ module io.inverno.example.app {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.7.1'
+compile 'io.inverno.mod:inverno-boot:1.8.0'
 ...
 </code></pre>
                     <h4 id="configuration">Configuration</h4>
@@ -2273,7 +2334,7 @@ boot.stop();
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-configuration:1.7.1'
+compile 'io.inverno.mod:inverno-configuration:1.8.0'
 ...
 </code></pre>
                     <h4 id="configuration-source">Configuration source</h4>
@@ -2960,7 +3021,7 @@ public interface CompositeModuleConfiguration {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-http-base:1.7.1'
+compile 'io.inverno.mod:inverno-http-base:1.8.0'
 ...
 </code></pre>
                     <p>The <em>http-base</em> module is usually provided as a transitive dependency by other HTTP modules, the <em>http-server</em> module or the <em>web</em> module in particular, so this might not be necessary.</p>
@@ -3022,7 +3083,7 @@ httpBase.stop();
                         <li>HTTP/2 over cleartext</li>
                         <li>WebSocket</li>
                         <li>HTTP Compression</li>
-                        <li>TLS</li>
+                        <li>TLS/mTLS</li>
                         <li>Interceptors</li>
                         <li>Strongly typed contexts</li>
                         <li><code>application/x-www-form-urlencoded</code> body encoding</li>
@@ -3057,8 +3118,8 @@ module io.inverno.example.app_http_client {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.7.1'
-compile 'io.inverno.mod:inverno-http-client:1.7.1'
+compile 'io.inverno.mod:inverno-boot:1.8.0'
+compile 'io.inverno.mod:inverno-http-client:1.8.0'
 ...
 </code></pre>
                     <p>An HTTP client is basically created from the <code>HttpClient</code> service exposed in the module and which is used to create the <code>Endpoint</code> connecting to the HTTP server:</p>
@@ -3079,24 +3140,24 @@ public class Main {
 	@Bean
 	public static class Example {
 		
-		private final Endpoint endpoint; 
+		private final Endpoint&lt;ExchangeContext&gt; endpoint; 
 		
 		public Example(HttpClient httpClient) {
-			this.endpoint = httpClient.endpoint("example.org", 80) // Creates the endpoint
-				.build();
+			this.endpoint = httpClient
+			    .endpoint("example.org", 80)
+				.build();                         // Create the endpoint
 		}
 		
 		public String get(String path) {
 			return this.endpoint
-				.request(Method.GET, path)                         // Creates the request 
-				.send()                                            // Sends the request
-				.flatMapMany(exchange -&gt; exchange                  // Streams the response
-					.response()
+				.exchange(Method.GET, path)       // Create the client exchange
+				.flatMap(Exchange::response)
+				.flatMapMany(response -&gt; response // Stream the response body
 					.body()
 					.string().stream()
 				)
-				.collect(Collectors.joining())                     // Aggregates the response
-				.block();
+				.collect(Collectors.joining())    // Aggregate the response
+				.block();                         // Send the request when the response publisher is subscribed
 		}
 	}
 
@@ -3110,7 +3171,7 @@ public class Main {
 	}
 }
 </code></pre>
-                    <p>In above example, module <em>app_http_client</em> creates the <code>Example</code> bean which uses the <code>HttpClient</code> to obtain an <code>Endpoint</code> to connect to <code>example.org</code> in plain HTTP. A request to get the server root is then created from the endpoint and sent to the server, the corresponding response is finally displayed to the standard output and the module is stopped.</p>
+                    <p>In above example, module <em>app_http_client</em> creates the <code>Example</code> bean which uses the <code>HttpClient</code> to obtain an <code>Endpoint</code> to connect to <code>example.org</code> in plain HTTP. An exchange to get the server root is then created from the endpoint, the request is sent when the response publisher is subscribed and the response body eventually returned and displayed to the standard output before the module is finally stopped.</p>
                     <pre><code class="language-plaintext">13:52:32.850 [main] INFO  io.inverno.core.v1.Application - Inverno is starting...
 
 
@@ -3123,7 +3184,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.5 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.6 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -3504,7 +3565,7 @@ module io.inverno.example.app {
 </code></pre>
                     <p>Specific <code>HttpClientConfiguration</code> and/or an <code>NetClientConfiguration</code> can also be provided when building the endpoint. By default, global modules configurations are applied if none are specified.</p>
                     <pre><code class="language-java">HttpClient httpClient = ...
-Endpoint endpoint = httpClient.endpoint("example.org", 80) 
+Endpoint&lt;ExchangeContext&gt; endpoint = httpClient.endpoint("example.org", 80) 
 	.configuration(
 		HttpClientConfigurationLoader.load(baseConfiguration.http_client(), configuration -&gt; configuration
 			.tls_enabled(true)
@@ -3514,67 +3575,76 @@ Endpoint endpoint = httpClient.endpoint("example.org", 80)
 	)
 	.build();
 </code></pre>
-                    <p>An HTTP request can be created and sent fluently from the <code>Endpoint</code> instance:</p>
-                    <pre><code class="language-java">Endpoint endpoint = ...
-Flux&lt;String&gt; responseBody = endpoint
-	.request(Method.GET, "/")         // 1 
-	.send()                           // 2
-	.flatMapMany(exchange -&gt; exchange // 3
-		.response()
+                    <p>An HTTP exchange can be created and a request sent fluently from the <code>Endpoint</code> instance:</p>
+                    <pre><code class="language-java">Flux&lt;String&gt; responseBody = endpoint
+    .exchange()
+    .flatMap(exchange -&gt; {
+        exchange.request()            // 1 
+            .method(Method.GET)
+            .path("/");
+        return exchange.response();   // 2
+    })
+	.flatMapMany(response -&gt; response // 3
 		.body()
 		.string().stream()
-	);
+	)
+	.subscribe(bodyPart -&gt; {});       // 2
 </code></pre>
                     <ol>
-                        <li>Create a <code>GET</code> request to get server's root path.</li>
-                        <li>Send the request to the server.</li>
-                        <li>When the client receives a response from the server the <code>Exchange</code> is emitted, exposing both the request and the response.</li>
+                        <li>Populate the request to <code>GET</code> the server's root path.</li>
+                        <li>The actual request is only sent to the server when the exchange response publisher is subscribed.</li>
+                        <li>When the client receives a response from the server the <code>Response</code> is emitted.</li>
                     </ol>
-                    <blockquote>
-                        <p>HTTP client and server APIs are built on top of <em>http-base</em> module API and as a result client and server <code>Exchange</code> API are very alike and used in a similar way.</p>
-                    </blockquote>
-                    <p>It is also possible to create <em>unbound</em> HTTP requests from the <code>HttpClient</code> in order to send a single request to multiple endpoints:</p>
-                    <pre><code class="language-java">Endpoint endpoint1 = ...
-Endpoint endpoint2 = ...
-
-HttpClient.Request&lt;ExchangeContext, Exchange&lt;ExchangeContext&gt;, InterceptableExchange&lt;ExchangeContext&gt;&gt; request = client.request(Method.GET, "/");
-
-endpoint1.send(request);
-endpoint2.send(request);
+                    <p>When the response publisher is subscribed, an HTTP connection is obtained from the Endpoint and the request eventually sent to the server.</p>
+                    <p>It is possible to specify the HTTP method and the request target directly when creating the exchange, above example could have also been written:</p>
+                    <pre><code class="language-java">Flux&lt;String&gt; responseBody = endpoint
+    .exchange(Method.GET, "/")
+    .flatMap(Exchange::response)
+	.flatMapMany(response -&gt; response
+		.body()
+		.string().stream()
+	)
+	.subscribe(bodyPart -&gt; {});
 </code></pre>
                     <blockquote>
-                        <p>Note that in case a body publisher is provided in the request, it will be subscribed multiple times (one per actual HTTP request).</p>
+                        <p>Note that when an exchange is created with no arguments it is set to send a <code>GET</code> request to the root path by default.</p>
+                    </blockquote>
+                    <blockquote>
+                        <p>HTTP client and server APIs are built on top of <em>http-base</em> module API and as a result client and server <code>Exchange</code> API are very alike and used in a similar way.</p>
                     </blockquote>
                     <h5 id="request">Request</h5>
                     <p>The <code>Request</code> allows to specify headers, cookies and the request body.</p>
                     <h6 id="request-headers">Request headers</h6>
                     <p>Request headers can be added or set fluently using a configurator as follows:</p>
-                    <pre><code class="language-java">Endpoint endpoint = ...
-endpoint
-	.request(Method.GET, "/")
-	.headers(headers -&gt; headers
-		.contentType(MediaTypes.APPLICATION_JSON)
-		.add("SomeHeader", "SomeValue")
-	);
+                    <pre><code class="language-java">endpoint
+	.exchange(Method.GET, "/")
+	.flatMap(exchange -&gt; {
+        exchange.request().headers(headers -&gt; headers
+            .contentType(MediaTypes.APPLICATION_JSON)
+            .add("SomeHeader", "SomeValue")
+        );
+        return exchange.response();
+	})
+	...
 </code></pre>
                     <h6 id="request-cookies">Request cookies</h6>
                     <p>Request cookies can be set fluently using a configurator as follows:</p>
-                    <pre><code class="language-java">Endpoint endpoint = ...
-endpoint
-	.request(Method.GET, "/")
-	.headers(headers -&gt; headers
+                    <pre><code class="language-java">endpoint
+	.exchange(Method.GET, "/")
+	.flatMap(exchange -&gt; {
+        exchange.request().headers(headers -&gt; headers
 		.cookies(cookies -&gt; cookies
 			.addCookie("cookie", "12345")
-		)
-	);
+		);
+		return exchange.response();
+	})
+	...
 </code></pre>
                     <h6 id="query-parameters">Query parameters</h6>
                     <p>Query parameters must be provided in the request target when creating the request, they are later exposed in the exchange as convertible parameters:</p>
-                    <pre><code class="language-java">Endpoint endpoint = ...
-endpoint
-	.request(Method.GET, "/some/path/id?some-integer=123&amp;some-string=abc")
-	.send()
-	.map(exchange -&gt; {
+                    <pre><code class="language-java">endpoint
+	.exchange(Method.GET, "/some/path/id?some-integer=123&amp;some-string=abc")
+	.flatMap(exchange -&gt; {
 		...
 		// get a specific query parameter, if there are multiple parameters with the same name, the first one is returned
 		Integer someInteger = exchange.request().queryParameters().get("some-integer").map(Parameter::asInteger).orElse(null);
@@ -3585,6 +3655,8 @@ endpoint
 		// get all query parameters
 		Map&lt;String, List&lt;Parameter&gt;&gt; queryParameters = exchange.request().queryParameters().getAll();
 		...
+		
+		return exchange.response();
 	})
 	...
 </code></pre>
@@ -3592,7 +3664,7 @@ endpoint
                         <p>A request can't be parameterized, the request target path specified when creating the request is the one included in the request sent to the server. It is however easy to get around this using a <code>URIBuilder</code>:</p>
                         <pre><code class="language-java">Map&lt;String, ?&gt; values = null;
 endpoint
-	.request(
+	.exchange(
 		Method.GET, 
 		URIs.uri(
 			"/some/path/{id}?p1={p1}", 
@@ -3605,36 +3677,42 @@ endpoint
                     </blockquote>
                     <h6 id="request-body">Request body</h6>
                     <p>The request body can also be specified fluently before sending the request. Since the HTTP client is fully reactive, the body must be specified as a publisher which is subscribed only when the request is sent to the server.</p>
+                    <blockquote>
+                        <p>Note that the body is only made available when the request method allows it (i.e. <code>POST</code>, <code>PUT</code>, <code>PATCH</code> or <code>DELETE</code>).</p>
+                    </blockquote>
                     <p><em>String</em></p>
                     <p>A simple string can be set in the request body as follows:</p>
-                    <pre><code class="language-java">Endpoint endpoint = ...
-endpoint
-	.request(Method.GET, "/some/path")
-	.body(body -&gt; body.string().value("Hello world!"))
-	.send()
+                    <pre><code class="language-java">endpoint
+	.exchange(Method.POST, "/some/path")
+	.flatMap(exchange -&gt; {
+	    exchange.request().body().get().string().value("Hello world!"));
+	    return exchange.response();
+	})
 	...
 </code></pre>
                     <p>The body can also be specified in a reactive way as a publisher of <code>CharSequence</code>:</p>
-                    <pre><code class="language-java">Endpoint endpoint = ...
-endpoint
-	.request(Method.GET, "/some/path")
-	.body(body -&gt; body.string().stream(Flux.just("Hello", " ", "world", "!")))
-	.send()
+                    <pre><code class="language-java">endpoint
+	.exchange(Method.POST, "/some/path")
+	.flatMap(exchange -&gt; {
+	    exchange.request().body().get().string().stream(Flux.just("Hello", " ", "world", "!"));
+	    return exchange.response();
+	})
 	...
 </code></pre>
                     <p><em>Raw</em></p>
                     <p>Raw data (i.e. bytes) can also be sent in the request. As for the string request body, it can be a single byte buffer or a stream of byte buffers:</p>
                     <p>The body can be specified as a publisher of <code>ByteBuf</code>:</p>
-                    <pre><code class="language-java">Endpoint endpoint = ...
-endpoint
-	.request(Method.GET, "/some/path")
-	.body(body -&gt; body.raw().stream(
-		Flux.just(
-			Unpooled.unreleasableBuffer(Unpooled.copiedBuffer("Hello", Charsets.DEFAULT)),
-			Unpooled.unreleasableBuffer(Unpooled.copiedBuffer(" world!", Charsets.DEFAULT))
-		)
-	))
-	.send()
+                    <pre><code class="language-java">endpoint
+	.exchange(Method.POST, "/some/path")
+	.flatMap(exchange -&gt; {
+	    exchange.request().body().get().raw().stream(
+		    Flux.just(
+			    Unpooled.unreleasableBuffer(Unpooled.copiedBuffer("Hello", Charsets.DEFAULT)),
+			    Unpooled.unreleasableBuffer(Unpooled.copiedBuffer(" world!", Charsets.DEFAULT))
+		    )
+	    );
+	    return exchange.response();
+	})
 	...
 </code></pre>
                     <blockquote>
@@ -3642,11 +3720,12 @@ endpoint
                     </blockquote>
                     <p><em>Resource</em></p>
                     <p>A <a href="#resource-api">resource</a> can be sent in a request body. When possible the client uses low-level (<a href="https://en.wikipedia.org/wiki/Zero-copy">zero-copy</a>) API for fast resource transfer.</p>
-                    <pre><code class="language-java">Endpoint endpoint = ...
-endpoint
-	.request(Method.GET, "/some/path")
-	.body(body -&gt; body.resource().value(new FileResource("/path/to/resource")))
-	.send()
+                    <pre><code class="language-java">endpoint
+	.exchange(Method.GET, "/some/path")
+	.flatMap(exchange -&gt; {
+	    exchange.request().body().get().resource().value(new FileResource("/path/to/resource"));
+	    return exchange.response();
+	})
 	...
 </code></pre>
                     <p>The media type of the resource is resolved using a <a href="#media-type-service">media type service</a> and automatically set in the request <code>content-type</code> header field.</p>
@@ -3655,47 +3734,52 @@ endpoint
                     </blockquote>
                     <p><em>URL encoded form</em></p>
                     <p>HTML form data of the form of key/value pairs encoded in <a href="https://url.spec.whatwg.org/#application/x-www-form-urlencoded">application/x-www-form-urlencoded format</a> can be sent in the request body of a POST as follows:</p>
-                    <pre><code class="language-java">Endpoint endpoint = ...
-endpoint
-	.request(Method.GET, "/some/path")
-	// param1=1234&amp;param2=abc
-	.body(body -&gt; body.urlEncoded()
-		.from((factory, data) -&gt; data.stream(
-			Flux.just(
-				factory.create("param1", 1234), 
-				factory.create("param2", "abc")
-			)
-		))
-	)
-	.send()
+                    <pre><code class="language-java">endpoint
+	.exchange(Method.POST, "/some/path")
+	.flatMap(exchange -&gt; {
+	    // param1=1234&amp;param2=abc
+	    exchange.request().body().get().urlEncoded()
+		    .from((factory, data) -&gt; data.stream(
+			    Flux.just(
+				    factory.create("param1", 1234), 
+				    factory.create("param2", "abc")
+			    )
+		    ));
+	    return exchange.response();
+	})
 	...
 </code></pre>
                     <p>When setting a URL encoded body, the request <code>content-type</code> header is automatically set to <code>application/x-www-form-urlencoded</code>. Parameter values are automatically converted to string using the <code>ParameterConverter</code> set in the <em>http-client</em> module and obviously percent-encoded to comply with <a href="https://url.spec.whatwg.org/#application/x-www-form-urlencoded">application/x-www-form-urlencoded format</a>.</p>
                     <p><em>Multipart form</em></p>
                     <p>When the request body must be split into multiple parts of different types or more basically when there is a need to upload one or more files along with other form data, a <a href="https://tools.ietf.org/html/rfc7578">Multipart/form-data</a> request body can be specified as follows:</p>
                     <pre><code class="language-java">endpoint
-	.request(Method.POST, "/some/path")
-	.body(body -&gt; body.multipart().from((factory, output) -&gt; output.stream(Flux.just(
-		factory.string(part -&gt; part
-			.name("param1")
-			.headers(headers -&gt; headers
-				.contentType(MediaTypes.TEXT_PLAIN)
-			)
-			.value("1234")
-		),
-		factory.string(part -&gt; part
-			.name("param2")
-			.headers(headers -&gt; headers
-				.contentType(MediaTypes.APPLICATION_JSON)
-			)
-			.value("{\"value\":123}")
-		),
-		factory.resource(part -&gt; part
-			.name("file")
-			.value(new FileResource("/path/to/resource"))
-		)
-	))))
-	.send()
+	.exchange(Method.POST, "/some/path")
+	.flatMap(exchange -&gt; {
+	    // param1=1234&amp;param2=abc
+	    exchange.request().body().get().multipart()
+	        .from((factory, output) -&gt; output.stream(Flux.just(
+		        factory.string(part -&gt; part
+			        .name("param1")
+			        .headers(headers -&gt; headers
+				        .contentType(MediaTypes.TEXT_PLAIN)
+			        )
+			        .value("1234")
+		        ),
+		        factory.string(part -&gt; part
+			        .name("param2")
+			        .headers(headers -&gt; headers
+				        .contentType(MediaTypes.APPLICATION_JSON)
+			        )
+			        .value("{\"value\":123}")
+		        ),
+		        factory.resource(part -&gt; part
+			        .name("file")
+			        .value(new FileResource("/path/to/resource"))
+		        )
+	        )));
+	    return exchange.response();
+	})
+	...
 </code></pre>
                     <p>The media type of a resource part is resolved using a <a href="#media-type-service">media type service</a> and automatically set in the part <code>content-type</code> header field. If no explicit <code>filename</code> parameter has been specified in the part, it is also automatically set to the filename of the resource.</p>
                     <h5 id="response">Response</h5>
@@ -3703,45 +3787,47 @@ endpoint
                     <h6 id="response-headerstrailers">Response headers/trailers</h6>
                     <p>Response headers can be obtained as string values as follows:</p>
                     <pre><code class="language-java">endpoint
-	.request(Method.GET, "/some/path")
-	.send()
-	.map(exchange -&gt; {
+	.exchange(Method.GET, "/some/path")
+	.flatMap(Exchange::response)
+	.map(response -&gt; {
 		// Returns the value of the first occurence of 'some-header' as string or returns null
-		String someHeaderValue = exchange.response().headers().get("some-header").orElse(null);
+		String someHeaderValue = response.headers().get("some-header").orElse(null);
 
 		// Returns all 'some-header' values as strings
-		List&lt;String&gt; someHeaderValues = exchange.response().headers().getAll("some-header");
+		List&lt;String&gt; someHeaderValues = response.headers().getAll("some-header");
 
 		// Returns all headers as strings
-		List&lt;Map.Entry&lt;String, String&gt;&gt; allHeadersValues = exchange.response().headers().getAll();
+		List&lt;Map.Entry&lt;String, String&gt;&gt; allHeadersValues = response.headers().getAll();
 		
 		...
-	});
+	})
+	...
 </code></pre>
                     <p>It is also possible to get headers as <code>Parameter</code> which allows to easily convert the value using a parameter converter:</p>
                     <pre><code class="language-java">endpoint
-	.request(Method.GET, "/some/path")
-	.send()
-	.map(exchange -&gt; {
+	.exchange(Method.GET, "/some/path")
+	.flatMap(Exchange::response)
+	.map(response -&gt; {
 		// Returns the value of the first occurence of 'some-header' as LocalDateTime or returns null
-		LocalDateTime someHeaderValue = exchange.response().headers().getParameter("some-header").map(Parameter::asLocalDateTime).orElse(null);
+		LocalDateTime someHeaderValue = response.headers().getParameter("some-header").map(Parameter::asLocalDateTime).orElse(null);
 
 		// Returns all 'some-header' values as LocalDateTime
-		List&lt;LocalDateTime&gt; someHeaderValues = exchange.response().headers().getAllParameter("some-header").stream().map(Parameter::asLocalDateTime).collect(Collectors.toList());
+		List&lt;LocalDateTime&gt; someHeaderValues = response.headers().getAllParameter("some-header").stream().map(Parameter::asLocalDateTime).collect(Collectors.toList());
 
 		// Returns all headers as parameters
-		List&lt;Parameter&gt; allHeadersParameters = exchange.response().headers().getAllParameter();
+		List&lt;Parameter&gt; allHeadersParameters = response.headers().getAllParameter();
 		
 		...
-	});
+	})
+	...
 </code></pre>
                     <p>The <em>http-client</em> module can also uses the <a href="#http-header-service">header service</a> provided by the <em>http-base</em> module to decode HTTP headers:</p>
                     <pre><code class="language-java">endpoint
 	.request(Method.GET, "/some/path")
-	.send()
-	.map(exchange -&gt; {
+	.flatMap(Exchange::response)
+	.map(response -&gt; {
 		// Returns the decoded 'content-type' header or null
-		Headers.ContentType contenType = exchange.request().headers().&lt;Headers.ContentType&gt;getHeader(Headers.NAME_CONTENT_TYPE).orElse(null);
+		Headers.ContentType contenType = response.headers().&lt;Headers.ContentType&gt;getHeader(Headers.NAME_CONTENT_TYPE).orElse(null);
 
 		String mediaType = contenType.getMediaType();
 		Charset charset = contenType.getCharset();
@@ -3756,9 +3842,9 @@ endpoint
                     <p>The response status is exposed as part of the headers:</p>
                     <pre><code class="language-java">endpoint
 	.request(Method.GET, "/some/path")
-	.send()
-	.map(exchange -&gt; {
-		if(exchange.response().headers().getStatus().getCode() &gt;= 400) {
+	.flatMap(Exchange::response)
+	.map(response -&gt; {
+		if(response.headers().getStatus().getCode() &gt;= 400) {
 			// Report Error
 			...
 		}
@@ -3769,26 +3855,27 @@ endpoint
                     <p>Response cookies can be obtained as convertible <code>Parameter</code> from the headers as follows:</p>
                     <pre><code class="language-java">endpoint
 	.request(Method.GET, "/some/path")
-	.send()
-	.map(exchange -&gt; {
+	.flatMap(Exchange::response)
+	.map(response -&gt; {
 		// Returns the value of the first occurence of 'some-cookie' as LocalDateTime or returns null
-		LocalDateTime someCookieValue = exchange.response().headers().cookies().get("some-cookie").map(Parameter::asLocalDateTime).orElse(null);
+		LocalDateTime someCookieValue = response.headers().cookies().get("some-cookie").map(Parameter::asLocalDateTime).orElse(null);
 
 		// Returns all 'some-cookie' values as LocalDateTime
-		List&lt;LocalDateTime&gt; someCookieValues = exchange.response().headers().cookies().getAll("some-cookie").stream().map(Parameter::asLocalDateTime).collect(Collectors.toList());
+		List&lt;LocalDateTime&gt; someCookieValues = response.headers().cookies().getAll("some-cookie").stream().map(Parameter::asLocalDateTime).collect(Collectors.toList());
 
 		// Returns all cookies as set-cookie parameters
-		Map&lt;String, List&lt;SetCookieParameter&gt;&gt; allCookieParameters = exchange.response().headers().cookies().getAll();
+		Map&lt;String, List&lt;SetCookieParameter&gt;&gt; allCookieParameters = response.headers().cookies().getAll();
 		
 		...
-	});
+	})
+	...
 </code></pre>
                     <p><code>SetCookieParameter</code> extends both <code>SetCookie</code> and <code>Parameter</code> so as to also expose <code>set-cookie</code> header attributes as defined by <a href="https://tools.ietf.org/html/rfc6265#section-4.1">RFC 6265 Section 4.1</a>:</p>
                     <pre><code class="language-java">endpoint
 	.request(Method.GET, "/some/path")
-	.send()
-	.map(exchange -&gt; {
-		SetCookieParameter someCookie = exchange.response().headers().cookies().get("some-cookie").orElse(null);
+	.flatMap(Exchange::response)
+	.map(response -&gt; {
+		SetCookieParameter someCookie = response.headers().cookies().get("some-cookie").orElse(null);
 
 		ZonedDateTime expires = someCookie.getExpires();
 		int maxAge = someCookie.getMaxAge();
@@ -3808,9 +3895,9 @@ endpoint
                     <p>The response body can be consumed as <code>CharSequence</code> as follows:</p>
                     <pre><code class="language-java">endpoint
 	.request(Method.GET, "/some/path")
-	.send()
-	.flatMapMany(exchange -&gt; exchange.response().body().string().stream())
-	.subscribe(chunk -&gt; {
+	.flatMap(Exchange::response)
+	.flatMapMany(response -&gt; response.body().string().stream())
+	.subscribe(bodyPart -&gt; {
 		// Do something usefull with the payload
 		...
 	});
@@ -3820,8 +3907,8 @@ endpoint
                     <p>The response body can also be consumed as raw data as follows:</p>
                     <pre><code class="language-java">endpoint
 	.request(Method.GET, "/some/path")
-	.send()
-	.flatMapMany(exchange -&gt; exchange.response().body().raw().stream())
+	.flatMap(Exchange::response)
+	.flatMapMany(response -&gt; response.body().raw().stream())
 	.subscribe((ByteBuf chunk) -&gt; {
 		try {
 			// Do something usefull with the payload
@@ -3834,75 +3921,93 @@ endpoint
 </code></pre>
                     <p>When response payload is consumed as a flow of <code>ByteBuf</code>, it is the responsability of the subscriber to release chunks in order to avoid memory leaks.</p>
                     <h5 id="exchange-interceptor">Exchange interceptor</h5>
-                    <p>The request can be intercepted using an <code>ExchangeInterceptor</code>. This can be used to preprocess a request before it is sent or the response before the exchange is emitted in the publisher returned by the <code>send()</code> method. For instance, it is then possible to add some security headers to the request, initialize some context (tracing, metrics...) or decorate the request and response bodies.</p>
-                    <p>The <code>intercept()</code> method returns a <code>Mono</code> which makes it reactive and allows to invoke non-blocking operations before the request is actually sent.</p>
-                    <p>The following code shows how to intercept a request in order to log request and response bodies:</p>
-                    <pre><code class="language-java">endpoint
-	.request(Method.POST, "/some/path")
-	.intercept(exchange -&gt; {
+                    <p>An <code>ExchangeInterceptor</code> can be specified when building an <code>Endpoint</code>, it is applied to all exchange created with the resulting instance right before the request is sent to the server. An interceptor can be used to preprocess a request before it is sent or a response before it is emitted in the response publisher. For instance, it is possible to add some security headers to the request, initialize some context (tracing, metrics...) or decorate the request and response bodies.</p>
+                    <p>The <code>intercept()</code> method in the <code>ExchangeInterceptor</code> returns a <code>Mono</code> which makes it reactive and allows to invoke non-blocking operations before the request is actually sent.</p>
+                    <p>The following code shows how to set an interceptor to log request and response bodies:</p>
+                    <pre><code class="language-java">Endpoint&lt;ExchangeContext&gt; endpoint = httpClient
+	.endpoint("example.org", 80)
+	.interceptor(exchange -&gt; {
 		final StringBuilder requestBodyBuilder = new StringBuilder();
 		exchange.request().body().ifPresent(body -&gt; body.transform(data -&gt; Flux.from(data)
 			.doOnNext(buf -&gt; requestBodyBuilder.append(buf.toString(Charsets.UTF_8)))
-			.doOnComplete(() -&gt; System.out.println("Request Body: \n" + requestBodyBuilder.toString()))
+			.doOnComplete(() -&gt; LOGGER.info("Request Body: \n" + requestBodyBuilder.toString()))
 		));
 
 		final StringBuilder responseBodyBuilder = new StringBuilder();
 		exchange.response().body().transform(data -&gt; Flux.from(data)
 			.doOnNext(buf -&gt; responseBodyBuilder.append(buf.toString(Charsets.UTF_8)))
-			.doOnComplete(() -&gt; System.out.println("Response Body: \n" + responseBodyBuilder.toString()))
+			.doOnComplete(() -&gt; LOGGER.info("Response Body: \n" + responseBodyBuilder.toString()))
 		);
-
 		return Mono.just(exchange);
 	})
-	.body(body -&gt; body.string().value("This is an example"))
-	.send()
-	...
+	.build();
+
+endpoint
+    .exchange(Method.POST, "/some/path")
+    .flatMap(exchange -&gt; {
+        exchange.request().body().get().string().value("This is an example"));
+        return exchange.response();
+    })
+    .flatMapMany(response -&gt; response.body().string().stream())
+    .collect(Collectors.joining())
+    .block(); // logs request and response body
 </code></pre>
-                    <p>An interceptor also allows to abort sending the actual HTTP request by returning an empty publisher in which case the current interceptable exchange is emitted.</p>
-                    <p>The following example shows how to abort the HTTP request and return a response programmatically:</p>
-                    <pre><code class="language-java">endpoint
-	.request(Method.GET, "/some/path")
-	.intercept(exchange -&gt; {
-		exchange.response()
-			.headers(headers -&gt; headers
-				.status(Status.OK)
-			)
-			.body()
-				.string().value("You have been intercepted");
-		
-		return Mono.empty();
+                    <p>An interceptor also allows to abort sending the actual HTTP request by returning an empty publisher in which case the current interceptable exchange with a locally populated response is emitted.</p>
+                    <p>The following example shows how to abort all HTTP requests to <code>/some/path</code> and return a local response:</p>
+                    <pre><code class="language-java">Endpoint&lt;ExchangeContext&gt; endpoint = httpClient
+	.endpoint("example.org", 80)
+	.interceptor(exchange -&gt; {
+	    if(exchange.request().getPath().equals("/some/path")) {
+	        // Abort '/some/path' requests only
+	        exchange.response()
+			    .headers(headers -&gt; headers
+				    .status(Status.OK)
+			    )
+			    .body().string().value("You have been intercepted");
+	        return Mono.empty();
+	    }
+	    return Mono.just(exchange);
 	})
-	.send()
-	...
+	.build();
+
+endpoint
+    .exchange(Method.POST, "/some/path")
+    .flatMap(Exchange::response)
+    .flatMapMany(response -&gt; response.body().string().stream())
+    .collect(Collectors.joining())
+    .block(); // returns "You have been intercepted"
 </code></pre>
                     <p>Mulitple interceptors can be chained by invoking <code>intercept()</code> method mutliple times:</p>
-                    <pre><code class="language-java">endpoint
-	.request(Method.GET, "/some/path")
-	.intercept(interceptor1)
-	.intercept(interceptor2)
-	.intercept(interceptor3)
-	.send()
+                    <pre><code class="language-java">Endpoint&lt;ExchangeContext&gt; endpoint = httpClient
+    .endpoint("example.org", 80)
+	.interceptor(interceptor1)
+	.interceptor(interceptor2)
+	.interceptor(interceptor3)
+	.build();
 	...
 </code></pre>
                     <h5 id="exchange-context">Exchange context</h5>
-                    <p>A strongly typed context is exposed in the <code>Exchange</code>, it allows to store or access data and to provide contextual operations throughout the process of the exchange. Such context can be provided when creating the request.</p>
+                    <p>A strongly typed context is exposed in the <code>Exchange</code>, it allows to store or access data and to provide contextual operations throughout the process of the exchange. Such context can be provided when creating the exchange, the actual context type is specified when creating the Endpoint.</p>
                     <p>For instance, it is possible to propagate a security context from an <code>ExchangeInterceptor</code>:</p>
-                    <pre><code class="language-java">SecurityContext context = ...
-endpoint
-	.request(Method.GET, path, context)
-	.intercept(exchange -&gt; {
+                    <pre><code class="language-java">Endpoint&lt;SecurityContext&gt; securedEndpoint = client.&lt;SecurityContext&gt;endpoint("secured", 8443)
+	.interceptor(exchange -&gt; {
 		exchange.request().headers(headers -&gt; headers
 			.add(Headers.NAME_AUTHORIZATION, "Bearer " + exchange.context().getToken())
 		);
 		return Mono.just(exchange);
 	})
-	.send()
+	.build();
+
+SecurityContext context = ...
+endpoint
+	.exchange(Method.GET, path, context)
+	.flatMap(Exchange::response)
 	...
 </code></pre>
+                    <p>The advantage of using strongly types context is that the compiler can perform static type checking but also to avoid the usage of an untyped map of attributes which is less performant and provides no control over contextual data. Since the developer defines the context type, it can also embed specific logic.</p>
                     <blockquote>
-                        <p>Above code is a simple example, in an actual application interceptors would probably be defined in a separate component and applied to multiple requests.</p>
+                        <p>The choice has been made to fix the context type on the endpoint following what was done in the Web server module: the exchange context is meant to be defined at application level covering all use cases as such there can only be one exchange type. We could have decided to fix the exchange type on the HttpClient itself but generics are not supported on beans, besides this gives us a little more flexibility anyway.</p>
                     </blockquote>
-                    <p>The advantage of using strongly types context is that the compiler can perform static type checking but also to avoid the usage of an untyped map of attributes which is less performant and provides no control over contextual data. Since the developer defines the context type, it can also expose specific logic.</p>
                     <h5 id="connection-pool">Connection pool</h5>
                     <p>The <em>http-client</em> module provides an <code>Endpoint</code> implementation based on a connection pool which allows it to be resilient, stale connections being automatically recreated, and to scale up and down automatically based on application workload.</p>
                     <p>An HTTP connection is only created when a request is sent on an <code>Endpoint</code> and no connection is currently available to process that request. This is especially the case when there is no active connection in the pool (e.g. when the endpoint has just been created) are full (i.e. max concurrent requests threshold has been reached). The pooled endpoint can create up to a certain amount of connections before buffering requests also up to a certain threshold above which a <code>ConnectionPoolException</code> is finally thrown. When the workload decreases, the endpoint parks unnecessary connections and eventually close them when they time out, this allows to put them back in the active pool in case new requests are issued.</p>
@@ -3920,11 +4025,11 @@ endpoint
                     </blockquote>
                     <p>At any moment, the endpoint will try its best to optimize connection usage by distributing request to the least loaded connection and only create connection when necessary. It also has the ability to reinstate parked connections which are still active if the workload demands it.</p>
                     <h5 id="error-handling">Error handling</h5>
-                    <p>Http client errors such as connection errors, timeout errors or any Http client related errors are raised by the exchange <code>Mono</code> returned by the <code>send()</code> method, they can then be handled as for any error on a reactive stream:</p>
+                    <p>Http client errors such as connection errors, timeout errors or any Http client related errors are raised on the response publisher exposed on the exchange, they can then be handled as for any error on a reactive stream:</p>
                     <pre><code class="language-java">endpoint
-	.request(Method.GET, "/some/path")
-	.send()
-	.flatMapMany(exchange -&gt; exchange.response().body().string().stream())
+	.exchange(Method.GET, "/some/path")
+	.flatMap(Exchange::response)
+	.flatMapMany(response -&gt; response.body().string().stream())
 	.collect(Collectors.joining())
 	.subscribe(
 		body -&gt; {
@@ -3935,48 +4040,52 @@ endpoint
 </code></pre>
                     <p>Being reactive allows interesting constructs, such as retries on error:</p>
                     <pre><code class="language-java">endpoint
-	.request(Method.GET, "/some/path")
-	.send()
-	.retry(5)
+	.exchange(Method.GET, "/some/path")
+	.flatMap(Exchange::response)
+	.retry(5) // see 
 	...
 </code></pre>
+                    <blockquote>
+                        <p>Reactor library provides advanced retry strategies such as backoff, fixed delay, max in a row... Please refer to <a href="https://projectreactor.io/docs/core/release/api/">Reactor API documentation</a>.</p>
+                    </blockquote>
                     <h4 id="websocket">WebSocket</h4>
-                    <p>The <em>http-client</em> module allows to open WebSocket connections as defined by <a href="https://datatracker.ietf.org/doc/html/rfc6455">RFC 6455</a>. The <code>webSocketRequest()</code> method on the <code>Endpoint</code> is used to create a specific HTTP request sent to upgrade an HTTP/1.1 connection to the WebSocket protocol.</p>
+                    <p>The <em>http-client</em> module allows to open WebSocket connections as defined by <a href="https://datatracker.ietf.org/doc/html/rfc6455">RFC 6455</a>. The <code>webSocket()</code> method exposed in the <code>Exchange</code> returns a <code>WebSocketExchange</code> publisher which is used to send a specific HTTP request that upgrades a dedicated HTTP/1.1 connection to the WebSocket protocol. As for the response publisher, the WebSocket connection is only created when the WebSocket publisher is subscribed.</p>
                     <p>A WebSocket connection can then be created as follows:</p>
                     <pre><code class="language-java">endpoint
-	.webSocketRequest("/some/path/ws")
-	.send()
+	.exchange("/some/path/ws")
+	.flatMap(Exchange::webSocket)
 	.subscribe(webSocketExchange -&gt; {
 		// write to outbound and read from inbound...
 		...
 	});
 </code></pre>
-                    <p>In case the server does not support or accept the upgrade a <code>WebSocketClientHandshakeException</code> is raised in the publisher returned in the <code>send()</code> method otherwise a <code>WebSocketExchange</code> is emitted exposing inbound and outbound frames or messages.</p>
+                    <p>In case the server does not support or accept the upgrade a <code>WebSocketClientHandshakeException</code> is raised in the <code>WebSocketExchange</code> publisher otherwise a <code>WebSocketExchange</code> is emitted exposing inbound and outbound frames or messages.</p>
                     <blockquote>
-                        <p>Note that a WebSocket connection lives outside of the connection pool managed by the endpoint and as such doesn't count in pool's capacity. It is closed as soon as the WebSocket is closed either by the client or the server.</p>
+                        <p>Note that a WebSocket connection is dedicated and lives outside of the connection pool managed by the endpoint and as such doesn't count in pool's capacity. It is closed as soon as the WebSocket is closed either by the client or the server.</p>
                     </blockquote>
                     <p>As for a regular HTTP request, headers and cookies can be specified as follows:</p>
                     <pre><code class="language-java">endpoint
-	.webSocketRequest("/some/path/ws")
-	.headers(headers -&gt; headers
-		.add("some-header", "value")
-		.cookies(cookies -&gt; cookies.addCookie("some-cookie", 123))
-	)
-	.send()
+	.exchange("/some/path/ws")
+	.flatMap(exchange -&gt; {
+	    exchange.request().headers(headers -&gt; headers
+	        .add("some-header", "value")
+		    .cookies(cookies -&gt; cookies.addCookie("some-cookie", 123))
+	    );
+	    return exchange.webSocket();
+	})
 	.subscribe(webSocketExchange -&gt; {
 		...
 	});
 </code></pre>
-                    <p>The WebSocket request can also specify the subprotocol to use by both client and server to communicate:</p>
+                    <p>The subprotocol to use by both client and server to communicate can also be specified:</p>
                     <pre><code class="language-java">endpoint
-	.webSocketRequest("/some/path/ws")
-	.subProtocol("xml")
-	.send()
+	.exchange("/some/path/ws")
+	.flatMap(exchange -&gt; exchange.webSocket("xml"))
 	.subscribe(webSocketExchange -&gt; {
 		...
 	});
 </code></pre>
-                    <p>The upgrading HTTP request basically contains the requested subprotocol which must be supported by the server for the connection to be established. The WebSocket handshake eventually fails if the server doesn't support it and a <code>WebSocketClientHandshakeException</code> shall be raised.</p>
+                    <p>The upgrading HTTP request basically contains the requested subprotocol which must be supported by the server for the connection to be established. Depending on servers implementation, the WebSocket handshake might fail eventually if the server doesn't support it and a <code>WebSocketClientHandshakeException</code> shall be raised.</p>
                     <h5 id="websocket-exchange">WebSocket exchange</h5>
                     <p>The <code>WebSocketExchange</code> also exposes:</p>
                     <ul>
@@ -4011,8 +4120,8 @@ webSocketExchange.close((short)1000, "Goodbye!");
                     <p>In a WebSocket exchange, the <code>Inbound</code> exposes the stream of frames received by the client from the server. It allows to consume WebSocket frames (text or binary) or messages (text or binary).</p>
                     <p>The following example shows how to logs every incoming frames:</p>
                     <pre><code class="language-java">endpoint
-	.webSocketRequest("/some/path/ws")
-	.send()
+	.exchange("/some/path/ws")
+	.flatMap(Exchange::webSocket)
 	.flatMapMany(wsExchange -&gt; wsExchange.inbound().frames())
 	.subscribe(frame -&gt; {
 		try {
@@ -4026,8 +4135,8 @@ webSocketExchange.close((short)1000, "Goodbye!");
                     <p>As for response body <code>ByteBuf</code> data, WebSocket frames are reference counted and they must be released where they are consumed. In previous example, inbound frames are consumed in the subscriber which must then release them.</p>
                     <p>The WebSocket protocol supports fragmentation as defined by [RFC 6455 Section 5.4][rfc-6455-5.4], a WebSocket message can be fragmented into multiple frames, the final frame being flagged as final to indicate the end of the message. The <code>Inbound</code> can handle fragmented WebSocket messages and allows to consume corresponding fragmented data in multiple ways.</p>
                     <pre><code class="language-java">endpoint
-	.webSocketRequest("/some/path/ws")
-	.send()
+	.exchange("/some/path/ws")
+	.flatMap(Exchange::webSocket)
 	.flatMapMany(wsExchange -&gt; wsExchange.inbound().messages())
 	.flatMap(message -&gt; {
 		// The stream of frames composing the message
@@ -4058,11 +4167,11 @@ webSocketExchange.close((short)1000, "Goodbye!");
                     <p>In the following example, a sink is used to create the frame publisher specified in the WebSocket outbound:</p>
                     <pre><code class="language-java">Sinks.Many&lt;String&gt; framesSink = Sinks.many().unicast().onBackpressureBuffer();
 endpoint
-	.webSocketRequest("/some/path/ws")
-	.send()
+	.exchange("/some/path/ws")
+	.flatMap(Exchange::webSocket)
 	.flatMapMany(wsExchange -&gt; {
 		wsExchange.outbound()
-			.frames(factory -&gt; framesSink.asFlux().map(factory::text));
+		    .frames(factory -&gt; framesSink.asFlux().map(factory::text));
 		
 		return wsExchange.inbound().frames();
 	})
@@ -4083,11 +4192,12 @@ framesSink.tryEmitComplete();
                     <p>Likewise, a message publisher can be specfied to send messages composed of multiple frames. Frames and messages publisher are exclusive, only one of them can be specified.</p>
                     <pre><code class="language-java">Sinks.Many&lt;List&lt;String&gt;&gt; messagesSink = Sinks.many().unicast().onBackpressureBuffer();
 endpoint
-	.webSocketRequest("/some/path/ws")
-	.send()
+	.exchange("/some/path/ws")
+	.flatMap(Exchange::webSocket)
 	.flatMapMany(wsExchange -&gt; {
-		wsExchange.outbound().closeOnComplete(true)
-			.messages(factory -&gt; messagesSink.asFlux().map(Flux::fromIterable).map(factory::text));
+		wsExchange.outbound()
+		    .closeOnComplete(true)
+		    .messages(factory -&gt; messagesSink.asFlux().map(Flux::fromIterable).map(factory::text));
 		
 		return wsExchange.inbound().messages();
 	})
@@ -4103,8 +4213,8 @@ messagesSink.tryEmitComplete();
                     <p>By default, a close frame is automatically sent when the outbound publisher terminates. This behaviour can be changed by configuration by setting the <code>ws_close_on_outbound_complete</code> parameter to ̀<code>false</code> or on the <code>Outbound</code> itself using the <code>closeOnComplete()</code> method:</p>
                     <pre><code class="language-java">Sinks.Many&lt;String&gt; framesSink = Sinks.many().unicast().onBackpressureBuffer();
 endpoint
-	.webSocketRequest("/some/path/ws")
-	.send()
+	.exchange("/some/path/ws")
+	.flatMap(Exchange::webSocket)
 	.flatMapMany(wsExchange -&gt; {
 		wsExchange.outbound()
 			.closeOnComplete(false)
@@ -4166,8 +4276,8 @@ module io.inverno.example.app_http {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.7.1'
-compile 'io.inverno.mod:inverno-http-server:1.7.1'
+compile 'io.inverno.mod:inverno-boot:1.8.0'
+compile 'io.inverno.mod:inverno-http-server:1.8.0'
 ...
 </code></pre>
                     <p>The resulting <em>app_http</em> module, thus created, can then be started as an application as follows:</p>
@@ -4195,7 +4305,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.5 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.6 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -4673,7 +4783,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.5 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.6 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -4855,7 +4965,7 @@ Hello anonymous from app_http module!
             .flatMap(part -&gt; part.getFilename()                                                                                   // 2 
                 .map(fileName -&gt; Flux.&lt;CharSequence, FileResource&gt;using(                                                          // 3 
                     () -&gt; new FileResource("uploads/" + part.getFilename().get()),                                                // 4 
-                    file -&gt; file.write(part.raw().stream()).map(Flux::from).get()                                                 // 5 
+                    file -&gt; Flux.from(file.write(part.raw().stream()))                                                            // 5 
                         .reduce(0, (acc, cur) -&gt; acc + cur)
                         .map(size -&gt; "Uploaded " + fileName + "(" + part.headers().getContentType() + "): " + size + " Bytes\n"),  
                     FileResource::close                                                                                           // 6 
@@ -5436,8 +5546,8 @@ module io.inverno.example.app_web {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.7.1'
-compile 'io.inverno.mod:inverno-web-server:1.7.1'
+compile 'io.inverno.mod:inverno-boot:1.8.0'
+compile 'io.inverno.mod:inverno-web-server:1.8.0'
 ...
 </code></pre>
                     <h4 id="web-routing-api">Web Routing API</h4>
@@ -6176,7 +6286,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.5 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.6 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -7603,7 +7713,7 @@ info:
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-irt:1.7.1'
+compile 'io.inverno.mod:inverno-irt:1.8.0'
 ...
 </code></pre>
                     <p>Dependencies to <code>io.netty.common</code> and <code>io.netty.buffer</code> are also required when using <code>BYTEBUF</code> or <code>PUBLISHER_BYTEBUF</code> <a href="#modes">modes</a> which require Netty's <code>ByteBuf</code>. They are defined as optional in the <em>irt</em> module and won't be included by default. In order to use <code>ByteBuf</code> based generation modes, the following dependencies must be declared as well in the module descriptor:</p>
@@ -8004,8 +8114,8 @@ import java.time.format.DateTimeFormatter;
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-sql:1.7.1'
-compile 'io.inverno.mod:inverno-sql-vertx:1.7.1'
+compile 'io.inverno.mod:inverno-sql:1.8.0'
+compile 'io.inverno.mod:inverno-sql-vertx:1.8.0'
 ...
 </code></pre>
                     <h4 id="sql-client-api">SQL client API</h4>
@@ -8218,7 +8328,7 @@ client.connection(ops -&gt; ops
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-sql-vertx:1.7.1'
+compile 'io.inverno.mod:inverno-sql-vertx:1.8.0'
 compile 'io.vertx:vertx-pg-client:4.1.2'
 ...
 </code></pre>
@@ -8275,8 +8385,8 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-redis:1.7.1'
-compile 'io.inverno.mod:inverno-redis-vertx:1.7.1'
+compile 'io.inverno.mod:inverno-redis:1.8.0'
+compile 'io.inverno.mod:inverno-redis-vertx:1.8.0'
 ...
 </code></pre>
                     <h4 id="redis-client-api">Redis Client API</h4>
@@ -8438,7 +8548,7 @@ Assertions.assertTrue(result.wasDiscarded());
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-redis-lettuce:1.7.1'
+compile 'io.inverno.mod:inverno-redis-lettuce:1.8.0'
 ...
 </code></pre>
                     <h5 id="configuration-6">Configuration</h5>
@@ -8499,8 +8609,8 @@ module io.inverno.example.app {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.7.1'
-compile 'io.inverno.mod:inverno-ldap:1.7.1'
+compile 'io.inverno.mod:inverno-boot:1.8.0'
+compile 'io.inverno.mod:inverno-ldap:1.8.0'
 ...
 </code></pre>
                     <h4 id="configuration-7">Configuration</h4>
@@ -8680,7 +8790,7 @@ admin_credentials="admin_password"
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security:1.7.1'
+compile 'io.inverno.mod:inverno-security:1.8.0'
 ...
 </code></pre>
                     <p>Before looking into details of the security API, let's see how to secure a simple standalone application composed of a single <code>HelloService</code> bean exposing <code>sayHello()</code> method. Initially the application might look like:</p>
@@ -8726,7 +8836,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.5 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.6 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -9690,7 +9800,7 @@ pbac.hasPermission("manage", "domain", "printer", "printer", "C400V-DN").block()
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security-http:1.7.1'
+compile 'io.inverno.mod:inverno-security-http:1.8.0'
 ...
 </code></pre>
                     <p>Let's quickly see how to secure a simple Web application exposing a single hello world service using basic authentication. The application might initially look like:</p>
@@ -9733,7 +9843,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.5 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.6 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -10863,8 +10973,8 @@ public class SecurityConfigurer implements WebInterceptorsConfigurer&lt;Exchange
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security-http:1.7.1'
-compile 'io.inverno.mod:inverno-security-ldap:1.7.1'
+compile 'io.inverno.mod:inverno-security-http:1.8.0'
+compile 'io.inverno.mod:inverno-security-ldap:1.8.0'
 ...
 </code></pre>
                     <p>The following example shows how to configure a security manager to authenticate login credentials against an LDAP server, resolving the authenticated user's identity from the LDAP server and a role-based access controller from user's groups.</p>
@@ -10959,7 +11069,7 @@ module io.inverno.example.app {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security-jose:1.7.1'
+compile 'io.inverno.mod:inverno-security-jose:1.8.0'
 ...
 </code></pre>
                     <p>The <em>security-jose</em> module is an Inverno module which exposes four services:</p>
@@ -12571,7 +12681,7 @@ Message message = jweService.&lt;JWS&lt;Message&gt;&gt;reader(Types.type(JWS.cla
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.tool:inverno-build-tools:1.4.3'
+compile 'io.inverno.tool:inverno-build-tools:1.4.4'
 ...
 </code></pre>
                     <h3 id="project-and-dependencies">Project and Dependencies</h3>
@@ -13321,7 +13431,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernobuild-runtime">inverno:build-runtime</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0-SNAPSHOT:build-runtime</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.4.4:build-runtime</p>
                     <p><strong>Description:</strong></p>
                     <p>Builds the project runtime image.</p>
                     <p>A runtime image is a custom Java runtime containing a set of modules and their dependencies.</p>
@@ -13837,7 +13947,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernodebug">inverno:debug</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0-SNAPSHOT:debug</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.4.4:debug</p>
                     <p><strong>Description:</strong></p>
                     <p>Debugs the project application.</p>
                     <p><strong>Attributes:</strong></p>
@@ -14051,7 +14161,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernodeploy-image">inverno:deploy-image</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0-SNAPSHOT:deploy-image</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.4.4:deploy-image</p>
                     <p><strong>Description:</strong></p>
                     <p>Builds and deploys the project application container image to an image registry.</p>
                     <p><strong>Attributes:</strong></p>
@@ -14916,7 +15026,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernohelp">inverno:help</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0-SNAPSHOT:help</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.4.4:help</p>
                     <p><strong>Description:</strong></p>
                     <p>Display help information on inverno-maven-plugin. Call mvn inverno:help -Ddetail=true -Dgoal=&lt;goal-name&gt; to display parameter details.</p>
                     <p><strong>Attributes:</strong></p>
@@ -15001,7 +15111,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernoinstall-image">inverno:install-image</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0-SNAPSHOT:install-image</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.4.4:install-image</p>
                     <p><strong>Description:</strong></p>
                     <p>Builds and installs the project application container image to the local Docker daemon.</p>
                     <p><strong>Attributes:</strong></p>
@@ -15863,7 +15973,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernopackage-app">inverno:package-app</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0-SNAPSHOT:package-app</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.4.4:package-app</p>
                     <p><strong>Description:</strong></p>
                     <p>Builds and packages the project application image.</p>
                     <p>A project application package is a native self-contained Java application including all the necessary dependencies. It can be used to distribute a complete application.</p>
@@ -16558,7 +16668,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernopackage-image">inverno:package-image</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0-SNAPSHOT:package-image</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.4.4:package-image</p>
                     <p><strong>Description:</strong></p>
                     <p>Builds and packages the project application container image in a TAR archive.</p>
                     <p><strong>Attributes:</strong></p>
@@ -17393,7 +17503,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernorun">inverno:run</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0-SNAPSHOT:run</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.4.4:run</p>
                     <p><strong>Description:</strong></p>
                     <p>Runs the project application.</p>
                     <p><strong>Attributes:</strong></p>
@@ -17573,7 +17683,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernostart">inverno:start</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0-SNAPSHOT:start</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.4.4:start</p>
                     <p><strong>Description:</strong></p>
                     <p>Starts the project application without blocking the Maven build.</p>
                     <p>This goal is used together with the stop goal in the pre-integration-test and post-integration-test phases to run integration tests.</p>
@@ -17754,7 +17864,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernostop">inverno:stop</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0-SNAPSHOT:stop</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.4.4:stop</p>
                     <p><strong>Description:</strong></p>
                     <p>Stops the project application that has been previously started using the start goal.</p>
                     <p>This goal is used together with the start goal in the pre-integration-test and post-integration-test phases to run integration tests.</p>
@@ -17890,22 +18000,27 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>com.fasterxml.jackson.core</td>
                               <td>jackson-core</td>
-                              <td>2.16.1</td>
+                              <td>2.17.0</td>
                               </tr>
                               <tr>
                               <td>com.fasterxml.jackson.core</td>
                               <td>jackson-databind</td>
-                              <td>2.16.1</td>
+                              <td>2.17.0</td>
                               </tr>
                               <tr>
                               <td>com.fasterxml.jackson.datatype</td>
                               <td>jackson-datatype-jsr310</td>
-                              <td>2.16.1</td>
+                              <td>2.17.0</td>
                               </tr>
                               <tr>
                               <td>com.google.cloud.tools</td>
                               <td>jib-core</td>
-                              <td>0.25.0</td>
+                              <td>0.26.0</td>
+                              </tr>
+                              <tr>
+                              <td>com.ongres.scram</td>
+                              <td>client</td>
+                              <td>2.1</td>
                               </tr>
                               <tr>
                               <td>commons-codec</td>
@@ -17915,7 +18030,7 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>io.lettuce</td>
                               <td>lettuce-core</td>
-                              <td>6.3.1.RELEASE</td>
+                              <td>6.3.2.RELEASE</td>
                               </tr>
                               <tr>
                               <td>io.netty</td>
@@ -18035,42 +18150,42 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>io.projectreactor</td>
                               <td>reactor-core</td>
-                              <td>3.6.2</td>
+                              <td>3.6.4</td>
                               </tr>
                               <tr>
                               <td>io.vertx</td>
                               <td>vertx-core</td>
-                              <td>4.5.4</td>
+                              <td>4.5.5</td>
                               </tr>
                               <tr>
                               <td>io.vertx</td>
                               <td>vertx-db2-client</td>
-                              <td>4.5.4</td>
+                              <td>4.5.5</td>
                               </tr>
                               <tr>
                               <td>io.vertx</td>
                               <td>vertx-io_uring-incubator</td>
-                              <td>4.5.4</td>
+                              <td>4.5.5</td>
                               </tr>
                               <tr>
                               <td>io.vertx</td>
                               <td>vertx-mssql-client</td>
-                              <td>4.5.4</td>
+                              <td>4.5.5</td>
                               </tr>
                               <tr>
                               <td>io.vertx</td>
                               <td>vertx-mysql-client</td>
-                              <td>4.5.4</td>
+                              <td>4.5.5</td>
                               </tr>
                               <tr>
                               <td>io.vertx</td>
                               <td>vertx-pg-client</td>
-                              <td>4.5.4</td>
+                              <td>4.5.5</td>
                               </tr>
                               <tr>
                               <td>io.vertx</td>
                               <td>vertx-sql-client</td>
-                              <td>4.5.4</td>
+                              <td>4.5.5</td>
                               </tr>
                               <tr>
                               <td>net.java.dev.javacc</td>
@@ -18080,7 +18195,7 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>org.apache.commons</td>
                               <td>commons-compress</td>
-                              <td>1.26.0</td>
+                              <td>1.26.1</td>
                               </tr>
                               <tr>
                               <td>org.apache.commons</td>
@@ -18095,27 +18210,27 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>org.apache.logging.log4j</td>
                               <td>log4j-api</td>
-                              <td>2.23.0</td>
+                              <td>2.23.1</td>
                               </tr>
                               <tr>
                               <td>org.apache.logging.log4j</td>
                               <td>log4j-core</td>
-                              <td>2.23.0</td>
+                              <td>2.23.1</td>
                               </tr>
                               <tr>
                               <td>org.apache.logging.log4j</td>
                               <td>log4j-iostreams</td>
-                              <td>2.23.0</td>
+                              <td>2.23.1</td>
                               </tr>
                               <tr>
                               <td>org.apache.logging.log4j</td>
                               <td>log4j-jul</td>
-                              <td>2.23.0</td>
+                              <td>2.23.1</td>
                               </tr>
                               <tr>
                               <td>org.apache.logging.log4j</td>
                               <td>log4j-layout-template-json</td>
-                              <td>2.23.0</td>
+                              <td>2.23.1</td>
                               </tr>
                               <tr>
                               <td>org.apache.maven</td>
@@ -18155,7 +18270,7 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>org.awaitility</td>
                               <td>awaitility</td>
-                              <td>4.2.0</td>
+                              <td>4.2.1</td>
                               </tr>
                               <tr>
                               <td>org.bouncycastle</td>
@@ -18200,7 +18315,7 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>org.mockito</td>
                               <td>mockito-core</td>
-                              <td>5.10.0</td>
+                              <td>5.11.0</td>
                               </tr>
                               <tr>
                               <td>org.ow2.asm</td>
@@ -18215,7 +18330,7 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>org.webjars</td>
                               <td>swagger-ui</td>
-                              <td>5.10.3</td>
+                              <td>5.11.10</td>
                               </tr>
                             </tbody>
                         </table>
@@ -18237,7 +18352,7 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>org.apache.maven.plugins</td>
                               <td>maven-assembly-plugin</td>
-                              <td>3.6.0</td>
+                              <td>3.7.0</td>
                               </tr>
                               <tr>
                               <td>org.apache.maven.plugins</td>
