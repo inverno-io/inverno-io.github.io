@@ -680,24 +680,18 @@ html {
 		color: #000000;
 		padding: 0 !important;
 		margin: 0 !important;
-		break-after: avoid;
-		page-break-after: avoid;
-		break-inside: avoid;
-		page-break-inside: avoid;
-	}
-	
-	.toc .toc-navbar a:after {
-		content: "";
-    	display: block;
-		height: 100px;
-		margin-bottom: -100px;
 	}
 	
 	.toc .toc-navbar > .nav > a {
 		padding-top: 0.5rem !important;
 		border-bottom: 1px dotted #adb5bd;
 		font-weight: bold;
+		margin-top: 1rem !important;
 		margin-bottom: 1rem !important;
+		break-after: avoid;
+		page-break-after: avoid;
+		break-inside: avoid;
+		page-break-inside: avoid;
 	}
 
 	.toc .toc-navbar > .nav {
@@ -718,7 +712,9 @@ html {
 	
 	.toc .toc-navbar > .nav > .nav {
 		counter-reset: counter2;
-		margin-bottom: 2rem !important;
+		/*margin-bottom: 2rem !important;*/
+		break-inside: avoid;
+		page-break-inside: avoid;
 	}
 	
 	.toc .toc-navbar > .nav .nav {
@@ -736,6 +732,10 @@ html {
 	
 	.toc .toc-navbar > .nav > .nav > .nav {
 		counter-reset: counter3;
+		break-after: avoid;
+		page-break-after: avoid;
+		break-inside: avoid;
+		page-break-inside: avoid;
 	}
 	
 	.toc .toc-navbar > .nav > .nav > .nav > a {

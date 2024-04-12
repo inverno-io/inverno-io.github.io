@@ -15,6 +15,12 @@ io.inverno.mod.boot.converter
 module:io.inverno.mod.configuration
 io.inverno.mod.configuration
 io.inverno.mod.configuration.source
+module:io.inverno.mod.grpc.base
+io.inverno.mod.grpc.base
+module:io.inverno.mod.grpc.client
+io.inverno.mod.grpc.client
+module:io.inverno.mod.grpc.server
+io.inverno.mod.grpc.server
 module:io.inverno.mod.http.base
 io.inverno.mod.http.base
 io.inverno.mod.http.base.header
@@ -77,3 +83,5 @@ io.inverno.mod.web.server.annotation
 io.inverno.mod.web.server.spi
 module:io.inverno.tool.buildtools
 io.inverno.tool.buildtools
+module:io.inverno.tool.grpc.protocplugin
+io.inverno.tool.grpc.protocplugin
