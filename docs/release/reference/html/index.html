@@ -87,8 +87,8 @@
         <main id="main" class="main container">
             <div class="heading">
                 <h1 class="heading-title">Inverno Framework Documentation</h1>
-                <p class="heading-subtitle">Version: 1.9.0</p>
-                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.9.0.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
+                <p class="heading-subtitle">Version: 1.10.0</p>
+                <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-1.10.0.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
             </div>
             <div class="d-lg-flex">
                 <section class="toc col-12 col-lg-3">
@@ -286,7 +286,7 @@ public class Main {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.9.0&lt;/version&gt;
+        &lt;version&gt;1.10.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;hello&lt;/artifactId&gt;
@@ -306,7 +306,7 @@ public class Main {
                     <p>You can then run the application:</p>
                     <pre><code class="language-plaintext">$ mvn inverno:run -Dinverno.run.arguments=John
 
-[INFO] --- inverno-maven-plugin:1.5.0:run (default-cli) @ app-hello ---
+[INFO] --- inverno-maven-plugin:1.5.1:run (default-cli) @ app-hello ---
 [INFO] Running project: io.inverno.example.hello@1.0.0-SNAPSHOT...
 Hello John!!!
 
@@ -554,7 +554,7 @@ public class MainController {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.9.0&lt;/version&gt;
+        &lt;version&gt;1.10.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample-app&lt;/artifactId&gt;
@@ -576,7 +576,7 @@ public class MainController {
             &lt;dependency&gt;
                 &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
                 &lt;artifactId&gt;inverno-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;1.9.0&lt;/version&gt;
+                &lt;version&gt;1.10.0&lt;/version&gt;
                 &lt;type&gt;pom&lt;/type&gt;
                 &lt;scope&gt;import&lt;/scope&gt;
             &lt;/dependency&gt;
@@ -676,7 +676,7 @@ public class App {
                     <pre><code class="language-plaintext">$ mvn inverno:run
 
 ...
-[INFO] --- inverno:1.5.0:run (default-cli) @ sample-app ---
+[INFO] --- inverno:1.5.1:run (default-cli) @ sample-app ---
 [INFO] Running project: io.inverno.example.sample_app@1.0.0-SNAPSHOT...
  [═══════════════════════════════════════════════ 100&nbsp;% ══════════════════════════════════════════════] 
 2021-04-08 23:50:35,261 INFO  [main] i.w.c.v.Application - Inverno is starting...
@@ -691,7 +691,7 @@ public class App {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.7 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.8 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -730,7 +730,7 @@ Hello, world!
                     <pre><code class="language-plaintext">$ mvn inverno:package-app
 
 ...
- [INFO] --- inverno:1.5.0:package-app (default-cli) @ sample-app ---
+ [INFO] --- inverno:1.5.1:package-app (default-cli) @ sample-app ---
 [INFO] Building application image: /home/jkuhn/Devel/git/frmk/io.inverno.example.sample-app/target/maven-inverno/application_linux_amd64/sample-app-1.0.0-SNAPSHOT...
  [═══════════════════════════════════════════════  69&nbsp;% ═══════════════&gt;                              ] Packaging project application...
 </code></pre>
@@ -872,7 +872,7 @@ $ /opt/sample-app/bin/sample-app
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.9.0&lt;/version&gt;
+        &lt;version&gt;1.10.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.example&lt;/groupId&gt;
     &lt;artifactId&gt;sample&lt;/artifactId&gt;
@@ -912,8 +912,8 @@ $ /opt/sample-app/bin/sample-app
         &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
         &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
         &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
-        &lt;version.inverno&gt;1.5.7&lt;/version.inverno&gt;
-        &lt;version.inverno.dist&gt;1.9.0&lt;/version.inverno.dist&gt;
+        &lt;version.inverno&gt;1.5.8&lt;/version.inverno&gt;
+        &lt;version.inverno.dist&gt;1.10.0&lt;/version.inverno.dist&gt;
     &lt;/properties&gt;
 
     &lt;dependencyManagement&gt;
@@ -967,8 +967,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.inverno:inverno-core:1.5.7'
-    annotationProcessor 'io.inverno:inverno-core-compiler:1.5.7'
+    implementation 'io.inverno:inverno-core:1.5.8'
+    annotationProcessor 'io.inverno:inverno-core-compiler:1.5.8'
 }
 
 java {
@@ -1383,7 +1383,7 @@ INFO: Inverno is starting...
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.7 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.8 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -1753,7 +1753,7 @@ boot.stop();
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-base:1.9.0'
+compile 'io.inverno.mod:inverno-base:1.10.0'
 ...
 </code></pre>
                     <p>The <em>base</em> module is usually provided as a transitive dependency by other modules, mainly the <em>boot</em> module, so defining a direct dependency is usually not necessary at least for an application module.</p>
@@ -2275,7 +2275,7 @@ module io.inverno.example.app {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.9.0'
+compile 'io.inverno.mod:inverno-boot:1.10.0'
 ...
 </code></pre>
                     <h4 id="configuration">Configuration</h4>
@@ -2371,7 +2371,7 @@ boot.stop();
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-configuration:1.9.0'
+compile 'io.inverno.mod:inverno-configuration:1.10.0'
 ...
 </code></pre>
                     <h4 id="configuration-source">Configuration source</h4>
@@ -2869,7 +2869,7 @@ source                                       // 2
                         <li>system properties</li>
                         <li>system environment variables</li>
                         <li>the <code>configuration.cprops</code> file in <code>./conf/</code> or <code>${inverno.conf.path}/</code> directories if one exists (if the first one exists the second one is ignored)</li>
-                        <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-apps/inverno-utilities/target/inverno-utilities-1.6.0-SNAPSHOT-application_linux_amd64/lib/runtime/conf/</code> directory if it exists</li>
+                        <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-apps/inverno-utilities/target/inverno-utilities-1.7.0-SNAPSHOT-application_linux_amd64/lib/runtime/conf/</code> directory if it exists</li>
                         <li>the <code>configuration.cprops</code> file in the application module if it exists</li>
                     </ul>
                     <p>This source is typically created in a <code>main</code> method to load the bootstrap configuration on startup.</p>
@@ -3058,7 +3058,7 @@ public interface CompositeModuleConfiguration {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-http-base:1.9.0'
+compile 'io.inverno.mod:inverno-http-base:1.10.0'
 ...
 </code></pre>
                     <p>The <em>http-base</em> module is usually provided as a transitive dependency by other HTTP modules, the <em>http-client</em>, <em>http-server</em> or the <em>web</em> modules in particular, so it might not be necessary to include it explicitly.</p>
@@ -3157,8 +3157,8 @@ module io.inverno.example.app_http_client {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.9.0'
-compile 'io.inverno.mod:inverno-http-client:1.9.0'
+compile 'io.inverno.mod:inverno-boot:1.10.0'
+compile 'io.inverno.mod:inverno-http-client:1.10.0'
 ...
 </code></pre>
                     <p>An HTTP client is basically created from the <code>HttpClient</code> service exposed in the module and which is used to create the <code>Endpoint</code> connecting to the HTTP server:</p>
@@ -3225,7 +3225,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.7 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.8 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -4317,8 +4317,8 @@ module io.inverno.example.app_http {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.9.0'
-compile 'io.inverno.mod:inverno-http-server:1.9.0'
+compile 'io.inverno.mod:inverno-boot:1.10.0'
+compile 'io.inverno.mod:inverno-http-server:1.10.0'
 ...
 </code></pre>
                     <p>The resulting <em>app_http</em> module, thus created, can then be started as an application as follows:</p>
@@ -4346,7 +4346,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.7 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.8 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -4416,7 +4416,7 @@ public class Main {
                 App_httpConfigurationLoader.load(configuration -&gt; configuration
                     .http_server(server -&gt; server
                         .server_port(8081)
-                        .h2c_enabled(true)
+                        .h2_enabled(true)
                     )
                     .boot(boot -&gt; boot
                         .reactor_event_loop_group_size(4)
@@ -4428,12 +4428,16 @@ public class Main {
 }
 </code></pre>
                     <p>In the above code, we have set the server port to 8081, enabled HTTP/2 over cleartext and set the number of thread allocated to the reactor core IO event loop group to 4.</p>
+                    <blockquote>
+                        <p><code>h2_enabled</code> property defaults to <code>true</code> when TLS is configured and to <code>false</code> otherwise, in order to activate HTTP/2 over cleartext, it must be set to true explicitly.</p>
+                    </blockquote>
                     <p>Please refer to the <a href="https://inverno.io/docs/release/api/index.html">API documentation</a> to have an exhaustive description of the different configuration properties. We can for instance configure low level network settings like TCP keep alive or TCP no delay as well as HTTP related settings like compression or TLS.</p>
                     <blockquote>
                         <p>You can also refer to the <a href="#configuration-1">configuration module documentation</a> to get more details on how configuration works and more especially how you can from here define the HTTP server configuration in command line arguments, property files...</p>
                     </blockquote>
                     <h5 id="logging">Logging</h5>
-                    <p>The HTTP server can log access and error events at <code>INFO</code> and <code>ERROR</code> level respectively. They can be disabled by configuring <code>io.inverno.mod.http.server.Exchange</code> logger as follows:</p>
+                    <p>The HTTP server logs error events at ERROR<code>level with the</code>io.inverno.mod.http.server.ErrorExchange<code>logger and access events at</code>INFO<code>level with the</code>io.inverno.mod.http.server.Exchange<code>logger when the</code>HttpAccessLogsInterceptor` has been registered to the server controller exchange handlers (see <a href="#http-access-logs-interceptor">HTTP access logs interceptor</a>).</p>
+                    <p>These loggers can be configured as follows:</p>
                     <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;Configuration xmlns="http://logging.apache.org/log4j/2.0/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -4448,6 +4452,7 @@ public class Main {
     &lt;Loggers&gt;
         &lt;!-- Disable HTTP server access and error logs --&gt;
         &lt;Logger name="io.inverno.mod.http.server.Exchange" additivity="false" level="off"  /&gt;
+        &lt;Logger name="io.inverno.mod.http.server.ErrorExchange" additivity="false" level="off"  /&gt;
 
         &lt;Root level="info"&gt;
             &lt;AppenderRef ref="LogToConsole"/&gt;
@@ -4462,28 +4467,10 @@ public class Main {
         &lt;Console name="Console" target="SYSTEM_OUT"&gt;
              &lt;PatternLayout pattern="%d{DEFAULT} %highlight{%-5level} [%t] %c{1.} - %msg%n%ex"/&gt;
         &lt;/Console&gt;
-        &lt;!-- Error log --&gt;
-        &lt;RollingRandomAccessFile name="ErrorRollingFile" fileName="logs/error.log" filePattern="logs/error-%d{yyyy-MM-dd}-%i.log.gz"&gt;
-            &lt;JsonTemplateLayout/&gt;
-            &lt;NoMarkerFilter onMatch="ACCEPT" onMismatch="DENY"/&gt;
-            &lt;Policies&gt;
-                &lt;TimeBasedTriggeringPolicy /&gt;
-                &lt;SizeBasedTriggeringPolicy size="10 MB"/&gt;
-            &lt;/Policies&gt;
-            &lt;DefaultRolloverStrategy&gt;
-                &lt;Delete basePath="logs" maxDepth="2"&gt;
-                    &lt;IfFileName glob="error-*.log.gz" /&gt;
-                    &lt;IfLastModified age="10d" /&gt;
-                &lt;/Delete&gt;
-            &lt;/DefaultRolloverStrategy&gt;
-        &lt;/RollingRandomAccessFile&gt;
-        &lt;Async name="AsyncErrorRollingFile"&gt;
-            &lt;AppenderRef ref="ErrorRollingFile"/&gt;
-        &lt;/Async&gt;
+
         &lt;!-- Access log --&gt;
         &lt;RollingRandomAccessFile name="AccessRollingFile" fileName="logs/access.log" filePattern="logs/access-%d{yyyy-MM-dd}-%i.log.gz"&gt;
             &lt;JsonTemplateLayout/&gt;
-            &lt;MarkerFilter marker="HTTP_ACCESS" onMatch="ACCEPT" onMismatch="DENY"/&gt;
             &lt;Policies&gt;
                 &lt;TimeBasedTriggeringPolicy /&gt;
                 &lt;SizeBasedTriggeringPolicy size="10 MB"/&gt;
@@ -4498,11 +4485,32 @@ public class Main {
         &lt;Async name="AsyncAccessRollingFile"&gt;
             &lt;AppenderRef ref="AccessRollingFile"/&gt;
         &lt;/Async&gt;
+
+        &lt;!-- Error log --&gt;
+        &lt;RollingRandomAccessFile name="ErrorRollingFile" fileName="logs/error.log" filePattern="logs/error-%d{yyyy-MM-dd}-%i.log.gz"&gt;
+            &lt;JsonTemplateLayout/&gt;
+            &lt;Policies&gt;
+                &lt;TimeBasedTriggeringPolicy /&gt;
+                &lt;SizeBasedTriggeringPolicy size="10 MB"/&gt;
+            &lt;/Policies&gt;
+            &lt;DefaultRolloverStrategy&gt;
+                &lt;Delete basePath="logs" maxDepth="2"&gt;
+                    &lt;IfFileName glob="error-*.log.gz" /&gt;
+                    &lt;IfLastModified age="10d" /&gt;
+                &lt;/Delete&gt;
+            &lt;/DefaultRolloverStrategy&gt;
+        &lt;/RollingRandomAccessFile&gt;
+        &lt;Async name="AsyncErrorRollingFile"&gt;
+            &lt;AppenderRef ref="ErrorRollingFile"/&gt;
+        &lt;/Async&gt;
     &lt;/Appenders&gt;
 
     &lt;Loggers&gt;
         &lt;Logger name="io.inverno.mod.http.server.Exchange" additivity="false" level="info"&gt;
             &lt;AppenderRef ref="AsyncAccessRollingFile" level="info"/&gt;
+        &lt;/Logger&gt;
+
+        &lt;Logger name="io.inverno.mod.http.server.ErrorExchange" additivity="false" level="error"&gt;
             &lt;AppenderRef ref="AsyncErrorRollingFile" level="error"/&gt;
         &lt;/Logger&gt;
 
@@ -4513,9 +4521,6 @@ public class Main {
     &lt;/Loggers&gt;
 &lt;/Configuration&gt;
 </code></pre>
-                    <blockquote>
-                        <p>Note that access and error events are logged by the same logger, they are differentiated by markers, <code>HTTP_ACCESS</code> and <code>HTTP_ERROR</code> respectively.</p>
-                    </blockquote>
                     <h5 id="transport-1">Transport</h5>
                     <p>By default, the HTTP server uses the Java NIO transport, but it is possible to use native <a href="https://en.wikipedia.org/wiki/Epoll">epoll</a> transport on Linux or <a href="https://en.wikipedia.org/wiki/Kqueue">kqueue</a> transport on BSD-like systems for optimized performances. This can be done by adding the corresponding Netty dependencies with the right classifier in the project descriptor:</p>
                     <pre><code class="language-xml">&lt;project&gt;
@@ -4824,7 +4829,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.7 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.8 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -5077,6 +5082,21 @@ ReactiveExchangeHandler&lt;ExchangeContext, Exchange&lt;ExchangeContext&gt;&gt; 
                     <pre><code class="language-java">// exchange handling chain: interceptor3 -&gt; interceptor2 -&gt; interceptor1 -&gt; handler
 handler.intercept(interceptor1).intercept(interceptor2).intercept(interceptor3);
 </code></pre>
+                    <h6 id="http-access-logs-interceptor">HTTP access logs interceptor</h6>
+                    <p>The <code>HttpAccessLogsInterceptor</code> is used to log Http access when the processing of an exchange completes and a response is sent to the client. It must be registered to the server controller's exchange and error exchange handlers.</p>
+                    <pre><code class="language-java">ServerController.&lt;ExchangeContext, Exchange&lt;ExchangeContext&gt;, ErrorExchange&lt;ExchangeContext&gt;&gt;from(
+    ((ExchangeHandler&lt;ExchangeContext, Exchange&lt;ExchangeContext&gt;&gt;)(exchange -&gt; {
+        ...
+    })).intercept(new HttpAccessLogsInterceptor&lt;&gt;()),
+    ((ExchangeHandler&lt;ExchangeContext, ErrorExchange&lt;ExchangeContext&gt;&gt;)(errorExchange -&gt; {
+        ...
+    })).intercept(new HttpAccessLogsInterceptor&lt;&gt;())
+)
+</code></pre>
+                    <p>Assuming logging is properly configured, <code>io.inverno.mod.http.server.Exchange</code> logger should output an access log for each processed request:</p>
+                    <pre><code class="language-plaintext">2024-04-25 11:32:56,123 INFO  [inverno-io-epoll-1-1] i.i.m.h.s.Exchange - 127.0.0.1 "GET /plaintext" 200 12 "" "curl/7.88.1"
+2024-04-25 11:32:57,285 INFO  [inverno-io-epoll-1-1] i.i.m.h.s.Exchange - 127.0.0.1 "GET /plaintext" 500 16 "" "curl/7.88.1"
+</code></pre>
                     <h5 id="exchange-context-1">Exchange context</h5>
                     <p>A strongly typed context is exposed in the <code>Exchange</code>, it allows to store or access data and to provide contextual operations throughout the process of the exchange. The server creates the context along with the exchange using the server controller. It is then possible to <em>customize</em> the exchange with a specific strongly types context.</p>
                     <p>The advantage of this approach is that the compiler can perform static type checking but also to avoid the usage of an untyped map of attributes which is less performant and provides no control over contextual data. Since the developer defines the context type, he can also implement logic inside.</p>
@@ -5276,6 +5296,9 @@ ReactiveExchangeHandler&lt;SecurityContext, Exchange&lt;SecurityContext&gt;&gt; 
                     <h4 id="web-socket">Web Socket</h4>
                     <p>An HTTP exchange can be upgraded to a WebSocket exchange as defined by <a href="https://datatracker.ietf.org/doc/html/rfc6455">RFC 6455</a>.</p>
                     <p>The <code>webSocket()</code> method exposed on the <code>Exchange</code> allows to upgrade to the WebSocket protocol, it returns an optional <code>WebSocket</code> which might be empty if the original exchange does not support the upgrade. This is especially the case when using HTTP/2 for which Websocket upgrade is not supported or if the state of the exchange prevents the upgrade (e.g. error exchange).</p>
+                    <blockquote>
+                        <p>Note that HTTP/2 over cleartext must be disabled for the Web Socket upgrade to be successful.</p>
+                    </blockquote>
                     <p>The resulting <code>WebSocket</code> allows specifying a <code>WebSocketExchangeHandler</code> and a default action in case the WebSocket opening handshake fails (e.g. the client did not provide the correct headers for the upgrade...). A WebSocket exchange handler is used to handle the resulting <code>WebSocketExchange</code> which exposes WebSocket inbound and outbound data.</p>
                     <p>In the following example, the original HTTP <code>Exchange</code> is upgraded to a <code>WebSocketExchange</code> and all inbound frames are sent back to the client. An internal server error (500) is returned if WebSocket upgrade is not supported and a bad request error (400) is returned if the opening handshake failed:</p>
                     <pre><code class="language-java">ExchangeHandler&lt;ExchangeContext, Exchange&lt;ExchangeContext&gt;&gt; handler = exchange -&gt; {
@@ -5587,8 +5610,8 @@ module io.inverno.example.app_web {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.9.0'
-compile 'io.inverno.mod:inverno-web-server:1.9.0'
+compile 'io.inverno.mod:inverno-boot:1.10.0'
+compile 'io.inverno.mod:inverno-web-server:1.10.0'
 ...
 </code></pre>
                     <h4 id="web-routing-api">Web Routing API</h4>
@@ -6327,7 +6350,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.7 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.8 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -6398,7 +6421,7 @@ public class Main {
                         .web(web -&gt; web
                             .http_server(server -&gt; server
                                 .server_port(8081)
-                                .h2c_enabled(true)
+                                .h2_enabled(true)
                                 .server_event_loop_group_size(4)
                             )
                         )
@@ -7750,7 +7773,7 @@ info:
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-grpc-base:1.9.0'
+compile 'io.inverno.mod:inverno-grpc-base:1.10.0'
 ...
 </code></pre>
                     <p>The <em>grpc-base</em> module is usually provided as a transitive dependency by other gRPC modules, the <em>grpc-client</em> and <em>grpc-server</em> modules in particular, so it might not be necessary to include it explicitly.</p>
@@ -7832,9 +7855,9 @@ module io.inverno.example.app_grpc_client {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.9.0'
-compile 'io.inverno.mod:inverno-http-client:1.9.0'
-compile 'io.inverno.mod:inverno-grpc-client:1.9.0'
+compile 'io.inverno.mod:inverno-boot:1.10.0'
+compile 'io.inverno.mod:inverno-http-client:1.10.0'
+compile 'io.inverno.mod:inverno-grpc-client:1.10.0'
 ...
 </code></pre>
                     <p>A gRPC service is basically invoked by converting an HTTP/2 client exchange into a unary, client streaming, server streaming or bidirectional streaming gRPC exchange using the <code>GrpcClient</code> bean:</p>
@@ -7922,7 +7945,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.7 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.8 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -8373,9 +8396,9 @@ module io.inverno.example.app_grpc_server {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.9.0'
-compile 'io.inverno.mod:inverno-web-server:1.9.0'
-compile 'io.inverno.mod:inverno-grpc-server:1.9.0'
+compile 'io.inverno.mod:inverno-boot:1.10.0'
+compile 'io.inverno.mod:inverno-web-server:1.10.0'
+compile 'io.inverno.mod:inverno-grpc-server:1.10.0'
 ...
 </code></pre>
                     <p>A gRPC service is basically exposed by using the <code>GrpcServer</code> bean to convert a unary, client streaming, server streaming or bidiretional streaming gRPC exchange handler into an HTTP server exchange handler which can then be injected either in the HTTP server controller or more conveniently in a Web route:</p>
@@ -8441,7 +8464,7 @@ public class GreeterRouteConfigurer implements WebRoutesConfigurer&lt;ExchangeCo
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.7 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.8 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -8582,7 +8605,7 @@ public class Main {
                 .web_server(webServer -&gt; webServer
                     .http_server(httpServer -&gt; httpServer
                         .server_port(8081)
-                        .h2c_enabled(true)
+                        .h2_enabled(true)
                     )
                 )
             ))
@@ -8864,7 +8887,7 @@ public class App_grpc_serverErrorWebRoutesConfigurer implements ErrorWebRoutesCo
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-irt:1.9.0'
+compile 'io.inverno.mod:inverno-irt:1.10.0'
 ...
 </code></pre>
                     <p>Dependencies to <code>io.netty.common</code> and <code>io.netty.buffer</code> are also required when using <code>BYTEBUF</code> or <code>PUBLISHER_BYTEBUF</code> <a href="#modes">modes</a> which require Netty's <code>ByteBuf</code>. They are defined as optional in the <em>irt</em> module and won't be included by default. In order to use <code>ByteBuf</code> based generation modes, the following dependencies must be declared as well in the module descriptor:</p>
@@ -9265,8 +9288,8 @@ import java.time.format.DateTimeFormatter;
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-sql:1.9.0'
-compile 'io.inverno.mod:inverno-sql-vertx:1.9.0'
+compile 'io.inverno.mod:inverno-sql:1.10.0'
+compile 'io.inverno.mod:inverno-sql-vertx:1.10.0'
 ...
 </code></pre>
                     <h4 id="sql-client-api">SQL client API</h4>
@@ -9479,7 +9502,7 @@ client.connection(ops -&gt; ops
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-sql-vertx:1.9.0'
+compile 'io.inverno.mod:inverno-sql-vertx:1.10.0'
 compile 'io.vertx:vertx-pg-client:4.1.2'
 ...
 </code></pre>
@@ -9536,8 +9559,8 @@ compile 'io.vertx:vertx-pg-client:4.1.2'
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-redis:1.9.0'
-compile 'io.inverno.mod:inverno-redis-vertx:1.9.0'
+compile 'io.inverno.mod:inverno-redis:1.10.0'
+compile 'io.inverno.mod:inverno-redis-vertx:1.10.0'
 ...
 </code></pre>
                     <h4 id="redis-client-api">Redis Client API</h4>
@@ -9699,7 +9722,7 @@ Assertions.assertTrue(result.wasDiscarded());
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-redis-lettuce:1.9.0'
+compile 'io.inverno.mod:inverno-redis-lettuce:1.10.0'
 ...
 </code></pre>
                     <h5 id="configuration-9">Configuration</h5>
@@ -9760,8 +9783,8 @@ module io.inverno.example.app {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-boot:1.9.0'
-compile 'io.inverno.mod:inverno-ldap:1.9.0'
+compile 'io.inverno.mod:inverno-boot:1.10.0'
+compile 'io.inverno.mod:inverno-ldap:1.10.0'
 ...
 </code></pre>
                     <h4 id="configuration-10">Configuration</h4>
@@ -9941,7 +9964,7 @@ admin_credentials="admin_password"
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security:1.9.0'
+compile 'io.inverno.mod:inverno-security:1.10.0'
 ...
 </code></pre>
                     <p>Before looking into details of the security API, let's see how to secure a simple standalone application composed of a single <code>HelloService</code> bean exposing <code>sayHello()</code> method. Initially the application might look like:</p>
@@ -9987,7 +10010,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.7 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.8 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -10951,7 +10974,7 @@ pbac.hasPermission("manage", "domain", "printer", "printer", "C400V-DN").block()
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security-http:1.9.0'
+compile 'io.inverno.mod:inverno-security-http:1.10.0'
 ...
 </code></pre>
                     <p>Let's quickly see how to secure a simple Web application exposing a single hello world service using basic authentication. The application might initially look like:</p>
@@ -10994,7 +11017,7 @@ public class Main {
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                  -- 1.5.7 --                 ║
+     ║                    ,   \/   ,                                  -- 1.5.8 --                 ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -12124,8 +12147,8 @@ public class SecurityConfigurer implements WebInterceptorsConfigurer&lt;Exchange
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security-http:1.9.0'
-compile 'io.inverno.mod:inverno-security-ldap:1.9.0'
+compile 'io.inverno.mod:inverno-security-http:1.10.0'
+compile 'io.inverno.mod:inverno-security-ldap:1.10.0'
 ...
 </code></pre>
                     <p>The following example shows how to configure a security manager to authenticate login credentials against an LDAP server, resolving the authenticated user's identity from the LDAP server and a role-based access controller from user's groups.</p>
@@ -12220,7 +12243,7 @@ module io.inverno.example.app {
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.mod:inverno-security-jose:1.9.0'
+compile 'io.inverno.mod:inverno-security-jose:1.10.0'
 ...
 </code></pre>
                     <p>The <em>security-jose</em> module is an Inverno module which exposes four services:</p>
@@ -13832,7 +13855,7 @@ Message message = jweService.&lt;JWS&lt;Message&gt;&gt;reader(Types.type(JWS.cla
 </code></pre>
                     <p>Using Gradle:</p>
                     <pre><code class="language-java">...
-compile 'io.inverno.tool:inverno-build-tools:1.5.0'
+compile 'io.inverno.tool:inverno-build-tools:1.5.1'
 ...
 </code></pre>
                     <h3 id="project-and-dependencies">Project and Dependencies</h3>
@@ -14916,7 +14939,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernobuild-runtime">inverno:build-runtime</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0:build-runtime</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.5.1:build-runtime</p>
                     <p><strong>Description:</strong></p>
                     <p>Builds the project runtime image.</p>
                     <p>A runtime image is a custom Java runtime containing a set of modules and their dependencies.</p>
@@ -15432,7 +15455,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernodebug">inverno:debug</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0:debug</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.5.1:debug</p>
                     <p><strong>Description:</strong></p>
                     <p>Debugs the project application.</p>
                     <p><strong>Attributes:</strong></p>
@@ -15646,7 +15669,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernodeploy-image">inverno:deploy-image</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0:deploy-image</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.5.1:deploy-image</p>
                     <p><strong>Description:</strong></p>
                     <p>Builds and deploys the project application container image to an image registry.</p>
                     <p><strong>Attributes:</strong></p>
@@ -16511,7 +16534,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernohelp">inverno:help</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0:help</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.5.1:help</p>
                     <p><strong>Description:</strong></p>
                     <p>Display help information on inverno-maven-plugin. Call mvn inverno:help -Ddetail=true -Dgoal=&lt;goal-name&gt; to display parameter details.</p>
                     <p><strong>Attributes:</strong></p>
@@ -16596,7 +16619,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernoinstall-image">inverno:install-image</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0:install-image</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.5.1:install-image</p>
                     <p><strong>Description:</strong></p>
                     <p>Builds and installs the project application container image to the local Docker daemon.</p>
                     <p><strong>Attributes:</strong></p>
@@ -17458,7 +17481,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernopackage-app">inverno:package-app</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0:package-app</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.5.1:package-app</p>
                     <p><strong>Description:</strong></p>
                     <p>Builds and packages the project application image.</p>
                     <p>A project application package is a native self-contained Java application including all the necessary dependencies. It can be used to distribute a complete application.</p>
@@ -18153,7 +18176,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernopackage-image">inverno:package-image</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0:package-image</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.5.1:package-image</p>
                     <p><strong>Description:</strong></p>
                     <p>Builds and packages the project application container image in a TAR archive.</p>
                     <p><strong>Attributes:</strong></p>
@@ -18988,7 +19011,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernorun">inverno:run</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0:run</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.5.1:run</p>
                     <p><strong>Description:</strong></p>
                     <p>Runs the project application.</p>
                     <p><strong>Attributes:</strong></p>
@@ -19168,7 +19191,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernostart">inverno:start</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0:start</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.5.1:start</p>
                     <p><strong>Description:</strong></p>
                     <p>Starts the project application without blocking the Maven build.</p>
                     <p>This goal is used together with the stop goal in the pre-integration-test and post-integration-test phases to run integration tests.</p>
@@ -19349,7 +19372,7 @@ Listening for transport dt_socket at address: 8000
                     </ul>
                     <h4 id="invernostop">inverno:stop</h4>
                     <p><strong>Full name:</strong></p>
-                    <p>io.inverno.tool:inverno-maven-plugin:1.5.0:stop</p>
+                    <p>io.inverno.tool:inverno-maven-plugin:1.5.1:stop</p>
                     <p><strong>Description:</strong></p>
                     <p>Stops the project application that has been previously started using the start goal.</p>
                     <p>This goal is used together with the start goal in the pre-integration-test and post-integration-test phases to run integration tests.</p>
@@ -19465,7 +19488,7 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>ch.qos.logback</td>
                               <td>logback-classic</td>
-                              <td>1.5.4</td>
+                              <td>1.5.6</td>
                               </tr>
                               <tr>
                               <td>com.aayushatharva.brotli4j</td>
@@ -19490,17 +19513,22 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>com.fasterxml.jackson.core</td>
                               <td>jackson-core</td>
-                              <td>2.17.0</td>
+                              <td>2.16.2</td>
                               </tr>
                               <tr>
                               <td>com.fasterxml.jackson.core</td>
                               <td>jackson-databind</td>
-                              <td>2.17.0</td>
+                              <td>2.16.2</td>
                               </tr>
                               <tr>
                               <td>com.fasterxml.jackson.datatype</td>
                               <td>jackson-datatype-jsr310</td>
-                              <td>2.17.0</td>
+                              <td>2.16.2</td>
+                              </tr>
+                              <tr>
+                              <td>com.fasterxml.jackson.module</td>
+                              <td>jackson-module-afterburner</td>
+                              <td>2.16.2</td>
                               </tr>
                               <tr>
                               <td>com.google.cloud.tools</td>
@@ -19765,7 +19793,7 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>org.apache.commons</td>
                               <td>commons-text</td>
-                              <td>1.11.0</td>
+                              <td>1.12.0</td>
                               </tr>
                               <tr>
                               <td>org.apache.logging.log4j</td>
@@ -19840,37 +19868,37 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>org.bouncycastle</td>
                               <td>bcjmail-jdk18on</td>
-                              <td>1.78</td>
+                              <td>1.78.1</td>
                               </tr>
                               <tr>
                               <td>org.bouncycastle</td>
                               <td>bcmail-jdk18on</td>
-                              <td>1.78</td>
+                              <td>1.78.1</td>
                               </tr>
                               <tr>
                               <td>org.bouncycastle</td>
                               <td>bcpg-jdk18on</td>
-                              <td>1.78</td>
+                              <td>1.78.1</td>
                               </tr>
                               <tr>
                               <td>org.bouncycastle</td>
                               <td>bcpkix-jdk18on</td>
-                              <td>1.78</td>
+                              <td>1.78.1</td>
                               </tr>
                               <tr>
                               <td>org.bouncycastle</td>
                               <td>bcprov-jdk18on</td>
-                              <td>1.78</td>
+                              <td>1.78.1</td>
                               </tr>
                               <tr>
                               <td>org.bouncycastle</td>
                               <td>bctls-jdk18on</td>
-                              <td>1.78</td>
+                              <td>1.78.1</td>
                               </tr>
                               <tr>
                               <td>org.bouncycastle</td>
                               <td>bcutil-jdk18on</td>
-                              <td>1.78</td>
+                              <td>1.78.1</td>
                               </tr>
                               <tr>
                               <td>org.junit</td>
@@ -19895,7 +19923,7 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>org.webjars</td>
                               <td>swagger-ui</td>
-                              <td>5.13.0</td>
+                              <td>5.17.2</td>
                               </tr>
                             </tbody>
                         </table>
@@ -19952,7 +19980,7 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>org.apache.maven.plugins</td>
                               <td>maven-jar-plugin</td>
-                              <td>3.3.0</td>
+                              <td>3.4.1</td>
                               </tr>
                               <tr>
                               <td>org.apache.maven.plugins</td>
@@ -19972,7 +20000,7 @@ Listening for transport dt_socket at address: 8000
                               <tr>
                               <td>org.apache.maven.plugins</td>
                               <td>maven-shade-plugin</td>
-                              <td>3.5.2</td>
+                              <td>3.5.3</td>
                               </tr>
                               <tr>
                               <td>org.apache.maven.plugins</td>

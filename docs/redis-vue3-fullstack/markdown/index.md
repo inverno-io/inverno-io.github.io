@@ -2211,7 +2211,7 @@ content-type: application/json
 [{"id":1,"title":"Inverno Full Stack Guide","summary":"Develop a Full Stack application with Inverno, Redis and Vue.js","description":null,"creationDateTime":"2022-02-23T13:15:11.411259961Z","tickets":[]}]
 ```
 
-> Note that HTTP/2 over cleartext (aka H2C) is also supported and can be activated by setting `web.http_server.h2c_enabled` configuration property to true.
+> Note that HTTP/2 over cleartext (H2C) is also supported and is activated when `web.http_server.h2_enabled` configuration property is set to true and TLS is not configured.
 
 You might choose to activate TLS support only on production environment. This can be done using the same approach as for the `web_root` configuration property. Let's modify the configuration to only activate TLS support when the application is started with `prod` profile.
 
