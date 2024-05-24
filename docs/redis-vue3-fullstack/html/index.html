@@ -141,7 +141,7 @@
                         └── ticket
                             └── App.java
 </code></pre>
-                <p>You can now set up the <code>pom.xml</code> build descriptor with the Inverno distribution by defining a <code>&lt;parent/&gt;</code> section pointing to <code>io.inverno.dist:inverno-parent:1.10.1</code> parent pom:</p>
+                <p>You can now set up the <code>pom.xml</code> build descriptor with the Inverno distribution by defining a <code>&lt;parent/&gt;</code> section pointing to <code>io.inverno.dist:inverno-parent:1.11.0</code> parent pom:</p>
                 <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
@@ -149,7 +149,7 @@
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.10.1&lt;/version&gt;
+        &lt;version&gt;1.11.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -165,7 +165,7 @@
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.10.1&lt;/version&gt;
+        &lt;version&gt;1.11.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -213,7 +213,7 @@ public class App {
                 <p>The application can now be run with the following command:</p>
                 <pre><code class="language-text">$ mvn invenro:run
 ...
-[INFO] --- inverno-maven-plugin:1.5.1:run (default-cli) @ ticket ---
+[INFO] --- inverno-maven-plugin:1.5.2:run (default-cli) @ ticket ---
 [INFO] Running project: io.inverno.guide.ticket@1.0-SNAPSHOT...
 ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
 INFO Application Inverno is starting...
@@ -228,7 +228,7 @@ INFO Application Inverno is starting...
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                 -- 1.5.8 --                  ║
+     ║                    ,   \/   ,                                 -- 1.5.9 --                  ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -448,7 +448,7 @@ module io.inverno.guide.ticket {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.10.1&lt;/version&gt;
+        &lt;version&gt;1.11.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -840,7 +840,7 @@ public class NoteService {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.10.1&lt;/version&gt;
+        &lt;version&gt;1.11.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -1053,7 +1053,7 @@ public class PlanDtoMapper implements DtoMapper&lt;PlanDto, Plan&gt; {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.10.1&lt;/version&gt;
+        &lt;version&gt;1.11.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -1457,7 +1457,7 @@ module io.inverno.guide.ticket {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.10.1&lt;/version&gt;
+        &lt;version&gt;1.11.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -1490,7 +1490,7 @@ module io.inverno.guide.ticket {
                 <p>The Inverno Ticket application is run as follows:</p>
                 <pre><code class="language-text">$ mvn inverno:run
 ...
-[INFO] --- inverno-maven-plugin:1.5.1:run (default-cli) @ ticket ---
+[INFO] --- inverno-maven-plugin:1.5.2:run (default-cli) @ ticket ---
 [INFO] Running project: io.inverno.guide.ticket@1.0-SNAPSHOT...
 ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
 INFO Application Inverno is starting...
@@ -1505,7 +1505,7 @@ INFO Application Inverno is starting...
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                 -- 1.5.8 --                  ║
+     ║                    ,   \/   ,                                 -- 1.5.9 --                  ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
@@ -1578,7 +1578,7 @@ content-length: 174
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.10.1&lt;/version&gt;
+        &lt;version&gt;1.11.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -1783,7 +1783,7 @@ public class App {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.10.1&lt;/version&gt;
+        &lt;version&gt;1.11.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -1823,7 +1823,7 @@ module io.inverno.guide.ticket {
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.10.1&lt;/version&gt;
+        &lt;version&gt;1.11.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -2049,7 +2049,7 @@ $ mvn inverno:run
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.10.1&lt;/version&gt;
+        &lt;version&gt;1.11.0&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -2151,7 +2151,7 @@ $ mvn inverno:run
                 <p>You can now install the application with the <code>install-docker</code> profile activated:</p>
                 <pre><code class="language-text">$ mvn install -Pinstall-docker
 ...
-[INFO] --- inverno-maven-plugin:1.5.1:build-image-docker (build-image-docker) @ ticket ---
+[INFO] --- inverno-maven-plugin:1.5.2:build-image-docker (build-image-docker) @ ticket ---
 [INFO] Building project container image...
  [═══════════════════════════════════════════════ 100&nbsp;% ══════════════════════════════════════════════] 
 [INFO] ------------------------------------------------------------------------
@@ -2182,7 +2182,7 @@ ticket           1.0-SNAPSHOT     1837e3e29277   6 minutes ago   222MB
      ║                ,   __\_/\_\__   ,    | || | | |\ \/ /|  __/| | | | | | |_| |               ║
      ║                 , /_/ /\/\ \_\ ,     |_||_| |_| \__/  \___||_| |_| |_|\___/                ║
      ║                  ,     /\     ,                                                            ║
-     ║                    ,   \/   ,                                 -- 1.5.8 --                  ║
+     ║                    ,   \/   ,                                 -- 1.5.9 --                  ║
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
