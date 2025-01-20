@@ -21,8 +21,8 @@ $properties(base = ../../../, title = Full-Stack application Guide)
 			<div class="card-body p-lg-5">
 				<h2 class="card-title">What you'll need</h2>
 				<ul>
-					<li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 16.</li>
-					<li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.6.</li>
+					<li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 21.</li>
+					<li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.9.</li>
 					<li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
 					<li>A <a href="https://www.docker.com/">Docker</a> installation.</li>
 					<li>A basic understanding of <a href="https://redis.io">Redis</a> data store.</li>
@@ -48,7 +48,7 @@ Both **Plan** and **Ticket** have a title, a summary and a description.
 
 Since a picture is worth a thousand words, the following wireframe shows what the application might look like in the end:
 
-<img class="shadow" src="img/wireframe.svg" style="display: block; margin: 2em auto;" alt="Inverno Ticket wireframe"/>
+<img class="shadow" src="img/wireframe.png" style="display: block; margin: 2em auto;" alt="Inverno Ticket wireframe"/>
 
 The architecture is that of a typical Web application using [Redis](https://redis.io) as data store, defining a service layer with services to access the data store, a REST layer to expose those services to the front-end which consists in a single page application built with [Bootstrap](https://getbootstrap.com/) and [Vue.js](https://v3.vuejs.org/). 
 
@@ -56,7 +56,7 @@ All static resources, including front-end libraries, will be exposed by the appl
 
 The application will be eventually packaged and deployed to local [Docker](https://www.docker.com/) repository and run using [Docker Compose](https://docs.docker.com/compose/).
 
-The full source code of the resulting application can be found in [GitHub](https://github.com/inverno-io/inverno-apps/tree/1.1.0/inverno-ticket).
+The full source code of the resulting application can be found in [GitHub](https://github.com/inverno-io/inverno-apps/tree/master/inverno-ticket).
 
 ## Step 1: Bootstrap the application project
 
@@ -73,7 +73,7 @@ You can start by creating a Maven Java project with groupId `io.inverno.guide` a
                 └── inverno
                     └── guide
                         └── ticket
-                            └── App.java
+                            └── TicketApp.java
 ```
 
 You can now set up the `pom.xml` build descriptor with the Inverno distribution by defining a `<parent/>` section pointing to `io.inverno.dist:inverno-parent:${VERSION_INVERNO_DIST}` parent pom:
@@ -89,8 +89,8 @@ You can now set up the `pom.xml` build descriptor with the Inverno distribution 
         <version>${VERSION_INVERNO_DIST}</version>
     </parent>
     <groupId>io.inverno.guide</groupId>
-    <artifactId>ticket</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>inverno-ticket</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
 </project>
 ```
@@ -108,8 +108,8 @@ Then you must declare a dependency to Inverno *boot* module which provides commo
         <version>${VERSION_INVERNO_DIST}</version>
     </parent>
     <groupId>io.inverno.guide</groupId>
-    <artifactId>ticket</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>inverno-ticket</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -139,21 +139,21 @@ $ mvn compile
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.702 s
-[INFO] Finished at: 2022-02-11T14:54:06+01:00
+[INFO] Total time:  1.776 s
+[INFO] Finished at: 2024-12-18T10:21:55+01:00
 [INFO] ------------------------------------------------------------------------
 ```
 
 You should now see the generated `Ticket` class in your IDE, this class will contain the IoC/DI logic used to bootstrap and assemble the application components.
 
-You can now edit the application entry point `src/main/java/io/inverno/guide/ticket/App.java` and bootstrap the ticket module:
+You can now edit the application entry point `src/main/java/io/inverno/guide/ticket/TicketApp.java` and bootstrap the ticket module:
 
 ```java
 package io.inverno.guide.ticket;
 
 import io.inverno.core.v1.Application;
 
-public class App {
+public class TicketApp {
     public static void main( String[] args ) {
         Application.run(new Ticket.Builder());
     }
@@ -163,11 +163,11 @@ public class App {
 The application can now be run with the following command:
 
 ```text
-$ mvn invenro:run
+$ mvn inverno:run
 ...
 [INFO] --- inverno-maven-plugin:${VERSION_INVERNO_TOOLS}:run (default-cli) @ ticket ---
-[INFO] Running project: io.inverno.guide.ticket@1.0-SNAPSHOT...
-ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
+ [═══════════════════════════════════════════════ 100 % ══════════════════════════════════════════════] Running project io.inverno.guide.ticket@1.0.0-SNAPSHOT...
+2024-12-18T09:22:52.696181784Z main ERROR Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
 INFO Application Inverno is starting...
 
 
@@ -184,25 +184,25 @@ INFO Application Inverno is starting...
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
-     ║ Java version        : 17+35-2724                                                           ║
-     ║ Java home           : /home/jkuhn/Devel/jdk/jdk-17                                         ║
+     ║ Java version        : 21.0.2+13-58                                                         ║
+     ║ Java home           : /home/jkuhn/Devel/jdk/jdk-21.0.2                                     ║
      ║                                                                                            ║
      ║ Application module  : io.inverno.guide.ticket                                              ║
-     ║ Application version : 1.0-SNAPSHOT                                                         ║
-     ║ Application class   : io.inverno.guide.ticket.App                                          ║
+     ║ Application version : 1.0.0-SNAPSHOT                                                       ║
+     ║ Application class   : io.inverno.guide.ticket.TicketApp                                    ║
      ║                                                                                            ║
      ║ Modules             :                                                                      ║
      ║  * ...                                                                                     ║
-     ║  * io.inverno.guide.ticket@1.0-SNAPSHOT                                                    ║
+     ║  * io.inverno.guide.ticket@1.0.0-SNAPSHOT                                                  ║
      ║  * ...                                                                                     ║
      ╚════════════════════════════════════════════════════════════════════════════════════════════╝
 
 
 INFO Ticket Starting Module io.inverno.guide.ticket...
 INFO Boot Starting Module io.inverno.mod.boot...
-INFO Boot Module io.inverno.mod.boot started in 278ms
-INFO Ticket Module io.inverno.guide.ticket started in 282ms
-INFO Application Application io.inverno.guide.ticket started in 335ms
+INFO Boot Module io.inverno.mod.boot started in 298ms
+INFO Ticket Module io.inverno.guide.ticket started in 312ms
+INFO Application Application io.inverno.guide.ticket started in 353ms
 INFO Ticket Stopping Module io.inverno.guide.ticket...
 INFO Boot Stopping Module io.inverno.mod.boot...
 INFO Boot Module io.inverno.mod.boot stopped in 0ms
@@ -221,7 +221,7 @@ Being able to inject configuration to your application in various ways depending
 
 The configuration module provides components that can be used in various situations to make your application code configurable. In order to operate the application on various platforms (e.g. bare metal, Docker, Kubernetes) and environment (e.g. development, test, production), it is important to make the application components fully configurable, this can be done easily by creating an application configuration interface and injecting a proper configuration source into the application module.
 
-You can create the following `AppConfiguration` interface annotated with `@io.inverno.mod.configuration.Configuration` to define the application configuration:
+You can create the following `TicketAppConfiguration` interface annotated with `@io.inverno.mod.configuration.Configuration` to define the application configuration:
 
 ```java
 package io.inverno.guide.ticket;
@@ -231,7 +231,7 @@ import io.inverno.mod.boot.BootConfiguration;
 import io.inverno.mod.configuration.Configuration;
 
 @Configuration
-public interface AppConfiguration {
+public interface TicketAppConfiguration {
 
     @NestedBean
     BootConfiguration boot();
@@ -240,20 +240,20 @@ public interface AppConfiguration {
 
 In above configuration, the `BootConfiguration` has been declared as a nested bean in order to expose the boot module configuration.
 
-You now need to inject a configuration source into the application module. A configuration source typically holds configuration data and exposes them to the application. In order to inject a configuration source into the application module, you need to create a socket bean by declaring a nested interface `AppConfigurationSource` in the application entry point as follows:
+You now need to inject a configuration source into the application module. A configuration source typically holds configuration data and exposes them to the application. In order to inject a configuration source into the application module, you need to create a socket bean by declaring a nested interface `TicketAppConfigurationSource` in the application entry point as follows:
 
 ```java
-
 package io.inverno.guide.ticket;
 
 import io.inverno.core.annotation.Bean;
 import io.inverno.core.v1.Application;
 import io.inverno.mod.configuration.ConfigurationSource;
+import java.util.function.Supplier;
 
-public class App {
+public class TicketApp {
 
     @Bean( name = "configurationSource" )
-    public interface AppConfigurationSource extends Supplier<ConfigurationSource<?, ?, ?>> {}
+    public interface TicketAppConfigurationSource extends Supplier<ConfigurationSource> {}
     
     public static void main( String[] args ) {
         Application.run(new Ticket.Builder());
@@ -261,7 +261,7 @@ public class App {
 }
 ```
 
-You can now recompile the project to regenerate the Inverno module class and generate the application configuration loader `io.inverno.guide.ticket.AppConfigurationLoader` which loads the `appConfiguration` bean exposing configuration data to the module.
+You can now recompile the project to regenerate the Inverno module class and generate the application configuration loader `io.inverno.guide.ticket.TicketAppConfigurationLoader` which loads the `ticketAppConfiguration` bean exposing configuration data to the module.
 
 The Inverno configuration module provides multiple configuration source implementations that can be used in various contexts. The `BootstrapConfigurationSource` is particularly suited for bootstrapping an application, it scans the following local sources in that order to resolve configuration properties: 
 
@@ -283,7 +283,6 @@ import io.inverno.core.annotation.Bean;
 import io.inverno.core.v1.Application;
 import io.inverno.mod.configuration.ConfigurationSource;
 import io.inverno.mod.configuration.source.BootstrapConfigurationSource;
-
 import java.io.IOException;
 import java.util.function.Supplier;
 
@@ -293,7 +292,7 @@ public class App {
     public interface AppConfigurationSource extends Supplier<ConfigurationSource<?, ?, ?>> {}
 
     public static void main( String[] args ) throws IOException {
-        Application.run(new Ticket.Builder().setConfigurationSource(new BootstrapConfigurationSource(App.class.getModule(), args)));
+        Application.run(new Ticket.Builder().setConfigurationSource(new BootstrapConfigurationSource(TicketApp.class.getModule(), args)));
     }
 }
 ```
@@ -301,12 +300,12 @@ public class App {
 Throughout this guide, you will provide default and specific configuration to the application components, so you can already create a `configuration.cprops` file under `src/main/resources`, this file will be packaged inside the module and is meant to contain generic application configuration.
 
 ```text
-io.inverno.guide.ticket.appConfiguration {
+io.inverno.guide.ticket.ticketAppConfiguration {
     
 }
 ```
 
-the `.cprops` configuration file format is a specific file format which allows declaring namespaced and parameterized configuration properties as defined in the configuration module. In that particular case, the configuration properties namespace is `io.inverno.guide.ticket.appConfiguration` which corresponds to the name of the application module and the name of the application configuration bean.
+the `.cprops` configuration file format is a specific file format which allows declaring namespaced and parameterized configuration properties as defined in the configuration module. In that particular case, the configuration properties namespace is `io.inverno.guide.ticket.ticketAppConfiguration` which corresponds to the name of the application module and the name of the application configuration bean.
 
 > Please refer to the Inverno configuration module [configuration](https://inverno.io/docs/release/reference/html/index.html#configuration-1), to have a complete understanding on configuration sources, parameterized properties and the `.cprops` file format. 
 
@@ -320,7 +319,7 @@ As described earlier, the ticket application is dealing with the following entit
 
 This can be modelled in the following diagram:
 
-<img class="shadow" src="img/datamodel.svg" style="display: block; margin: 2em auto;" alt="Inverno Ticket data model"/>
+<img class="shadow" src="img/datamodel.png" style="display: block; margin: 2em auto;" alt="Inverno Ticket data model"/>
 
 Plans and tickets are uniquely identified by generated ids, ticket notes are stored as list associated to a ticket, they are then uniquely identified by a ticket id and an index. 
 
@@ -332,7 +331,6 @@ package io.inverno.guide.ticket.internal.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import reactor.core.publisher.Flux;
-
 import java.time.ZonedDateTime;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -423,7 +421,6 @@ Finally, in order for the Jackson object mapper to be able to serialize/deserial
 @io.inverno.core.annotation.Module
 module io.inverno.guide.ticket {
     requires io.inverno.mod.boot;
-    requires io.inverno.mod.redis.lettuce;
 
     exports io.inverno.guide.ticket.internal.model to com.fasterxml.jackson.databind;
 }
@@ -448,8 +445,8 @@ Inverno currently provides an implementation based on [Lettuce](https://lettuce.
         <version>${VERSION_INVERNO_DIST}</version>
     </parent>
     <groupId>io.inverno.guide</groupId>
-    <artifactId>ticket</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>inverno-ticket</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -471,12 +468,14 @@ You must also declare the dependency in the `module-info.java` descriptor of the
 module io.inverno.guide.ticket {
     requires io.inverno.mod.boot;
     requires io.inverno.mod.redis.lettuce;
+
+	exports io.inverno.guide.ticket.internal.model to com.fasterxml.jackson.databind;
 }
 ```
 
 `io.inverno.mod.redis.lettuce` is an Inverno module exposing a `RedisTransactionalClient<String, String>` bean and a `LettuceRedisClientConfiguration` configuration bean, it can then be injected in any bean defined in the application module.
 
-In order to be able to configure the Redis client, the `LettuceRedisClientConfiguration` must be exposed in the `AppConfiguration`:
+In order to be able to configure the Redis client, the `LettuceRedisClientConfiguration` must be exposed in the `TicketAppConfiguration`:
 
 ```java
 package io.inverno.guide.ticket;
@@ -487,7 +486,7 @@ import io.inverno.mod.configuration.Configuration;
 import io.inverno.mod.redis.lettuce.LettuceRedisClientConfiguration;
 
 @Configuration
-public interface AppConfiguration {
+public interface TicketAppConfiguration {
 
     @NestedBean
     BootConfiguration boot();
@@ -497,7 +496,7 @@ public interface AppConfiguration {
 }
 ```
 
-Since the `LettuceRedisClientConfiguration` is declared as a nested bean in the `AppConfiguration`, it will be automatically injected in the Lettuce Redis client module and used to configure the Redis client.
+Since the `LettuceRedisClientConfiguration` is declared as a nested bean in the `TicketAppConfiguration`, it will be automatically injected in the Lettuce Redis client module and used to configure the Redis client.
 
 You can now create three services to manage plans, tickets and notes. The following naming strategy will be used for keys in the Redis data store:
 
@@ -507,7 +506,7 @@ APP:<APPLICATION>:<DATA_TYPE>:<ID>[:<OPT>]*
 
 - `<APPLICATION>` uniquely identifies the application, in your case: `Ticket`
 - `<DATA_TYPE>` designates the type of data: `Plan`, `Ticket` or `Note`
-- `<ID>` uniquely identifies the data, it can be a sequence for a plan or a ticket (e.g. `APP:Ticket:Ticket:2`) but it can also be a constant to identify single entries such as sequences (eg. `APP:Ticket:Ticket:SEQ`)
+- `<ID>` uniquely identifies the data, it can be a sequence for a plan or a ticket (e.g. `APP:Ticket:Ticket:2`) but it can also be a constant to identify single entries such as sequences (e.g. `APP:Ticket:Ticket:SEQ`)
 - `<OPT>` could be any extra metadata used to designate any data related to a parent entry such as the list of tickets associated to a plan (e.g. `APP:Ticket:Plan:2:Tickets`)
 
 Since the `APP:Ticket` prefix is common to the whole application, you can declare it in the application entry point:
@@ -515,7 +514,7 @@ Since the `APP:Ticket` prefix is common to the whole application, you can declar
 ```java
 package io.inverno.guide.ticket;
 
-public class App {
+public class TicketApp {
 
     public static final String REDIS_KEY = "APP:Ticket";
     
@@ -534,19 +533,19 @@ package io.inverno.guide.ticket.internal.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.inverno.core.annotation.Bean;
-import io.inverno.guide.ticket.App;
+import io.inverno.guide.ticket.TicketApp;
 import io.inverno.guide.ticket.internal.exception.TicketException;
 import io.inverno.guide.ticket.internal.model.Ticket;
+import io.inverno.core.annotation.Bean;
 import io.inverno.mod.redis.RedisTransactionalClient;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
 
 @Bean
 public class TicketService {
@@ -584,19 +583,18 @@ package io.inverno.guide.ticket.internal.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.inverno.core.annotation.Bean;
-import io.inverno.guide.ticket.App;
+import io.inverno.guide.ticket.TicketApp;
 import io.inverno.guide.ticket.internal.exception.TicketException;
 import io.inverno.guide.ticket.internal.model.Ticket;
+import io.inverno.core.annotation.Bean;
 import io.inverno.mod.redis.RedisTransactionalClient;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Bean
 public class TicketService {
@@ -672,7 +670,9 @@ public class TicketService {
                     return ticket;
                 });
         }
-    }
+	}
+	
+    ...
 }
 ```
 
@@ -684,11 +684,11 @@ The `RedisTransactionalClient` provides method `multi()` which allows running mu
 
 A ticket is updated when a ticket id is present in the ticket argument by updating the JSON representation at the key corresponding to the ticket id and by moving the ticket id from the old status set to the new status set if the ticket status was actually updated. This is done using `SET` and `SMOVE` Redis commands. Note that the `xx` option is used when updating the ticket, as a result a non-existing ticket results in an empty Mono.
 
-A new ticket is created when there's no ticket id in the ticket argument. A ticket sequence is first obtained by incrementing `APP:Ticket:Ticket:SEQ` and then a JSON representation of the ticket is stored at the corresponding key. The ticket id is also added to the `APP:Ticket:Ticket:OPEN` set since a new ticket is always in status `OPEN`. These two commands are run within a transaction in order to make sure a ticket is always created and added to the `OPEN` ticket status set.
+A new ticket is created when there's no ticket id in the ticket argument. A ticket sequence is first obtained by incrementing `APP:Ticket:Ticket:SEQ` and then a JSON representation of the ticket is stored at the corresponding key. The ticket id is also added to the `APP:Ticket:Ticket:OPEN` set since a new ticket is always in status `OPEN`. These two commands run within a transaction in order to make sure that a ticket is always created and added to the `OPEN` ticket status set.
 
 The Redis client API is quite self-explanatory, but we can differentiate between simple and complex commands: a simple command is run by subscribing to a `Publisher` directly returned by a `RedisOperations` method whereas a complex command is run by subscribing to a `Publisher` obtained from a builder returned by a `RedisOperations` method which allows defining more complex arguments. In above code, the `SADD` command is considered a simple command and the `SET` command a complex command.
 
-The rest of the implementation is done in a similar way, the complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.1.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/service/TicketService.java).
+The rest of the implementation is done in a similar way, the complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/master/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/service/TicketService.java).
 
 The `io.inverno.guide.ticket.internal.service.PlanService` class manages plans in the Redis data store. It must be annotated with `io.inverno.core.annotation.Bean` to take part in IoC/DI when the application module is started. As for the `TicketService` bean, it requires a `RedisTransactionalClient<String, String>` instance and an `ObjectMapper` instance but also a `TicketService` instance to retrieve tickets associated to a plan. These are required dependencies that must be injected in the constructor.
 
@@ -699,22 +699,21 @@ package io.inverno.guide.ticket.internal.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.inverno.core.annotation.Bean;
-import io.inverno.guide.ticket.App;
+import io.inverno.guide.ticket.TicketApp;
 import io.inverno.guide.ticket.internal.exception.PlanAlreadyExistsException;
 import io.inverno.guide.ticket.internal.exception.TicketException;
 import io.inverno.guide.ticket.internal.exception.TicketNotFoundInPlanException;
 import io.inverno.guide.ticket.internal.model.Plan;
 import io.inverno.guide.ticket.internal.model.Ticket;
+import io.inverno.core.annotation.Bean;
 import io.inverno.mod.redis.RedisTransactionalClient;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Bean
 public class PlanService {
@@ -756,22 +755,21 @@ package io.inverno.guide.ticket.internal.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.inverno.core.annotation.Bean;
-import io.inverno.guide.ticket.App;
+import io.inverno.guide.ticket.TicketApp;
 import io.inverno.guide.ticket.internal.exception.PlanAlreadyExistsException;
 import io.inverno.guide.ticket.internal.exception.TicketException;
 import io.inverno.guide.ticket.internal.exception.TicketNotFoundInPlanException;
 import io.inverno.guide.ticket.internal.model.Plan;
 import io.inverno.guide.ticket.internal.model.Ticket;
+import io.inverno.core.annotation.Bean;
 import io.inverno.mod.redis.RedisTransactionalClient;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Bean
 public class PlanService {
@@ -792,33 +790,36 @@ public class PlanService {
 
     public Mono<Plan> getPlan(long planId, List<Ticket.Status> statuses) {
         return this.redisClient.get(String.format(REDIS_KEY_PLAN, planId))
-                .map(result -> {
-                    try {
-                        Plan plan = this.mapper.readValue(result, Plan.class);
-                        plan.setTickets(this.getPlanTickets(planId, statuses));
-                        return plan;
-                    } catch (JsonProcessingException ex) {
-                        throw new UncheckedIOException(ex);
-                    }
-                });
-    }
+            .map(result -> {
+                try {
+                    Plan plan = this.mapper.readValue(result, Plan.class);
+                    plan.setTickets(this.getPlanTickets(planId, statuses));
+                    return plan;
+                }
+                catch (JsonProcessingException ex) {
+                    throw new UncheckedIOException(ex);
+                }
+            });
+	}
 
     private Flux<Ticket> getPlanTickets(long planId, List<Ticket.Status> statuses) {
-        if (statuses == null || statuses.isEmpty()) {
+        if(statuses == null || statuses.isEmpty()) {
             return Flux.empty();
         }
         return Flux.from(this.redisClient.connection(operations -> operations
-                .sunion(keys -> statuses.forEach(status -> keys.key(String.format(TicketService.REDIS_KEY_TICKET_STATUS, status))))
+            .sunion(keys -> statuses.forEach(status -> keys.key(String.format(TicketService.REDIS_KEY_TICKET_STATUS, status))))
+            .collectList()
+            .filter(ticketIds -> !ticketIds.isEmpty())
+            .flatMapMany(ticketIds -> operations.lrange(String.format(REDIS_KEY_PLAN_TICKETS, planId), 0, -1)
+                .filter(id -> ticketIds.contains(id))
+                .map(id -> Long.parseLong(id))
                 .collectList()
-                .filter(ticketIds -> !ticketIds.isEmpty())
-                .flatMapMany(ticketIds -> operations.lrange(String.format(REDIS_KEY_PLAN_TICKETS, planId), 0, -1)
-                        .filter(id -> ticketIds.contains(id))
-                        .map(id -> Long.parseLong(id))
-                        .collectList()
-                        .flatMapMany(this.ticketService::getTickets)
-                )
+                .flatMapMany(this.ticketService::getTickets)
+            )
         ));
-    }
+	}
+	
+    ...
 }
 ```
 
@@ -828,7 +829,7 @@ Retrieving a plan is pretty straightforward using Redis `GET` command, the filte
 
 Using a `Flux<Ticket>` allows to lazily load plan's ticket when required. This is one advantage of being reactive since nothing happens until the publisher is subscribed.
 
-The rest of the `PlanService` implementation is done in a similar way as for the `TicketService`, the complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.1.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/service/PlanService.java).
+The rest of the `PlanService` implementation is done in a similar way as for the `TicketService`, the complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/master/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/service/PlanService.java).
 
 The `io.inverno.guide.ticket.internal.service.NoteService` class manages ticket notes in the Redis data store. It must be annotated with `io.inverno.core.annotation.Bean` to take part in IoC/DI when the application module is started. It requires a `RedisTransactionalClient<String, String>` instance and an `ObjectMapper` instance. These are required dependencies that must be injected in the constructor.
 
@@ -840,11 +841,11 @@ package io.inverno.guide.ticket.internal.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.inverno.guide.ticket.internal.model.Note;
+import io.inverno.core.annotation.Bean;
 import io.inverno.mod.redis.RedisTransactionalClient;
+import java.io.UncheckedIOException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.io.UncheckedIOException;
 
 public class NoteService {
 
@@ -870,7 +871,7 @@ public class NoteService {
 
 Notes associated to a ticket are stored in a Redis `list` whose key derives from the ticket id: `APP:Ticket:Ticket:2:Notes`.
 
-The `NoteService` implementation is a basic CRUD implementation which is similar to what we've seen so far in `TicketService` and `PlanService`, the complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.1.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/service/NoteService.java).
+The `NoteService` implementation is a basic CRUD implementation which is similar to what we've seen so far in `TicketService` and `PlanService`, the complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/master/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/service/NoteService.java).
 
 Inverno fully embraces the [Java Platform Module System](https://en.wikipedia.org/wiki/Java_Platform_Module_System) to create modular and secure applications. Unfortunately, not all Java libraries have been properly migrated to Java modules. This is especially the case for [Lettuce](https://lettuce.io/) and [Project Reactor](https://projectreactor.io/). This might result in self-explanatory runtime errors such as: `java.lang.reflect.InaccessibleObjectException: ... module reactor.core does not "opens reactor.core.publisher" to module lettuce.core`. Until external libraries are properly modularized, such issues can be fixed by specifying `--add-opens` or `--add-exports` arguments to the JVM.
 
@@ -887,8 +888,8 @@ Since you'll use the Inverno Maven plugin to run and package the application, yo
         <version>${VERSION_INVERNO_DIST}</version>
     </parent>
     <groupId>io.inverno.guide</groupId>
-    <artifactId>ticket</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>inverno-ticket</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     ...
 
@@ -946,7 +947,6 @@ The `TicketDto` class is more basic and contains the same fields as the `Ticket`
 package io.inverno.guide.ticket.internal.rest.v1.dto;
 
 import io.inverno.guide.ticket.internal.model.Ticket;
-
 import java.time.ZonedDateTime;
 
 public class TicketDto {
@@ -1006,6 +1006,7 @@ package io.inverno.guide.ticket.internal.rest.v1.mapper;
 import io.inverno.guide.ticket.internal.model.Ticket;
 import io.inverno.guide.ticket.internal.rest.DtoMapper;
 import io.inverno.guide.ticket.internal.rest.v1.dto.TicketDto;
+import io.inverno.core.annotation.Bean;
 import reactor.core.publisher.Mono;
 
 @Bean( visibility = Bean.Visibility.PRIVATE )
@@ -1047,22 +1048,21 @@ public class TicketDtoMapper implements DtoMapper<TicketDto, Ticket> {
 }
 ```
 
-The code of the `NoteDtoMapper` implementation can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.1.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/rest/v1/mapper/NoteDtoMapper.java).
+The code of the `NoteDtoMapper` implementation can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/master/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/rest/v1/mapper/NoteDtoMapper.java).
 
 The `PlanDtoMapper` is a bit more complex since `Flux<Ticket>` must be mapped to `List<TicketDto>`, implementation then requires some logic and a `DtoMapper<TicketDto, Ticket>` which can be easily injected in the constructor since both `PlanDtoMapper` and `TicketDtoMapper` are declared as beans in the same module.
 
 ```java
 package io.inverno.guide.ticket.internal.rest.v1.mapper;
 
-import io.inverno.core.annotation.Bean;
 import io.inverno.guide.ticket.internal.model.Plan;
 import io.inverno.guide.ticket.internal.model.Ticket;
 import io.inverno.guide.ticket.internal.rest.DtoMapper;
 import io.inverno.guide.ticket.internal.rest.v1.dto.PlanDto;
 import io.inverno.guide.ticket.internal.rest.v1.dto.TicketDto;
+import io.inverno.core.annotation.Bean;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import java.util.Optional;
 
 @Bean( visibility = Bean.Visibility.PRIVATE )
@@ -1077,20 +1077,20 @@ public class PlanDtoMapper implements DtoMapper<PlanDto, Plan> {
     @Override
     public Mono<PlanDto> toDto(Plan domain) {
         return Optional.ofNullable(domain.getTickets()).orElse(Flux.empty())
-                .flatMap(this.ticketDtoMapper::toDto)
-                .collectList()
-                .map(tickets -> {
-                    PlanDto dto = new PlanDto();
+            .flatMap(this.ticketDtoMapper::toDto)
+            .collectList()
+            .map(tickets -> {
+                PlanDto dto = new PlanDto();
 
-                    dto.setId(domain.getId());
-                    dto.setTitle(domain.getTitle());
-                    dto.setSummary(domain.getSummary());
-                    dto.setDescription(domain.getDescription());
-                    dto.setCreationDateTime(domain.getCreationDateTime());
-                    dto.setTickets(tickets);
+                dto.setId(domain.getId());
+                dto.setTitle(domain.getTitle());
+                dto.setSummary(domain.getSummary());
+                dto.setDescription(domain.getDescription());
+                dto.setCreationDateTime(domain.getCreationDateTime());
+                dto.setTickets(tickets);
 
-                    return dto;
-                });
+                return dto;
+            });
     }
 
     @Override
@@ -1126,8 +1126,8 @@ You can now move to the creation of the two REST endpoints. Inverno provides a W
         <version>${VERSION_INVERNO_DIST}</version>
     </parent>
     <groupId>io.inverno.guide</groupId>
-    <artifactId>ticket</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>inverno-ticket</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -1156,10 +1156,12 @@ module io.inverno.guide.ticket {
     requires io.inverno.mod.boot;
     requires io.inverno.mod.redis.lettuce;
     requires io.inverno.mod.web.server;
+	
+	exports io.inverno.guide.ticket.internal.model to com.fasterxml.jackson.databind;
 }
 ```
 
-`io.inverno.mod.web.server` is an Inverno module which embeds the HTTP server and allows defining Web routes used to route HTTP requests to the right handler. It can be configured by injecting a `WebConfiguration` which should then be exposed in the `AppConfiguration` as follows:
+`io.inverno.mod.web.server` is an Inverno module which embeds the HTTP server and allows defining Web routes used to route HTTP requests to the right handler. It can be configured by injecting a `WebServerConfiguration` which should then be exposed in the `TicketAppConfiguration` as follows:
 
 ```java
 package io.inverno.guide.ticket;
@@ -1168,10 +1170,10 @@ import io.inverno.core.annotation.NestedBean;
 import io.inverno.mod.boot.BootConfiguration;
 import io.inverno.mod.configuration.Configuration;
 import io.inverno.mod.redis.lettuce.LettuceRedisClientConfiguration;
-import io.inverno.mod.web.server.WebConfiguration;
+import io.inverno.mod.web.server.WebServerConfiguration;
 
 @Configuration
-public interface AppConfiguration {
+public interface TicketAppConfiguration {
 
     @NestedBean
     BootConfiguration boot();
@@ -1180,11 +1182,11 @@ public interface AppConfiguration {
     LettuceRedisClientConfiguration redis();
 
     @NestedBean
-    WebConfiguration web();
+    WebServerConfiguration web_server();
 }
 ```
 
-Since the `WebConfiguration` is declared as a nested bean in the `AppConfiguration`, it will be automatically injected in the Web server module and used to configure the HTTP server among other things.
+Since the `WebServerConfiguration` is declared as a nested bean in the `TicketAppConfiguration`, it will be automatically injected in the Web server module and used to configure the HTTP server among other things.
 
 The Web server module provides several ways to create REST endpoint, it can be done by defining Web routes programmatically or by defining Web controllers later processed by the Inverno Web compiler at build time to generate the Web server controller configurer injected in the Web server module to configure the corresponding Web routes. As well as being simpler, using Web controllers allows generating [OpenAPI](https://www.openapis.org/) specifications automatically based on JavaDoc.
 
@@ -1193,22 +1195,26 @@ Let's start by creating the `PlanWebController` which exposes the `PlanService` 
 ```java
 package io.inverno.guide.ticket.internal.rest.v1;
 
-import io.inverno.core.annotation.Bean;
 import io.inverno.guide.ticket.internal.model.Plan;
 import io.inverno.guide.ticket.internal.model.Ticket;
 import io.inverno.guide.ticket.internal.rest.DtoMapper;
 import io.inverno.guide.ticket.internal.rest.v1.dto.PlanDto;
 import io.inverno.guide.ticket.internal.service.PlanService;
+import io.inverno.core.annotation.Bean;
 import io.inverno.mod.base.resource.MediaTypes;
 import io.inverno.mod.http.base.Method;
 import io.inverno.mod.http.base.NotFoundException;
 import io.inverno.mod.http.base.Status;
 import io.inverno.mod.http.base.header.Headers;
+import io.inverno.mod.web.base.annotation.Body;
+import io.inverno.mod.web.base.annotation.FormParam;
+import io.inverno.mod.web.base.annotation.PathParam;
+import io.inverno.mod.web.base.annotation.QueryParam;
 import io.inverno.mod.web.server.WebExchange;
-import io.inverno.mod.web.server.annotation.*;
+import io.inverno.mod.web.server.annotation.WebController;
+import io.inverno.mod.web.server.annotation.WebRoute;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -1240,7 +1246,28 @@ The `createPlan()` route handler method delegates the creation of a plan to the 
 ```java
 package io.inverno.guide.ticket.internal.rest.v1;
 
-...
+import io.inverno.guide.ticket.internal.model.Plan;
+import io.inverno.guide.ticket.internal.model.Ticket;
+import io.inverno.guide.ticket.internal.rest.DtoMapper;
+import io.inverno.guide.ticket.internal.rest.v1.dto.PlanDto;
+import io.inverno.guide.ticket.internal.service.PlanService;
+import io.inverno.core.annotation.Bean;
+import io.inverno.mod.base.resource.MediaTypes;
+import io.inverno.mod.http.base.Method;
+import io.inverno.mod.http.base.NotFoundException;
+import io.inverno.mod.http.base.Status;
+import io.inverno.mod.http.base.header.Headers;
+import io.inverno.mod.web.base.annotation.Body;
+import io.inverno.mod.web.base.annotation.FormParam;
+import io.inverno.mod.web.base.annotation.PathParam;
+import io.inverno.mod.web.base.annotation.QueryParam;
+import io.inverno.mod.web.server.WebExchange;
+import io.inverno.mod.web.server.annotation.WebController;
+import io.inverno.mod.web.server.annotation.WebRoute;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import java.util.List;
+import java.util.Optional;
 
 @Bean( visibility = Bean.Visibility.PRIVATE )
 @WebController( path = "/api/v1/plan" )
@@ -1260,14 +1287,14 @@ public class PlanWebController {
     public Mono<PlanDto> createPlan(@Body PlanDto plan, WebExchange<?> exchange) {
         plan.setId(null);
         return this.planDtoMapper.toDomain(plan)
-                .flatMap(this.planService::savePlan)
-                .doOnNext(savedPlan -> 
-                    exchange.response().headers(headers -> headers
-                        .status(Status.CREATED)
-                        .add(Headers.NAME_LOCATION, exchange.request().getPathBuilder().segment(savedPlan.getId().toString()).buildPath())
-                    )
+            .flatMap(this.planService::savePlan)
+            .doOnNext(savedPlan -> exchange.response()
+                .headers(headers -> headers
+                    .status(Status.CREATED)
+                    .add(Headers.NAME_LOCATION, exchange.request().getPathBuilder().segment(savedPlan.getId().toString()).buildPath())
                 )
-                .flatMap(this.planDtoMapper::toDto);
+            )
+            .flatMap(this.planDtoMapper::toDto);
     }
 }
 ```
@@ -1291,7 +1318,28 @@ The `listPlans()` route handler method delegates to the `PlanService` to list th
 ```java
 package io.inverno.guide.ticket.internal.rest.v1;
 
-...
+import io.inverno.guide.ticket.internal.model.Plan;
+import io.inverno.guide.ticket.internal.model.Ticket;
+import io.inverno.guide.ticket.internal.rest.DtoMapper;
+import io.inverno.guide.ticket.internal.rest.v1.dto.PlanDto;
+import io.inverno.guide.ticket.internal.service.PlanService;
+import io.inverno.core.annotation.Bean;
+import io.inverno.mod.base.resource.MediaTypes;
+import io.inverno.mod.http.base.Method;
+import io.inverno.mod.http.base.NotFoundException;
+import io.inverno.mod.http.base.Status;
+import io.inverno.mod.http.base.header.Headers;
+import io.inverno.mod.web.base.annotation.Body;
+import io.inverno.mod.web.base.annotation.FormParam;
+import io.inverno.mod.web.base.annotation.PathParam;
+import io.inverno.mod.web.base.annotation.QueryParam;
+import io.inverno.mod.web.server.WebExchange;
+import io.inverno.mod.web.server.annotation.WebController;
+import io.inverno.mod.web.server.annotation.WebRoute;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import java.util.List;
+import java.util.Optional;
 
 @Bean( visibility = Bean.Visibility.PRIVATE )
 @WebController( path = "/api/v1/plan" )
@@ -1318,7 +1366,28 @@ The `getPlan()` route handler method returns a plan with the list of associated 
 ```java
 package io.inverno.guide.ticket.internal.rest.v1;
 
-...
+import io.inverno.guide.ticket.internal.model.Plan;
+import io.inverno.guide.ticket.internal.model.Ticket;
+import io.inverno.guide.ticket.internal.rest.DtoMapper;
+import io.inverno.guide.ticket.internal.rest.v1.dto.PlanDto;
+import io.inverno.guide.ticket.internal.service.PlanService;
+import io.inverno.core.annotation.Bean;
+import io.inverno.mod.base.resource.MediaTypes;
+import io.inverno.mod.http.base.Method;
+import io.inverno.mod.http.base.NotFoundException;
+import io.inverno.mod.http.base.Status;
+import io.inverno.mod.http.base.header.Headers;
+import io.inverno.mod.web.base.annotation.Body;
+import io.inverno.mod.web.base.annotation.FormParam;
+import io.inverno.mod.web.base.annotation.PathParam;
+import io.inverno.mod.web.base.annotation.QueryParam;
+import io.inverno.mod.web.server.WebExchange;
+import io.inverno.mod.web.server.annotation.WebController;
+import io.inverno.mod.web.server.annotation.WebRoute;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import java.util.List;
+import java.util.Optional;
 
 @Bean( visibility = Bean.Visibility.PRIVATE )
 @WebController( path = "/api/v1/plan" )
@@ -1337,9 +1406,9 @@ public class PlanWebController {
      */
     @WebRoute( path = "/{planId}", method = Method.GET, produces = MediaTypes.APPLICATION_JSON )
     public Mono<PlanDto> getPlan(@PathParam long planId, @QueryParam Optional<List<Ticket.Status>> statuses) {
-        return statuses.map(s -> this.planService.getPlan(planId, s)).orElse(this.planService.getPlan(planId))
-            .flatMap(this.planDtoMapper::toDto)
-            .switchIfEmpty(Mono.error(() -> new NotFoundException()));
+		return statuses.map(s -> this.planService.getPlan(planId, s)).orElse(this.planService.getPlan(planId))
+			.flatMap(this.planDtoMapper::toDto)
+			.switchIfEmpty(Mono.error(() -> new NotFoundException()));
     }
 }
 ```
@@ -1357,7 +1426,28 @@ The `updatePlan()` and `deletePlan()` route handler methods are based on what yo
 ```java
 package io.inverno.guide.ticket.internal.rest.v1;
 
-...
+import io.inverno.guide.ticket.internal.model.Plan;
+import io.inverno.guide.ticket.internal.model.Ticket;
+import io.inverno.guide.ticket.internal.rest.DtoMapper;
+import io.inverno.guide.ticket.internal.rest.v1.dto.PlanDto;
+import io.inverno.guide.ticket.internal.service.PlanService;
+import io.inverno.core.annotation.Bean;
+import io.inverno.mod.base.resource.MediaTypes;
+import io.inverno.mod.http.base.Method;
+import io.inverno.mod.http.base.NotFoundException;
+import io.inverno.mod.http.base.Status;
+import io.inverno.mod.http.base.header.Headers;
+import io.inverno.mod.web.base.annotation.Body;
+import io.inverno.mod.web.base.annotation.FormParam;
+import io.inverno.mod.web.base.annotation.PathParam;
+import io.inverno.mod.web.base.annotation.QueryParam;
+import io.inverno.mod.web.server.WebExchange;
+import io.inverno.mod.web.server.annotation.WebController;
+import io.inverno.mod.web.server.annotation.WebRoute;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import java.util.List;
+import java.util.Optional;
 
 @Bean( visibility = Bean.Visibility.PRIVATE )
 @WebController( path = "/api/v1/plan" )
@@ -1376,11 +1466,11 @@ public class PlanWebController {
      */
     @WebRoute( path = "/{planId}", method = Method.PUT, consumes = MediaTypes.APPLICATION_JSON, produces = MediaTypes.APPLICATION_JSON )
     public Mono<PlanDto> updatePlan(@PathParam long planId, @Body PlanDto plan) {
-        plan.setId(planId);
-        return this.planDtoMapper.toDomain(plan)
-            .flatMap(this.planService::savePlan)
-            .flatMap(this.planDtoMapper::toDto)
-            .switchIfEmpty(Mono.error(() -> new NotFoundException()));
+		plan.setId(planId);
+		return this.planDtoMapper.toDomain(plan)
+			.flatMap(this.planService::savePlan)
+			.flatMap(this.planDtoMapper::toDto)
+			.switchIfEmpty(Mono.error(() -> new NotFoundException()));
     }
 
     /**
@@ -1393,9 +1483,9 @@ public class PlanWebController {
      */
     @WebRoute( path = "/{planId}", method = Method.DELETE, produces = MediaTypes.APPLICATION_JSON )
     public Mono<PlanDto> deletePlan(@PathParam long planId) {
-        return this.planService.removePlan(planId)
-            .flatMap(this.planDtoMapper::toDto)
-            .switchIfEmpty(Mono.error(() -> new NotFoundException()));
+		return this.planService.removePlan(planId)
+			.flatMap(this.planDtoMapper::toDto)
+			.switchIfEmpty(Mono.error(() -> new NotFoundException()));
     }
 }
 ```
@@ -1405,7 +1495,28 @@ The `pushTicket()` route handler method is more interesting as the Web route con
 ```java
 package io.inverno.guide.ticket.internal.rest.v1;
 
-...
+import io.inverno.guide.ticket.internal.model.Plan;
+import io.inverno.guide.ticket.internal.model.Ticket;
+import io.inverno.guide.ticket.internal.rest.DtoMapper;
+import io.inverno.guide.ticket.internal.rest.v1.dto.PlanDto;
+import io.inverno.guide.ticket.internal.service.PlanService;
+import io.inverno.core.annotation.Bean;
+import io.inverno.mod.base.resource.MediaTypes;
+import io.inverno.mod.http.base.Method;
+import io.inverno.mod.http.base.NotFoundException;
+import io.inverno.mod.http.base.Status;
+import io.inverno.mod.http.base.header.Headers;
+import io.inverno.mod.web.base.annotation.Body;
+import io.inverno.mod.web.base.annotation.FormParam;
+import io.inverno.mod.web.base.annotation.PathParam;
+import io.inverno.mod.web.base.annotation.QueryParam;
+import io.inverno.mod.web.server.WebExchange;
+import io.inverno.mod.web.server.annotation.WebController;
+import io.inverno.mod.web.server.annotation.WebRoute;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import java.util.List;
+import java.util.Optional;
 
 @Bean( visibility = Bean.Visibility.PRIVATE )
 @WebController( path = "/api/v1/plan" )
@@ -1424,9 +1535,9 @@ public class PlanWebController {
      */
     @WebRoute( path = "/{planId}/ticket", method = Method.POST, consumes= MediaTypes.APPLICATION_X_WWW_FORM_URLENCODED )
     public Mono<Void> pushTicket(@PathParam long planId, @FormParam long ticketId, @FormParam Optional<Long> referenceTicketId) {
-        return referenceTicketId
-            .map(refTicketId -> this.planService.insertTicketBefore(planId, ticketId, refTicketId))
-            .orElse(this.planService.addTicket(planId, ticketId));
+		return referenceTicketId
+			.map(refTicketId -> this.planService.insertTicketBefore(planId, ticketId, refTicketId))
+			.orElse(this.planService.addTicket(planId, ticketId));
     }
 }
 ```
@@ -1438,7 +1549,28 @@ Finally, the `removeTicket()` route handler achieves the `PlanWebController` cla
 ```java
 package io.inverno.guide.ticket.internal.rest.v1;
 
-...
+import io.inverno.guide.ticket.internal.model.Plan;
+import io.inverno.guide.ticket.internal.model.Ticket;
+import io.inverno.guide.ticket.internal.rest.DtoMapper;
+import io.inverno.guide.ticket.internal.rest.v1.dto.PlanDto;
+import io.inverno.guide.ticket.internal.service.PlanService;
+import io.inverno.core.annotation.Bean;
+import io.inverno.mod.base.resource.MediaTypes;
+import io.inverno.mod.http.base.Method;
+import io.inverno.mod.http.base.NotFoundException;
+import io.inverno.mod.http.base.Status;
+import io.inverno.mod.http.base.header.Headers;
+import io.inverno.mod.web.base.annotation.Body;
+import io.inverno.mod.web.base.annotation.FormParam;
+import io.inverno.mod.web.base.annotation.PathParam;
+import io.inverno.mod.web.base.annotation.QueryParam;
+import io.inverno.mod.web.server.WebExchange;
+import io.inverno.mod.web.server.annotation.WebController;
+import io.inverno.mod.web.server.annotation.WebRoute;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import java.util.List;
+import java.util.Optional;
 
 @Bean( visibility = Bean.Visibility.PRIVATE )
 @WebController( path = "/api/v1/plan" )
@@ -1456,7 +1588,7 @@ public class PlanWebController {
      */
     @WebRoute( path = "/{planId}/ticket/{ticketId}", method = Method.DELETE, produces = MediaTypes.TEXT_PLAIN )
     public Mono<Long> removeTicket(@PathParam long planId, @PathParam long ticketId) {
-        return this.planService.removeTicket(planId, ticketId);
+		return this.planService.removeTicket(planId, ticketId);
     }
 }
 ```
@@ -1466,26 +1598,29 @@ The `TicketWebController` is implemented in a similar way, it exposes tickets an
 ```java
 package io.inverno.guide.ticket.internal.rest.v1;
 
-import io.inverno.core.annotation.Bean;
+import io.inverno.guide.ticket.internal.service.NoteService;
+import io.inverno.guide.ticket.internal.service.TicketService;
 import io.inverno.guide.ticket.internal.model.Note;
 import io.inverno.guide.ticket.internal.model.Ticket;
 import io.inverno.guide.ticket.internal.rest.DtoMapper;
 import io.inverno.guide.ticket.internal.rest.v1.dto.NoteDto;
 import io.inverno.guide.ticket.internal.rest.v1.dto.TicketDto;
-import io.inverno.guide.ticket.internal.service.NoteService;
-import io.inverno.guide.ticket.internal.service.TicketService;
+import io.inverno.core.annotation.Bean;
 import io.inverno.mod.base.resource.MediaTypes;
 import io.inverno.mod.http.base.Method;
 import io.inverno.mod.http.base.NotFoundException;
 import io.inverno.mod.http.base.Status;
 import io.inverno.mod.http.base.header.Headers;
+import io.inverno.mod.web.base.annotation.Body;
+import io.inverno.mod.web.base.annotation.PathParam;
+import io.inverno.mod.web.base.annotation.QueryParam;
 import io.inverno.mod.web.server.WebExchange;
-import io.inverno.mod.web.server.annotation.*;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
+import io.inverno.mod.web.server.annotation.WebController;
+import io.inverno.mod.web.server.annotation.WebRoute;
 import java.util.List;
 import java.util.Optional;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * Create, update and delete Tickets and manages tickets notes.
@@ -1553,7 +1688,7 @@ public class TicketWebController {
 }
 ```
 
-The complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/1.1.0/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/rest/v1/TicketWebController.java)
+The complete code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/blob/master/inverno-ticket/src/main/java/io/inverno/app/ticket/internal/rest/v1/TicketWebController.java)
 
 As for the Domain model, you must add the following `exports` directive to the module descriptor to allow Jackson to access DTOs.
 
@@ -1564,9 +1699,34 @@ module io.inverno.guide.ticket {
     requires io.inverno.mod.redis.lettuce;
 
     exports io.inverno.guide.ticket.internal.model to com.fasterxml.jackson.databind;
-    exports io.inverno.app.ticket.internal.rest.v1.dto to com.fasterxml.jackson.databind;
+    exports io.inverno.guide.ticket.internal.rest.v1.dto to com.fasterxml.jackson.databind;
 }
 ```
+
+The Web server uses a simple default error handler to translate request processing errors into corresponding HTTP error responses, but it is also possible to configure white label error routes to respond with proper HTML error pages or JSON formatted responses. They can be configured using the `WhiteLabelErrorRoutesConfigurer` in an `ErrorWebServer.Configurer`. Let's create the `WebServerConfigurer` that will let you programmatically configure the Web server:
+
+```java
+package io.inverno.guide.ticket.internal;
+
+import io.inverno.core.annotation.Bean;
+import io.inverno.mod.http.base.ExchangeContext;
+import io.inverno.mod.web.server.ErrorWebRouter;
+import io.inverno.mod.web.server.WhiteLabelErrorRoutesConfigurer;
+
+@Bean(visibility = Bean.Visibility.PRIVATE)
+public class WebServerConfigurer implements ErrorWebRouter.Configurer<ExchangeContext> {
+
+	@Override
+	public void configure(ErrorWebRouter<ExchangeContext> errorRoutes) {
+		errorRoutes
+			.configureErrorRoutes(new WhiteLabelErrorRoutesConfigurer<>());
+	}
+}
+```
+
+After restarting the application, you should see white label 404 error page when accessing an unknown location:
+
+<img src="img/inverno_ticket_not_found.png" style="display: block; margin: 2em auto;" alt="Inverno Ticket Application 404 white label error"/>
 
 The Inverno Web compiler does not generate OpenAPI specifications by default, this generation must be activated explicitly in the Maven compiler plugin's configuration in the Maven project descriptor.
 
@@ -1581,15 +1741,14 @@ The Inverno Web compiler does not generate OpenAPI specifications by default, th
         <version>${VERSION_INVERNO_DIST}</version>
     </parent>
     <groupId>io.inverno.guide</groupId>
-    <artifactId>ticket</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>inverno-ticket</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     ...
     
     <build>
         <pluginManagement>
             <plugins>
-                ...
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -1618,8 +1777,8 @@ The Inverno Ticket application is run as follows:
 $ mvn inverno:run
 ...
 [INFO] --- inverno-maven-plugin:${VERSION_INVERNO_TOOLS}:run (default-cli) @ ticket ---
-[INFO] Running project: io.inverno.guide.ticket@1.0-SNAPSHOT...
-ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
+ [═══════════════════════════════════════════════ 100 % ══════════════════════════════════════════════] Running project io.inverno.guide.ticket@1.0.0-SNAPSHOT...
+2024-12-18T10:29:08.725375213Z main ERROR Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
 INFO Application Inverno is starting...
 
 
@@ -1636,32 +1795,36 @@ INFO Application Inverno is starting...
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
-     ║ Java version        : 17+35-2724                                                           ║
-     ║ Java home           : /home/jkuhn/Devel/jdk/jdk-17                                         ║
+     ║ Java version        : 21.0.2+13-58                                                         ║
+     ║ Java home           : /home/jkuhn/Devel/jdk/jdk-21.0.2                                     ║
      ║                                                                                            ║
      ║ Application module  : io.inverno.guide.ticket                                              ║
-     ║ Application version : 1.0-SNAPSHOT                                                         ║
-     ║ Application class   : io.inverno.guide.ticket.App                                          ║
+     ║ Application version : 1.0.0-SNAPSHOT                                                       ║
+     ║ Application class   : io.inverno.guide.ticket.TicketApp                                    ║
      ║                                                                                            ║
      ║ Modules             :                                                                      ║
      ║  * ...                                                                                     ║
      ╚════════════════════════════════════════════════════════════════════════════════════════════╝
 
 
-INFO Ticket Starting Module io.inverno.guide.ticket...
+NFO Ticket Starting Module io.inverno.guide.ticket...
 INFO Boot Starting Module io.inverno.mod.boot...
-INFO Boot Module io.inverno.mod.boot started in 337ms
+INFO Boot Module io.inverno.mod.boot started in 436ms
 INFO Lettuce Starting Module io.inverno.mod.redis.lettuce...
-INFO Lettuce Module io.inverno.mod.redis.lettuce started in 44ms
-INFO Web Starting Module io.inverno.mod.web.server...
+INFO Lettuce Module io.inverno.mod.redis.lettuce started in 72ms
+INFO Server Starting Module io.inverno.mod.web.server...
 INFO Server Starting Module io.inverno.mod.http.server...
 INFO Base Starting Module io.inverno.mod.http.base...
-INFO Base Module io.inverno.mod.http.base started in 4ms
+INFO Base Module io.inverno.mod.http.base started in 5ms
+INFO Base Starting Module io.inverno.mod.web.base...
+INFO Base Starting Module io.inverno.mod.http.base...
+INFO Base Module io.inverno.mod.http.base started in 0ms
+INFO Base Module io.inverno.mod.web.base started in 1ms
 INFO HttpServer HTTP Server (nio) listening on http://0.0.0.0:8080
 INFO Server Module io.inverno.mod.http.server started in 95ms
 INFO Server Module io.inverno.mod.web.server started in 95ms
-INFO Ticket Module io.inverno.guide.ticket started in 480ms
-INFO Application Application io.inverno.guide.ticket started in 554ms
+INFO Ticket Module io.inverno.guide.ticket started in 710ms
+INFO Application Application io.inverno.guide.ticket started in 799ms
 ```
 
 You can test the REST API:
@@ -1673,24 +1836,24 @@ content-type: application/json
 location: /api/v1/plan/1
 content-length: 174
 
-{"id":1,"title":"My first plan","summary":"This is my first plan","description":"Lorem ipsum dolor sit amet","creationDateTime":"2022-02-23T08:46:02.536865752Z","tickets":[]}
+{"id":1,"title":"My first plan","summary":"This is my first plan","description":"Lorem ipsum dolor sit amet","creationDateTime":"2024-12-18T10:32:24.520729759Z","tickets":[]}
 
 $ curl -i http://localhost:8080/api/v1/plan
 HTTP/1.1 200 OK
 content-type: application/json
 transfer-encoding: chunked
 
-[{"id":1,"title":"My first plan","summary":"This is my first plan","description":"Lorem ipsum dolor sit amet","creationDateTime":"2022-02-23T08:46:02.536865752Z","tickets":[]}]
+[{"id":1,"title":"My first plan","summary":"This is my first plan","description":"Lorem ipsum dolor sit amet","creationDateTime":"2024-12-18T10:32:24.520729759Z","tickets":[]}]
 
 $ curl -i http://localhost:8080/api/v1/plan/1
 HTTP/1.1 200 OK
 content-type: application/json
 content-length: 174
 
-{"id":1,"title":"My first plan","summary":"This is my first plan","description":"Lorem ipsum dolor sit amet","creationDateTime":"2022-02-23T08:46:02.536865752Z","tickets":[]}
+{"id":1,"title":"My first plan","summary":"This is my first plan","description":"Lorem ipsum dolor sit amet","creationDateTime":"2024-12-18T10:32:24.520729759Z","tickets":[]}
 ```
 
-An OpenAPI specification should have been generated in the project build output directory: `./target/classes/META-INF/inverno/web/io.inverno.guide.ticket/openapi.yml`.
+An OpenAPI specification should have been generated in the project build output directory: `./target/classes/META-INF/inverno/web/server/io.inverno.guide.ticket/openapi.yml`.
 
 ## Step 6: Create the Front-end layer
 
@@ -1706,7 +1869,7 @@ src/main/resources/static/
 └── index.html
 ```
 
-Web UI development using Bootstrap and Vue.js is not the purpose of this guide, so please refer to appropriate documentations if you want to go deeper. The complete UI code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/tree/1.1.0/inverno-ticket/src/main/resources/static).
+Web UI development using Bootstrap and Vue.js is not the purpose of this guide, so please refer to appropriate documentations if you want to go deeper. The complete UI code can be found in [GitHub](https://github.com/inverno-io/inverno-apps/tree/master/inverno-ticket/src/main/resources/static).
 
 The Web UI requires multiple JavaScript libraries that are packaged as [WebJars](https://www.webjars.org/), you'll also need Swagger UI resources which also comes as a WebJar. These are quite easy to include into the application by declaring corresponding dependencies in the Maven project descriptor:
 
@@ -1721,41 +1884,46 @@ The Web UI requires multiple JavaScript libraries that are packaged as [WebJars]
         <version>${VERSION_INVERNO_DIST}</version>
     </parent>
     <groupId>io.inverno.guide</groupId>
-    <artifactId>ticket</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>inverno-ticket</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         ...
 
-        <dependency>
-            <groupId>org.webjars.npm</groupId>
-            <artifactId>vue</artifactId>
-            <version>3.2.26</version>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>5.1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.npm</groupId>
-            <artifactId>bootstrap-icons</artifactId>
-            <version>1.7.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.npm</groupId>
-            <artifactId>marked</artifactId>
-            <version>4.0.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>highlightjs</artifactId>
-            <version>10.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>swagger-ui</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>vue</artifactId>
+			<version>3.2.26</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>5.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>bootstrap-icons</artifactId>
+			<version>1.7.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>marked</artifactId>
+			<version>4.0.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>highlightjs</artifactId>
+			<version>10.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>simplemde</artifactId>
+			<version>1.11.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>swagger-ui</artifactId>
+		</dependency>
     </dependencies>
 
     ...
@@ -1764,34 +1932,41 @@ The Web UI requires multiple JavaScript libraries that are packaged as [WebJars]
 
 > The Swagger UI artifact is managed by Inverno's distribution, so you don't need to specify its version.
 
-You must now configure the application's Web router by defining appropriate Web routes to serve all these resources. The Inverno Web server module provides built-in configurers and route handlers to easily expose WebJars and any kind of static resources. Let's create a `StaticWebRoutesConfigurer` that will let you programmatically configure the Web router.
+You must now configure the application's Web router by defining appropriate Web routes to serve all these resources. The Inverno Web server module provides built-in configurers and route handlers to easily expose WebJars and any kind of static resources. Let's add these to the `WebServerConfigurer`:
 
 ```java
 package io.inverno.guide.ticket.internal;
 
+import io.inverno.guide.ticket.TicketAppConfiguration;
 import io.inverno.core.annotation.Bean;
-import io.inverno.guide.ticket.AppConfiguration;
 import io.inverno.mod.base.resource.Resource;
 import io.inverno.mod.base.resource.ResourceService;
 import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.Method;
-import io.inverno.mod.web.server.*;
+import io.inverno.mod.web.server.ErrorWebRouter;
+import io.inverno.mod.web.server.OpenApiRoutesConfigurer;
+import io.inverno.mod.web.server.StaticHandler;
+import io.inverno.mod.web.server.WebJarsRoutesConfigurer;
+import io.inverno.mod.web.server.WebRouter;
+import io.inverno.mod.web.server.WhiteLabelErrorRoutesConfigurer;
 
 @Bean(visibility = Bean.Visibility.PRIVATE)
-public class StaticWebRoutesConfigurer implements WebRoutesConfigurer<ExchangeContext> {
+public class WebServerConfigurer implements WebRouter.Configurer<ExchangeContext>, ErrorWebRouter.Configurer<ExchangeContext> {
 
-    private final AppConfiguration configuration;
+    private final TicketAppConfiguration configuration;
+
     private final ResourceService resourceService;
+
     private final Resource homeResource;
 
-    public StaticWebRoutesConfigurer(AppConfiguration configuration, ResourceService resourceService) {
+    public WebServerConfigurer(TicketAppConfiguration configuration, ResourceService resourceService) {
         this.configuration = configuration;
         this.resourceService = resourceService;
         this.homeResource = this.resourceService.getResource(this.configuration.web_root()).resolve("index.html");
     }
 
     @Override
-    public void accept(WebRoutable<ExchangeContext, ?> routes) {
+    public void configure(WebRouter<ExchangeContext> routes) {
         routes
             // OpenAPI specifications
             .configureRoutes(new OpenApiRoutesConfigurer<>(this.resourceService, true))
@@ -1799,22 +1974,27 @@ public class StaticWebRoutesConfigurer implements WebRoutesConfigurer<ExchangeCo
             .configureRoutes(new WebJarsRoutesConfigurer<>(this.resourceService))
             // Static resources: html, javascript, css, images...
             .route()
-                .path("/static/{path:.*}", true)
-                .method(Method.GET)
-                .handler(new StaticHandler<>(this.resourceService.getResource(this.configuration.web_root())))
+            .path("/static/{path:.*}", true)
+            .method(Method.GET)
+            .handler(new StaticHandler<>(this.resourceService.getResource(this.configuration.web_root())))
             // Welcome page
             .route()
-                .path("/", true)
-                .method(Method.GET)
-                .handler(exchange -> exchange.response().body().resource().value(this.homeResource))
+            .path("/", true)
+            .method(Method.GET)
+            .handler(exchange -> exchange.response().body().resource().value(this.homeResource));
+    }
 
+    @Override
+    public void configure(ErrorWebRouter<ExchangeContext> errorRoutes) {
+        errorRoutes
+            .configureErrorRoutes(new WhiteLabelErrorRoutesConfigurer<>());
     }
 }
 ```
 
-The `StaticWebRoutesConfigurer` class is an implementation of `WebRoutesConfigurer` which is used to configure routes in the Web router. It is injected into the Web router when the application module is started.
+The `WebServerConfigurer` class now also implement `WebRouter.Configurer` which is used to configure routes in the Web router. It is injected into the Web server when the application module is started.
 
-The HTTP server root directory, which basically points to the application Web UI resources, must be made configurable by defining a `web_root` configuration property in the `AppConfiguration`.
+The HTTP server root directory, which basically points to the application Web UI resources, must be made configurable by defining a `web_root` configuration property in the `TicketAppConfiguration`.
 
 ```java
 package io.inverno.guide.ticket;
@@ -1823,19 +2003,26 @@ import io.inverno.core.annotation.NestedBean;
 import io.inverno.mod.boot.BootConfiguration;
 import io.inverno.mod.configuration.Configuration;
 import io.inverno.mod.redis.lettuce.LettuceRedisClientConfiguration;
-import io.inverno.mod.web.server.WebConfiguration;
-
+import io.inverno.mod.web.server.WebServerConfiguration;
 import java.net.URI;
 
 @Configuration
-public interface AppConfiguration {
+public interface TicketAppConfiguration {
 
-    ...
+	@NestedBean
+	BootConfiguration boot();
 
-    default URI web_root() {
-        return URI.create("module://" + AppConfiguration.class.getModule().getName() + "/static");
-    }
+	@NestedBean
+	LettuceRedisClientConfiguration redis();
+
+	@NestedBean
+	WebServerConfiguration web();
+
+	default URI web_root() {
+		return URI.create("module://" + TicketAppConfiguration.class.getModule().getName() + "/static");
+	}
 }
+
 ```
 
 The `web_root` property is a resource URI that is passed to the `ResourceService`. The `ResourceService` is provided by the Inverno boot module, it provides unified access to resources based on URIs. For instance, it can be used to resolve file resources (`file:/...`), class path resources (`classpath:/...`), resources inside JAR or ZIP files (`jar:/...`), network resources (`http://...`, `ftp://...`) or module resources (`module:/...`). In above code, the root directory points to the `static/` directory inside the application module by default.
@@ -1857,22 +2044,22 @@ $ mvn clean inverno:run
 ...
 ```
 
-<img class="shadow" src="img/inverno_ticket_app_0.png" style="display: block; margin: 2em auto;" alt="Inverno Ticket Application"/>
+<img src="img/inverno_ticket_app_0.png" style="display: block; margin: 2em auto;" alt="Inverno Ticket Application"/>
 
 You can also display a fully functional Swagger UI exposing the generated OpenAPI specification at [http://localhost:8080/open-api](http://localhost:8080/open-api).
 
-<img class="shadow" src="img/inverno_ticket_rest_api.png" style="display: block; margin: 2em auto;" alt="Inverno Ticket REST API"/>
+<img src="img/inverno_ticket_rest_api.png" style="display: block; margin: 2em auto;" alt="Inverno Ticket REST API"/>
 
 You can play a bit with the application (or the Swagger UI) by creating a plan and some tickets to validate that everything is working fine.
 
-<img class="shadow" src="img/inverno_ticket_app_1.png" style="display: block; margin: 2em auto;" alt="Inverno Full Stack Guide plan"/>
+<img src="img/inverno_ticket_app_1.png" style="display: block; margin: 2em auto;" alt="Inverno Full Stack Guide plan"/>
 
 Now if you try to modify the UI code, you won't be able to see changes live. This is because the Inverno Maven plugin modularizes and packages project dependencies before running the application as a result the `src/main/resources/static/` folder is packaged within the runtime module, since the `web_root` configuration property targets this location by default, changes in `src/main/resources/static/` directory are not loaded unless the project is rebuilt. 
 
 This is clearly not convenient when developing Web UIs, hopefully the `web_root` configuration property can be configured on the command line as follows:
 
 ```text
-$ mvn inverno:run -Dinverno.run.arguments="--io.inverno.guide.ticket.appConfiguration.web_root=\\\"file:/path/to/project/src/main/resources/static\\\""
+$ mvn inverno:run -Dinverno.run.arguments="--io.inverno.guide.ticket.ticketAppConfiguration.web_root=\\\"file:/path/to/project/src/main/resources/static\\\""
 ...
 ```
 
@@ -1884,105 +2071,49 @@ package io.inverno.guide.ticket;
 import io.inverno.core.annotation.Bean;
 import io.inverno.core.v1.Application;
 import io.inverno.mod.configuration.ConfigurationKey;
-import io.inverno.mod.configuration.ConfigurationProperty;
 import io.inverno.mod.configuration.ConfigurationSource;
 import io.inverno.mod.configuration.source.BootstrapConfigurationSource;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Supplier;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class App {
+public class TicketApp {
 
-    private static final Logger LOGGER = LogManager.getLogger(App.class);
+	private static final Logger LOGGER = LogManager.getLogger(TicketApp.class);
 
-    public static final String REDIS_KEY = "APP:Ticket";
-    public static final String PROFILE_PROPERTY_NAME = "profile";
+	public static final String REDIS_KEY = "APP:Ticket";
+	public static final String PROFILE_PROPERTY_NAME = "profile";
 
-    @Bean( name = "configurationSource")
-    public interface AppConfigurationSource extends Supplier<ConfigurationSource<?, ?, ?>> {}
+	@Bean( name = "configurationSource" )
+	public interface TicketAppConfigurationSource extends Supplier<ConfigurationSource> {}
 
-    @Bean( name = "configurationParameters")
-    public static interface TicketAppConfigurationParameters extends Supplier<List<ConfigurationKey.Parameter>> {}
+	@Bean( name = "configurationParameters")
+	public interface TicketAppConfigurationParameters extends Supplier<List<ConfigurationKey.Parameter>> {}
 
-    public static void main( String[] args ) throws IOException {
-        final BootstrapConfigurationSource bootstrapConfigurationSource = new BootstrapConfigurationSource(App.class.getModule(), args);
-        bootstrapConfigurationSource
-                .get(PROFILE_PROPERTY_NAME)
-                .execute()
-                .single()
-                .map(configurationQueryResult -> configurationQueryResult.getResult().flatMap(ConfigurationProperty::asString).orElse("default"))
-                .map(profile -> {
-                    LOGGER.info(() -> "Active profile: " + profile);
-                    return Application.run(new Ticket.Builder()
-                            .setConfigurationSource(bootstrapConfigurationSource)
-                            .setConfigurationParameters(List.of(ConfigurationKey.Parameter.of(PROFILE_PROPERTY_NAME, profile)))
-                    );
-                })
-                .block();
-
-    }
+	public static void main( String[] args ) throws IOException {
+		final BootstrapConfigurationSource bootstrapConfigurationSource = new BootstrapConfigurationSource(TicketApp.class.getModule(), args);
+		Ticket ticketApp = bootstrapConfigurationSource
+			.get(PROFILE_PROPERTY_NAME)
+			.execute()
+			.single()
+			.map(configurationQueryResult -> configurationQueryResult.asString("default"))
+			.map(profile -> {
+				LOGGER.info(() -> "Active profile: " + profile);
+				return Application.run(new Ticket.Builder()
+					.setConfigurationSource(bootstrapConfigurationSource)
+					.setConfigurationParameters(List.of(ConfigurationKey.Parameter.of(PROFILE_PROPERTY_NAME, profile)))
+				);
+			})
+			.block();
+	}
 }
 ```
 
-In above code, the `profile` value is first resolved using the bootstrap configuration source, it is then injected into the module by defining `configurationParameters` socket bean. Using the bootstrap configuration source to resolve the profile parameter has many advantages, for instance you can define the profile as an environment variable, a system property or a command line argument. The bootstrap configuration source also support defaulting: command line arguments override system properties which override environment variables... 
+In above code, the `profile` value is first resolved using the bootstrap configuration source, it is then injected into the module by defining `configurationParameters` socket bean. Using the bootstrap configuration source to resolve the profile parameter has many advantages, for instance you can define the profile as an environment variable, a system property or a command line argument. The bootstrap configuration source also support defaulting: command line arguments override system properties which override environment variables...
 
-You can now specify a `dev` location for the `web_root` configuration property in `src/main/resources/configuration.cprops`
-
-```text
-io.inverno.guide.ticket.appConfiguration {
-    [ profile = "dev" ] {
-        web_root = "file:/path/to/project/src/main/resources/static"
-    }
-}
-```
-
-If you restart the application with command line argument `--profile=\"dev\"`, you should be able to modify Web UI resources and see changes live.
-
-```text
-$ mvn inverno:run -Dinverno.run.arguments="--profile=\\\"dev\\\""
-...
-14:58:35.258 [main] INFO  io.inverno.guide.ticket.App - Active profile: dev
-14:58:35.468 [main] INFO  io.inverno.core.v1.Application - Inverno is starting...
-...
-```
-
-> You might wonder why quotes must be escaped when specifying command line arguments values. This is because configuration values are typed and a String value must be specified following the Java String syntax, since quotes might be interpreted by the shell, they have to be escaped and even double escaped when specified in a system property (i.e. `-Dinverno.run.arguments="..."`).
-
-## Step 7: Configure Logging
-
-Inverno relies on [Apache Log4j2](https://logging.apache.org/log4j/2.x/) for logging. So far, the Log4j2 runtime wasn't included and Log4j default `SimpleLogger` implementation was used. In order to provide a more advanced logging configuration, you need to declare `log4j-core` dependency in the Maven project descriptor.
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>io.inverno.dist</groupId>
-        <artifactId>inverno-parent</artifactId>
-        <version>${VERSION_INVERNO_DIST}</version>
-    </parent>
-    <groupId>io.inverno.guide</groupId>
-    <artifactId>ticket</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
-    <dependencies>
-        ...
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-        </dependency>
-    </dependencies>
-
-    ...
-</project>
-```
-
-At this stage, you might also want to declare a dependency to the Log4j2 API module in the Java module descriptor as you'd probably want to add some logs in your application.
+And since we are using a logger, you must also add the Log4j2 API module dependency in the Java module descriptor:
 
 ```java
 @io.inverno.core.annotation.Module
@@ -1998,9 +2129,35 @@ module io.inverno.guide.ticket {
 }
 ```
 
+You can now specify a `dev` location for the `web_root` configuration property in `src/main/resources/configuration.cprops`
+
+```text
+io.inverno.guide.ticket.ticketAppConfiguration {
+    [ profile = "dev" ] {
+        web_root = "file:/path/to/project/src/main/resources/static"
+    }
+}
+```
+
+If you restart the application with command line argument `--profile=\"dev\"`, you should be able to modify Web UI resources and see changes live.
+
+```text
+$ mvn inverno:run -Dinverno.run.arguments="--profile=\\\"dev\\\""
+...
+14:58:35.258 [main] INFO  io.inverno.guide.ticket.TicketApp - Active profile: dev
+14:58:35.468 [main] INFO  io.inverno.core.v1.Application - Inverno is starting...
+...
+```
+
+> You might wonder why quotes must be escaped when specifying command line arguments values. This is because configuration values are typed and a String value must be specified following the Java String syntax, since quotes might be interpreted by the shell, they have to be escaped and even double escaped when specified in a system property (i.e. `-Dinverno.run.arguments="..."`).
+
+## Step 7: Configure Logging
+
+Inverno relies on [Apache Log4j2](https://logging.apache.org/log4j/2.x/) for logging. So far, the Log4j2 runtime wasn't included and Log4j default `SimpleLogger` implementation was used. In order to provide a more advanced logging configuration, you need to declare at least `log4j-core` dependency in the Maven project descriptor and the module descriptor.
+
 Since Inverno Ticket Application should be production-ready, logging must be configured to log application logs, access logs and errors logs in separate rolling files. The application might eventually run in the cloud, in an Amazon EC2 instance for example, so let's also format logs in such a way that they can be easily integrated with tools like [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/).
 
-In order to format logs in the JSON formats expected by AWS, you must add `log4j-layout-template-json` dependency to the Maven project descriptor. As for Lettuce library, Log4j hasn't been migrated to a Java module yet, so you'll also need to set some VM options in the Inverno plugin configuration to avoid runtime errors:
+In order to format logs in the JSON formats expected by AWS, you must also add `log4j-layout-template-json` dependency to the Maven project descriptor and the module descriptor:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -2013,8 +2170,8 @@ In order to format logs in the JSON formats expected by AWS, you must add `log4j
         <version>${VERSION_INVERNO_DIST}</version>
     </parent>
     <groupId>io.inverno.guide</groupId>
-    <artifactId>ticket</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>inverno-ticket</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         ...
@@ -2036,7 +2193,7 @@ In order to format logs in the JSON formats expected by AWS, you must add `log4j
                     <groupId>io.inverno.tool</groupId>
                     <artifactId>inverno-maven-plugin</artifactId>
                     <configuration>
-                        <vmOptions>--add-opens reactor.core/reactor.core.publisher=lettuce.core --add-opens org.apache.logging.log4j.core/org.apache.logging.log4j.core.jackson=com.fasterxml.jackson.databind --add-opens org.apache.logging.log4j.log4j.layout.template.json/org.apache.logging.log4j.layout.template.json=org.apache.logging.log4j.core</vmOptions>
+                        <vmOptions>--add-opens reactor.core/reactor.core.publisher=lettuce.core</vmOptions>
                     </configuration>
                 </plugin>
                 ...
@@ -2044,6 +2201,101 @@ In order to format logs in the JSON formats expected by AWS, you must add `log4j
         </pluginManagement>
     </build>
 </project>
+```
+
+> Note that the system properties used to configure the default Log4j Logger are no longer required and can be removed from the VM options in the Inverno Maven plugin configuration.
+
+```java
+@io.inverno.core.annotation.Module
+    module io.inverno.guide.ticket {
+    requires io.inverno.mod.boot;
+    requires io.inverno.mod.redis.lettuce;
+    requires io.inverno.mod.web.server;
+
+    requires org.apache.logging.log4j;
+    requires org.apache.logging.log4j.layout.template.json;
+
+    exports io.inverno.guide.ticket.internal.model to com.fasterxml.jackson.databind;
+    exports io.inverno.guide.ticket.internal.rest.v1.dto to com.fasterxml.jackson.databind;
+}
+```
+
+Access and error logs are not generated by default and requires to configure the `HttpAccessLogsInterceptor` in the Web server. As always this must be done in the `WebServerConfigurer` which must now also implement `WebRouteInterceptor.Configurer` and `ErrorWebRouteInterceptor.Configurer` to respectfully configure route interceptors (access log) and error route interceptors (error log):
+
+```java
+package io.inverno.guide.ticket.internal;
+
+import io.inverno.guide.ticket.TicketAppConfiguration;
+import io.inverno.core.annotation.Bean;
+import io.inverno.mod.base.resource.Resource;
+import io.inverno.mod.base.resource.ResourceService;
+import io.inverno.mod.http.base.ExchangeContext;
+import io.inverno.mod.http.base.Method;
+import io.inverno.mod.http.server.HttpAccessLogsInterceptor;
+import io.inverno.mod.web.server.ErrorWebRouteInterceptor;
+import io.inverno.mod.web.server.ErrorWebRouter;
+import io.inverno.mod.web.server.OpenApiRoutesConfigurer;
+import io.inverno.mod.web.server.StaticHandler;
+import io.inverno.mod.web.server.WebJarsRoutesConfigurer;
+import io.inverno.mod.web.server.WebRouteInterceptor;
+import io.inverno.mod.web.server.WebRouter;
+import io.inverno.mod.web.server.WhiteLabelErrorRoutesConfigurer;
+
+@Bean(visibility = Bean.Visibility.PRIVATE)
+public class WebServerConfigurer implements WebRouteInterceptor.Configurer<ExchangeContext>, WebRouter.Configurer<ExchangeContext>, ErrorWebRouteInterceptor.Configurer<ExchangeContext>, ErrorWebRouter.Configurer<ExchangeContext> {
+
+    private final TicketAppConfiguration configuration;
+
+    private final ResourceService resourceService;
+
+    private final Resource homeResource;
+
+    public WebServerConfigurer(TicketAppConfiguration configuration, ResourceService resourceService) {
+        this.configuration = configuration;
+        this.resourceService = resourceService;
+        this.homeResource = this.resourceService.getResource(this.configuration.web_root()).resolve("index.html");
+    }
+
+    @Override
+    public WebRouteInterceptor<ExchangeContext> configure(WebRouteInterceptor<ExchangeContext> interceptors) {
+        return interceptors
+            .intercept()
+                .interceptor(new HttpAccessLogsInterceptor<>());
+    }
+
+    @Override
+    public void configure(WebRouter<ExchangeContext> routes) {
+        routes
+            // OpenAPI specifications
+            .configureRoutes(new OpenApiRoutesConfigurer<>(this.resourceService, true))
+            // WebJars
+            .configureRoutes(new WebJarsRoutesConfigurer<>(this.resourceService))
+            // Static resources: html, javascript, css, images...
+            .route()
+                .path("/static/{path:.*}", true)
+                .method(Method.GET)
+                .handler(new StaticHandler<>(this.resourceService.getResource(this.configuration.web_root())))
+            // Welcome page
+            .route()
+                .path("/", true)
+                .method(Method.GET)
+                .handler(exchange -> exchange.response().body().resource().value(this.homeResource));
+    }
+
+
+    @Override
+    public ErrorWebRouteInterceptor<ExchangeContext> configure(ErrorWebRouteInterceptor<ExchangeContext> errorInterceptors) {
+        return errorInterceptors
+            .interceptError()
+                .interceptor(new HttpAccessLogsInterceptor<>());
+    }
+
+    @Override
+    public void configure(ErrorWebRouter<ExchangeContext> errorRoutes) {
+        errorRoutes
+            .configureErrorRoutes(new WhiteLabelErrorRoutesConfigurer<>());
+    }
+}
 ```
 
 The access log layout expected by AWS is a bit specific and requires to define a custom `AccessLayout.json` in project resources `src/main/resources`:
@@ -2068,79 +2320,84 @@ Log4j can be configured in `log4j2.xml` file in project resources folder `src/ma
 
 ```xml
 {% raw %}
-<?xml version="1.0" encoding="UTF-8"?>
+	<?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" name="Website" shutdownHook="disable">
-    <Appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{DEFAULT} %highlight{%-5level} [%t] %c{1.} - %msg%n%ex"/>
-        </Console>
-        <!-- Application log -->
-        <RollingRandomAccessFile name="ApplicationRollingFile" fileName="logs/application.log" filePattern="logs/error-%d{yyyy-MM-dd}-%i.log.gz">
-            <JsonTemplateLayout/>
-            <Policies>
-                <TimeBasedTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="10 MB"/>
-            </Policies>
-            <DefaultRolloverStrategy>
-                <Delete basePath="logs" maxDepth="2">
-                    <IfFileName glob="application-*.log.gz" />
-                    <IfLastModified age="10d" />
-                </Delete>
-            </DefaultRolloverStrategy>
-        </RollingRandomAccessFile>
-        <Async name="AsyncApplicationRollingFile">
-            <AppenderRef ref="ApplicationRollingFile"/>
-        </Async>
-        <!-- Error log -->
-        <RollingRandomAccessFile name="ErrorRollingFile" fileName="logs/error.log" filePattern="logs/error-%d{yyyy-MM-dd}-%i.log.gz">
-            <JsonTemplateLayout/>
-            <NoMarkerFilter onMatch="ACCEPT" onMismatch="DENY"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="10 MB"/>
-            </Policies>
-            <DefaultRolloverStrategy>
-                <Delete basePath="logs" maxDepth="2">
-                    <IfFileName glob="error-*.log.gz" />
-                    <IfLastModified age="10d" />
-                </Delete>
-            </DefaultRolloverStrategy>
-        </RollingRandomAccessFile>
-        <Async name="AsyncErrorRollingFile">
-            <AppenderRef ref="ErrorRollingFile"/>
-        </Async>
-        <!-- Access log -->
-        <RollingRandomAccessFile name="AccessRollingFile" fileName="logs/access.log" filePattern="logs/access-%d{yyyy-MM-dd}-%i.log.gz">
-            <JsonTemplateLayout eventTemplateUri="classpath:AccessLayout.json"/>
-            <MarkerFilter marker="HTTP_ACCESS" onMatch="ACCEPT" onMismatch="DENY"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="10 MB"/>
-            </Policies>
-            <DefaultRolloverStrategy>
-                <Delete basePath="logs" maxDepth="2">
-                    <IfFileName glob="access-*.log.gz" />
-                    <IfLastModified age="10d" />
-                </Delete>
-            </DefaultRolloverStrategy>
-        </RollingRandomAccessFile>
-        <Async name="AsyncAccessRollingFile">
-            <AppenderRef ref="AccessRollingFile"/>
-        </Async>
-    </Appenders>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{DEFAULT} %highlight{%-5level} [%t] %c{1.} - %msg%n%ex"/>
+		</Console>
+		<!-- Application log -->
+		<RollingRandomAccessFile name="ApplicationRollingFile" fileName="logs/application.log" filePattern="logs/error-%d{yyyy-MM-dd}-%i.log.gz">
+			<JsonTemplateLayout/>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB"/>
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="logs" maxDepth="2">
+					<IfFileName glob="application-*.log.gz" />
+					<IfLastModified age="10d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingRandomAccessFile>
+		<Async name="AsyncApplicationRollingFile">
+			<AppenderRef ref="ApplicationRollingFile"/>
+		</Async>
+		<!-- Error log -->
+		<RollingRandomAccessFile name="ErrorRollingFile" fileName="logs/error.log" filePattern="logs/error-%d{yyyy-MM-dd}-%i.log.gz">
+			<JsonTemplateLayout/>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB"/>
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="logs" maxDepth="2">
+					<IfFileName glob="error-*.log.gz" />
+					<IfLastModified age="10d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingRandomAccessFile>
+		<Async name="AsyncErrorRollingFile">
+			<AppenderRef ref="ErrorRollingFile"/>
+		</Async>
+		<!-- Access log -->
+		<RollingRandomAccessFile name="AccessRollingFile" fileName="logs/access.log" filePattern="logs/access-%d{yyyy-MM-dd}-%i.log.gz">
+			<JsonTemplateLayout eventTemplateUri="classpath:AccessLayout.json"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB"/>
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="logs" maxDepth="2">
+					<IfFileName glob="access-*.log.gz" />
+					<IfLastModified age="10d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingRandomAccessFile>
+		<Async name="AsyncAccessRollingFile">
+			<AppenderRef ref="AccessRollingFile"/>
+		</Async>
+	</Appenders>
 
-    <Loggers>
-        <Logger name="io.inverno.mod.http.server.internal.AbstractExchange" additivity="false" level="info">
-            <AppenderRef ref="AsyncAccessRollingFile" level="info"/>
-            <AppenderRef ref="AsyncErrorRollingFile" level="error"/>
-        </Logger>
+	<Loggers>
+		<Logger name="io.inverno.mod.http.server.Exchange" additivity="false" level="info">
+			<AppenderRef ref="AsyncAccessRollingFile" level="info"/>
+		</Logger>
+		<Logger name="io.inverno.mod.http.server.ErrorExchange" additivity="false" level="info">
+			<AppenderRef ref="AsyncErrorRollingFile" level="error"/>
+		</Logger>
 
-        <Root level="info" additivity="false">
-            <AppenderRef ref="Console" level="info" />
-            <AppenderRef ref="ApplicationRollingFile" level="info" />
-            <AppenderRef ref="AsyncErrorRollingFile" level="error"/>
-        </Root>
-    </Loggers>
+		<Logger name="io.inverno.mod.http.server.Exchange" additivity="false" level="info">
+			<AppenderRef ref="AsyncAccessRollingFile" level="info"/>
+			<AppenderRef ref="AsyncErrorRollingFile" level="error"/>
+		</Logger>
+
+		<Root level="info" additivity="false">
+			<AppenderRef ref="Console" level="info" />
+			<AppenderRef ref="ApplicationRollingFile" level="info" />
+			<AppenderRef ref="AsyncErrorRollingFile" level="error"/>
+		</Root>
+	</Loggers>
 </Configuration>
 {% endraw %}
 ```
@@ -2155,10 +2412,9 @@ $ ls logs/
 access.log  application.log  error.log
 
 $ cat logs/access.log
-
-{"@timestamp":"2022-02-23T15:42:35.441Z","message":{"remoteAddress":"127.0.0.1","request":"GET \/","status":200,"bytes":20708,"referer":"","userAgent":"Mozilla\/5.0 (X11; Linux x86_64; rv:91.0) Gecko\/20100101 Firefox\/91.0"}}
-{"@timestamp":"2022-02-23T15:42:35.485Z","message":{"remoteAddress":"127.0.0.1","request":"GET \/webjars\/marked\/marked.min.js","status":200,"bytes":47375,"referer":"http:\/\/localhost:8080\/","userAgent":"Mozilla\/5.0 (X11; Linux x86_64; rv:91.0) Gecko\/20100101 Firefox\/91.0"}}
-{"@timestamp":"2022-02-23T15:42:35.492Z","message":{"remoteAddress":"127.0.0.1","request":"GET \/static\/js\/script.js","status":200,"bytes":16743,"referer":"http:\/\/localhost:8080\/","userAgent":"Mozilla\/5.0 (X11; Linux x86_64; rv:91.0) Gecko\/20100101 Firefox\/91.0"}}
+{"@timestamp":"2024-12-18T14:46:53.388Z","message":{"remoteAddress":"127.0.0.1","request":"GET \/","status":200,"bytes":22163,"referer":"","userAgent":"Mozilla\/5.0 (X11; Linux x86_64) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.1 Safari\/605.1.15"}}
+{"@timestamp":"2024-12-18T14:46:53.418Z","message":{"remoteAddress":"127.0.0.1","request":"GET \/webjars\/vue\/dist\/vue.global.js","status":200,"bytes":630171,"referer":"http:\/\/127.0.0.1:8080\/","userAgent":"Mozilla\/5.0 (X11; Linux x86_64) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.1 Safari\/605.1.15"}}
+{"@timestamp":"2024-12-18T14:46:53.424Z","message":{"remoteAddress":"127.0.0.1","request":"GET \/webjars\/highlightjs\/highlight.min.js","status":200,"bytes":100276,"referer":"http:\/\/127.0.0.1:8080\/","userAgent":"Mozilla\/5.0 (X11; Linux x86_64) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/18.1 Safari\/605.1.15"}}
 ...
 ```
 
@@ -2175,14 +2431,14 @@ $ keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -storepas
 
 > Do not use self-signed certificate for any other purposes than development and testing.
 
-Since Web server module configuration should be already exposed in `AppConfiguration`, you can now configure the HTTP server in `src/main/resources/configuration.cprops`:
+Since Web server module configuration should be already exposed in the `TicketAppConfiguration`, you can now configure the HTTP server in `src/main/resources/configuration.cprops`:
 
 ```text
-io.inverno.guide.ticket.appConfiguration {
+io.inverno.guide.ticket.ticketAppConfiguration {
     [ profile = "dev" ] {
         web_root = "file:/home/jkuhn/Devel/git/winter/doc/guides/io.inverno.guide.ticket/src/main/resources/static"
     }
-    web.http_server {
+    web_server.http_server {
         server_port = 8443
         tls_enabled = true
         key_store = "module://io.inverno.guide.ticket/keystore.jks"
@@ -2211,17 +2467,17 @@ content-type: application/json
 [{"id":1,"title":"Inverno Full Stack Guide","summary":"Develop a Full Stack application with Inverno, Redis and Vue.js","description":null,"creationDateTime":"2022-02-23T13:15:11.411259961Z","tickets":[]}]
 ```
 
-> Note that HTTP/2 over cleartext (H2C) is also supported and is activated when `web.http_server.h2_enabled` configuration property is set to true and TLS is not configured.
+> Note that HTTP/2 over cleartext (H2C) is also supported and is activated when `web_server.http_server.h2_enabled` configuration property is set to true and TLS is not configured.
 
 You might choose to activate TLS support only on production environment. This can be done using the same approach as for the `web_root` configuration property. Let's modify the configuration to only activate TLS support when the application is started with `prod` profile.
 
 ```text
-io.inverno.guide.ticket.appConfiguration {
+io.inverno.guide.ticket.ticketAppConfiguration {
     [ profile = "dev" ] {
         web_root = "file:/home/jkuhn/Devel/git/winter/doc/guides/io.inverno.guide.ticket/src/main/resources/static"
     }
     [ profile = "prod" ] {
-        web.http_server {
+        web_server.http_server {
             server_port = 8443
             tls_enabled = true
             key_store = "module://io.inverno.guide.ticket/keystore.jks"
@@ -2237,21 +2493,20 @@ Now TLS support should only be activated when the application is started using t
 ```text
 $ mvn inverno:run -Dinverno.run.arguments="--profile=\\\"prod\\\""
 ...
-2022-02-23 15:46:47,749 INFO  [main] i.i.g.t.App - Active profile: prod
-15:46:47.749 [main] INFO  io.inverno.guide.ticket.App - Active profile: prod
+2024-12-18 15:53:49,939 INFO  [main] i.i.g.t.TicketApp - Active profile: prod
 ...
-2022-02-23 15:46:48,776 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (nio) listening on https://0.0.0.0:8443
+2024-12-18 15:53:50,746 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (nio) listening on https://0.0.0.0:8443
 ...
 
 $ mvn inverno:run
 ...
-2022-02-23 15:48:57,222 INFO  [main] i.i.g.t.App - Active profile: default
+2024-12-18 15:54:47,847 INFO  [main] i.i.g.t.TicketApp - Active profile: default
 ...
-2022-02-23 15:48:57,881 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (nio) listening on http://0.0.0.0:8080
+2024-12-18 15:54:48,379 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (nio) listening on http://0.0.0.0:8080
 ...
 ```
 
-> The Java keystore is packaged within the application module to keep things simple, however in a real life application, certificates are usually managed externally so the `web.http_server.key_store` should instead point to an external URI (e.g. `file:/path/to/keystore.jks`).
+> The Java keystore is packaged within the application module to keep things simple, however in a real life application, certificates are usually managed externally so the `web_server.http_server.tls_key_store` should instead point to an external URI (e.g. `file:/path/to/keystore.jks`).
 
 ## Step 9: Use native transport
 
@@ -2270,8 +2525,8 @@ If you intend to run the application on a Linux system for instance, you can act
         <version>${VERSION_INVERNO_DIST}</version>
     </parent>
     <groupId>io.inverno.guide</groupId>
-    <artifactId>ticket</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>inverno-ticket</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         ...
@@ -2290,7 +2545,7 @@ If you intend to run the application on a Linux system for instance, you can act
                     <groupId>io.inverno.tool</groupId>
                     <artifactId>inverno-maven-plugin</artifactId>
                     <configuration>
-                        <vmOptions>--add-opens reactor.core/reactor.core.publisher=lettuce.core --add-opens org.apache.logging.log4j.core/org.apache.logging.log4j.core.jackson=com.fasterxml.jackson.databind --add-opens org.apache.logging.log4j.log4j.layout.template.json/org.apache.logging.log4j.layout.template.json=org.apache.logging.log4j.core --add-modules io.netty.transport.unix.common,io.netty.transport.epoll</vmOptions>
+						<vmOptions>--add-opens reactor.core/reactor.core.publisher=lettuce.core --add-modules io.netty.transport.unix.common,io.netty.transport.classes.epoll,io.netty.transport.epoll.linux.x86_64</vmOptions>
                     </configuration>
                 </plugin>
                 ...
@@ -2305,7 +2560,7 @@ If you restart the application, you should see that the HTTP server is now using
 ```text
 $ mvn inverno:run
 ...
-2022-02-23 17:16:26,150 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (epoll) listening on http://0.0.0.0:8080
+2024-12-18 15:58:41,796 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (epoll) listening on http://0.0.0.0:8080
 ...
 ```
 
@@ -2315,7 +2570,7 @@ $ mvn inverno:run
 
 The application is all set, it is now time to package and deploy it to the cloud. So far, you used the Inverno Maven plugin to run the application, but it can also package the application into a native self-contained Java application including all the necessary dependencies including the Java runtime, create the corresponding Docker or CLI container image and deploy that image to a local or remote repository.
 
-Let's create the following `install-docker` profile in the Maven project descriptor and configure the Inverno Maven plugin to build and deploy a Docker image to the local Docker repository:
+Let's create the following `install-image` profile in the Maven project descriptor and configure the Inverno Maven plugin to build and deploy a Docker image to the local Docker repository:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -2328,14 +2583,14 @@ Let's create the following `install-docker` profile in the Maven project descrip
         <version>1.5.0-SNAPSHOT</version>
     </parent>
     <groupId>io.inverno.guide</groupId>
-    <artifactId>ticket</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>inverno-ticket</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     ...
     
     <profiles>
         <profile>
-            <id>install-docker</id>
+            <id>install-image</id>
             <build>
                 <plugins>
                     <plugin>
@@ -2343,20 +2598,20 @@ Let's create the following `install-docker` profile in the Maven project descrip
                         <artifactId>inverno-maven-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>build-image-docker</id>
+                                <id>install-image</id>
                                 <phase>install</phase>
                                 <goals>
-                                    <goal>build-image-docker</goal>
+                                    <goal>install-image</goal>
                                 </goals>
                                 <configuration>
                                     <vm>server</vm>
                                     <!-- jdk.crypto.ec: TLS, jdk.jdwp.agent: remote debug -->
                                     <addModules>jdk.crypto.ec</addModules>
-                                    <executable>ticket</executable>
+                                    <executable>inverno-ticket</executable>
                                     <launchers>
                                         <launcher>
-                                            <name>ticket</name>
-                                            <vmOptions>-Xms2G -Xmx2G -XX:+UseNUMA -XX:+UseParallelGC --add-opens reactor.core/reactor.core.publisher=lettuce.core --add-opens org.apache.logging.log4j.core/org.apache.logging.log4j.core.jackson=com.fasterxml.jackson.databind --add-opens org.apache.logging.log4j.log4j.layout.template.json/org.apache.logging.log4j.layout.template.json=org.apache.logging.log4j.core --add-modules io.netty.transport.unix.common,io.netty.transport.epoll</vmOptions>
+                                            <name>inverno-ticket</name>
+											<vmOptions>-Xms2G -Xmx2G -XX:+UseNUMA -XX:+UseParallelGC --add-opens reactor.core/reactor.core.publisher=lettuce.core --add-modules io.netty.transport.unix.common,io.netty.transport.classes.epoll,io.netty.transport.epoll.linux.x86_64</vmOptions>
                                         </launcher>
                                     </launchers>
                                     <volumes>
@@ -2375,19 +2630,19 @@ Let's create the following `install-docker` profile in the Maven project descrip
 
 The name of the image executable is set to `ticket` which is the name of the native executable that must be executed when running a container, it must correspond to a launcher. In the definition of the `ticket` launcher, you might have noticed that new VM options, related to memory and GC management, have been added to the ones previously defined to turn the application into a production ready application. The `jdk.crypto.ec` module has been added explicitly to have it packaged in the application's Java runtime, this module is required for TLS. Finally, volume `/opt/ticket/logs` has been defined, it corresponds to the application logs folder. This volume will be used to persist logs outside the container.
 
-You can now install the application with the `install-docker` profile activated:
+You can now install the application with the `install-image` profile activated:
 
 ```text
-$ mvn install -Pinstall-docker
+$ mvn install -Pinstall-image
 ...
-[INFO] --- inverno-maven-plugin:${VERSION_INVERNO_TOOLS}:build-image-docker (build-image-docker) @ ticket ---
-[INFO] Building project container image...
- [═══════════════════════════════════════════════ 100 % ══════════════════════════════════════════════] 
+[INFO] --- inverno:${VERSION_INVERNO_TOOLS}:install-image (install-image) @ ticket ---
+ [═══════════════════════════════════════════════ 100 % ══════════════════════════════════════════════] Project Docker container image deployed to Docker daemon
+[INFO] Project image ticket:1.0.0-SNAPSHOT installed to Docker
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  27.115 s
-[INFO] Finished at: 2022-02-24T11:33:28+01:00
+[INFO] Total time:  29.973 s
+[INFO] Finished at: 2024-12-18T16:04:16+01:00
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -2395,15 +2650,15 @@ A ticket application container image should have been created and deployed to th
 
 ```text
 $ docker images
-REPOSITORY       TAG              IMAGE ID       CREATED         SIZE
-ticket           1.0-SNAPSHOT     1837e3e29277   6 minutes ago   222MB
+REPOSITORY               TAG              IMAGE ID       CREATED          SIZE
+inverno-ticket           1.0.0-SNAPSHOT   962d7c28f940   15 seconds ago   246MB
 ...
 ```
 
-The corresponding native self-contained Java application generated during the build can be found in `target/maven-inverno/application_linux_amd64/ticket-1.0-SNAPSHOT` folder. You can run it just like any other application:
+The corresponding native self-contained Java application generated during the build can be found in `target/maven-inverno/application_linux_amd64/inverno-ticket-1.0.0-SNAPSHOT` folder. You can run it just like any other application:
 
 ```text
-$ ./target/maven-inverno/application_linux_amd64/ticket-1.0-SNAPSHOT/bin/ticket --profile=\"prod\"
+$ ./target/inverno-ticket-1.0.0-SNAPSHOT-application_linux_amd64/bin/inverno-ticket --profile=\"prod\"
 2022-02-24 11:46:51,315 INFO  [main] i.i.g.t.App - Active profile: prod
 2022-02-24 11:46:51,369 INFO  [main] i.i.c.v.Application - Inverno is starting...
 
@@ -2421,34 +2676,37 @@ $ ./target/maven-inverno/application_linux_amd64/ticket-1.0-SNAPSHOT/bin/ticket 
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
-     ║ Java version        : 17+35-2724                                                           ║
+     ║ Java version        : 21.0.2+13-58                                                         ║
      ║ Java home           : /home/jkuhn/Devel/git/winter/doc/guides/io.inverno.guide.ticket/targ ║
-     ║                       et/maven-inverno/application_linux_amd64/ticket-1.0-SNAPSHOT/lib/run ║
-     ║                       time                                                                 ║
+     ║                       et/ticket-1.0.0-SNAPSHOT-application_linux_amd64/lib/runtime         ║
      ║                                                                                            ║
      ║ Application module  : io.inverno.guide.ticket                                              ║
-     ║ Application version : 1.0-SNAPSHOT                                                         ║
-     ║ Application class   : io.inverno.guide.ticket.App                                          ║
+     ║ Application version : 1.0.0-SNAPSHOT                                                       ║
+     ║ Application class   : io.inverno.guide.ticket.TicketApp                                    ║
      ║                                                                                            ║
      ║ Modules             :                                                                      ║
      ║  * ...                                                                                     ║
      ╚════════════════════════════════════════════════════════════════════════════════════════════╝
 
 
-2022-02-24 11:46:51,373 INFO  [main] i.i.g.t.Ticket - Starting Module io.inverno.guide.ticket...
-2022-02-24 11:46:51,373 INFO  [main] i.i.m.b.Boot - Starting Module io.inverno.mod.boot...
-2022-02-24 11:46:51,581 INFO  [main] i.i.m.b.Boot - Module io.inverno.mod.boot started in 207ms
-2022-02-24 11:46:51,581 INFO  [main] i.i.m.r.l.Lettuce - Starting Module io.inverno.mod.redis.lettuce...
-2022-02-24 11:46:51,621 INFO  [main] i.i.m.r.l.Lettuce - Module io.inverno.mod.redis.lettuce started in 39ms
-2022-02-24 11:46:51,621 INFO  [main] i.i.m.w.Server - Starting Module io.inverno.mod.web.server...
-2022-02-24 11:46:51,621 INFO  [main] i.i.m.h.s.Server - Starting Module io.inverno.mod.http.server...
-2022-02-24 11:46:51,622 INFO  [main] i.i.m.h.b.Base - Starting Module io.inverno.mod.http.base...
-2022-02-24 11:46:51,627 INFO  [main] i.i.m.h.b.Base - Module io.inverno.mod.http.base started in 5ms
-2022-02-24 11:46:52,008 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (epoll) listening on https://0.0.0.0:8443
-2022-02-24 11:46:52,008 INFO  [main] i.i.m.h.s.Server - Module io.inverno.mod.http.server started in 387ms
-2022-02-24 11:46:52,009 INFO  [main] i.i.m.w.Server - Module io.inverno.mod.web.server started in 387ms
-2022-02-24 11:46:52,009 INFO  [main] i.i.g.t.Ticket - Module io.inverno.guide.ticket started in 637ms
-2022-02-24 11:46:52,009 INFO  [main] i.i.c.v.Application - Application io.inverno.guide.ticket started in 692ms
+2024-12-18 16:05:42,349 INFO  [main] i.i.g.t.Ticket - Starting Module io.inverno.guide.ticket...
+2024-12-18 16:05:42,350 INFO  [main] i.i.m.b.Boot - Starting Module io.inverno.mod.boot...
+2024-12-18 16:05:42,611 INFO  [main] i.i.m.b.Boot - Module io.inverno.mod.boot started in 261ms
+2024-12-18 16:05:42,612 INFO  [main] i.i.m.r.l.Lettuce - Starting Module io.inverno.mod.redis.lettuce...
+2024-12-18 16:05:42,659 INFO  [main] i.i.m.r.l.Lettuce - Module io.inverno.mod.redis.lettuce started in 47ms
+2024-12-18 16:05:42,659 INFO  [main] i.i.m.w.s.Server - Starting Module io.inverno.mod.web.server...
+2024-12-18 16:05:42,660 INFO  [main] i.i.m.h.s.Server - Starting Module io.inverno.mod.http.server...
+2024-12-18 16:05:42,660 INFO  [main] i.i.m.h.b.Base - Starting Module io.inverno.mod.http.base...
+2024-12-18 16:05:42,667 INFO  [main] i.i.m.h.b.Base - Module io.inverno.mod.http.base started in 6ms
+2024-12-18 16:05:42,668 INFO  [main] i.i.m.w.b.Base - Starting Module io.inverno.mod.web.base...
+2024-12-18 16:05:42,668 INFO  [main] i.i.m.h.b.Base - Starting Module io.inverno.mod.http.base...
+2024-12-18 16:05:42,669 INFO  [main] i.i.m.h.b.Base - Module io.inverno.mod.http.base started in 0ms
+2024-12-18 16:05:42,670 INFO  [main] i.i.m.w.b.Base - Module io.inverno.mod.web.base started in 2ms
+2024-12-18 16:05:43,013 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (epoll) listening on https://0.0.0.0:8443
+2024-12-18 16:05:43,014 INFO  [main] i.i.m.h.s.Server - Module io.inverno.mod.http.server started in 354ms
+2024-12-18 16:05:43,014 INFO  [main] i.i.m.w.s.Server - Module io.inverno.mod.web.server started in 354ms
+2024-12-18 16:05:43,128 INFO  [main] i.i.g.t.Ticket - Module io.inverno.guide.ticket started in 783ms
+2024-12-18 16:05:43,128 INFO  [main] i.i.c.v.Application - Application io.inverno.guide.ticket started in 846ms
 ```
 
 ## Step 11: Run the application with Docker Compose
@@ -2462,12 +2720,12 @@ version: '3'
 
 services:
   ticket:
-    image: ticket:1.0-SNAPSHOT
+    image: inverno-ticket:1.0.0-SNAPSHOT
     volumes:
       - logs:/opt/ticket/logs
     ports:
       - "8080:8080"
-    command: --io.inverno.app.ticket.ticketAppConfiguration.redis.host=\"redis\"
+    command: --io.inverno.guide.ticket.ticketAppConfiguration.redis.host=\"redis\"
   redis:
     image: redis
     volumes:
@@ -2486,50 +2744,50 @@ You can now deploy the complete application using `docker-compose` command from 
 
 ```text
 $ docker-compose up -d
-`Creating network "ioinvernoguideticket_default" with the default driver
-Creating volume "ioinvernoguideticket_logs" with default driver
-Creating volume "ioinvernoguideticket_data" with default driver
-Creating ioinvernoguideticket_redis_1  ... done
-Creating ioinvernoguideticket_ticket_1 ... done`
+Creating network "inverno-ticket_default" with the default driver
+Creating volume "inverno-ticket_logs" with default driver
+Creating volume "inverno-ticket_data" with default driver
+Creating inverno-ticket_redis_1          ... done
+Creating inverno-ticket_inverno_ticket_1 ... done
 ```
 
-The `up` command initializes networks, volumes and containers, and eventually starts the applications's services. You can see that a dedicated network has been created, as well as two volumes: one to persist ticket application logs and one to persist Redis data. Data stored in volumes are not deleted when containers are stopped or removed which means application data are safe and can be easily backed up as well. Two services have been started in dedicated containers: one running the Redis data store and one running the ticket application. The 8080 port of the ticket application container is mapped to the 8080 port of the host, as a result the ticket application is accessible at [http://localhost:8080](http://localhost:8080).
+The `up` command initializes networks, volumes and containers, and eventually starts the application's services. You can see that a dedicated network has been created, as well as two volumes: one to persist ticket application logs and one to persist Redis data. Data stored in volumes are not deleted when containers are stopped or removed which means application data are safe and can be easily backed up as well. Two services have been started in dedicated containers: one running the Redis data store and one running the ticket application. The 8080 port of the ticket application container is mapped to the 8080 port of the host, as a result the ticket application is accessible at [http://localhost:8080](http://localhost:8080).
 
 You can list the two running containers and their opened ports:
 
 ```text
 $ docker-compose ps
-                Name                               Command               State           Ports         
--------------------------------------------------------------------------------------------------------
-ioinvernoguideticket_redis_1    docker-entrypoint.sh redis ...   Up      6379/tcp              
-ioinvernoguideticket_ticket_1   /opt/ticket/bin/inverno-ti ...   Up      0.0.0.0:8080->8080/tcp
+             Name                            Command               State                    Ports                  
+-------------------------------------------------------------------------------------------------------------------
+inverno-ticket_inverno_ticket_1   /opt/inverno-ticket/bin/in ...   Up      0.0.0.0:8080->8080/tcp,:::8080->8080/tcp
+inverno-ticket_redis_1            docker-entrypoint.sh redis ...   Up      6379/tcp           
 ```
 
 At this stage, the application can be stopped, started or restarted using `stop`, `start` and `restart` command respectively:
 
 ```text
 $ docker-compose stop
-Stopping ioinvernoguideticket_redis_1  ... done
-Stopping ioinvernoguideticket_ticket_1 ... done
+Stopping inverno-ticket_inverno_ticket_1 ... done
+Stopping inverno-ticket_redis_1          ... done
 
 $ docker-compose start
-Starting ticket ... done
-Starting redis  ... done
+Starting inverno_ticket ... done
+Starting redis          ... done
 
 $ docker-compose restart
-Restarting ioinvernoguideticket_redis_1  ... done
-Restarting ioinvernoguideticket_ticket_1 ... done
+Restarting inverno-ticket_inverno_ticket_1 ... done
+Restarting inverno-ticket_redis_1          ... done
 ```
 
 If you want to undeploy the application and remove corresponding networks and containers, use the `down` command:
 
 ```text
 $ docker-compose down
-Stopping ioinvernoguideticket_redis_1  ... done
-Stopping ioinvernoguideticket_ticket_1 ... done
-Removing ioinvernoguideticket_redis_1  ... done
-Removing ioinvernoguideticket_ticket_1 ... done
-Removing network ioinvernoguideticket_default
+Stopping inverno-ticket_inverno_ticket_1 ... done
+Stopping inverno-ticket_redis_1          ... done
+Removing inverno-ticket_inverno_ticket_1 ... done
+Removing inverno-ticket_redis_1          ... done
+Removing network inverno-ticket_default
 ```
 
 Note that previous command didn't remove volumes, which means data are still accessible, if you reinitialize the application using the `up` command again, after an update for instance, you should see that data have been restored in the new containers.
@@ -2537,13 +2795,14 @@ Note that previous command didn't remove volumes, which means data are still acc
 If you wish to completely undeploy the application, you must specify the `-v` options to the `down` command to remove volumes as well:
 
 ```text
-Stopping ioinvernoguideticket_redis_1  ... done
-Stopping ioinvernoguideticket_ticket_1 ... done
-Removing ioinvernoguideticket_redis_1  ... done
-Removing ioinvernoguideticket_ticket_1 ... done
-Removing network ioinvernoguideticket_default
-Removing volume ioinvernoguideticket_logs
-Removing volume ioinvernoguideticket_data
+$ docker-compose down -v
+Stopping inverno-ticket_inverno_ticket_1 ... done
+Stopping inverno-ticket_redis_1          ... done
+Removing inverno-ticket_inverno_ticket_1 ... done
+Removing inverno-ticket_redis_1          ... done
+Removing network inverno-ticket_default
+Removing volume inverno-ticket_logs
+Removing volume inverno-ticket_data
 ```
 
 Congratulations! You've just built and deployed a Full-stack application using Inverno framework. 

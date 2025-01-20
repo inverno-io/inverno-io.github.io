@@ -619,6 +619,10 @@ html {
 		padding: 0 !important;
 		margin: 0 !important;
 	}
+
+	.main > div:nth-child(2) {
+		display: block !important;
+	}
 	
 	.scrollbar-thin {
 		scrollbar-width: none;
@@ -653,9 +657,20 @@ html {
 	.heading .heading-subtitle {
 		font-size: 1rem;
 	}
+
+	.toc {
+		display: block !important;
+		padding: 0px !important;
+		margin: 0px !important;
+		width: 100vw !important;
+	}
+
+	.toc > h2 {
+		display: block !important;
+	}
 	
 	.toc .toc-toggler {
-		display: none;
+		display: none !important;
 	}
 	
 	.toc .nav-pills .nav-link.active, .toc .nav-pills .show>.nav-link {
@@ -669,6 +684,8 @@ html {
 		height: unset !important;
 		font-size: 10pt !important;
 		background-color: transparent !important;
+		padding: 0px !important;
+		margin: 0px !important;
 	}
 	
 	.toc .toc-navbar .nav {
@@ -680,18 +697,15 @@ html {
 		color: #000000;
 		padding: 0 !important;
 		margin: 0 !important;
+    border-radius: 0px;
 	}
 	
 	.toc .toc-navbar > .nav > a {
-		padding-top: 0.5rem !important;
+		padding: 0rem !important;
 		border-bottom: 1px dotted #adb5bd;
 		font-weight: bold;
-		margin-top: 1rem !important;
+		margin-top: 0rem !important;
 		margin-bottom: 1rem !important;
-		break-after: avoid;
-		page-break-after: avoid;
-		break-inside: avoid;
-		page-break-inside: avoid;
 	}
 
 	.toc .toc-navbar > .nav {
@@ -705,16 +719,13 @@ html {
 	
 	.toc .toc-navbar > .nav > a::before {
 		content: counter(counter1) " ";
-		margin-right: 2rem;
-		font-size: 2rem;
+		margin-right: 1rem;
+		font-size: 1.5rem;
 		font-weight: normal;
 	}
 	
 	.toc .toc-navbar > .nav > .nav {
 		counter-reset: counter2;
-		/*margin-bottom: 2rem !important;*/
-		break-inside: avoid;
-		page-break-inside: avoid;
 	}
 	
 	.toc .toc-navbar > .nav .nav {
@@ -732,10 +743,6 @@ html {
 	
 	.toc .toc-navbar > .nav > .nav > .nav {
 		counter-reset: counter3;
-		break-after: avoid;
-		page-break-after: avoid;
-		break-inside: avoid;
-		page-break-inside: avoid;
 	}
 	
 	.toc .toc-navbar > .nav > .nav > .nav > a {
@@ -746,7 +753,35 @@ html {
 		content: counter(counter1) "." counter(counter2) "." counter(counter3) " ";
 		margin-right: 1rem;
 	}
+
+
+	.toc .toc-navbar > .nav > .nav > .nav > .nav {
+		counter-reset: counter4;
+	}
 	
+	.toc .toc-navbar > .nav > .nav > .nav > .nav > a {
+		counter-increment: counter4;
+	}
+
+	.toc .toc-navbar > .nav > .nav > .nav > .nav > a::before {
+		content: counter(counter1) "." counter(counter2) "." counter(counter3) "." counter(counter4) " ";
+		margin-right: 1rem;
+	} 
+
+	.toc .toc-navbar > nav > nav:nth-child(4) > a:nth-child(5),
+	.toc .toc-navbar > nav > nav:nth-child(8) > nav:nth-child(10) > a:nth-child(5),
+	.toc .toc-navbar > nav > nav:nth-child(10) > nav:nth-child(7) > a:nth-child(8),
+	.toc .toc-navbar > nav > nav:nth-child(10) > a:nth-child(16),
+	.toc .toc-navbar > nav > nav:nth-child(10) > nav:nth-child(23) > a:nth-child(6),
+	.toc .toc-navbar > nav > nav:nth-child(10) > nav:nth-child(27) > a:nth-child(5),
+	.toc .toc-navbar > nav > nav:nth-child(10) > a:nth-child(34),
+	.toc .toc-navbar > nav > nav:nth-child(10) > a:nth-child(40),
+	.toc .toc-navbar > nav > nav:nth-child(10) > a:nth-child(48),
+	.toc .toc-navbar > nav > a:nth-child(15),
+	.toc .toc-navbar > nav > nav:nth-child(16) > nav:nth-child(4) > a:nth-child(16) {
+		page-break-before: always;
+  }
+
 	.markdown {
 		counter-reset: chapterCounter;
 		widows: 5;
@@ -754,6 +789,7 @@ html {
 		margin: 0 !important;
 		padding: 0 !important;
 		font-size: 10pt;
+		width: 100vw !important;
 	}
 	
 	.markdown table {

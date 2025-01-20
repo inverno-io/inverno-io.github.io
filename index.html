@@ -139,7 +139,7 @@
 					</div>
 					<div id="feature-2" class="feature">
 						<h2 class="feature-title fs-1">Be Reactive</h2>
-						<p class="feature-desc">Inverno has been built from the ground up to be reactive and non-blocking in order to make full use of computer resources.</p>
+						<p class="feature-desc">Inverno has been built from the ground up to be reactive and non-blocking in order to make full use of hardware resources.</p>
 					</div>
 					<div id="feature-3" class="feature">
 						<h2 class="feature-title fs-1">Be Reliable</h2>
@@ -170,7 +170,7 @@
 @WebController
 public class App {
 
-    @WebRoute( path = "/hello")
+    @WebRoute( path = "/hello" )
     public String hello() {
         return "Hello, world!";
     }
@@ -210,7 +210,7 @@ public class App {
 									<span class="d-block mt-4 fw-bold">Performance</span>
 								</h3>
 								<div class="p-4">
-									<p class="card-text">Performance is a multi-faceted topic, modern applications running in containers, sometimes even serverless, must start as quickly as possible and support very high throughput while making fair use of resources.</p>
+									<p class="card-text">Performance is a multi-faceted topic: modern applications must be delivered swiftly, they are running in containers, sometimes even serverless, must start as quickly as possible and support very high throughput while making fair use of resources.</p>
 									<p class="card-text">The Inverno Framework reduces to the minimum the runtime processing required to bootstrap an application by relying on the compiler to generate the exact code that instantiates and wires the objects of the application together without use of reflection resulting in fast startup and small runtime overhead.</p>
 									<p class="card-text">It also combines a best-in-class reactive threading model with non-blocking I/O in order to absorb very high throughput without wasting resources.</p>
 								</div>
@@ -240,7 +240,7 @@ public class App {
 								</h3>
 								<div class="p-4">
 									<p class="card-text">Microservices architecture has become the de facto standard for backend applications. It ensures a great modularity that makes complex applications easier to understand. Microservices can be monitored and scaled independently, they are easier to integrate with legacy systems and their development can be easily distributed and parallelized. All this makes it a perfect match for the Cloud and DevOps practices.</p>
-									<p class="card-text">The Inverno Framework facilitates the development of Microservices and exposes corresponding <a href="https://www.openapis.org/">Open API</a> specifications with no runtime overhead by generating them from JavaDoc comments at compile time.</p> 
+									<p class="card-text">The Inverno Framework facilitates the development of Microservices using declarative notations for servers and clients. It can also expose <a href="https://www.openapis.org/">Open API</a> specifications with no runtime overhead by generating them from REST controllers JavaDoc comments at compile time.</p>
 								</div>
 							</div>
 						</div>
@@ -263,6 +263,21 @@ public class App {
 						<div class="card shadow">
 							<div class="card-body">
 								<h3 class="card-title text-center my-3">
+									<img src="img/security.svg" style="max-width: 96px;" alt="Security"/>
+									<span class="d-block mt-4 fw-bold">Security</span>
+								</h3>
+								<div class="p-4">
+									<p class="card-text">Securing an application is a tedious task that is made complicated by the ever-increasing number of systems, norms and attacks.</p>
+									<p class="card-text">The Inverno Framework proposes a robust and extensible security model where authentication, identification and access control are formalized clearly in order to streamline that task.</p>
+									<p class="card-text">It also comes with standard implementations for basic HTTP authentication over LDAP or Redis user repository, password encryption, JSON Object Signing and Encryption...</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col d-flex align-items-stretch">
+						<div class="card shadow">
+							<div class="card-body">
+								<h3 class="card-title text-center my-3">
 									<img src="img/maintainability.svg" style="max-width: 96px;" alt="Maintainability"/>
 									<span class="d-block mt-4 fw-bold">Maintainability</span>
 								</h3>
@@ -273,29 +288,6 @@ public class App {
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-			</section>
-			<hr class="container my-5"/>
-			<section class="container my-4">
-				<div class="row align-items-center">
-					<div class="col-12 col-lg-4">
-						<h4 class="text-center text-lg-start mb-5 mb-lg-0 lh-lg">The Inverno Framework provides <a href="https://github.com/inverno-io/benchmarks">high-end performance</a>.</h4>
-					</div>
-					<div class="col-12 col-lg-8">
-						<img class="img-fluid" src="img/benchmarks.svg" alt="Benchmarks" title="Requests/sec change relative to Inverno"/>
-					</div>
-				</div>
-				<p>Checkout the lastest <a href="https://www.techempower.com/benchmarks/#section=data-r21&test=composite&l=xan3i7-6bj">Web Framework Benchmarks</a> from TechEmpower and see for yourself.</p>
-			</section>
-			<hr class="container my-5"/>
-			<section class="container my-4">
-				<div class="row align-items-center">
-					<div class="col-12 col-lg-8">
-						<img class="img-fluid" src="img/startup_time.svg" alt="Startup Time" title="Startup Time change relative to Inverno"/>
-					</div>
-					<div class="col-12 col-lg-4">
-						<h4 class="text-center text-lg-start mt-5 mt-lg-0 lh-lg">The Inverno Framework <a href="https://github.com/inverno-io/benchmarks">reduces</a> application startup time on the JVM.</h4>
 					</div>
 				</div>
 			</section>
@@ -335,7 +327,7 @@ public class App {
 			</div>
 			<div class="p-3 mb-5 text-center"> 
 				<p class="fw-light fs-6">The Inverno Framework is released under version 2.0 of the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License</a>.</p> 
-				<p class="fw-light fs-6">Copyright © 2024, The Inverno Framework</p> 
+				<p class="fw-light fs-6">Copyright © 2025, The Inverno Framework™</p> 
 			</div>
 		</footer>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>

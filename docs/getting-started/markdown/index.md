@@ -20,8 +20,8 @@ $properties(base = ../../../, title = Getting Started Guide)
 			<div class="card-body p-lg-5">
 		    	<h2 class="card-title">What you'll need</h2>
 		    	<ul>
-		    		<li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 15.</li>
-		    		<li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.6.</li>
+		    		<li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 21.</li>
+		    		<li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.9.</li>
 		    		<li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
 		    	</ul>
 			</div>
@@ -123,7 +123,7 @@ package io.inverno.guide.getting_started;
 import io.inverno.core.annotation.Bean;
 import io.inverno.core.v1.Application;
 import io.inverno.mod.base.resource.MediaTypes;
-import io.inverno.mod.web.server.annotation.QueryParam;
+import io.inverno.mod.web.base.annotation.QueryParam;
 import io.inverno.mod.web.server.annotation.WebController;
 import io.inverno.mod.web.server.annotation.WebRoute;
 
@@ -164,7 +164,7 @@ You should see an output similar to the following:
 
 ```plaintext
 [INFO] --- inverno-maven-plugin:${VERSION_INVERNO_TOOLS}:run (default-cli) @ getting-started ---
-[INFO] Running project: io.inverno.guide.getting-started@1.0-SNAPSHOT...
+ [═══════════════════════════════════════════════ 100 % ══════════════════════════════════════════════] Running project io.inverno.guide.getting_started@1.0-SNAPSHOT...
 ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
 INFO Application Inverno is starting...
 
@@ -182,8 +182,8 @@ INFO Application Inverno is starting...
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
-     ║ Java version        : 17+35-2724                                                           ║
-     ║ Java home           : /home/jkuhn/Devel/jdk/jdk-17                                         ║
+     ║ Java version        : 21.0.2+13-58                                                         ║
+     ║ Java home           : /home/jkuhn/Devel/jdk/jdk-21.0.2                                     ║
      ║                                                                                            ║
      ║ Application module  : io.inverno.guide.getting_started                                     ║
      ║ Application version : 1.0-SNAPSHOT                                                         ║
@@ -198,16 +198,20 @@ INFO Application Inverno is starting...
 
 INFO Getting_started Starting Module io.inverno.guide.getting_started...
 INFO Boot Starting Module io.inverno.mod.boot...
-INFO Boot Module io.inverno.mod.boot started in 260ms
-INFO Web Starting Module io.inverno.mod.web.server...
+INFO Boot Module io.inverno.mod.boot started in 276ms
+INFO Server Starting Module io.inverno.mod.web.server...
 INFO Server Starting Module io.inverno.mod.http.server...
 INFO Base Starting Module io.inverno.mod.http.base...
 INFO Base Module io.inverno.mod.http.base started in 4ms
+INFO Base Starting Module io.inverno.mod.web.base...
+INFO Base Starting Module io.inverno.mod.http.base...
+INFO Base Module io.inverno.mod.http.base started in 0ms
+INFO Base Module io.inverno.mod.web.base started in 1ms
 INFO HttpServer HTTP Server (nio) listening on http://0.0.0.0:8080
-INFO Server Module io.inverno.mod.http.server started in 111ms
-INFO Web Module io.inverno.mod.web.server started in 112ms
-INFO Getting_started Module io.inverno.guide.getting_started started in 377ms
-INFO Application Application io.inverno.guide.getting_started started in 458ms
+INFO Server Module io.inverno.mod.http.server started in 68ms
+INFO Server Module io.inverno.mod.web.server started in 68ms
+INFO Getting_started Module io.inverno.guide.getting_started started in 399ms
+INFO Application Application io.inverno.guide.getting_started started in 460ms
 ```
 
 A Web server has been started listening on port 8080, you can now test the `/hello` endpoint:
@@ -224,17 +228,15 @@ Hello, world!
 
 Using a Web browser pointing to `http://localhost:8080/hello?name=John`:
 
-<img class="shadow" src="img/hello_browser.png" style="display: block; margin: 2em auto;" alt="Hello World in Web Browser"/>
+<img src="img/hello_browser.png" style="display: block; margin: 2em auto;" alt="Hello World in Web Browser"/>
 
 ## Step 5: Package and deploy the application
 
-You can package the application into a native platform dependent image containing a Java runtime with the exact dependencies needed by the application and deploy it to your local Maven repository or eventually to a remote repository:
+You can package the application into a native platform dependent image containing a Java runtime with the exact dependencies needed by the application and deploy it as a `zip` archive to your local Maven repository or eventually to a remote repository:
 
 ```plaintext
-$ mvn inverno:build-app install
+$ mvn inverno:package-app install -Dinverno.runtime.archiveFormats=zip
 ```
-
-> Note that if you are using a JDK<16, you'll need to explicitly add the `jdk.incubator.jpackage` module in MAVEN_OPTS: `MAVEN_OPTS="--add-modules jdk.incubator.jpackage"`
 
 Then you can install the application on any compatible platform by downloading and unpacking the application image using Maven dependency plugin:
 

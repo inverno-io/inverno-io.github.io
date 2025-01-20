@@ -31,10 +31,10 @@ $properties(base = ../../../, title = Web Application Security Guide)
             <div class="card-body p-lg-5">
                 <h2 class="card-title">What you'll need</h2>
                 <ul>
-                    <li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 16.</li>
-                    <li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.6.</li>
+                    <li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 21.</li>
+                    <li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.9.</li>
                     <li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
-                    <li>An Inverno Web application to secure, such as the <a href="https://github.com/inverno-io/inverno-apps/tree/1.2.0/inverno-ticket">Inverno Ticket</a> application you should have created when you followed the <a href="${base}docs/redis-vue3-fullstack/html/index.html">Inverno Framework Full-Stack application Guide</a>.</li>
+                    <li>An Inverno Web application to secure, such as the <a href="https://github.com/inverno-io/inverno-apps/tree/master/inverno-ticket">Inverno Ticket</a> application you should have created when you followed the <a href="${base}docs/redis-vue3-fullstack/html/index.html">Inverno Framework Full-Stack application Guide</a>.</li>
                     <li>A basic understanding of Redis data store.</li>
                     <li>A basic understanding of Inverno's Web application development (see web module documentation in the <a href="${base}docs/release/reference/html/index/html">Reference documentation</a>).</li>
                     <li>A basic understanding of JSON Object Signing and Encryption concepts.</li>
@@ -48,13 +48,13 @@ $doc
 
 This guide directly follows the [Inverno Framework Full-Stack application Guide][inverno-full-stack-guide]. In this guide you will secure the Inverno Ticket application that was created then.
 
-The objective is to protect the access to every services or resources exposed in the application by requiring an authentication. Since you clearly don't want to ask a user to manually enter credentials each time a service or a resource is accessed, authentication will be done in two steps: first a user will have to authenticate on a login page by providing proper credentials (username/password) submitted in a form to a login action which then returns a token to the client (Web browser) sent in every subsequent requests to the application.
+The objective is to protect the access to every service or resources exposed in the application by requiring an authentication. Since you clearly don't want to ask a user to manually enter credentials each time a service or a resource is accessed, authentication will be done in two steps: first a user will have to authenticate on a login page by providing proper credentials (username/password) submitted in a form to a login action which then returns a token to the client (Web browser) sent in every subsequent requests to the application.
 
 The login action will authenticate login credentials against a [Redis][redis] user repository. A redis data store should already be configured in the Ticket application making things easier.
 
 The token will be a [JSON Web Signature][rfc7515] object that can be easily authenticated by validating a digital signature. This token can be seen as a visitor badge that one would have obtained form a security desk at the entrance of building after showing proper credentials (e.g. ID card...). 
 
-The complete Inverno Ticket application can be found in [GitHub](https://github.com/inverno-io/inverno-apps/tree/1.2.0/inverno-ticket).
+The complete Inverno Ticket application can be found in [GitHub](https://github.com/inverno-io/inverno-apps/tree/secure/inverno-ticket).
 
 ## Step 1: Declare Inverno security dependencies
 
@@ -74,7 +74,7 @@ These dependencies should be first added to the `pom.xml` build descriptor of th
     </parent>
     <groupId>io.inverno.guide</groupId>
     <artifactId>ticket</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         ...
@@ -96,18 +96,26 @@ You can now add dependencies to `io.inverno.mod.security.http` and `io.inverno.m
 ```java
 @io.inverno.core.annotation.Module
 module io.inverno.guide.ticket {
-    ...
+    requires io.inverno.mod.boot;
+    requires io.inverno.mod.redis.lettuce;
+    requires io.inverno.mod.web.server;
     requires io.inverno.mod.security.http;
     requires io.inverno.mod.security.jose;
-    ...
+
+    requires org.apache.logging.log4j;
+    requires org.apache.logging.log4j.layout.template.json;
+
+    exports io.inverno.guide.ticket.internal.model to com.fasterxml.jackson.databind;
+    exports io.inverno.guide.ticket.internal.rest.v1.dto to com.fasterxml.jackson.databind;
 }
+
 ```
 
-You should now be all set and you can start securing the application.
+You should now be all set, and you can start securing the application.
 
 > Note that the Inverno *security* module, which defines core security API and services, is provided as a transitive dependency.
 
-## Step 2: Setup the Login page
+## Step 2: Set up the Login page
 
 Let's start by setting up the application login page that will be used by users to log into the application. The Inverno *security-http* module provides a whitelabel login page through the `FormLoginPageHandler`, it contains a simple login form which allows users to submit login credentials (username/password) to the login action.
 
@@ -118,7 +126,7 @@ On successful authentication, a [JSON Web Signature][rfc7515] object wrapping th
 You can start by creating bean `UserRepositoryWrapper` to expose the `RedisUserRepository`. This will abstract the actual user repository from the user authenticator and ease maintenance if the `UserRepository` implementation must be changed at some point. A `RedisUserRepository` requires a `RedisClient` and an `ObjectMapper` which should already be provided in the application by the *redis* and the *boot* modules respectively.
 
 ```java
-package io.inverno.app.ticket.internal.security;
+package io.inverno.guide.ticket.internal.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.inverno.core.annotation.Bean;
@@ -130,6 +138,13 @@ import io.inverno.mod.security.authentication.user.UserRepository;
 import io.inverno.mod.security.identity.PersonIdentity;
 import java.util.function.Supplier;
 
+/**
+ * <p>
+ * The user repository managing application users and used to authenticate users.
+ * </p>
+ *
+ * @author <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a>
+ */
 @Wrapper @Bean( name = "userRepository" )
 public class UserRepositoryWrapper implements Supplier<UserRepository<PersonIdentity, User<PersonIdentity>>> {
 
@@ -146,6 +161,7 @@ public class UserRepositoryWrapper implements Supplier<UserRepository<PersonIden
         return new RedisUserRepository<>(this.redisClient, this.mapper);
     }
 }
+
 ```
 
 Now you need to define a JSON Web Key (JWK) for your application, this key will be used to create, parse and verify the JSON Web Signature tokens. The Inverno *security-jose* module provides the `JWKService` which can be used to generate a `JWK` or load it from the configuration. To keep things simple, let's assume a new key will be generated each time the application is started.
@@ -153,48 +169,47 @@ Now you need to define a JSON Web Key (JWK) for your application, this key will 
 The algorithm used to digitally sign JWS will be a simple symmetric algorithm, such as `HS512`. The `JWSService` that will be used to manipulate JWS objects has the ability to automatically look up keys by id from a `JWKStore`. So let's create an `InMemoryJWKStore` bean to store keys in memory and a trusted `JWK` bean registered into the `JWKStore`.
 
 ```java
-package io.inverno.app.ticket.internal.security;
+package io.inverno.guide.ticket.internal.security;
 
 import io.inverno.core.annotation.Bean;
-import io.inverno.core.annotation.Init;
 import io.inverno.core.annotation.Wrapper;
 import io.inverno.mod.security.jose.jwa.OCTAlgorithm;
 import io.inverno.mod.security.jose.jwk.InMemoryJWKStore;
 import io.inverno.mod.security.jose.jwk.JWK;
 import io.inverno.mod.security.jose.jwk.JWKService;
 import io.inverno.mod.security.jose.jwk.JWKStore;
-
 import java.util.function.Supplier;
 
 @Wrapper @Bean( name = "jwk" )
 public class JWKWrapper implements Supplier<JWK> {
 
-    private final JWKService jwkService;
+	private final JWKService jwkService;
 
-    public JWKWrapper(JWKService jwkService) {
-        this.jwkService = jwkService;
-    }
+	public JWKWrapper(JWKService jwkService) {
+		this.jwkService = jwkService;
+	}
 
-    @Override
-    public JWK get() {
-        return this.jwkService.oct().generator()
-            .keyId("tkt")
-            .algorithm(OCTAlgorithm.HS512.getAlgorithm())
-            .generate()
-            .map(JWK::trust)
-            .flatMap(jwk -> jwkService.store().set(jwk).thenReturn(jwk))
-            .block();
-    }
+	@Override
+	public JWK get() {
+		return this.jwkService.oct().generator()
+			.keyId("tkt")
+			.algorithm(OCTAlgorithm.HS512.getAlgorithm())
+			.generate()
+			.map(JWK::trust)
+			.flatMap(jwk -> jwkService.store().set(jwk).thenReturn(jwk))
+			.block();
+	}
 
-    @Wrapper @Bean
-    public static class JWKStoreWrapper implements Supplier<JWKStore> {
+	@Wrapper @Bean
+	public static class JWKStoreWrapper implements Supplier<JWKStore> {
 
-        @Override
-        public JWKStore get() {
-            return new InMemoryJWKStore();
-        }
-    }
+		@Override
+		public JWKStore get() {
+			return new InMemoryJWKStore();
+		}
+	}
 }
+
 ```
 
 Note that the generated key must be explicitly trusted because a generated keys are not trusted by default. Untrusted keys cannot be used to create or verify JWS objects.
@@ -203,11 +218,12 @@ Note that the generated key must be explicitly trusted because a generated keys 
 
 From there, it is quite simple to load a JWK from configuration, it only requires to use a `builder()` instead of a `generator()` and provide the symmetric key value in the configuration.
 
-You can now create the `SecurityConfigurer` bean that will be used to configure security for the whols application. For now, it shall implement `WebRoutesConfigurer` in order to define routes to the login page using the `FormLoginPageHandler` and the login action using the `LoginActionHandler`:
+You can now create the `SecurityConfigurer` bean that will be used to configure security for the whole application. For now, it shall implement `WebRouter.Configurer<SecurityContext<PersonIdentity, AccessController>>` in order to define routes to the login page using the `FormLoginPageHandler` and the login action using the `LoginActionHandler`:
 
 ```java
-package io.inverno.app.ticket.internal.security;
+package io.inverno.guide.ticket.internal.security;
 
+import io.inverno.core.annotation.Bean;
 import io.inverno.mod.base.resource.MediaTypes;
 import io.inverno.mod.http.base.Method;
 import io.inverno.mod.security.accesscontrol.AccessController;
@@ -228,15 +244,16 @@ import io.inverno.mod.security.identity.PersonIdentity;
 import io.inverno.mod.security.jose.jwa.OCTAlgorithm;
 import io.inverno.mod.security.jose.jws.JWSAuthentication;
 import io.inverno.mod.security.jose.jws.JWSService;
-import io.inverno.mod.web.server.WebRoutable;
-import io.inverno.mod.web.server.WebRoutesConfigurer;
+import io.inverno.mod.web.server.WebRouter;
+import io.inverno.mod.web.server.annotation.WebRoute;
+import io.inverno.mod.web.server.annotation.WebRoutes;
 
 @WebRoutes({
     @WebRoute(path = { "/login" }, method = { Method.GET }),
     @WebRoute(path = { "/login" }, method = { Method.POST }),
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
-public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<PersonIdentity, AccessController>> {
+public class SecurityConfigurer implements WebRouter.Configurer<SecurityContext<PersonIdentity, AccessController>> {
 
     private final UserRepository<PersonIdentity, User<PersonIdentity>> userRepository;
     private final JWSService jwsService;
@@ -247,20 +264,20 @@ public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<P
     }
 
     @Override
-    public void configure(WebRoutable<SecurityContext<PersonIdentity, AccessController>, ?> routes) {
+	public void configure(WebRouter<SecurityContext<PersonIdentity, AccessController>> routes) {
         routes
-            .route()                                                                                                                     // 1 
+            .route()                                                                                                                     // 1
                 .path("/login")
                 .method(Method.GET)
                 .handler(new FormLoginPageHandler<>())
-            .route()                                                                                                                     // 2 
+            .route()                                                                                                                     // 2
                 .path("/login")
                 .method(Method.POST)
-                .handler(new LoginActionHandler<>(                                                                                       // 3 
-                    new FormCredentialsExtractor(),                                                                                      // 4 
-                    new UserAuthenticator<>(this.userRepository, new LoginCredentialsMatcher<>())                                        // 5 
-                        .failOnDenied()                                                                                                  // 6 
-                        .flatMap(authentication -> this.jwsService.<UserAuthentication<PersonIdentity>>builder(UserAuthentication.class) // 7 
+                .handler(new LoginActionHandler<>(                                                                                       // 3
+                    new FormCredentialsExtractor(),                                                                                      // 4
+                    new UserAuthenticator<>(this.userRepository, new LoginCredentialsMatcher<>())                                        // 5
+                        .failOnDenied()                                                                                                  // 6
+                        .flatMap(authentication -> this.jwsService.<UserAuthentication<PersonIdentity>>builder(UserAuthentication.class) // 7
                             .header(header -> header
                                 .keyId("tkt")
                                 .algorithm(OCTAlgorithm.HS512.getAlgorithm())
@@ -269,11 +286,11 @@ public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<P
                             .build(MediaTypes.APPLICATION_JSON)
                             .map(JWSAuthentication::new)
                         ),
-                    LoginSuccessHandler.of(                                                                                              // 8 
+                    LoginSuccessHandler.of(                                                                                              // 8
                         new CookieTokenLoginSuccessHandler<>(),
                         new RedirectLoginSuccessHandler<>()
                     ),
-                    new RedirectLoginFailureHandler<>()                                                                                  // 9 
+                    new RedirectLoginFailureHandler<>()                                                                                  // 9
                 ));
     }
 }
@@ -291,28 +308,50 @@ Above configurer deserves some deeper explanations:
 8. On successful login, a `CookieTokenLoginSuccessHandler` is used to return an `AUTH-TOKEN` cookie to the Web browser containing the JWS compact representation. The `RedirectLoginSuccessHandler` is also used to redirect the user to its original request or to `/` if the login page was directly accessed.
 9. Finally, a `RedirectLoginFailureHandler` is used to redirect the user to the login page in case of denied authentication.
 
-You should also notice that the exchange context type declared in `WebRoutesConfigurer` is `SecurityContext<PersonIdentity, AccessController>`. Although access to the `SecurityContext` is not required by the `FormLoginPageHandler` or the `LoginActionHandler`, it is required if you want to expose a logout action using the `LogoutActionHandler` in order to be able to release the security context.
+You should also notice that the exchange context type declared in `WebRouter.Configurer` is `SecurityContext<PersonIdentity, AccessController>`. Although access to the `SecurityContext` is not required by the `FormLoginPageHandler` or the `LoginActionHandler`, it is required if you want to expose a logout action using the `LogoutActionHandler` in order to be able to release the security context.
 
 Let's define a `/logout` route using the `LogoutActionHandler` to log out users:
 
 ```java
-package io.inverno.app.ticket.internal.security;
+package io.inverno.guide.ticket.internal.security;
 
-...
-import io.inverno.mod.security.http.form.FormAuthenticationErrorInterceptor;
+import io.inverno.core.annotation.Bean;
+import io.inverno.mod.base.resource.MediaTypes;
+import io.inverno.mod.http.base.Method;
+import io.inverno.mod.security.accesscontrol.AccessController;
+import io.inverno.mod.security.authentication.LoginCredentialsMatcher;
+import io.inverno.mod.security.authentication.user.User;
+import io.inverno.mod.security.authentication.user.UserAuthentication;
+import io.inverno.mod.security.authentication.user.UserAuthenticator;
+import io.inverno.mod.security.authentication.user.UserRepository;
+import io.inverno.mod.security.http.context.SecurityContext;
+import io.inverno.mod.security.http.form.FormCredentialsExtractor;
+import io.inverno.mod.security.http.form.FormLoginPageHandler;
+import io.inverno.mod.security.http.form.RedirectLoginFailureHandler;
+import io.inverno.mod.security.http.form.RedirectLoginSuccessHandler;
 import io.inverno.mod.security.http.form.RedirectLogoutSuccessHandler;
+import io.inverno.mod.security.http.login.LoginActionHandler;
+import io.inverno.mod.security.http.login.LoginSuccessHandler;
 import io.inverno.mod.security.http.login.LogoutActionHandler;
 import io.inverno.mod.security.http.login.LogoutSuccessHandler;
+import io.inverno.mod.security.http.token.CookieTokenLoginSuccessHandler;
 import io.inverno.mod.security.http.token.CookieTokenLogoutSuccessHandler;
+import io.inverno.mod.security.identity.PersonIdentity;
+import io.inverno.mod.security.jose.jwa.OCTAlgorithm;
+import io.inverno.mod.security.jose.jws.JWSAuthentication;
+import io.inverno.mod.security.jose.jws.JWSService;
+import io.inverno.mod.web.server.WebRouter;
+import io.inverno.mod.web.server.annotation.WebRoute;
+import io.inverno.mod.web.server.annotation.WebRoutes;
 import reactor.core.publisher.Mono;
 
 @WebRoutes({
     @WebRoute(path = { "/login" }, method = { Method.GET }),
     @WebRoute(path = { "/login" }, method = { Method.POST }),
-    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
+    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" })
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
-public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<PersonIdentity, AccessController>> {
+public class SecurityConfigurer implements WebRouter.Configurer<SecurityContext<PersonIdentity, RoleBasedAccessController>> {
 
     private final UserRepository<PersonIdentity, User<PersonIdentity>> userRepository;
     private final JWSService jwsService;
@@ -323,18 +362,18 @@ public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<P
     }
 
     @Override
-    public void configure(WebRoutable<SecurityContext<PersonIdentity, AccessController>, ?> routes) {
+    public void configure(WebRouter<SecurityContext<PersonIdentity, AccessController>> routes) {
         routes
             ...
             .route()
                 .path("/logout")
-                .produces(MediaTypes.APPLICATION_JSON)
+                .produce(MediaTypes.APPLICATION_JSON)
                 .handler(new LogoutActionHandler<>(
-                        authentication -> Mono.empty(),
-                        LogoutSuccessHandler.of(
-                            new CookieTokenLogoutSuccessHandler<>(),
-                            new RedirectLogoutSuccessHandler<>()
-                        )
+                    authentication -> Mono.empty(),
+                    LogoutSuccessHandler.of(
+                        new CookieTokenLogoutSuccessHandler<>(),
+                        new RedirectLogoutSuccessHandler<>()
+                    )
                 ));
     }
 }
@@ -342,7 +381,7 @@ public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<P
 
 The above logout action basically does nothing to release the security context since the application stores its state in a JWS and is basically stateless. On successful logout, which should then always be the case, the cookie is removed by the `CookieTokenLogoutSuccessHandler` and the Web browser redirected to `/` using the `RedirectLogoutSuccessHandler`.
 
-The login page should now be all set with login and logout actions and you can move on by securing access to services and resources.
+The login page should now be all set with login and logout actions, and you can move on by securing access to services and resources.
 
 ## Step 3: Secure applications services and resources
 
@@ -358,37 +397,64 @@ The Ticket application basically exposes the following routes:
 - `/login` which points to the login page.
 - `/logout` which points to the logout action
 
-All these routes except the `/login` page, which must remain accessible to any user, should be protected against unauthenticated or anonymous access. In order to do that, you need to intercept requests to these routes and reject those that do do not contain valid credentials, namely the `AUTH-TOKEN` cookie containing a compact JWS normally created in the login action. In case valid credentials have been provided, a `SecurityContext` should be created and injected in the exchange context, the security context is then accessible to subsequent interceptors and route handlers.
+All these routes except the `/login` page, which must remain accessible to any user, should be protected against unauthenticated or anonymous access. In order to do that, you need to intercept requests to these routes and reject those that do not contain valid credentials, namely the `AUTH-TOKEN` cookie containing a compact JWS normally created in the login action. In case valid credentials have been provided, a `SecurityContext` should be created and injected in the exchange context, the security context is then accessible to subsequent interceptors and route handlers.
 
-You must then modify the `SecurityConfigurer` and make it implement `WebInterceptorsConfigurer<InterceptingSecurityContext<PersonIdentity, AccessController>>` in order to configure the security interceptors on the protected routes.
+You must then modify the `SecurityConfigurer` and make it implement `WebRouteInterceptor.Configurer<InterceptingSecurityContext<PersonIdentity, AccessController>>` in order to configure the security interceptors on the protected routes.
 
 ```java
-package io.inverno.app.ticket.internal.security;
+package io.inverno.guide.ticket.internal.security;
 
-...
+import io.inverno.core.annotation.Bean;
 import io.inverno.mod.base.reflect.Types;
+import io.inverno.mod.base.resource.MediaTypes;
+import io.inverno.mod.http.base.Method;
+import io.inverno.mod.security.accesscontrol.AccessController;
+import io.inverno.mod.security.authentication.LoginCredentialsMatcher;
+import io.inverno.mod.security.authentication.user.User;
+import io.inverno.mod.security.authentication.user.UserAuthentication;
+import io.inverno.mod.security.authentication.user.UserAuthenticator;
+import io.inverno.mod.security.authentication.user.UserRepository;
 import io.inverno.mod.security.http.AccessControlInterceptor;
 import io.inverno.mod.security.http.SecurityInterceptor;
 import io.inverno.mod.security.http.context.InterceptingSecurityContext;
+import io.inverno.mod.security.http.context.SecurityContext;
+import io.inverno.mod.security.http.form.FormCredentialsExtractor;
+import io.inverno.mod.security.http.form.FormLoginPageHandler;
+import io.inverno.mod.security.http.form.RedirectLoginFailureHandler;
+import io.inverno.mod.security.http.form.RedirectLoginSuccessHandler;
+import io.inverno.mod.security.http.form.RedirectLogoutSuccessHandler;
+import io.inverno.mod.security.http.login.LoginActionHandler;
+import io.inverno.mod.security.http.login.LoginSuccessHandler;
+import io.inverno.mod.security.http.login.LogoutActionHandler;
+import io.inverno.mod.security.http.login.LogoutSuccessHandler;
 import io.inverno.mod.security.http.token.CookieTokenCredentialsExtractor;
+import io.inverno.mod.security.http.token.CookieTokenLoginSuccessHandler;
+import io.inverno.mod.security.http.token.CookieTokenLogoutSuccessHandler;
+import io.inverno.mod.security.identity.PersonIdentity;
+import io.inverno.mod.security.jose.jwa.OCTAlgorithm;
+import io.inverno.mod.security.jose.jws.JWSAuthentication;
 import io.inverno.mod.security.jose.jws.JWSAuthenticator;
-import io.inverno.mod.web.server.WebInterceptable;
-import io.inverno.mod.web.server.WebInterceptorsConfigurer;
+import io.inverno.mod.security.jose.jws.JWSService;
+import io.inverno.mod.web.server.WebRouteInterceptor;
+import io.inverno.mod.web.server.WebRouter;
+import io.inverno.mod.web.server.annotation.WebRoute;
+import io.inverno.mod.web.server.annotation.WebRoutes;
 import java.util.List;
+import reactor.core.publisher.Mono;
 
 @WebRoutes({
     @WebRoute(path = { "/login" }, method = { Method.GET }),
     @WebRoute(path = { "/login" }, method = { Method.POST }),
-    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
+    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" })
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
-public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<PersonIdentity, AccessController>>, WebInterceptorsConfigurer<InterceptingSecurityContext<PersonIdentity, AccessController>> {
+public class SecurityConfigurer implements WebRouteInterceptor.Configurer<InterceptingSecurityContext<PersonIdentity, AccessController>>, WebRouter.Configurer<SecurityContext<PersonIdentity, AccessController>> {
 
     ...
     @Override
-    public void configure(WebInterceptable<InterceptingSecurityContext<PersonIdentity, AccessController>, ?> interceptors) {
-        interceptors
-            .intercept()                                                                                  // 1 
+    public WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, AccessController>> configure(WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, AccessController>> interceptors) {
+        return interceptors
+            .intercept()                                                                                  // 1
                 .path("/")
                 .path("/api/**")
                 .path("/static/**")
@@ -396,16 +462,16 @@ public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<P
                 .path("/open-api/**")
                 .path("/logout")
                 .interceptors(List.of(
-                    SecurityInterceptor.of(                                                               // 2 
-                        new CookieTokenCredentialsExtractor(),                                            // 3 
-                        new JWSAuthenticator<UserAuthentication<PersonIdentity>>(                         // 4 
-                            this.jwsService, 
+                    SecurityInterceptor.of(                                                               // 2
+                        new CookieTokenCredentialsExtractor(),                                            // 3
+                        new JWSAuthenticator<UserAuthentication<PersonIdentity>>(                         // 4
+                            this.jwsService,
                             Types.type(UserAuthentication.class).type(PersonIdentity.class).and().build()
-                        )  
-                        .failOnDenied()                                                                   // 5 
-                        .map(jwsAuthentication -> jwsAuthentication.getJws().getPayload())                // 6 
+                        )
+                        .failOnDenied()                                                                   // 5
+                        .map(jwsAuthentication -> jwsAuthentication.getJws().getPayload())                // 6
                     ),
-                    AccessControlInterceptor.authenticated()                                              // 7 
+                    AccessControlInterceptor.authenticated()                                              // 7
                 ));
     }
 }
@@ -419,7 +485,7 @@ public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<P
 6. The original `UserAuthentication<PersonIdentity>` is then unwrapped, the security interceptor then creates a `SecurityContext` with the original authentication instead of the `JWSAuthentication`.
 7. Finally, we make sure only authenticated security context can access the protected service or resource. This basically means that only users that provided valid login credentials have access to the application.
 
-Note that the exchange context type declated in the `WebInterceptorsConfigurer` is `InterceptingSecurityContext<PersonIdentity, AccessController>`, the `InterceptingSecurityContext` is required by the `SecurityInterceptor` in order to populate the `SecurityContext`.
+Note that the exchange context type declared in the `WebRouteInterceptor.Configurer` is `InterceptingSecurityContext<PersonIdentity, AccessController>`, the `InterceptingSecurityContext` is required by the `SecurityInterceptor` in order to populate the `SecurityContext`.
 
 Using a `JWS` token has many advantages: first it is easy to verify that the provided credentials are valid by verifying the digital signature using `tkt` key and then, the original `UserAuthentication<PersonIdentity>` could have been restored. It provides user's identity and roles that can then be used directly to get the user's `PersonIdentity` or obtain a `RoleBasedAccessController` without having to query the user repository again.
 
@@ -427,35 +493,70 @@ Using a `JWS` token has many advantages: first it is easy to verify that the pro
 
 It should now be impossible to access a protected resource without being authenticated, however a user won't be automatically redirected to the login page when receiving an unauthorized (401) error. This can be done by intercepting `UnauthorizedException` in the error router.
 
-You must then modify the `SecurityConfigurer` one more time to make it implement `ErrorWebRouterConfigurer<ExchangeContext>` in order to intercept unauthorized errors and use a `FormAuthenticationErrorInterceptor` to redirect the user to the login page:
+You must then modify the `SecurityConfigurer` one more time to make it implement `ErrorWebRouteInterceptor.Configurer<ExchangeContext>` in order to intercept unauthorized errors and use a `FormAuthenticationErrorInterceptor` to redirect the user to the login page:
 
 ```java
-package io.inverno.app.ticket.internal.security;
+package io.inverno.guide.ticket.internal.security;
 
-...
+import io.inverno.core.annotation.Bean;
+import io.inverno.mod.base.reflect.Types;
+import io.inverno.mod.base.resource.MediaTypes;
 import io.inverno.mod.http.base.ExchangeContext;
+import io.inverno.mod.http.base.Method;
 import io.inverno.mod.http.base.UnauthorizedException;
-import io.inverno.mod.web.server.ErrorWebRouter;
-import io.inverno.mod.web.server.ErrorWebRouterConfigurer;
+import io.inverno.mod.security.accesscontrol.AccessController;
+import io.inverno.mod.security.authentication.LoginCredentialsMatcher;
+import io.inverno.mod.security.authentication.user.User;
+import io.inverno.mod.security.authentication.user.UserAuthentication;
+import io.inverno.mod.security.authentication.user.UserAuthenticator;
+import io.inverno.mod.security.authentication.user.UserRepository;
+import io.inverno.mod.security.http.AccessControlInterceptor;
+import io.inverno.mod.security.http.SecurityInterceptor;
+import io.inverno.mod.security.http.context.InterceptingSecurityContext;
+import io.inverno.mod.security.http.context.SecurityContext;
+import io.inverno.mod.security.http.form.FormAuthenticationErrorInterceptor;
+import io.inverno.mod.security.http.form.FormCredentialsExtractor;
+import io.inverno.mod.security.http.form.FormLoginPageHandler;
+import io.inverno.mod.security.http.form.RedirectLoginFailureHandler;
+import io.inverno.mod.security.http.form.RedirectLoginSuccessHandler;
+import io.inverno.mod.security.http.form.RedirectLogoutSuccessHandler;
+import io.inverno.mod.security.http.login.LoginActionHandler;
+import io.inverno.mod.security.http.login.LoginSuccessHandler;
+import io.inverno.mod.security.http.login.LogoutActionHandler;
+import io.inverno.mod.security.http.login.LogoutSuccessHandler;
+import io.inverno.mod.security.http.token.CookieTokenCredentialsExtractor;
+import io.inverno.mod.security.http.token.CookieTokenLoginSuccessHandler;
+import io.inverno.mod.security.http.token.CookieTokenLogoutSuccessHandler;
+import io.inverno.mod.security.identity.PersonIdentity;
+import io.inverno.mod.security.jose.jwa.OCTAlgorithm;
+import io.inverno.mod.security.jose.jws.JWSAuthentication;
+import io.inverno.mod.security.jose.jws.JWSAuthenticator;
+import io.inverno.mod.security.jose.jws.JWSService;
+import io.inverno.mod.web.server.ErrorWebRouteInterceptor;
+import io.inverno.mod.web.server.WebRouteInterceptor;
+import io.inverno.mod.web.server.WebRouter;
+import io.inverno.mod.web.server.annotation.WebRoute;
+import io.inverno.mod.web.server.annotation.WebRoutes;
+import java.util.List;
+import reactor.core.publisher.Mono;
 
 @WebRoutes({
     @WebRoute(path = { "/login" }, method = { Method.GET }),
     @WebRoute(path = { "/login" }, method = { Method.POST }),
-    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
+    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" })
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
-public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<PersonIdentity, AccessController>>, WebInterceptorsConfigurer<InterceptingSecurityContext<PersonIdentity, AccessController>>, ErrorWebRouterConfigurer<ExchangeContext> {
+public class SecurityConfigurer implements WebRouteInterceptor.Configurer<InterceptingSecurityContext<PersonIdentity, AccessController>>, WebRouter.Configurer<SecurityContext<PersonIdentity, AccessController>>, ErrorWebRouteInterceptor.Configurer<ExchangeContext> {
 
     ...
-    @Override
-    public void configure(ErrorWebRouter<ExchangeContext> errorRouter) {
-        errorRouter
-            .intercept()
-            .path("/")
-            .error(UnauthorizedException.class)
-            .interceptor(new FormAuthenticationErrorInterceptor<>())
-            .applyInterceptors(); // We must apply interceptors to intercept white labels error routes which are already defined
-    }
+	@Override
+	public ErrorWebRouteInterceptor<ExchangeContext> configure(ErrorWebRouteInterceptor<ExchangeContext> errorInterceptors) {
+		return errorInterceptors
+			.interceptError()
+                .path("/")
+                .error(UnauthorizedException.class)
+                .interceptor(new FormAuthenticationErrorInterceptor<>());
+	}
 }
 ```
 
@@ -470,15 +571,55 @@ You might now want to display the user's identity in the application UI. To do s
 But first you must resolve the user's identity from the `UserAuthentication`, this can be done easily by adding a `UserIdentityResolver` to the `SecurityInterceptor`:
 
 ```java
-package io.inverno.app.ticket.internal.security;
+package io.inverno.guide.ticket.internal.security;
 
-...
+import io.inverno.core.annotation.Bean;
+import io.inverno.mod.base.reflect.Types;
+import io.inverno.mod.base.resource.MediaTypes;
+import io.inverno.mod.http.base.ExchangeContext;
+import io.inverno.mod.http.base.Method;
+import io.inverno.mod.http.base.UnauthorizedException;
+import io.inverno.mod.security.accesscontrol.AccessController;
+import io.inverno.mod.security.authentication.LoginCredentialsMatcher;
+import io.inverno.mod.security.authentication.user.User;
+import io.inverno.mod.security.authentication.user.UserAuthentication;
+import io.inverno.mod.security.authentication.user.UserAuthenticator;
+import io.inverno.mod.security.authentication.user.UserRepository;
+import io.inverno.mod.security.http.AccessControlInterceptor;
+import io.inverno.mod.security.http.SecurityInterceptor;
+import io.inverno.mod.security.http.context.InterceptingSecurityContext;
+import io.inverno.mod.security.http.context.SecurityContext;
+import io.inverno.mod.security.http.form.FormAuthenticationErrorInterceptor;
+import io.inverno.mod.security.http.form.FormCredentialsExtractor;
+import io.inverno.mod.security.http.form.FormLoginPageHandler;
+import io.inverno.mod.security.http.form.RedirectLoginFailureHandler;
+import io.inverno.mod.security.http.form.RedirectLoginSuccessHandler;
+import io.inverno.mod.security.http.form.RedirectLogoutSuccessHandler;
+import io.inverno.mod.security.http.login.LoginActionHandler;
+import io.inverno.mod.security.http.login.LoginSuccessHandler;
+import io.inverno.mod.security.http.login.LogoutActionHandler;
+import io.inverno.mod.security.http.login.LogoutSuccessHandler;
+import io.inverno.mod.security.http.token.CookieTokenCredentialsExtractor;
+import io.inverno.mod.security.http.token.CookieTokenLoginSuccessHandler;
+import io.inverno.mod.security.http.token.CookieTokenLogoutSuccessHandler;
+import io.inverno.mod.security.identity.PersonIdentity;
 import io.inverno.mod.security.identity.UserIdentityResolver;
+import io.inverno.mod.security.jose.jwa.OCTAlgorithm;
+import io.inverno.mod.security.jose.jws.JWSAuthentication;
+import io.inverno.mod.security.jose.jws.JWSAuthenticator;
+import io.inverno.mod.security.jose.jws.JWSService;
+import io.inverno.mod.web.server.ErrorWebRouteInterceptor;
+import io.inverno.mod.web.server.WebRouteInterceptor;
+import io.inverno.mod.web.server.WebRouter;
+import io.inverno.mod.web.server.annotation.WebRoute;
+import io.inverno.mod.web.server.annotation.WebRoutes;
+import java.util.List;
+import reactor.core.publisher.Mono;
 
 @WebRoutes({
     @WebRoute(path = { "/login" }, method = { Method.GET }),
     @WebRoute(path = { "/login" }, method = { Method.POST }),
-    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
+    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" })
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
 public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<PersonIdentity, AccessController>>, WebInterceptorsConfigurer<InterceptingSecurityContext<PersonIdentity, AccessController>>, ErrorWebRouterConfigurer<ExchangeContext> {
@@ -511,16 +652,17 @@ public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<P
 }
 ```
 
-> Here the user's identity is resolved for all routes but it is also possible to resolve it only for the routes that need it, simply by defining different security interceptors.
+> Here the user's identity is resolved for all routes, but it is also possible to resolve it only for the routes that need it, simply by defining different security interceptors.
 
 The user's identity should now be accessible from the `SecurityContext` in the exchange, you can then create the following `SecurityController` to expose the user's identity to the UI:
 
 ```java
-package io.inverno.app.ticket.internal.security;
+package io.inverno.guide.ticket.internal.security;
 
 import io.inverno.core.annotation.Bean;
 import io.inverno.mod.base.resource.MediaTypes;
 import io.inverno.mod.http.base.Method;
+import io.inverno.mod.http.base.NotFoundException;
 import io.inverno.mod.security.accesscontrol.AccessController;
 import io.inverno.mod.security.http.context.SecurityContext;
 import io.inverno.mod.security.identity.Identity;
@@ -533,7 +675,7 @@ public class SecurityController {
 
     @WebRoute( path = "/identity", method = Method.GET, produces = MediaTypes.APPLICATION_JSON )
     public Identity identity(SecurityContext<? extends Identity, ? extends AccessController> securityContext) {
-        return securityContext.getIdentity().get();
+        return securityContext.getIdentity().orElseThrow(() -> new NotFoundException("Identify not found"));
     }
 }
 ```
@@ -549,40 +691,60 @@ Before you can run the application, you need to define a user in the Redis user 
 So let's modify the `TicketApp#main()` method and use the `UserRepository` bean to create user `jsmith` if it does not already exist when the application is starting:
 
 ```java
-package io.inverno.app.ticket;
+package io.inverno.guide.ticket;
 
 import io.inverno.core.annotation.Bean;
 import io.inverno.core.v1.Application;
 import io.inverno.mod.configuration.ConfigurationKey;
-import io.inverno.mod.configuration.ConfigurationProperty;
 import io.inverno.mod.configuration.ConfigurationSource;
 import io.inverno.mod.configuration.source.BootstrapConfigurationSource;
 import io.inverno.mod.security.authentication.password.RawPassword;
 import io.inverno.mod.security.authentication.user.User;
 import io.inverno.mod.security.identity.PersonIdentity;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import reactor.core.publisher.Mono;
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Supplier;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import reactor.core.publisher.Mono;
 
 public class TicketApp {
 
-    ...
-    public static void main(String[] args) throws IOException {
-        final BootstrapConfigurationSource bootstrapConfigurationSource = new BootstrapConfigurationSource(TicketApp.class.getModule(), args);
-        Ticket ticketApp = bootstrapConfigurationSource
-            ...
+	private static final Logger LOGGER = LogManager.getLogger(TicketApp.class);
 
-        ticketApp.userRepository().getUser("jsmith")
-            .switchIfEmpty(Mono.defer(() -> ticketApp.userRepository().createUser(User.of("jsmith")
-                .password(new RawPassword("password"))
-                .identity(new PersonIdentity("jsmith", "John", "Smith", "jsmith@inverno.io"))
-                .build())
-            ))
-            .block();
-    }
+	public static final String REDIS_KEY = "APP:Ticket";
+	public static final String PROFILE_PROPERTY_NAME = "profile";
+
+	@Bean(name = "configurationSource")
+	public interface TicketAppConfigurationSource extends Supplier<ConfigurationSource> {}
+
+	@Bean(name = "configurationParameters")
+	public interface TicketAppConfigurationParameters extends Supplier<List<ConfigurationKey.Parameter>> {}
+
+	public static void main(String[] args) throws IOException {
+		final BootstrapConfigurationSource bootstrapConfigurationSource = new BootstrapConfigurationSource(TicketApp.class.getModule(), args);
+		Ticket ticketApp = bootstrapConfigurationSource
+			.get(PROFILE_PROPERTY_NAME)
+			.execute()
+			.single()
+			.map(configurationQueryResult -> configurationQueryResult.asString("default"))
+			.map(profile -> {
+				LOGGER.info(() -> "Active profile: " + profile);
+				return Application.run(new Ticket.Builder()
+					.setConfigurationSource(bootstrapConfigurationSource)
+					.setConfigurationParameters(List.of(ConfigurationKey.Parameter.of(PROFILE_PROPERTY_NAME, profile)))
+				);
+			})
+			.block();
+
+		ticketApp.userRepository().getUser("jsmith")
+			.switchIfEmpty(Mono.defer(() -> ticketApp.userRepository().createUser(User.of("jsmith")
+				.password(new RawPassword("password"))
+				.identity(new PersonIdentity("jsmith", "John", "Smith", "jsmith@inverno.io"))
+				.build())
+			))
+			.block();
+	}
 }
 ```
 
@@ -600,10 +762,9 @@ $ docker run -d -p6379:6379 redis
 $ mvn inverno:run
 ...
 [INFO] --- inverno-maven-plugin:${VERSION_INVERNO_TOOLS}:run (default-cli) @ inverno-ticket ---
-[INFO] Running project: io.inverno.app.ticket@1.2.0-SNAPSHOT...
- [═══════════════════════════════════════════════ 100 % ══════════════════════════════════════════════] 
-2022-08-10 16:15:39,961 INFO  [main] i.i.a.t.TicketApp - Active profile: default
-2022-08-10 16:15:40,075 INFO  [main] i.i.c.v.Application - Inverno is starting...
+ [═══════════════════════════════════════════════ 100 % ══════════════════════════════════════════════] Running project io.inverno.guide.ticket@1.0.0-SNAPSHOT...
+2024-12-19 10:42:01,769 INFO  [main] i.i.g.t.TicketApp - Active profile: default
+2024-12-19 10:42:01,880 INFO  [main] i.i.c.v.Application - Inverno is starting...
 
 
      ╔════════════════════════════════════════════════════════════════════════════════════════════╗
@@ -619,43 +780,47 @@ $ mvn inverno:run
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
-     ║ Java version        : 17.0.2+8-86                                                          ║
-     ║ Java home           : /home/jkuhn/Devel/jdk/jdk-17.0.2                                     ║
+     ║ Java version        : 21.0.2+13-58                                                         ║
+     ║ Java home           : /home/jkuhn/Devel/jdk/jdk-21.0.2                                     ║
      ║                                                                                            ║
-     ║ Application module  : io.inverno.app.ticket                                                ║
-     ║ Application version : 1.2.0-SNAPSHOT                                                       ║
-     ║ Application class   : io.inverno.app.ticket.TicketApp                                      ║
+     ║ Application module  : io.inverno.guide.ticket                                              ║
+     ║ Application version : 1.0.0-SNAPSHOT                                                       ║
+     ║ Application class   : io.inverno.guide.ticket.TicketApp                                    ║
      ║                                                                                            ║
      ║ Modules             :                                                                      ║
      ║  * ...                                                                                     ║
      ╚════════════════════════════════════════════════════════════════════════════════════════════╝
 
 
-2022-08-10 16:15:40,080 INFO  [main] i.i.a.t.Ticket - Starting Module io.inverno.app.ticket...
-2022-08-10 16:15:40,081 INFO  [main] i.i.m.b.Boot - Starting Module io.inverno.mod.boot...
-2022-08-10 16:15:40,342 INFO  [main] i.i.m.b.Boot - Module io.inverno.mod.boot started in 261ms
-2022-08-10 16:15:40,342 INFO  [main] i.i.m.r.l.Lettuce - Starting Module io.inverno.mod.redis.lettuce...
-2022-08-10 16:15:40,404 INFO  [main] i.i.m.r.l.Lettuce - Module io.inverno.mod.redis.lettuce started in 61ms
-2022-08-10 16:15:40,405 INFO  [main] i.i.m.s.j.Jose - Starting Module io.inverno.mod.security.jose...
-2022-08-10 16:15:40,490 INFO  [main] i.i.m.s.j.Jose - Module io.inverno.mod.security.jose started in 85ms
-2022-08-10 16:15:40,490 INFO  [main] i.i.m.w.Server - Starting Module io.inverno.mod.web.server...
-2022-08-10 16:15:40,491 INFO  [main] i.i.m.h.s.Server - Starting Module io.inverno.mod.http.server...
-2022-08-10 16:15:40,491 INFO  [main] i.i.m.h.b.Base - Starting Module io.inverno.mod.http.base...
-2022-08-10 16:15:40,496 INFO  [main] i.i.m.h.b.Base - Module io.inverno.mod.http.base started in 5ms
-2022-08-10 16:15:40,701 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (epoll) listening on http://0.0.0.0:8080
-2022-08-10 16:15:40,701 INFO  [main] i.i.m.h.s.Server - Module io.inverno.mod.http.server started in 210ms
-2022-08-10 16:15:40,702 INFO  [main] i.i.m.w.Server - Module io.inverno.mod.web.server started in 211ms
-2022-08-10 16:15:40,707 INFO  [main] i.i.a.t.Ticket - Module io.inverno.app.ticket started in 627ms
-2022-08-10 16:15:40,708 INFO  [main] i.i.c.v.Application - Application io.inverno.app.ticket started in 739ms
+2024-12-19 10:42:01,893 INFO  [main] i.i.g.t.Ticket - Starting Module io.inverno.guide.ticket...
+2024-12-19 10:42:01,893 INFO  [main] i.i.m.b.Boot - Starting Module io.inverno.mod.boot...
+2024-12-19 10:42:02,224 INFO  [main] i.i.m.b.Boot - Module io.inverno.mod.boot started in 330ms
+2024-12-19 10:42:02,224 INFO  [main] i.i.m.r.l.Lettuce - Starting Module io.inverno.mod.redis.lettuce...
+2024-12-19 10:42:02,287 INFO  [main] i.i.m.r.l.Lettuce - Module io.inverno.mod.redis.lettuce started in 62ms
+2024-12-19 10:42:02,288 INFO  [main] i.i.m.s.j.Jose - Starting Module io.inverno.mod.security.jose...
+2024-12-19 10:42:02,402 INFO  [main] i.i.m.s.j.Jose - Module io.inverno.mod.security.jose started in 114ms
+2024-12-19 10:42:02,403 INFO  [main] i.i.m.w.s.Server - Starting Module io.inverno.mod.web.server...
+2024-12-19 10:42:02,403 INFO  [main] i.i.m.h.s.Server - Starting Module io.inverno.mod.http.server...
+2024-12-19 10:42:02,403 INFO  [main] i.i.m.h.b.Base - Starting Module io.inverno.mod.http.base...
+2024-12-19 10:42:02,408 INFO  [main] i.i.m.h.b.Base - Module io.inverno.mod.http.base started in 4ms
+2024-12-19 10:42:02,409 INFO  [main] i.i.m.w.b.Base - Starting Module io.inverno.mod.web.base...
+2024-12-19 10:42:02,409 INFO  [main] i.i.m.h.b.Base - Starting Module io.inverno.mod.http.base...
+2024-12-19 10:42:02,409 INFO  [main] i.i.m.h.b.Base - Module io.inverno.mod.http.base started in 0ms
+2024-12-19 10:42:02,410 INFO  [main] i.i.m.w.b.Base - Module io.inverno.mod.web.base started in 1ms
+2024-12-19 10:42:02,461 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (epoll) listening on http://0.0.0.0:8080
+2024-12-19 10:42:02,462 INFO  [main] i.i.m.h.s.Server - Module io.inverno.mod.http.server started in 58ms
+2024-12-19 10:42:02,463 INFO  [main] i.i.m.w.s.Server - Module io.inverno.mod.web.server started in 59ms
+2024-12-19 10:42:02,683 INFO  [main] i.i.g.t.Ticket - Module io.inverno.guide.ticket started in 797ms
+2024-12-19 10:42:02,684 INFO  [main] i.i.c.v.Application - Application io.inverno.guide.ticket started in 911ms
 ```
 
 Now if you try to access to the application by opening [http://localhost:8080](http://localhost:8080) in your Web browser, you should be automatically redirected to the login page:
 
-<img class="shadow" src="img/inverno_login_page.png" style="display: block; margin: 2em auto;" alt="Inverno Login page"/>
+<img src="img/inverno_login_page.png" style="display: block; margin: 2em auto;" alt="Inverno Login page"/>
 
 In order to access the application, you must enter valid login credentials, for instance `jsmith/password`, you should get redirected to the original request `/` and user's identity should be displayed in the UI:
 
-<img class="shadow" src="img/inverno_ticket_authenticated.png" style="display: block; margin: 2em auto;" alt="Inverno Ticket application"/>
+<img src="img/inverno_ticket_authenticated.png" style="display: block; margin: 2em auto;" alt="Inverno Ticket application"/>
 
 Once authenticated the user's identity can be retrieved by requesting [http://localhost:8080/api/security/identity](http://localhost:8080/api/security/identity):
 

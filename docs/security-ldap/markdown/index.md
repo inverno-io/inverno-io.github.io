@@ -26,10 +26,10 @@ $properties(base = ../../../, title = LDAP Security Guide)
             <div class="card-body p-lg-5">
                 <h2 class="card-title">What you'll need</h2>
                 <ul>
-                    <li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 16.</li>
-                    <li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.6.</li>
+                    <li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 21.</li>
+                    <li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.9.</li>
                     <li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
-                    <li>An secured Inverno Web application, such as the <a href="https://github.com/inverno-io/inverno-apps/tree/1.2.0/inverno-ticket">Inverno Ticket</a> application following the <a href="${base}docs/security-rbac/html/index.html">Inverno Framework Role-based Access Control Guide</a>.</li>
+                    <li>A secured Inverno Web application, such as the <a href="https://github.com/inverno-io/inverno-apps/tree/rbac/inverno-ticket">Inverno Ticket</a> application following the <a href="${base}docs/security-rbac/html/index.html">Inverno Framework Role-based Access Control Guide</a>.</li>
                     <li>A basic understanding of <a href="https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol">LDAP</a>.</li>
                 </ul>
             </div>
@@ -61,7 +61,7 @@ These dependencies should be first added to the `pom.xml` build descriptor of th
     </parent>
     <groupId>io.inverno.guide</groupId>
     <artifactId>ticket</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         ...
@@ -90,7 +90,7 @@ module io.inverno.guide.ticket {
 }
 ```
 
-You should now be all set and you can move on and change the authentication and identification process.
+You should now be all set, and you can move on and change the authentication and identification process.
 
 ## Step 2: Authenticate with LDAP
 
@@ -103,34 +103,81 @@ The `LDAPAuthenticator` requires an `LDAPClient` to communicate with the LDAP se
 Let's change the `SecurityConfigurer` to use the `LDAPAuthenticator` instead of the `UserAuthenticator`:
 
 ```java
-package io.inverno.app.ticket.internal.security;
+package io.inverno.guide.ticket.internal.security;
 
-...
+import io.inverno.core.annotation.Bean;
+import io.inverno.mod.base.reflect.Types;
+import io.inverno.mod.base.resource.MediaTypes;
+import io.inverno.mod.http.base.ExchangeContext;
+import io.inverno.mod.http.base.ForbiddenException;
+import io.inverno.mod.http.base.Method;
+import io.inverno.mod.http.base.UnauthorizedException;
+import io.inverno.mod.ldap.LDAPClient;
+import io.inverno.mod.security.accesscontrol.GroupsRoleBasedAccessControllerResolver;
+import io.inverno.mod.security.accesscontrol.RoleBasedAccessController;
+import io.inverno.mod.security.authentication.user.UserAuthentication;
+import io.inverno.mod.security.http.AccessControlInterceptor;
+import io.inverno.mod.security.http.SecurityInterceptor;
+import io.inverno.mod.security.http.context.InterceptingSecurityContext;
+import io.inverno.mod.security.http.context.SecurityContext;
+import io.inverno.mod.security.http.form.FormAuthenticationErrorInterceptor;
+import io.inverno.mod.security.http.form.FormCredentialsExtractor;
+import io.inverno.mod.security.http.form.FormLoginPageHandler;
+import io.inverno.mod.security.http.form.RedirectLoginFailureHandler;
+import io.inverno.mod.security.http.form.RedirectLoginSuccessHandler;
+import io.inverno.mod.security.http.form.RedirectLogoutSuccessHandler;
+import io.inverno.mod.security.http.login.LoginActionHandler;
+import io.inverno.mod.security.http.login.LoginSuccessHandler;
+import io.inverno.mod.security.http.login.LogoutActionHandler;
+import io.inverno.mod.security.http.login.LogoutSuccessHandler;
+import io.inverno.mod.security.http.token.CookieTokenCredentialsExtractor;
+import io.inverno.mod.security.http.token.CookieTokenLoginSuccessHandler;
+import io.inverno.mod.security.http.token.CookieTokenLogoutSuccessHandler;
+import io.inverno.mod.security.identity.PersonIdentity;
+import io.inverno.mod.security.identity.UserIdentityResolver;
+import io.inverno.mod.security.jose.jwa.OCTAlgorithm;
+import io.inverno.mod.security.jose.jws.JWSAuthentication;
+import io.inverno.mod.security.jose.jws.JWSAuthenticator;
+import io.inverno.mod.security.jose.jws.JWSService;
 import io.inverno.mod.security.ldap.authentication.LDAPAuthentication;
 import io.inverno.mod.security.ldap.authentication.LDAPAuthenticator;
-...
+import io.inverno.mod.web.server.ErrorWebRouteInterceptor;
+import io.inverno.mod.web.server.WebRouteInterceptor;
+import io.inverno.mod.web.server.WebRouter;
+import io.inverno.mod.web.server.annotation.WebRoute;
+import io.inverno.mod.web.server.annotation.WebRoutes;
+import java.util.List;
+import reactor.core.publisher.Mono;
 
 @WebRoutes({
     @WebRoute(path = { "/login" }, method = { Method.GET }),
     @WebRoute(path = { "/login" }, method = { Method.POST }),
-    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
+    @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" })
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
-public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<PersonIdentity, RoleBasedAccessController>>, WebInterceptorsConfigurer<InterceptingSecurityContext<PersonIdentity, RoleBasedAccessController>>, ErrorWebRouterConfigurer<ExchangeContext> {
+public class SecurityConfigurer implements WebRouteInterceptor.Configurer<InterceptingSecurityContext<PersonIdentity, RoleBasedAccessController>>, WebRouter.Configurer<SecurityContext<PersonIdentity, RoleBasedAccessController>>, ErrorWebRouteInterceptor.Configurer<ExchangeContext> {
 
-    private final LDAPClient ldapClient;
-    ...
+	private final LDAPClient ldapClient;
+	private final JWSService jwsService;
 
-    public SecurityConfigurer(LDAPClient ldapClient, JWSService jwsService) {
-        this.ldapClient = ldapClient;
+	public SecurityConfigurer(LDAPClient ldapClient, JWSService jwsService) {
+		this.ldapClient = ldapClient;
+		this.jwsService = jwsService;
+	}
+
+	@Override
+	public WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, RoleBasedAccessController>> configure(WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, RoleBasedAccessController>> interceptors) {
         ...
-    }
+	}
 
     @Override
     public void configure(WebRoutable<SecurityContext<PersonIdentity, RoleBasedAccessController>, ?> routes) {
-        routes
-            ...
-            .route()
+		routes
+			.route()
+                .path("/login")
+                .method(Method.GET)
+                .handler(new FormLoginPageHandler<>())
+			.route()
                 .path("/login")
                 .method(Method.POST)
                 .handler(new LoginActionHandler<>(
@@ -152,8 +199,22 @@ public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<P
                     ),
                     new RedirectLoginFailureHandler<>()
                 ))
-            ...
-    ...
+			.route()
+                .path("/logout")
+                .produce(MediaTypes.APPLICATION_JSON)
+                .handler(new LogoutActionHandler<>(
+                    authentication -> Mono.empty(),
+                    LogoutSuccessHandler.of(
+                        new CookieTokenLogoutSuccessHandler<>(),
+                        new RedirectLogoutSuccessHandler<>()
+                    )
+                ));
+	}
+
+	@Override
+	public ErrorWebRouteInterceptor<ExchangeContext> configure(ErrorWebRouteInterceptor<ExchangeContext> errorInterceptors) {
+		...
+	}
 }
 ```
 
@@ -163,19 +224,54 @@ As you can see, the user repository is no longer required and the `LDAPClient` i
 
 ## Step 3: Resolve identity from LDAP
 
-The `SecurityConfigurer` is still declaring `PersonIdentity` which cannot be resolved from an `LDAPAuthentication`, as a result at this stage the application is not runnable and you need to replace the `PersonIdentity` by the `LDAPIdentity`.
+The `SecurityConfigurer` is still declaring `PersonIdentity` which cannot be resolved from an `LDAPAuthentication`, as a result at this stage the application is not runnable, and you need to replace the `PersonIdentity` by the `LDAPIdentity`.
 
 You must change this in the `SecurityConfigurer` and also replace the `UserIdentityResolver` by an `LDAPIdentityResolver` in the `SecurityInterceptor`:
 
 ```java
-package io.inverno.app.ticket.internal.security;
+package io.inverno.guide.ticket.internal.security;
 
-...
+import io.inverno.core.annotation.Bean;
+import io.inverno.mod.base.resource.MediaTypes;
+import io.inverno.mod.http.base.ExchangeContext;
+import io.inverno.mod.http.base.ForbiddenException;
+import io.inverno.mod.http.base.Method;
+import io.inverno.mod.http.base.UnauthorizedException;
+import io.inverno.mod.ldap.LDAPClient;
+import io.inverno.mod.security.accesscontrol.GroupsRoleBasedAccessControllerResolver;
+import io.inverno.mod.security.accesscontrol.RoleBasedAccessController;
+import io.inverno.mod.security.http.AccessControlInterceptor;
+import io.inverno.mod.security.http.SecurityInterceptor;
+import io.inverno.mod.security.http.context.InterceptingSecurityContext;
+import io.inverno.mod.security.http.context.SecurityContext;
+import io.inverno.mod.security.http.form.FormAuthenticationErrorInterceptor;
+import io.inverno.mod.security.http.form.FormCredentialsExtractor;
+import io.inverno.mod.security.http.form.FormLoginPageHandler;
+import io.inverno.mod.security.http.form.RedirectLoginFailureHandler;
+import io.inverno.mod.security.http.form.RedirectLoginSuccessHandler;
+import io.inverno.mod.security.http.form.RedirectLogoutSuccessHandler;
+import io.inverno.mod.security.http.login.LoginActionHandler;
+import io.inverno.mod.security.http.login.LoginSuccessHandler;
+import io.inverno.mod.security.http.login.LogoutActionHandler;
+import io.inverno.mod.security.http.login.LogoutSuccessHandler;
+import io.inverno.mod.security.http.token.CookieTokenCredentialsExtractor;
+import io.inverno.mod.security.http.token.CookieTokenLoginSuccessHandler;
+import io.inverno.mod.security.http.token.CookieTokenLogoutSuccessHandler;
+import io.inverno.mod.security.jose.jwa.OCTAlgorithm;
+import io.inverno.mod.security.jose.jws.JWSAuthentication;
+import io.inverno.mod.security.jose.jws.JWSAuthenticator;
+import io.inverno.mod.security.jose.jws.JWSService;
 import io.inverno.mod.security.ldap.authentication.LDAPAuthentication;
 import io.inverno.mod.security.ldap.authentication.LDAPAuthenticator;
 import io.inverno.mod.security.ldap.identity.LDAPIdentity;
 import io.inverno.mod.security.ldap.identity.LDAPIdentityResolver;
-...
+import io.inverno.mod.web.server.ErrorWebRouteInterceptor;
+import io.inverno.mod.web.server.WebRouteInterceptor;
+import io.inverno.mod.web.server.WebRouter;
+import io.inverno.mod.web.server.annotation.WebRoute;
+import io.inverno.mod.web.server.annotation.WebRoutes;
+import java.util.List;
+import reactor.core.publisher.Mono;
 
 @WebRoutes({
     @WebRoute(path = { "/login" }, method = { Method.GET }),
@@ -183,16 +279,11 @@ import io.inverno.mod.security.ldap.identity.LDAPIdentityResolver;
     @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
-public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<LDAPIdentity, RoleBasedAccessController>>, WebInterceptorsConfigurer<InterceptingSecurityContext<LDAPIdentity, RoleBasedAccessController>>, ErrorWebRouterConfigurer<ExchangeContext> {
+public class SecurityConfigurer implements WebRouteInterceptor.Configurer<InterceptingSecurityContext<LDAPIdentity, RoleBasedAccessController>>, WebRouter.Configurer<SecurityContext<LDAPIdentity, RoleBasedAccessController>>, ErrorWebRouteInterceptor.Configurer<ExchangeContext> {
 
     ...
     @Override
-    public void configure(WebRoutable<SecurityContext<LDAPIdentity, RoleBasedAccessController>, ?> routes) {
-        ...
-    }
-
-    @Override
-    public void configure(WebInterceptable<InterceptingSecurityContext<LDAPIdentity, RoleBasedAccessController>, ?> interceptors) {
+	public WebRouteInterceptor<InterceptingSecurityContext<LDAPIdentity, RoleBasedAccessController>> configure(WebRouteInterceptor<InterceptingSecurityContext<LDAPIdentity, RoleBasedAccessController>> interceptors) {
         interceptors
             .intercept()
                 .path("/")
@@ -222,7 +313,16 @@ public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<L
                         .hasRole("developer")
                     ));
     }
-    ...
+
+    @Override
+    public void configure(WebRouter<SecurityContext<LDAPIdentity, RoleBasedAccessController>> routes) {
+        ...
+    }
+
+    @Override
+    public ErrorWebRouteInterceptor<ExchangeContext> configure(ErrorWebRouteInterceptor<ExchangeContext> errorInterceptors) {
+        ...
+    }
 }
 ```
 
@@ -232,7 +332,7 @@ Note that the `GroupsRoleBasedAccessControllerResolver` can still be used with t
 
 You can now clean up the `TicketApp` class and remove the code related to the creation of users in the user repository as this is no longer needed.
 
-In order to run the application, you must first setup a local LDAP server with users `jsmith` and `tktadmin` (`admin` is reserved) in `io.inverno` organization, this can be done quite easily using [Docker compose][docker-compose].
+In order to run the application, you must first set up a local LDAP server with users `jsmith` and `tktadmin` (`admin` is reserved) in `io.inverno` organization, this can be done quite easily using [Docker compose][docker-compose].
 
 The following `docker-compose.yml` file can be used to start an [OpenLDAP][openldap] server with preset users:
 
@@ -327,13 +427,16 @@ Creating openldap_ldap_1 ... done
 You can now start the Inverno Ticket application:
 
 ```plaintext
+$ docker run -d -p6379:6379 redis
+```
+
+```plaintext
 $ mvn inverno:run
 ...
 [INFO] --- inverno-maven-plugin:${VERSION_INVERNO_TOOLS}:run (default-cli) @ inverno-ticket ---
-[INFO] Running project: io.inverno.app.ticket@1.2.0-SNAPSHOT...
- [═══════════════════════════════════════════════ 100 % ══════════════════════════════════════════════] 
-2022-08-11 16:54:48,929 INFO  [main] i.i.a.t.TicketApp - Active profile: default
-2022-08-11 16:54:49,044 INFO  [main] i.i.c.v.Application - Inverno is starting...
+ [═══════════════════════════════════════════════ 100 % ══════════════════════════════════════════════] Running project io.inverno.guide.ticket@1.0.0-SNAPSHOT...
+2024-12-19 14:57:37,141 INFO  [main] i.i.g.t.TicketApp - Active profile: default
+2024-12-19 14:57:37,260 INFO  [main] i.i.c.v.Application - Inverno is starting...
 
 
      ╔════════════════════════════════════════════════════════════════════════════════════════════╗
@@ -349,41 +452,45 @@ $ mvn inverno:run
      ║                      ' -- '                                                                ║
      ╠════════════════════════════════════════════════════════════════════════════════════════════╣
      ║ Java runtime        : OpenJDK Runtime Environment                                          ║
-     ║ Java version        : 17.0.2+8-86                                                          ║
-     ║ Java home           : /home/jkuhn/Devel/jdk/jdk-17.0.2                                     ║
+     ║ Java version        : 21.0.2+13-58                                                         ║
+     ║ Java home           : /home/jkuhn/Devel/jdk/jdk-21.0.2                                     ║
      ║                                                                                            ║
-     ║ Application module  : io.inverno.app.ticket                                                ║
-     ║ Application version : 1.2.0-SNAPSHOT                                                       ║
-     ║ Application class   : io.inverno.app.ticket.TicketApp                                      ║
+     ║ Application module  : io.inverno.guide.ticket                                              ║
+     ║ Application version : 1.0.0-SNAPSHOT                                                       ║
+     ║ Application class   : io.inverno.guide.ticket.TicketApp                                    ║
      ║                                                                                            ║
      ║ Modules             :                                                                      ║
      ║  * ...                                                                                     ║
      ╚════════════════════════════════════════════════════════════════════════════════════════════╝
 
 
-2022-08-11 16:54:49,049 INFO  [main] i.i.a.t.Ticket - Starting Module io.inverno.app.ticket...
-2022-08-11 16:54:49,050 INFO  [main] i.i.m.b.Boot - Starting Module io.inverno.mod.boot...
-2022-08-11 16:54:49,368 INFO  [main] i.i.m.b.Boot - Module io.inverno.mod.boot started in 318ms
-2022-08-11 16:54:49,369 INFO  [main] i.i.m.l.Ldap - Starting Module io.inverno.mod.ldap...
-2022-08-11 16:54:49,374 INFO  [main] i.i.m.l.Ldap - Module io.inverno.mod.ldap started in 4ms
-2022-08-11 16:54:49,374 INFO  [main] i.i.m.r.l.Lettuce - Starting Module io.inverno.mod.redis.lettuce...
-2022-08-11 16:54:49,432 INFO  [main] i.i.m.r.l.Lettuce - Module io.inverno.mod.redis.lettuce started in 58ms
-2022-08-11 16:54:49,433 INFO  [main] i.i.m.s.j.Jose - Starting Module io.inverno.mod.security.jose...
-2022-08-11 16:54:49,514 INFO  [main] i.i.m.s.j.Jose - Module io.inverno.mod.security.jose started in 81ms
-2022-08-11 16:54:49,515 INFO  [main] i.i.m.w.Server - Starting Module io.inverno.mod.web.server...
-2022-08-11 16:54:49,515 INFO  [main] i.i.m.h.s.Server - Starting Module io.inverno.mod.http.server...
-2022-08-11 16:54:49,515 INFO  [main] i.i.m.h.b.Base - Starting Module io.inverno.mod.http.base...
-2022-08-11 16:54:49,519 INFO  [main] i.i.m.h.b.Base - Module io.inverno.mod.http.base started in 4ms
-2022-08-11 16:54:49,733 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (epoll) listening on http://0.0.0.0:8080
-2022-08-11 16:54:49,734 INFO  [main] i.i.m.h.s.Server - Module io.inverno.mod.http.server started in 219ms
-2022-08-11 16:54:49,735 INFO  [main] i.i.m.w.Server - Module io.inverno.mod.web.server started in 220ms
-2022-08-11 16:54:49,742 INFO  [main] i.i.a.t.Ticket - Module io.inverno.app.ticket started in 695ms
-2022-08-11 16:54:49,744 INFO  [main] i.i.c.v.Application - Application io.inverno.app.ticket started in 811ms
+2024-12-19 14:57:37,273 INFO  [main] i.i.g.t.Ticket - Starting Module io.inverno.guide.ticket...
+2024-12-19 14:57:37,274 INFO  [main] i.i.m.b.Boot - Starting Module io.inverno.mod.boot...
+2024-12-19 14:57:37,582 INFO  [main] i.i.m.b.Boot - Module io.inverno.mod.boot started in 307ms
+2024-12-19 14:57:37,582 INFO  [main] i.i.m.l.Ldap - Starting Module io.inverno.mod.ldap...
+2024-12-19 14:57:37,589 INFO  [main] i.i.m.l.Ldap - Module io.inverno.mod.ldap started in 7ms
+2024-12-19 14:57:37,590 INFO  [main] i.i.m.r.l.Lettuce - Starting Module io.inverno.mod.redis.lettuce...
+2024-12-19 14:57:37,656 INFO  [main] i.i.m.r.l.Lettuce - Module io.inverno.mod.redis.lettuce started in 65ms
+2024-12-19 14:57:37,656 INFO  [main] i.i.m.s.j.Jose - Starting Module io.inverno.mod.security.jose...
+2024-12-19 14:57:37,754 INFO  [main] i.i.m.s.j.Jose - Module io.inverno.mod.security.jose started in 97ms
+2024-12-19 14:57:37,754 INFO  [main] i.i.m.w.s.Server - Starting Module io.inverno.mod.web.server...
+2024-12-19 14:57:37,754 INFO  [main] i.i.m.h.s.Server - Starting Module io.inverno.mod.http.server...
+2024-12-19 14:57:37,754 INFO  [main] i.i.m.h.b.Base - Starting Module io.inverno.mod.http.base...
+2024-12-19 14:57:37,759 INFO  [main] i.i.m.h.b.Base - Module io.inverno.mod.http.base started in 4ms
+2024-12-19 14:57:37,760 INFO  [main] i.i.m.w.b.Base - Starting Module io.inverno.mod.web.base...
+2024-12-19 14:57:37,761 INFO  [main] i.i.m.h.b.Base - Starting Module io.inverno.mod.http.base...
+2024-12-19 14:57:37,761 INFO  [main] i.i.m.h.b.Base - Module io.inverno.mod.http.base started in 0ms
+2024-12-19 14:57:37,763 INFO  [main] i.i.m.w.b.Base - Module io.inverno.mod.web.base started in 2ms
+2024-12-19 14:57:37,809 INFO  [main] i.i.m.h.s.i.HttpServer - HTTP Server (epoll) listening on http://0.0.0.0:8080
+2024-12-19 14:57:37,810 INFO  [main] i.i.m.h.s.Server - Module io.inverno.mod.http.server started in 55ms
+2024-12-19 14:57:37,810 INFO  [main] i.i.m.w.s.Server - Module io.inverno.mod.web.server started in 55ms
+2024-12-19 14:57:38,032 INFO  [main] i.i.g.t.Ticket - Module io.inverno.guide.ticket started in 766ms
+2024-12-19 14:57:38,033 INFO  [main] i.i.c.v.Application - Application io.inverno.guide.ticket started in 888ms
 ```
 
 You should be able to access the Inverno Ticker application at [http://localhost:8080](http://localhost:8080) and authenticate with users `jsmith/password` and `tktadmin/password`  which should respectively have role `developer` and `admin`:
 
-<img class="shadow" src="img/inverno_ticket_authenticated_ldap.png" style="display: block; margin: 2em auto;" alt="Inverno Ticket application with LDAP"/>
+<img src="img/inverno_ticket_authenticated_ldap.png" style="display: block; margin: 2em auto;" alt="Inverno Ticket application with LDAP"/>
 
 If you access [http://localhost:8080/api/security/identity](http://localhost:8080/api/security/identity), you should now see an LDAP identity:
 
