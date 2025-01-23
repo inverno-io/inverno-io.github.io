@@ -3123,7 +3123,7 @@ source                                       // 2
                         <li>system properties</li>
                         <li>system environment variables</li>
                         <li>the <code>configuration.cprops</code> file in <code>./conf/</code> or <code>${inverno.conf.path}/</code> directories if one exists (if the first one exists the second one is ignored)</li>
-                        <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-apps/inverno-utilities/target/inverno-utilities-1.8.0-SNAPSHOT-application_linux_amd64/lib/runtime/conf/</code> directory if it exists</li>
+			<li>the <code>configuration.cprops</code> file in <code>${java.home}/conf/</code> directory if it exists</li>
                         <li>the <code>configuration.cprops</code> file in the application module if it exists</li>
                     </ul>
                     <p>This source is typically created in a <code>main</code> method to load the bootstrap configuration on startup.</p>

@@ -305,7 +305,7 @@ public class TicketApp {
                     <li>system properties</li>
                     <li>system environment variables</li>
                     <li>the <code>configuration.cprops</code> file in <code>./conf/</code> or <code>${inverno.config.path}/</code> directories if one exists (if the first one exists the second one is ignored)</li>
-                    <li>the <code>configuration.cprops</code> file in <code>/home/jkuhn/Devel/git/winter/inverno-apps/inverno-utilities/target/inverno-utilities-1.8.0-SNAPSHOT-application_linux_amd64/lib/runtime/conf/</code> directory if it exists</li>
+                    <li>the <code>configuration.cprops</code> file in <code>${java.home}/conf/</code> directory if it exists</li>
                     <li>the <code>configuration.cprops</code> file in the application module if it exists</li>
                 </ul>
                 <p>It is then possible to define a default configuration in a configuration file inside the module and override any properties from the command line, a system property or an external configuration file.</p>

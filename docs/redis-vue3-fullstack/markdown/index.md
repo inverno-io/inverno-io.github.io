@@ -268,8 +268,8 @@ The Inverno configuration module provides multiple configuration source implemen
 - command line argument
 - system properties
 - system environment variables
-- the `configuration.cprops` file in `./conf/` or `${inverno.config.path}/` directories if one exists (if the first one exists the second one is ignored)
-- the `configuration.cprops` file in `${java.home}/conf/` directory if it exists 
+- the `configuration.cprops` file in `./conf/` or `\${inverno.config.path}/` directories if one exists (if the first one exists the second one is ignored)
+- the `configuration.cprops` file in `\${java.home}/conf/` directory if it exists 
 - the `configuration.cprops` file in the application module if it exists
 
 It is then possible to define a default configuration in a configuration file inside the module and override any properties from the command line, a system property or an external configuration file.
