@@ -319,10 +319,10 @@ import io.inverno.mod.configuration.source.BootstrapConfigurationSource;
 import java.io.IOException;
 import java.util.function.Supplier;
 
-public class App {
+public class TicketApp {
 
     @Bean( name = "configurationSource" )
-    public interface AppConfigurationSource extends Supplier&lt;ConfigurationSource&lt;?, ?, ?&gt;&gt; {}
+    public interface TicketAppConfigurationSource extends Supplier&lt;ConfigurationSource&gt; {}
 
     public static void main( String[] args ) throws IOException {
         Application.run(new Ticket.Builder().setConfigurationSource(new BootstrapConfigurationSource(TicketApp.class.getModule(), args)));
