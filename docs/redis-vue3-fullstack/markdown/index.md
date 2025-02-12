@@ -1,37 +1,37 @@
 $properties(base = ../../../, title = Full-Stack application Guide)
 
 <div class="heading">
-	<h1 class="heading-title">Inverno Framework Full-Stack application Guide</h1> 
-	<p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> 
+    <h1 class="heading-title">Inverno Framework Full-Stack application Guide</h1> 
+    <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> 
 </div>
 
 <div class="row align-items-stretch mt-5 mb-2">
-	<div class="col-12 col-lg-6 mb-3">
-		<div class="card shadow h-100">
-			<div class="card-body p-lg-5">
-				<h2 class="card-title">What you'll learn</h2>
-				<p class="card-text">This guide demonstrates how the Inverno framework can be used to develop a full-stack application exposing REST services, accessing data in <a href="https://redis.io">Redis</a> data store and exposing a <a href="https://v3.vuejs.org/">Vue.js</a> front-end.</p>
-				<p class="card-text">The application consists in a Task/Ticket Management System which demonstrates multiple Inverno's features such as: IoC/DI, configuration, Web Controllers, automatic OpenAPI specifications, WebJars and static resources, Redis client, <a href="https://www.docker.com/">Docker</a> packaging and deployment to the cloud.</p>
-				<p class="card-text">We will guide you through the setup of a Maven project containing the Inverno module of the application, configuration setup, TLS setup, the creation of backend services to access Redis data store, the creation of Web controllers to expose these services as REST resources, the setup of Web routes to expose WebJars and static resources, running the application and finally packaging and deploying the application to <a href="https://www.docker.com/">Docker</a>.</p>
-			</div>
-		</div>
-	</div>
-	<div class="col-12 col-lg-6 mb-3">
-		<div class="card shadow h-100">
-			<div class="card-body p-lg-5">
-				<h2 class="card-title">What you'll need</h2>
-				<ul>
-					<li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 21.</li>
-					<li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.9.</li>
-					<li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
-					<li>A <a href="https://www.docker.com/">Docker</a> installation.</li>
-					<li>A basic understanding of <a href="https://redis.io">Redis</a> data store.</li>
-					<li>A basic understanding of Inverno's core IoC/DI framework (see <a href="${base}docs/getting-started/html/index.html">Getting Started guide</a>).</li>
-					<li>A basic understanding of reactive programming using <a href="https://projectreactor.io/">Project reactor</a> library.</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+    <div class="col-12 col-lg-6 mb-3">
+        <div class="card shadow h-100">
+            <div class="card-body p-lg-5">
+                <h2 class="card-title">What you'll learn</h2>
+                <p class="card-text">This guide demonstrates how the Inverno framework can be used to develop a full-stack application exposing REST services, accessing data in <a href="https://redis.io">Redis</a> data store and exposing a <a href="https://v3.vuejs.org/">Vue.js</a> front-end.</p>
+                <p class="card-text">The application consists in a Task/Ticket Management System which demonstrates multiple Inverno's features such as: IoC/DI, configuration, Web Controllers, automatic OpenAPI specifications, WebJars and static resources, Redis client, <a href="https://www.docker.com/">Docker</a> packaging and deployment to the cloud.</p>
+                <p class="card-text">We will guide you through the setup of a Maven project containing the Inverno module of the application, configuration setup, TLS setup, the creation of backend services to access Redis data store, the creation of Web controllers to expose these services as REST resources, the setup of Web routes to expose WebJars and static resources, running the application and finally packaging and deploying the application to <a href="https://www.docker.com/">Docker</a>.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 mb-3">
+        <div class="card shadow h-100">
+            <div class="card-body p-lg-5">
+                <h2 class="card-title">What you'll need</h2>
+                <ul>
+                    <li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 21.</li>
+                    <li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.9.</li>
+                    <li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
+                    <li>A <a href="https://www.docker.com/">Docker</a> installation.</li>
+                    <li>A basic understanding of <a href="https://redis.io">Redis</a> data store.</li>
+                    <li>A basic understanding of Inverno's core IoC/DI framework (see <a href="${base}docs/getting-started/html/index.html">Getting Started guide</a>).</li>
+                    <li>A basic understanding of reactive programming using <a href="https://projectreactor.io/">Project reactor</a> library.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 $doc
@@ -469,7 +469,7 @@ module io.inverno.guide.ticket {
     requires io.inverno.mod.boot;
     requires io.inverno.mod.redis.lettuce;
 
-	exports io.inverno.guide.ticket.internal.model to com.fasterxml.jackson.databind;
+    exports io.inverno.guide.ticket.internal.model to com.fasterxml.jackson.databind;
 }
 ```
 
@@ -670,8 +670,8 @@ public class TicketService {
                     return ticket;
                 });
         }
-	}
-	
+    }
+    
     ...
 }
 ```
@@ -800,7 +800,7 @@ public class PlanService {
                     throw new UncheckedIOException(ex);
                 }
             });
-	}
+    }
 
     private Flux<Ticket> getPlanTickets(long planId, List<Ticket.Status> statuses) {
         if(statuses == null || statuses.isEmpty()) {
@@ -817,8 +817,8 @@ public class PlanService {
                 .flatMapMany(this.ticketService::getTickets)
             )
         ));
-	}
-	
+    }
+    
     ...
 }
 ```
@@ -1156,8 +1156,8 @@ module io.inverno.guide.ticket {
     requires io.inverno.mod.boot;
     requires io.inverno.mod.redis.lettuce;
     requires io.inverno.mod.web.server;
-	
-	exports io.inverno.guide.ticket.internal.model to com.fasterxml.jackson.databind;
+    
+    exports io.inverno.guide.ticket.internal.model to com.fasterxml.jackson.databind;
 }
 ```
 
@@ -1406,9 +1406,9 @@ public class PlanWebController {
      */
     @WebRoute( path = "/{planId}", method = Method.GET, produces = MediaTypes.APPLICATION_JSON )
     public Mono<PlanDto> getPlan(@PathParam long planId, @QueryParam Optional<List<Ticket.Status>> statuses) {
-		return statuses.map(s -> this.planService.getPlan(planId, s)).orElse(this.planService.getPlan(planId))
-			.flatMap(this.planDtoMapper::toDto)
-			.switchIfEmpty(Mono.error(() -> new NotFoundException()));
+        return statuses.map(s -> this.planService.getPlan(planId, s)).orElse(this.planService.getPlan(planId))
+            .flatMap(this.planDtoMapper::toDto)
+            .switchIfEmpty(Mono.error(() -> new NotFoundException()));
     }
 }
 ```
@@ -1466,11 +1466,11 @@ public class PlanWebController {
      */
     @WebRoute( path = "/{planId}", method = Method.PUT, consumes = MediaTypes.APPLICATION_JSON, produces = MediaTypes.APPLICATION_JSON )
     public Mono<PlanDto> updatePlan(@PathParam long planId, @Body PlanDto plan) {
-		plan.setId(planId);
-		return this.planDtoMapper.toDomain(plan)
-			.flatMap(this.planService::savePlan)
-			.flatMap(this.planDtoMapper::toDto)
-			.switchIfEmpty(Mono.error(() -> new NotFoundException()));
+        plan.setId(planId);
+        return this.planDtoMapper.toDomain(plan)
+            .flatMap(this.planService::savePlan)
+            .flatMap(this.planDtoMapper::toDto)
+            .switchIfEmpty(Mono.error(() -> new NotFoundException()));
     }
 
     /**
@@ -1483,9 +1483,9 @@ public class PlanWebController {
      */
     @WebRoute( path = "/{planId}", method = Method.DELETE, produces = MediaTypes.APPLICATION_JSON )
     public Mono<PlanDto> deletePlan(@PathParam long planId) {
-		return this.planService.removePlan(planId)
-			.flatMap(this.planDtoMapper::toDto)
-			.switchIfEmpty(Mono.error(() -> new NotFoundException()));
+        return this.planService.removePlan(planId)
+            .flatMap(this.planDtoMapper::toDto)
+            .switchIfEmpty(Mono.error(() -> new NotFoundException()));
     }
 }
 ```
@@ -1535,9 +1535,9 @@ public class PlanWebController {
      */
     @WebRoute( path = "/{planId}/ticket", method = Method.POST, consumes= MediaTypes.APPLICATION_X_WWW_FORM_URLENCODED )
     public Mono<Void> pushTicket(@PathParam long planId, @FormParam long ticketId, @FormParam Optional<Long> referenceTicketId) {
-		return referenceTicketId
-			.map(refTicketId -> this.planService.insertTicketBefore(planId, ticketId, refTicketId))
-			.orElse(this.planService.addTicket(planId, ticketId));
+        return referenceTicketId
+            .map(refTicketId -> this.planService.insertTicketBefore(planId, ticketId, refTicketId))
+            .orElse(this.planService.addTicket(planId, ticketId));
     }
 }
 ```
@@ -1588,7 +1588,7 @@ public class PlanWebController {
      */
     @WebRoute( path = "/{planId}/ticket/{ticketId}", method = Method.DELETE, produces = MediaTypes.TEXT_PLAIN )
     public Mono<Long> removeTicket(@PathParam long planId, @PathParam long ticketId) {
-		return this.planService.removeTicket(planId, ticketId);
+        return this.planService.removeTicket(planId, ticketId);
     }
 }
 ```
@@ -1716,11 +1716,11 @@ import io.inverno.mod.web.server.WhiteLabelErrorRoutesConfigurer;
 @Bean(visibility = Bean.Visibility.PRIVATE)
 public class WebServerConfigurer implements ErrorWebRouter.Configurer<ExchangeContext> {
 
-	@Override
-	public void configure(ErrorWebRouter<ExchangeContext> errorRoutes) {
-		errorRoutes
-			.configureErrorRoutes(new WhiteLabelErrorRoutesConfigurer<>());
-	}
+    @Override
+    public void configure(ErrorWebRouter<ExchangeContext> errorRouter) {
+        errorRouter
+            .configureErrorRoutes(new WhiteLabelErrorRoutesConfigurer<>());
+    }
 }
 ```
 
@@ -1890,40 +1890,40 @@ The Web UI requires multiple JavaScript libraries that are packaged as [WebJars]
     <dependencies>
         ...
 
-		<dependency>
-			<groupId>org.webjars.npm</groupId>
-			<artifactId>vue</artifactId>
-			<version>3.2.26</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>5.1.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars.npm</groupId>
-			<artifactId>bootstrap-icons</artifactId>
-			<version>1.7.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars.npm</groupId>
-			<artifactId>marked</artifactId>
-			<version>4.0.8</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>highlightjs</artifactId>
-			<version>10.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars.npm</groupId>
-			<artifactId>simplemde</artifactId>
-			<version>1.11.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>swagger-ui</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>vue</artifactId>
+            <version>3.2.26</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>5.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>bootstrap-icons</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>marked</artifactId>
+            <version>4.0.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>highlightjs</artifactId>
+            <version>10.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>simplemde</artifactId>
+            <version>1.11.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>swagger-ui</artifactId>
+        </dependency>
     </dependencies>
 
     ...
@@ -1966,8 +1966,8 @@ public class WebServerConfigurer implements WebRouter.Configurer<ExchangeContext
     }
 
     @Override
-    public void configure(WebRouter<ExchangeContext> routes) {
-        routes
+    public void configure(WebRouter<ExchangeContext> router) {
+        router
             // OpenAPI specifications
             .configureRoutes(new OpenApiRoutesConfigurer<>(this.resourceService, true))
             // WebJars
@@ -1985,7 +1985,7 @@ public class WebServerConfigurer implements WebRouter.Configurer<ExchangeContext
     }
 
     @Override
-    public void configure(ErrorWebRouter<ExchangeContext> errorRoutes) {
+    public void configure(ErrorWebRouter<ExchangeContext> errorRouter) {
         errorRoutes
             .configureErrorRoutes(new WhiteLabelErrorRoutesConfigurer<>());
     }
@@ -2009,18 +2009,18 @@ import java.net.URI;
 @Configuration
 public interface TicketAppConfiguration {
 
-	@NestedBean
-	BootConfiguration boot();
+    @NestedBean
+    BootConfiguration boot();
 
-	@NestedBean
-	LettuceRedisClientConfiguration redis();
+    @NestedBean
+    LettuceRedisClientConfiguration redis();
 
-	@NestedBean
-	WebServerConfiguration web();
+    @NestedBean
+    WebServerConfiguration web();
 
-	default URI web_root() {
-		return URI.create("module://" + TicketAppConfiguration.class.getModule().getName() + "/static");
-	}
+    default URI web_root() {
+        return URI.create("module://" + TicketAppConfiguration.class.getModule().getName() + "/static");
+    }
 }
 
 ```
@@ -2029,7 +2029,7 @@ The `web_root` property is a resource URI that is passed to the `ResourceService
 
 The `homeResource` is resolved once and represents the welcome page, namely the `static/index.html` page used to bootstrap the application UI.
 
-Routes are configured in the `accept()` method, the `routable` argument of type `WebRoutable` allows defining routes in a fluent way, similar to what you saw with Web controllers. 
+Routes are configured on the `WebRouter` which allows to define them in a fluent way similar to waht you saw with Web controllers. 
 
 The `OpenApiRoutesConfigurer` and `WebJarsRoutesConfigurer` are built-in routes configurers, used respectively to configure Web routes to generated OpenAPI specifications, with or without Swagger UI, and to configure Web routes to WebJars present on the class path or the module path.
 
@@ -2081,33 +2081,33 @@ import org.apache.logging.log4j.Logger;
 
 public class TicketApp {
 
-	private static final Logger LOGGER = LogManager.getLogger(TicketApp.class);
+    private static final Logger LOGGER = LogManager.getLogger(TicketApp.class);
 
-	public static final String REDIS_KEY = "APP:Ticket";
-	public static final String PROFILE_PROPERTY_NAME = "profile";
+    public static final String REDIS_KEY = "APP:Ticket";
+    public static final String PROFILE_PROPERTY_NAME = "profile";
 
-	@Bean( name = "configurationSource" )
-	public interface TicketAppConfigurationSource extends Supplier<ConfigurationSource> {}
+    @Bean( name = "configurationSource" )
+    public interface TicketAppConfigurationSource extends Supplier<ConfigurationSource> {}
 
-	@Bean( name = "configurationParameters")
-	public interface TicketAppConfigurationParameters extends Supplier<List<ConfigurationKey.Parameter>> {}
+    @Bean( name = "configurationParameters")
+    public interface TicketAppConfigurationParameters extends Supplier<List<ConfigurationKey.Parameter>> {}
 
-	public static void main( String[] args ) throws IOException {
-		final BootstrapConfigurationSource bootstrapConfigurationSource = new BootstrapConfigurationSource(TicketApp.class.getModule(), args);
-		Ticket ticketApp = bootstrapConfigurationSource
-			.get(PROFILE_PROPERTY_NAME)
-			.execute()
-			.single()
-			.map(configurationQueryResult -> configurationQueryResult.asString("default"))
-			.map(profile -> {
-				LOGGER.info(() -> "Active profile: " + profile);
-				return Application.run(new Ticket.Builder()
-					.setConfigurationSource(bootstrapConfigurationSource)
-					.setConfigurationParameters(List.of(ConfigurationKey.Parameter.of(PROFILE_PROPERTY_NAME, profile)))
-				);
-			})
-			.block();
-	}
+    public static void main( String[] args ) throws IOException {
+        final BootstrapConfigurationSource bootstrapConfigurationSource = new BootstrapConfigurationSource(TicketApp.class.getModule(), args);
+        Ticket ticketApp = bootstrapConfigurationSource
+            .get(PROFILE_PROPERTY_NAME)
+            .execute()
+            .single()
+            .map(configurationQueryResult -> configurationQueryResult.asString("default"))
+            .map(profile -> {
+                LOGGER.info(() -> "Active profile: " + profile);
+                return Application.run(new Ticket.Builder()
+                    .setConfigurationSource(bootstrapConfigurationSource)
+                    .setConfigurationParameters(List.of(ConfigurationKey.Parameter.of(PROFILE_PROPERTY_NAME, profile)))
+                );
+            })
+            .block();
+    }
 }
 ```
 
@@ -2264,8 +2264,8 @@ public class WebServerConfigurer implements WebRouteInterceptor.Configurer<Excha
     }
 
     @Override
-    public void configure(WebRouter<ExchangeContext> routes) {
-        routes
+    public void configure(WebRouter<ExchangeContext> router) {
+        router
             // OpenAPI specifications
             .configureRoutes(new OpenApiRoutesConfigurer<>(this.resourceService, true))
             // WebJars
@@ -2291,8 +2291,8 @@ public class WebServerConfigurer implements WebRouteInterceptor.Configurer<Excha
     }
 
     @Override
-    public void configure(ErrorWebRouter<ExchangeContext> errorRoutes) {
-        errorRoutes
+    public void configure(ErrorWebRouter<ExchangeContext> errorRouter) {
+        errorRouter
             .configureErrorRoutes(new WhiteLabelErrorRoutesConfigurer<>());
     }
 }
@@ -2320,84 +2320,84 @@ Log4j can be configured in `log4j2.xml` file in project resources folder `src/ma
 
 ```xml
 {% raw %}
-	<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" name="Website" shutdownHook="disable">
-	<Appenders>
-		<Console name="Console" target="SYSTEM_OUT">
-			<PatternLayout pattern="%d{DEFAULT} %highlight{%-5level} [%t] %c{1.} - %msg%n%ex"/>
-		</Console>
-		<!-- Application log -->
-		<RollingRandomAccessFile name="ApplicationRollingFile" fileName="logs/application.log" filePattern="logs/error-%d{yyyy-MM-dd}-%i.log.gz">
-			<JsonTemplateLayout/>
-			<Policies>
-				<TimeBasedTriggeringPolicy />
-				<SizeBasedTriggeringPolicy size="10 MB"/>
-			</Policies>
-			<DefaultRolloverStrategy>
-				<Delete basePath="logs" maxDepth="2">
-					<IfFileName glob="application-*.log.gz" />
-					<IfLastModified age="10d" />
-				</Delete>
-			</DefaultRolloverStrategy>
-		</RollingRandomAccessFile>
-		<Async name="AsyncApplicationRollingFile">
-			<AppenderRef ref="ApplicationRollingFile"/>
-		</Async>
-		<!-- Error log -->
-		<RollingRandomAccessFile name="ErrorRollingFile" fileName="logs/error.log" filePattern="logs/error-%d{yyyy-MM-dd}-%i.log.gz">
-			<JsonTemplateLayout/>
-			<Policies>
-				<TimeBasedTriggeringPolicy />
-				<SizeBasedTriggeringPolicy size="10 MB"/>
-			</Policies>
-			<DefaultRolloverStrategy>
-				<Delete basePath="logs" maxDepth="2">
-					<IfFileName glob="error-*.log.gz" />
-					<IfLastModified age="10d" />
-				</Delete>
-			</DefaultRolloverStrategy>
-		</RollingRandomAccessFile>
-		<Async name="AsyncErrorRollingFile">
-			<AppenderRef ref="ErrorRollingFile"/>
-		</Async>
-		<!-- Access log -->
-		<RollingRandomAccessFile name="AccessRollingFile" fileName="logs/access.log" filePattern="logs/access-%d{yyyy-MM-dd}-%i.log.gz">
-			<JsonTemplateLayout eventTemplateUri="classpath:AccessLayout.json"/>
-			<Policies>
-				<TimeBasedTriggeringPolicy />
-				<SizeBasedTriggeringPolicy size="10 MB"/>
-			</Policies>
-			<DefaultRolloverStrategy>
-				<Delete basePath="logs" maxDepth="2">
-					<IfFileName glob="access-*.log.gz" />
-					<IfLastModified age="10d" />
-				</Delete>
-			</DefaultRolloverStrategy>
-		</RollingRandomAccessFile>
-		<Async name="AsyncAccessRollingFile">
-			<AppenderRef ref="AccessRollingFile"/>
-		</Async>
-	</Appenders>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{DEFAULT} %highlight{%-5level} [%t] %c{1.} - %msg%n%ex"/>
+        </Console>
+        <!-- Application log -->
+        <RollingRandomAccessFile name="ApplicationRollingFile" fileName="logs/application.log" filePattern="logs/error-%d{yyyy-MM-dd}-%i.log.gz">
+            <JsonTemplateLayout/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="logs" maxDepth="2">
+                    <IfFileName glob="application-*.log.gz" />
+                    <IfLastModified age="10d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingRandomAccessFile>
+        <Async name="AsyncApplicationRollingFile">
+            <AppenderRef ref="ApplicationRollingFile"/>
+        </Async>
+        <!-- Error log -->
+        <RollingRandomAccessFile name="ErrorRollingFile" fileName="logs/error.log" filePattern="logs/error-%d{yyyy-MM-dd}-%i.log.gz">
+            <JsonTemplateLayout/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="logs" maxDepth="2">
+                    <IfFileName glob="error-*.log.gz" />
+                    <IfLastModified age="10d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingRandomAccessFile>
+        <Async name="AsyncErrorRollingFile">
+            <AppenderRef ref="ErrorRollingFile"/>
+        </Async>
+        <!-- Access log -->
+        <RollingRandomAccessFile name="AccessRollingFile" fileName="logs/access.log" filePattern="logs/access-%d{yyyy-MM-dd}-%i.log.gz">
+            <JsonTemplateLayout eventTemplateUri="classpath:AccessLayout.json"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="logs" maxDepth="2">
+                    <IfFileName glob="access-*.log.gz" />
+                    <IfLastModified age="10d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingRandomAccessFile>
+        <Async name="AsyncAccessRollingFile">
+            <AppenderRef ref="AccessRollingFile"/>
+        </Async>
+    </Appenders>
 
-	<Loggers>
-		<Logger name="io.inverno.mod.http.server.Exchange" additivity="false" level="info">
-			<AppenderRef ref="AsyncAccessRollingFile" level="info"/>
-		</Logger>
-		<Logger name="io.inverno.mod.http.server.ErrorExchange" additivity="false" level="info">
-			<AppenderRef ref="AsyncErrorRollingFile" level="error"/>
-		</Logger>
+    <Loggers>
+        <Logger name="io.inverno.mod.http.server.Exchange" additivity="false" level="info">
+            <AppenderRef ref="AsyncAccessRollingFile" level="info"/>
+        </Logger>
+        <Logger name="io.inverno.mod.http.server.ErrorExchange" additivity="false" level="info">
+            <AppenderRef ref="AsyncErrorRollingFile" level="error"/>
+        </Logger>
 
-		<Logger name="io.inverno.mod.http.server.Exchange" additivity="false" level="info">
-			<AppenderRef ref="AsyncAccessRollingFile" level="info"/>
-			<AppenderRef ref="AsyncErrorRollingFile" level="error"/>
-		</Logger>
+        <Logger name="io.inverno.mod.http.server.Exchange" additivity="false" level="info">
+            <AppenderRef ref="AsyncAccessRollingFile" level="info"/>
+            <AppenderRef ref="AsyncErrorRollingFile" level="error"/>
+        </Logger>
 
-		<Root level="info" additivity="false">
-			<AppenderRef ref="Console" level="info" />
-			<AppenderRef ref="ApplicationRollingFile" level="info" />
-			<AppenderRef ref="AsyncErrorRollingFile" level="error"/>
-		</Root>
-	</Loggers>
+        <Root level="info" additivity="false">
+            <AppenderRef ref="Console" level="info" />
+            <AppenderRef ref="ApplicationRollingFile" level="info" />
+            <AppenderRef ref="AsyncErrorRollingFile" level="error"/>
+        </Root>
+    </Loggers>
 </Configuration>
 {% endraw %}
 ```
@@ -2545,7 +2545,7 @@ If you intend to run the application on a Linux system for instance, you can act
                     <groupId>io.inverno.tool</groupId>
                     <artifactId>inverno-maven-plugin</artifactId>
                     <configuration>
-						<vmOptions>--add-opens reactor.core/reactor.core.publisher=lettuce.core --add-modules io.netty.transport.unix.common,io.netty.transport.classes.epoll,io.netty.transport.epoll.linux.x86_64</vmOptions>
+                        <vmOptions>--add-opens reactor.core/reactor.core.publisher=lettuce.core --add-modules io.netty.transport.unix.common,io.netty.transport.classes.epoll,io.netty.transport.epoll.linux.x86_64</vmOptions>
                     </configuration>
                 </plugin>
                 ...
@@ -2611,7 +2611,7 @@ Let's create the following `install-image` profile in the Maven project descript
                                     <launchers>
                                         <launcher>
                                             <name>inverno-ticket</name>
-											<vmOptions>-Xms2G -Xmx2G -XX:+UseNUMA -XX:+UseParallelGC --add-opens reactor.core/reactor.core.publisher=lettuce.core --add-modules io.netty.transport.unix.common,io.netty.transport.classes.epoll,io.netty.transport.epoll.linux.x86_64</vmOptions>
+                                            <vmOptions>-Xms2G -Xmx2G -XX:+UseNUMA -XX:+UseParallelGC --add-opens reactor.core/reactor.core.publisher=lettuce.core --add-modules io.netty.transport.unix.common,io.netty.transport.classes.epoll,io.netty.transport.epoll.linux.x86_64</vmOptions>
                                         </launcher>
                                     </launchers>
                                     <volumes>

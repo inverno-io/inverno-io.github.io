@@ -195,7 +195,7 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer<Interc
 
     ...
     @Override
-	public WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, PermissionBasedAccessController>> configure(WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, PermissionBasedAccessController>> interceptors) {
+    public WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, PermissionBasedAccessController>> configure(WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, PermissionBasedAccessController>> interceptors) {
         return interceptors
             ...
             .intercept()
@@ -347,7 +347,7 @@ import reactor.core.publisher.Mono;
     @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
-public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<PersonIdentity, PermissionBasedAccessController>>, WebInterceptorsConfigurer<InterceptingSecurityContext<PersonIdentity, PermissionBasedAccessController>>, ErrorWebRouterConfigurer<ExchangeContext> {
+public class SecurityConfigurer implements WebRouteInterceptor.Configurer<InterceptingSecurityContext<PersonIdentity, PermissionBasedAccessController>>, WebRouter.Configurer<SecurityContext<PersonIdentity, PermissionBasedAccessController>>, ErrorWebRouteInterceptor.Configurer<ExchangeContext> {
 
     ...
     @Init

@@ -3,12 +3,12 @@
     <head><!-- Google tag (gtag.js) -->
         <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GQCEQ9P38V"></script>
         <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-          gtag('config', 'G-GQCEQ9P38V');
-        </script>
+            gtag('config', 'G-GQCEQ9P38V');
+		</script>
         <meta charset="UTF-8" />
         <title>The Inverno Framework | Web Application Security Guide</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -52,7 +52,7 @@
                               <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
                               <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                               </ul></li>
-                            <li class="nav-item mt-2"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill"></i> Sponsor</a></li>
+                            <li class="nav-item mt-2"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill me-1"></i> Sponsor</a></li>
                         </ul>
                     </div>
                     <ul class="navbar-nav d-none d-sm-none d-lg-flex flex-fill justify-content-end align-self-stretch">
@@ -79,7 +79,7 @@
                               <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
                               <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                             </ul></li>
-                        <li class="nav-item d-flex align-items-center"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill"></i> Sponsor</a></li>
+                        <li class="nav-item d-flex align-items-center"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill me-1"></i> Sponsor</a></li>
                     </ul>
                 </nav>
             </div>
@@ -133,7 +133,7 @@
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.12.0&lt;/version&gt;
+        &lt;version&gt;1.12.1&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -232,31 +232,31 @@ import java.util.function.Supplier;
 @Wrapper @Bean( name = "jwk" )
 public class JWKWrapper implements Supplier&lt;JWK&gt; {
 
-	private final JWKService jwkService;
+    private final JWKService jwkService;
 
-	public JWKWrapper(JWKService jwkService) {
-		this.jwkService = jwkService;
-	}
+    public JWKWrapper(JWKService jwkService) {
+        this.jwkService = jwkService;
+    }
 
-	@Override
-	public JWK get() {
-		return this.jwkService.oct().generator()
-			.keyId("tkt")
-			.algorithm(OCTAlgorithm.HS512.getAlgorithm())
-			.generate()
-			.map(JWK::trust)
-			.flatMap(jwk -&gt; jwkService.store().set(jwk).thenReturn(jwk))
-			.block();
-	}
+    @Override
+    public JWK get() {
+        return this.jwkService.oct().generator()
+            .keyId("tkt")
+            .algorithm(OCTAlgorithm.HS512.getAlgorithm())
+            .generate()
+            .map(JWK::trust)
+            .flatMap(jwk -&gt; jwkService.store().set(jwk).thenReturn(jwk))
+            .block();
+    }
 
-	@Wrapper @Bean
-	public static class JWKStoreWrapper implements Supplier&lt;JWKStore&gt; {
+    @Wrapper @Bean
+    public static class JWKStoreWrapper implements Supplier&lt;JWKStore&gt; {
 
-		@Override
-		public JWKStore get() {
-			return new InMemoryJWKStore();
-		}
-	}
+        @Override
+        public JWKStore get() {
+            return new InMemoryJWKStore();
+        }
+    }
 }
 
 </code></pre>
@@ -309,8 +309,8 @@ public class SecurityConfigurer implements WebRouter.Configurer&lt;SecurityConte
     }
 
     @Override
-	public void configure(WebRouter&lt;SecurityContext&lt;PersonIdentity, AccessController&gt;&gt; routes) {
-        routes
+    public void configure(WebRouter&lt;SecurityContext&lt;PersonIdentity, AccessController&gt;&gt; router) {
+        router
             .route()                                                                                                                     // 1
                 .path("/login")
                 .method(Method.GET)
@@ -403,8 +403,8 @@ public class SecurityConfigurer implements WebRouter.Configurer&lt;SecurityConte
     }
 
     @Override
-    public void configure(WebRouter&lt;SecurityContext&lt;PersonIdentity, AccessController&gt;&gt; routes) {
-        routes
+    public void configure(WebRouter&lt;SecurityContext&lt;PersonIdentity, AccessController&gt;&gt; router) {
+        router
             ...
             .route()
                 .path("/logout")
@@ -487,7 +487,7 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer&lt;Int
     @Override
     public WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, AccessController&gt;&gt; configure(WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, AccessController&gt;&gt; interceptors) {
         return interceptors
-            .intercept()                                                                                  // 1
+            .intercept()                                                                                      // 1
                 .path("/")
                 .path("/api/**")
                 .path("/static/**")
@@ -495,16 +495,16 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer&lt;Int
                 .path("/open-api/**")
                 .path("/logout")
                 .interceptors(List.of(
-                    SecurityInterceptor.of(                                                               // 2
-                        new CookieTokenCredentialsExtractor(),                                            // 3
-                        new JWSAuthenticator&lt;UserAuthentication&lt;PersonIdentity&gt;&gt;(                         // 4
-                            this.jwsService,
-                            Types.type(UserAuthentication.class).type(PersonIdentity.class).and().build()
-                        )
-                        .failOnDenied()                                                                   // 5
-                        .map(jwsAuthentication -&gt; jwsAuthentication.getJws().getPayload())                // 6
+                    SecurityInterceptor.of(                                                                   // 2
+                        new CookieTokenCredentialsExtractor(),                                                // 3
+                        new JWSAuthenticator&lt;UserAuthentication&lt;PersonIdentity&gt;&gt;(                             // 4
+                                this.jwsService,
+                                Types.type(UserAuthentication.class).type(PersonIdentity.class).and().build()
+                            )
+                            .failOnDenied()                                                                   // 5
+                            .map(jwsAuthentication -&gt; jwsAuthentication.getJws().getPayload())                // 6
                     ),
-                    AccessControlInterceptor.authenticated()                                              // 7
+                    AccessControlInterceptor.authenticated()                                                  // 7
                 ));
     }
 }
@@ -578,14 +578,14 @@ import reactor.core.publisher.Mono;
 public class SecurityConfigurer implements WebRouteInterceptor.Configurer&lt;InterceptingSecurityContext&lt;PersonIdentity, AccessController&gt;&gt;, WebRouter.Configurer&lt;SecurityContext&lt;PersonIdentity, AccessController&gt;&gt;, ErrorWebRouteInterceptor.Configurer&lt;ExchangeContext&gt; {
 
     ...
-	@Override
-	public ErrorWebRouteInterceptor&lt;ExchangeContext&gt; configure(ErrorWebRouteInterceptor&lt;ExchangeContext&gt; errorInterceptors) {
-		return errorInterceptors
-			.interceptError()
+    @Override
+    public ErrorWebRouteInterceptor&lt;ExchangeContext&gt; configure(ErrorWebRouteInterceptor&lt;ExchangeContext&gt; errorInterceptors) {
+        return errorInterceptors
+            .interceptError()
                 .path("/")
                 .error(UnauthorizedException.class)
                 .interceptor(new FormAuthenticationErrorInterceptor&lt;&gt;());
-	}
+    }
 }
 </code></pre>
                 <p>The Inverno Ticket application is a single page application, so this redirection can be limited to the welcome page <code>/</code>, accessing any other resources will simply result in an authorized (401) response.</p>
@@ -598,9 +598,7 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer&lt;Int
 import io.inverno.core.annotation.Bean;
 import io.inverno.mod.base.reflect.Types;
 import io.inverno.mod.base.resource.MediaTypes;
-import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.Method;
-import io.inverno.mod.http.base.UnauthorizedException;
 import io.inverno.mod.security.accesscontrol.AccessController;
 import io.inverno.mod.security.authentication.LoginCredentialsMatcher;
 import io.inverno.mod.security.authentication.user.User;
@@ -611,7 +609,6 @@ import io.inverno.mod.security.http.AccessControlInterceptor;
 import io.inverno.mod.security.http.SecurityInterceptor;
 import io.inverno.mod.security.http.context.InterceptingSecurityContext;
 import io.inverno.mod.security.http.context.SecurityContext;
-import io.inverno.mod.security.http.form.FormAuthenticationErrorInterceptor;
 import io.inverno.mod.security.http.form.FormCredentialsExtractor;
 import io.inverno.mod.security.http.form.FormLoginPageHandler;
 import io.inverno.mod.security.http.form.RedirectLoginFailureHandler;
@@ -630,7 +627,6 @@ import io.inverno.mod.security.jose.jwa.OCTAlgorithm;
 import io.inverno.mod.security.jose.jws.JWSAuthentication;
 import io.inverno.mod.security.jose.jws.JWSAuthenticator;
 import io.inverno.mod.security.jose.jws.JWSService;
-import io.inverno.mod.web.server.ErrorWebRouteInterceptor;
 import io.inverno.mod.web.server.WebRouteInterceptor;
 import io.inverno.mod.web.server.WebRouter;
 import io.inverno.mod.web.server.annotation.WebRoute;
@@ -644,12 +640,12 @@ import reactor.core.publisher.Mono;
     @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" })
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
-public class SecurityConfigurer implements WebRoutesConfigurer&lt;SecurityContext&lt;PersonIdentity, AccessController&gt;&gt;, WebInterceptorsConfigurer&lt;InterceptingSecurityContext&lt;PersonIdentity, AccessController&gt;&gt;, ErrorWebRouterConfigurer&lt;ExchangeContext&gt; {
+public class SecurityConfigurer implements WebRouteInterceptor.Configurer&lt;InterceptingSecurityContext&lt;PersonIdentity, AccessController&gt;&gt;, WebRouter.Configurer&lt;SecurityContext&lt;PersonIdentity, AccessController&gt;&gt; {
 
     ...
     @Override
-    public void configure(WebInterceptable&lt;InterceptingSecurityContext&lt;PersonIdentity, AccessController&gt;, ?&gt; interceptors) {
-        interceptors
+    public WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, AccessController&gt;&gt; configure(WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, AccessController&gt;&gt; interceptors) {
+        return interceptors
             .intercept()
                 .path("/")
                 .path("/api/**")
@@ -661,15 +657,15 @@ public class SecurityConfigurer implements WebRoutesConfigurer&lt;SecurityContex
                     SecurityInterceptor.of(
                         new CookieTokenCredentialsExtractor(),
                         new JWSAuthenticator&lt;UserAuthentication&lt;PersonIdentity&gt;&gt;(
-                            this.jwsService,
-                            Types.type(UserAuthentication.class).type(PersonIdentity.class).and().build()
-                        )
-                        .failOnDenied()
-                        .map(jwsAuthentication -&gt; jwsAuthentication.getJws().getPayload()),
+                                this.jwsService,
+                                Types.type(UserAuthentication.class).type(PersonIdentity.class).and().build()
+                            )
+                            .failOnDenied()
+                            .map(jwsAuthentication -&gt; jwsAuthentication.getJws().getPayload()),
                         new UserIdentityResolver&lt;&gt;()
                     ),
                     AccessControlInterceptor.authenticated()
-                ));
+            ));
     }
 }
 </code></pre>
@@ -725,41 +721,41 @@ import reactor.core.publisher.Mono;
 
 public class TicketApp {
 
-	private static final Logger LOGGER = LogManager.getLogger(TicketApp.class);
+    private static final Logger LOGGER = LogManager.getLogger(TicketApp.class);
 
-	public static final String REDIS_KEY = "APP:Ticket";
-	public static final String PROFILE_PROPERTY_NAME = "profile";
+    public static final String REDIS_KEY = "APP:Ticket";
+    public static final String PROFILE_PROPERTY_NAME = "profile";
 
-	@Bean(name = "configurationSource")
-	public interface TicketAppConfigurationSource extends Supplier&lt;ConfigurationSource&gt; {}
+    @Bean(name = "configurationSource")
+    public interface TicketAppConfigurationSource extends Supplier&lt;ConfigurationSource&gt; {}
 
-	@Bean(name = "configurationParameters")
-	public interface TicketAppConfigurationParameters extends Supplier&lt;List&lt;ConfigurationKey.Parameter&gt;&gt; {}
+    @Bean(name = "configurationParameters")
+    public interface TicketAppConfigurationParameters extends Supplier&lt;List&lt;ConfigurationKey.Parameter&gt;&gt; {}
 
-	public static void main(String[] args) throws IOException {
-		final BootstrapConfigurationSource bootstrapConfigurationSource = new BootstrapConfigurationSource(TicketApp.class.getModule(), args);
-		Ticket ticketApp = bootstrapConfigurationSource
-			.get(PROFILE_PROPERTY_NAME)
-			.execute()
-			.single()
-			.map(configurationQueryResult -&gt; configurationQueryResult.asString("default"))
-			.map(profile -&gt; {
-				LOGGER.info(() -&gt; "Active profile: " + profile);
-				return Application.run(new Ticket.Builder()
-					.setConfigurationSource(bootstrapConfigurationSource)
-					.setConfigurationParameters(List.of(ConfigurationKey.Parameter.of(PROFILE_PROPERTY_NAME, profile)))
-				);
-			})
-			.block();
+    public static void main(String[] args) throws IOException {
+        final BootstrapConfigurationSource bootstrapConfigurationSource = new BootstrapConfigurationSource(TicketApp.class.getModule(), args);
+        Ticket ticketApp = bootstrapConfigurationSource
+            .get(PROFILE_PROPERTY_NAME)
+            .execute()
+            .single()
+            .map(configurationQueryResult -&gt; configurationQueryResult.asString("default"))
+            .map(profile -&gt; {
+                LOGGER.info(() -&gt; "Active profile: " + profile);
+                return Application.run(new Ticket.Builder()
+                    .setConfigurationSource(bootstrapConfigurationSource)
+                    .setConfigurationParameters(List.of(ConfigurationKey.Parameter.of(PROFILE_PROPERTY_NAME, profile)))
+                );
+            })
+            .block();
 
-		ticketApp.userRepository().getUser("jsmith")
-			.switchIfEmpty(Mono.defer(() -&gt; ticketApp.userRepository().createUser(User.of("jsmith")
-				.password(new RawPassword("password"))
-				.identity(new PersonIdentity("jsmith", "John", "Smith", "jsmith@inverno.io"))
-				.build())
-			))
-			.block();
-	}
+        ticketApp.userRepository().getUser("jsmith")
+            .switchIfEmpty(Mono.defer(() -&gt; ticketApp.userRepository().createUser(User.of("jsmith")
+                .password(new RawPassword("password"))
+                .identity(new PersonIdentity("jsmith", "John", "Smith", "jsmith@inverno.io"))
+                .build())
+            ))
+            .block();
+    }
 }
 </code></pre>
                 <p>You might have noticed that the password is specified in clear text as a <code>RawPassword</code>, but it is actually stored securely in the Redis data store using <a href="https://en.wikipedia.org/wiki/PBKDF2">Password-Based Key Derivation Function 2</a> by default. This can be changed by defining a different password encoder in the <code>RedisUserRepository</code>.</p>
@@ -863,7 +859,7 @@ content-length: 105
                             <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                         </ul>
                     </div>
-                    <div class="col d-none d-lg-block"><iframe src="https://github.com/sponsors/inverno-io/card" title="Sponsor inverno-io" height="225" width="600" style="border: 0;"></iframe>
+                    <div class="col d-none d-lg-block"><iframe class="border rounded" src="https://github.com/sponsors/inverno-io/card" title="Sponsor inverno-io" width="100%"></iframe>
                     </div>
                 </div>
             </div>

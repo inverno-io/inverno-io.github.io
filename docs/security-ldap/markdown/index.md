@@ -106,7 +106,6 @@ Let's change the `SecurityConfigurer` to use the `LDAPAuthenticator` instead of 
 package io.inverno.guide.ticket.internal.security;
 
 import io.inverno.core.annotation.Bean;
-import io.inverno.mod.base.reflect.Types;
 import io.inverno.mod.base.resource.MediaTypes;
 import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.ForbiddenException;
@@ -115,7 +114,6 @@ import io.inverno.mod.http.base.UnauthorizedException;
 import io.inverno.mod.ldap.LDAPClient;
 import io.inverno.mod.security.accesscontrol.GroupsRoleBasedAccessControllerResolver;
 import io.inverno.mod.security.accesscontrol.RoleBasedAccessController;
-import io.inverno.mod.security.authentication.user.UserAuthentication;
 import io.inverno.mod.security.http.AccessControlInterceptor;
 import io.inverno.mod.security.http.SecurityInterceptor;
 import io.inverno.mod.security.http.context.InterceptingSecurityContext;
@@ -133,14 +131,14 @@ import io.inverno.mod.security.http.login.LogoutSuccessHandler;
 import io.inverno.mod.security.http.token.CookieTokenCredentialsExtractor;
 import io.inverno.mod.security.http.token.CookieTokenLoginSuccessHandler;
 import io.inverno.mod.security.http.token.CookieTokenLogoutSuccessHandler;
-import io.inverno.mod.security.identity.PersonIdentity;
-import io.inverno.mod.security.identity.UserIdentityResolver;
 import io.inverno.mod.security.jose.jwa.OCTAlgorithm;
 import io.inverno.mod.security.jose.jws.JWSAuthentication;
 import io.inverno.mod.security.jose.jws.JWSAuthenticator;
 import io.inverno.mod.security.jose.jws.JWSService;
 import io.inverno.mod.security.ldap.authentication.LDAPAuthentication;
 import io.inverno.mod.security.ldap.authentication.LDAPAuthenticator;
+import io.inverno.mod.security.ldap.identity.LDAPIdentity;
+import io.inverno.mod.security.ldap.identity.LDAPIdentityResolver;
 import io.inverno.mod.web.server.ErrorWebRouteInterceptor;
 import io.inverno.mod.web.server.WebRouteInterceptor;
 import io.inverno.mod.web.server.WebRouter;
@@ -157,27 +155,27 @@ import reactor.core.publisher.Mono;
 @Bean( visibility = Bean.Visibility.PRIVATE )
 public class SecurityConfigurer implements WebRouteInterceptor.Configurer<InterceptingSecurityContext<PersonIdentity, RoleBasedAccessController>>, WebRouter.Configurer<SecurityContext<PersonIdentity, RoleBasedAccessController>>, ErrorWebRouteInterceptor.Configurer<ExchangeContext> {
 
-	private final LDAPClient ldapClient;
-	private final JWSService jwsService;
+    private final LDAPClient ldapClient;
+    private final JWSService jwsService;
 
-	public SecurityConfigurer(LDAPClient ldapClient, JWSService jwsService) {
-		this.ldapClient = ldapClient;
-		this.jwsService = jwsService;
-	}
-
-	@Override
-	public WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, RoleBasedAccessController>> configure(WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, RoleBasedAccessController>> interceptors) {
-        ...
-	}
+    public SecurityConfigurer(LDAPClient ldapClient, JWSService jwsService) {
+        this.ldapClient = ldapClient;
+        this.jwsService = jwsService;
+    }
 
     @Override
-    public void configure(WebRoutable<SecurityContext<PersonIdentity, RoleBasedAccessController>, ?> routes) {
-		routes
-			.route()
+    public WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, RoleBasedAccessController>> configure(WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, RoleBasedAccessController>> interceptors) {
+        ...
+    }
+
+    @Override
+    public void configure(WebRouter<SecurityContext<LDAPIdentity, RoleBasedAccessController>> router) {
+        router
+            .route()
                 .path("/login")
                 .method(Method.GET)
                 .handler(new FormLoginPageHandler<>())
-			.route()
+            .route()
                 .path("/login")
                 .method(Method.POST)
                 .handler(new LoginActionHandler<>(
@@ -199,7 +197,7 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer<Interc
                     ),
                     new RedirectLoginFailureHandler<>()
                 ))
-			.route()
+            .route()
                 .path("/logout")
                 .produce(MediaTypes.APPLICATION_JSON)
                 .handler(new LogoutActionHandler<>(
@@ -209,12 +207,12 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer<Interc
                         new RedirectLogoutSuccessHandler<>()
                     )
                 ));
-	}
+    }
 
-	@Override
-	public ErrorWebRouteInterceptor<ExchangeContext> configure(ErrorWebRouteInterceptor<ExchangeContext> errorInterceptors) {
-		...
-	}
+    @Override
+    public ErrorWebRouteInterceptor<ExchangeContext> configure(ErrorWebRouteInterceptor<ExchangeContext> errorInterceptors) {
+        ...
+    }
 }
 ```
 
@@ -283,8 +281,8 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer<Interc
 
     ...
     @Override
-	public WebRouteInterceptor<InterceptingSecurityContext<LDAPIdentity, RoleBasedAccessController>> configure(WebRouteInterceptor<InterceptingSecurityContext<LDAPIdentity, RoleBasedAccessController>> interceptors) {
-        interceptors
+    public WebRouteInterceptor<InterceptingSecurityContext<LDAPIdentity, RoleBasedAccessController>> configure(WebRouteInterceptor<InterceptingSecurityContext<LDAPIdentity, RoleBasedAccessController>> interceptors) {
+        return interceptors
             .intercept()
                 .path("/")
                 .path("/api/**")
@@ -315,7 +313,7 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer<Interc
     }
 
     @Override
-    public void configure(WebRouter<SecurityContext<LDAPIdentity, RoleBasedAccessController>> routes) {
+    public void configure(WebRouter<SecurityContext<LDAPIdentity, RoleBasedAccessController>> router) {
         ...
     }
 

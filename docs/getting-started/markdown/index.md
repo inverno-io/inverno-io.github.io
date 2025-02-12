@@ -1,32 +1,32 @@
 $properties(base = ../../../, title = Getting Started Guide)
 
 <div class="heading">
-	<h1 class="heading-title">Inverno Framework Getting Started Guide</h1> 
-	<p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> 
+    <h1 class="heading-title">Inverno Framework Getting Started Guide</h1> 
+    <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p> 
 </div>
 
 <div class="row align-items-stretch mt-5 mb-2">
-	<div class="col-12 col-lg-6 mb-3">
-		<div class="card shadow h-100">
-			<div class="card-body p-lg-5">
-		    	<h2 class="card-title">What you'll learn</h2>
-				<p class="card-text">This guide provides insights into how to create an Inverno application that exposes a simple <code>Hello World</code> HTTP endpoint.</p>
-				<p class="card-text">We will guide you through creating a Maven project, creating the Inverno module for the application, writing the HTTP endpoint, running the application and finally packaging the application into an optimized runtime image.</p>
-			</div>
-		</div>
-	</div>
-	<div class="col-12 col-lg-6 mb-3">
-		<div class="card shadow h-100">
-			<div class="card-body p-lg-5">
-		    	<h2 class="card-title">What you'll need</h2>
-		    	<ul>
-		    		<li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 21.</li>
-		    		<li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.9.</li>
-		    		<li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
-		    	</ul>
-			</div>
-		</div>
-	</div>
+    <div class="col-12 col-lg-6 mb-3">
+        <div class="card shadow h-100">
+            <div class="card-body p-lg-5">
+                <h2 class="card-title">What you'll learn</h2>
+                <p class="card-text">This guide provides insights into how to create an Inverno application that exposes a simple <code>Hello World</code> HTTP endpoint.</p>
+                <p class="card-text">We will guide you through creating a Maven project, creating the Inverno module for the application, writing the HTTP endpoint, running the application and finally packaging the application into an optimized runtime image.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 mb-3">
+        <div class="card shadow h-100">
+            <div class="card-body p-lg-5">
+                <h2 class="card-title">What you'll need</h2>
+                <ul>
+                    <li>A <em>Java™ Development Kit</em> (<a href="https://openjdk.java.net/install/">OpenJDK</a>) at least version 21.</li>
+                    <li>Apache <a href="https://maven.apache.org/">Maven</a> at least version 3.9.</li>
+                    <li>An <em>Integrated Development Environment</em> (IDE) such as <a href="https://www.eclipse.org/">Eclipse</a> or <a href="https://www.jetbrains.com/idea/">IDEA</a> although any text editor will do.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 $doc

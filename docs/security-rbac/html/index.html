@@ -3,12 +3,12 @@
     <head><!-- Google tag (gtag.js) -->
         <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GQCEQ9P38V"></script>
         <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-          gtag('config', 'G-GQCEQ9P38V');
-        </script>
+            gtag('config', 'G-GQCEQ9P38V');
+		</script>
         <meta charset="UTF-8" />
         <title>The Inverno Framework | Role-based Access Control Guide</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -52,7 +52,7 @@
                               <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
                               <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                               </ul></li>
-                            <li class="nav-item mt-2"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill"></i> Sponsor</a></li>
+                            <li class="nav-item mt-2"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill me-1"></i> Sponsor</a></li>
                         </ul>
                     </div>
                     <ul class="navbar-nav d-none d-sm-none d-lg-flex flex-fill justify-content-end align-self-stretch">
@@ -79,7 +79,7 @@
                               <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
                               <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                             </ul></li>
-                        <li class="nav-item d-flex align-items-center"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill"></i> Sponsor</a></li>
+                        <li class="nav-item d-flex align-items-center"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill me-1"></i> Sponsor</a></li>
                     </ul>
                 </nav>
             </div>
@@ -214,7 +214,7 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer&lt;Int
 }
 </code></pre>
                 <blockquote>
-                    <p>Note that it is important to define <code>RoleBasedAccessController</code> in both <code>WebRoutesConfigurer</code> and <code>WebInterceptorsConfigurer</code>. Since the <code>InterceptingSecurityContext</code> also extends the <code>SecurityContext</code>, they cannot be defined with different bounds and the compilation will fail with inconsistent context types errors when this happens. It is also interesting to notice that it is not required to change this in the <code>SecurityController</code> since bounds could have been declared using upper wildcards (i.e. <code>SecurityContext&lt;? extends PersonIdentity, ? extends AccessController&gt;</code>) which is perfectly fine. Please consult the <a href="../../../docs/release/reference/html/index.html">reference documentation</a> to better understand how the exchange context is generated when defining multiple Web configurers and Web controllers.</p>
+                    <p>Note that it is important to declare <code>RoleBasedAccessController</code> in both <code>WebRouter.Configurer</code> and <code>WebRouteInterceptor.Configurer</code>. Since the <code>InterceptingSecurityContext</code> also extends the <code>SecurityContext</code>, they cannot be defined with different bounds and the compilation will fail with inconsistent context types errors when this happens. It is also interesting to notice that it is not required to change this in the <code>SecurityController</code> since bounds could have been declared using upper wildcards (i.e. <code>SecurityContext&lt;? extends PersonIdentity, ? extends AccessController&gt;</code>) which is perfectly fine. Please consult the <a href="../../../docs/release/reference/html/index.html">reference documentation</a> to better understand how the exchange context is generated when defining multiple Web configurers and Web controllers.</p>
                 </blockquote>
                 <p>A <code>RoleBasedAccessController</code> should now be present in the <code>SecurityContext</code> and accessible to subsequent interceptors and route handlers.</p>
                 <h2 id="step-2-control-access-to-services-and-resources">Step 2: Control access to services and resources</h2>
@@ -277,7 +277,7 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer&lt;Int
 
     ...
     @Override
-	public WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, RoleBasedAccessController&gt;&gt; configure(WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, RoleBasedAccessController&gt;&gt; interceptors) {
+    public WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, RoleBasedAccessController&gt;&gt; configure(WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, RoleBasedAccessController&gt;&gt; interceptors) {
         return interceptors
             ...
             .intercept()
@@ -406,7 +406,7 @@ import org.apache.logging.log4j.Logger;
 import reactor.core.publisher.Mono;
 
 public class TicketApp {
-	
+    
     private static final Logger LOGGER = LogManager.getLogger(TicketApp.class);
 
     public static final String REDIS_KEY = "APP:Ticket";
@@ -556,7 +556,7 @@ public class TicketApp {
                             <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                         </ul>
                     </div>
-                    <div class="col d-none d-lg-block"><iframe src="https://github.com/sponsors/inverno-io/card" title="Sponsor inverno-io" height="225" width="600" style="border: 0;"></iframe>
+                    <div class="col d-none d-lg-block"><iframe class="border rounded" src="https://github.com/sponsors/inverno-io/card" title="Sponsor inverno-io" width="100%"></iframe>
                     </div>
                 </div>
             </div>

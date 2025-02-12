@@ -183,31 +183,31 @@ import java.util.function.Supplier;
 @Wrapper @Bean( name = "jwk" )
 public class JWKWrapper implements Supplier<JWK> {
 
-	private final JWKService jwkService;
+    private final JWKService jwkService;
 
-	public JWKWrapper(JWKService jwkService) {
-		this.jwkService = jwkService;
-	}
+    public JWKWrapper(JWKService jwkService) {
+        this.jwkService = jwkService;
+    }
 
-	@Override
-	public JWK get() {
-		return this.jwkService.oct().generator()
-			.keyId("tkt")
-			.algorithm(OCTAlgorithm.HS512.getAlgorithm())
-			.generate()
-			.map(JWK::trust)
-			.flatMap(jwk -> jwkService.store().set(jwk).thenReturn(jwk))
-			.block();
-	}
+    @Override
+    public JWK get() {
+        return this.jwkService.oct().generator()
+            .keyId("tkt")
+            .algorithm(OCTAlgorithm.HS512.getAlgorithm())
+            .generate()
+            .map(JWK::trust)
+            .flatMap(jwk -> jwkService.store().set(jwk).thenReturn(jwk))
+            .block();
+    }
 
-	@Wrapper @Bean
-	public static class JWKStoreWrapper implements Supplier<JWKStore> {
+    @Wrapper @Bean
+    public static class JWKStoreWrapper implements Supplier<JWKStore> {
 
-		@Override
-		public JWKStore get() {
-			return new InMemoryJWKStore();
-		}
-	}
+        @Override
+        public JWKStore get() {
+            return new InMemoryJWKStore();
+        }
+    }
 }
 
 ```
@@ -264,8 +264,8 @@ public class SecurityConfigurer implements WebRouter.Configurer<SecurityContext<
     }
 
     @Override
-	public void configure(WebRouter<SecurityContext<PersonIdentity, AccessController>> routes) {
-        routes
+    public void configure(WebRouter<SecurityContext<PersonIdentity, AccessController>> router) {
+        router
             .route()                                                                                                                     // 1
                 .path("/login")
                 .method(Method.GET)
@@ -362,8 +362,8 @@ public class SecurityConfigurer implements WebRouter.Configurer<SecurityContext<
     }
 
     @Override
-    public void configure(WebRouter<SecurityContext<PersonIdentity, AccessController>> routes) {
-        routes
+    public void configure(WebRouter<SecurityContext<PersonIdentity, AccessController>> router) {
+        router
             ...
             .route()
                 .path("/logout")
@@ -454,7 +454,7 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer<Interc
     @Override
     public WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, AccessController>> configure(WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, AccessController>> interceptors) {
         return interceptors
-            .intercept()                                                                                  // 1
+            .intercept()                                                                                      // 1
                 .path("/")
                 .path("/api/**")
                 .path("/static/**")
@@ -462,16 +462,16 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer<Interc
                 .path("/open-api/**")
                 .path("/logout")
                 .interceptors(List.of(
-                    SecurityInterceptor.of(                                                               // 2
-                        new CookieTokenCredentialsExtractor(),                                            // 3
-                        new JWSAuthenticator<UserAuthentication<PersonIdentity>>(                         // 4
-                            this.jwsService,
-                            Types.type(UserAuthentication.class).type(PersonIdentity.class).and().build()
-                        )
-                        .failOnDenied()                                                                   // 5
-                        .map(jwsAuthentication -> jwsAuthentication.getJws().getPayload())                // 6
+                    SecurityInterceptor.of(                                                                   // 2
+                        new CookieTokenCredentialsExtractor(),                                                // 3
+                        new JWSAuthenticator<UserAuthentication<PersonIdentity>>(                             // 4
+                                this.jwsService,
+                                Types.type(UserAuthentication.class).type(PersonIdentity.class).and().build()
+                            )
+                            .failOnDenied()                                                                   // 5
+                            .map(jwsAuthentication -> jwsAuthentication.getJws().getPayload())                // 6
                     ),
-                    AccessControlInterceptor.authenticated()                                              // 7
+                    AccessControlInterceptor.authenticated()                                                  // 7
                 ));
     }
 }
@@ -549,14 +549,14 @@ import reactor.core.publisher.Mono;
 public class SecurityConfigurer implements WebRouteInterceptor.Configurer<InterceptingSecurityContext<PersonIdentity, AccessController>>, WebRouter.Configurer<SecurityContext<PersonIdentity, AccessController>>, ErrorWebRouteInterceptor.Configurer<ExchangeContext> {
 
     ...
-	@Override
-	public ErrorWebRouteInterceptor<ExchangeContext> configure(ErrorWebRouteInterceptor<ExchangeContext> errorInterceptors) {
-		return errorInterceptors
-			.interceptError()
+    @Override
+    public ErrorWebRouteInterceptor<ExchangeContext> configure(ErrorWebRouteInterceptor<ExchangeContext> errorInterceptors) {
+        return errorInterceptors
+            .interceptError()
                 .path("/")
                 .error(UnauthorizedException.class)
                 .interceptor(new FormAuthenticationErrorInterceptor<>());
-	}
+    }
 }
 ```
 
@@ -576,9 +576,7 @@ package io.inverno.guide.ticket.internal.security;
 import io.inverno.core.annotation.Bean;
 import io.inverno.mod.base.reflect.Types;
 import io.inverno.mod.base.resource.MediaTypes;
-import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.Method;
-import io.inverno.mod.http.base.UnauthorizedException;
 import io.inverno.mod.security.accesscontrol.AccessController;
 import io.inverno.mod.security.authentication.LoginCredentialsMatcher;
 import io.inverno.mod.security.authentication.user.User;
@@ -589,7 +587,6 @@ import io.inverno.mod.security.http.AccessControlInterceptor;
 import io.inverno.mod.security.http.SecurityInterceptor;
 import io.inverno.mod.security.http.context.InterceptingSecurityContext;
 import io.inverno.mod.security.http.context.SecurityContext;
-import io.inverno.mod.security.http.form.FormAuthenticationErrorInterceptor;
 import io.inverno.mod.security.http.form.FormCredentialsExtractor;
 import io.inverno.mod.security.http.form.FormLoginPageHandler;
 import io.inverno.mod.security.http.form.RedirectLoginFailureHandler;
@@ -608,7 +605,6 @@ import io.inverno.mod.security.jose.jwa.OCTAlgorithm;
 import io.inverno.mod.security.jose.jws.JWSAuthentication;
 import io.inverno.mod.security.jose.jws.JWSAuthenticator;
 import io.inverno.mod.security.jose.jws.JWSService;
-import io.inverno.mod.web.server.ErrorWebRouteInterceptor;
 import io.inverno.mod.web.server.WebRouteInterceptor;
 import io.inverno.mod.web.server.WebRouter;
 import io.inverno.mod.web.server.annotation.WebRoute;
@@ -622,12 +618,12 @@ import reactor.core.publisher.Mono;
     @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" })
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
-public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<PersonIdentity, AccessController>>, WebInterceptorsConfigurer<InterceptingSecurityContext<PersonIdentity, AccessController>>, ErrorWebRouterConfigurer<ExchangeContext> {
+public class SecurityConfigurer implements WebRouteInterceptor.Configurer<InterceptingSecurityContext<PersonIdentity, AccessController>>, WebRouter.Configurer<SecurityContext<PersonIdentity, AccessController>> {
 
     ...
     @Override
-    public void configure(WebInterceptable<InterceptingSecurityContext<PersonIdentity, AccessController>, ?> interceptors) {
-        interceptors
+    public WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, AccessController>> configure(WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, AccessController>> interceptors) {
+        return interceptors
             .intercept()
                 .path("/")
                 .path("/api/**")
@@ -639,15 +635,15 @@ public class SecurityConfigurer implements WebRoutesConfigurer<SecurityContext<P
                     SecurityInterceptor.of(
                         new CookieTokenCredentialsExtractor(),
                         new JWSAuthenticator<UserAuthentication<PersonIdentity>>(
-                            this.jwsService,
-                            Types.type(UserAuthentication.class).type(PersonIdentity.class).and().build()
-                        )
-                        .failOnDenied()
-                        .map(jwsAuthentication -> jwsAuthentication.getJws().getPayload()),
+                                this.jwsService,
+                                Types.type(UserAuthentication.class).type(PersonIdentity.class).and().build()
+                            )
+                            .failOnDenied()
+                            .map(jwsAuthentication -> jwsAuthentication.getJws().getPayload()),
                         new UserIdentityResolver<>()
                     ),
                     AccessControlInterceptor.authenticated()
-                ));
+            ));
     }
 }
 ```
@@ -710,41 +706,41 @@ import reactor.core.publisher.Mono;
 
 public class TicketApp {
 
-	private static final Logger LOGGER = LogManager.getLogger(TicketApp.class);
+    private static final Logger LOGGER = LogManager.getLogger(TicketApp.class);
 
-	public static final String REDIS_KEY = "APP:Ticket";
-	public static final String PROFILE_PROPERTY_NAME = "profile";
+    public static final String REDIS_KEY = "APP:Ticket";
+    public static final String PROFILE_PROPERTY_NAME = "profile";
 
-	@Bean(name = "configurationSource")
-	public interface TicketAppConfigurationSource extends Supplier<ConfigurationSource> {}
+    @Bean(name = "configurationSource")
+    public interface TicketAppConfigurationSource extends Supplier<ConfigurationSource> {}
 
-	@Bean(name = "configurationParameters")
-	public interface TicketAppConfigurationParameters extends Supplier<List<ConfigurationKey.Parameter>> {}
+    @Bean(name = "configurationParameters")
+    public interface TicketAppConfigurationParameters extends Supplier<List<ConfigurationKey.Parameter>> {}
 
-	public static void main(String[] args) throws IOException {
-		final BootstrapConfigurationSource bootstrapConfigurationSource = new BootstrapConfigurationSource(TicketApp.class.getModule(), args);
-		Ticket ticketApp = bootstrapConfigurationSource
-			.get(PROFILE_PROPERTY_NAME)
-			.execute()
-			.single()
-			.map(configurationQueryResult -> configurationQueryResult.asString("default"))
-			.map(profile -> {
-				LOGGER.info(() -> "Active profile: " + profile);
-				return Application.run(new Ticket.Builder()
-					.setConfigurationSource(bootstrapConfigurationSource)
-					.setConfigurationParameters(List.of(ConfigurationKey.Parameter.of(PROFILE_PROPERTY_NAME, profile)))
-				);
-			})
-			.block();
+    public static void main(String[] args) throws IOException {
+        final BootstrapConfigurationSource bootstrapConfigurationSource = new BootstrapConfigurationSource(TicketApp.class.getModule(), args);
+        Ticket ticketApp = bootstrapConfigurationSource
+            .get(PROFILE_PROPERTY_NAME)
+            .execute()
+            .single()
+            .map(configurationQueryResult -> configurationQueryResult.asString("default"))
+            .map(profile -> {
+                LOGGER.info(() -> "Active profile: " + profile);
+                return Application.run(new Ticket.Builder()
+                    .setConfigurationSource(bootstrapConfigurationSource)
+                    .setConfigurationParameters(List.of(ConfigurationKey.Parameter.of(PROFILE_PROPERTY_NAME, profile)))
+                );
+            })
+            .block();
 
-		ticketApp.userRepository().getUser("jsmith")
-			.switchIfEmpty(Mono.defer(() -> ticketApp.userRepository().createUser(User.of("jsmith")
-				.password(new RawPassword("password"))
-				.identity(new PersonIdentity("jsmith", "John", "Smith", "jsmith@inverno.io"))
-				.build())
-			))
-			.block();
-	}
+        ticketApp.userRepository().getUser("jsmith")
+            .switchIfEmpty(Mono.defer(() -> ticketApp.userRepository().createUser(User.of("jsmith")
+                .password(new RawPassword("password"))
+                .identity(new PersonIdentity("jsmith", "John", "Smith", "jsmith@inverno.io"))
+                .build())
+            ))
+            .block();
+    }
 }
 ```
 

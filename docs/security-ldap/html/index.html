@@ -3,12 +3,12 @@
     <head><!-- Google tag (gtag.js) -->
         <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GQCEQ9P38V"></script>
         <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-          gtag('config', 'G-GQCEQ9P38V');
-        </script>
+            gtag('config', 'G-GQCEQ9P38V');
+		</script>
         <meta charset="UTF-8" />
         <title>The Inverno Framework | LDAP Security Guide</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -52,7 +52,7 @@
                               <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
                               <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                               </ul></li>
-                            <li class="nav-item mt-2"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill"></i> Sponsor</a></li>
+                            <li class="nav-item mt-2"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill me-1"></i> Sponsor</a></li>
                         </ul>
                     </div>
                     <ul class="navbar-nav d-none d-sm-none d-lg-flex flex-fill justify-content-end align-self-stretch">
@@ -79,7 +79,7 @@
                               <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
                               <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                             </ul></li>
-                        <li class="nav-item d-flex align-items-center"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill"></i> Sponsor</a></li>
+                        <li class="nav-item d-flex align-items-center"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill me-1"></i> Sponsor</a></li>
                     </ul>
                 </nav>
             </div>
@@ -127,7 +127,7 @@
     &lt;parent&gt;
         &lt;groupId&gt;io.inverno.dist&lt;/groupId&gt;
         &lt;artifactId&gt;inverno-parent&lt;/artifactId&gt;
-        &lt;version&gt;1.12.0&lt;/version&gt;
+        &lt;version&gt;1.12.1&lt;/version&gt;
     &lt;/parent&gt;
     &lt;groupId&gt;io.inverno.guide&lt;/groupId&gt;
     &lt;artifactId&gt;ticket&lt;/artifactId&gt;
@@ -167,7 +167,6 @@ module io.inverno.guide.ticket {
                 <pre><code class="language-java">package io.inverno.guide.ticket.internal.security;
 
 import io.inverno.core.annotation.Bean;
-import io.inverno.mod.base.reflect.Types;
 import io.inverno.mod.base.resource.MediaTypes;
 import io.inverno.mod.http.base.ExchangeContext;
 import io.inverno.mod.http.base.ForbiddenException;
@@ -176,7 +175,6 @@ import io.inverno.mod.http.base.UnauthorizedException;
 import io.inverno.mod.ldap.LDAPClient;
 import io.inverno.mod.security.accesscontrol.GroupsRoleBasedAccessControllerResolver;
 import io.inverno.mod.security.accesscontrol.RoleBasedAccessController;
-import io.inverno.mod.security.authentication.user.UserAuthentication;
 import io.inverno.mod.security.http.AccessControlInterceptor;
 import io.inverno.mod.security.http.SecurityInterceptor;
 import io.inverno.mod.security.http.context.InterceptingSecurityContext;
@@ -194,14 +192,14 @@ import io.inverno.mod.security.http.login.LogoutSuccessHandler;
 import io.inverno.mod.security.http.token.CookieTokenCredentialsExtractor;
 import io.inverno.mod.security.http.token.CookieTokenLoginSuccessHandler;
 import io.inverno.mod.security.http.token.CookieTokenLogoutSuccessHandler;
-import io.inverno.mod.security.identity.PersonIdentity;
-import io.inverno.mod.security.identity.UserIdentityResolver;
 import io.inverno.mod.security.jose.jwa.OCTAlgorithm;
 import io.inverno.mod.security.jose.jws.JWSAuthentication;
 import io.inverno.mod.security.jose.jws.JWSAuthenticator;
 import io.inverno.mod.security.jose.jws.JWSService;
 import io.inverno.mod.security.ldap.authentication.LDAPAuthentication;
 import io.inverno.mod.security.ldap.authentication.LDAPAuthenticator;
+import io.inverno.mod.security.ldap.identity.LDAPIdentity;
+import io.inverno.mod.security.ldap.identity.LDAPIdentityResolver;
 import io.inverno.mod.web.server.ErrorWebRouteInterceptor;
 import io.inverno.mod.web.server.WebRouteInterceptor;
 import io.inverno.mod.web.server.WebRouter;
@@ -218,27 +216,27 @@ import reactor.core.publisher.Mono;
 @Bean( visibility = Bean.Visibility.PRIVATE )
 public class SecurityConfigurer implements WebRouteInterceptor.Configurer&lt;InterceptingSecurityContext&lt;PersonIdentity, RoleBasedAccessController&gt;&gt;, WebRouter.Configurer&lt;SecurityContext&lt;PersonIdentity, RoleBasedAccessController&gt;&gt;, ErrorWebRouteInterceptor.Configurer&lt;ExchangeContext&gt; {
 
-	private final LDAPClient ldapClient;
-	private final JWSService jwsService;
+    private final LDAPClient ldapClient;
+    private final JWSService jwsService;
 
-	public SecurityConfigurer(LDAPClient ldapClient, JWSService jwsService) {
-		this.ldapClient = ldapClient;
-		this.jwsService = jwsService;
-	}
-
-	@Override
-	public WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, RoleBasedAccessController&gt;&gt; configure(WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, RoleBasedAccessController&gt;&gt; interceptors) {
-        ...
-	}
+    public SecurityConfigurer(LDAPClient ldapClient, JWSService jwsService) {
+        this.ldapClient = ldapClient;
+        this.jwsService = jwsService;
+    }
 
     @Override
-    public void configure(WebRoutable&lt;SecurityContext&lt;PersonIdentity, RoleBasedAccessController&gt;, ?&gt; routes) {
-		routes
-			.route()
+    public WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, RoleBasedAccessController&gt;&gt; configure(WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, RoleBasedAccessController&gt;&gt; interceptors) {
+        ...
+    }
+
+    @Override
+    public void configure(WebRouter&lt;SecurityContext&lt;LDAPIdentity, RoleBasedAccessController&gt;&gt; router) {
+        router
+            .route()
                 .path("/login")
                 .method(Method.GET)
                 .handler(new FormLoginPageHandler&lt;&gt;())
-			.route()
+            .route()
                 .path("/login")
                 .method(Method.POST)
                 .handler(new LoginActionHandler&lt;&gt;(
@@ -260,7 +258,7 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer&lt;Int
                     ),
                     new RedirectLoginFailureHandler&lt;&gt;()
                 ))
-			.route()
+            .route()
                 .path("/logout")
                 .produce(MediaTypes.APPLICATION_JSON)
                 .handler(new LogoutActionHandler&lt;&gt;(
@@ -270,12 +268,12 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer&lt;Int
                         new RedirectLogoutSuccessHandler&lt;&gt;()
                     )
                 ));
-	}
+    }
 
-	@Override
-	public ErrorWebRouteInterceptor&lt;ExchangeContext&gt; configure(ErrorWebRouteInterceptor&lt;ExchangeContext&gt; errorInterceptors) {
-		...
-	}
+    @Override
+    public ErrorWebRouteInterceptor&lt;ExchangeContext&gt; configure(ErrorWebRouteInterceptor&lt;ExchangeContext&gt; errorInterceptors) {
+        ...
+    }
 }
 </code></pre>
                 <p>As you can see, the user repository is no longer required and the <code>LDAPClient</code> is now injected instead. The <code>LDAPAuthenticator</code> simply replaces the <code>UserAuthenticator</code> but the JWS token creation remains <em>almost</em> untouched.</p>
@@ -339,8 +337,8 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer&lt;Int
 
     ...
     @Override
-	public WebRouteInterceptor&lt;InterceptingSecurityContext&lt;LDAPIdentity, RoleBasedAccessController&gt;&gt; configure(WebRouteInterceptor&lt;InterceptingSecurityContext&lt;LDAPIdentity, RoleBasedAccessController&gt;&gt; interceptors) {
-        interceptors
+    public WebRouteInterceptor&lt;InterceptingSecurityContext&lt;LDAPIdentity, RoleBasedAccessController&gt;&gt; configure(WebRouteInterceptor&lt;InterceptingSecurityContext&lt;LDAPIdentity, RoleBasedAccessController&gt;&gt; interceptors) {
+        return interceptors
             .intercept()
                 .path("/")
                 .path("/api/**")
@@ -371,7 +369,7 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer&lt;Int
     }
 
     @Override
-    public void configure(WebRouter&lt;SecurityContext&lt;LDAPIdentity, RoleBasedAccessController&gt;&gt; routes) {
+    public void configure(WebRouter&lt;SecurityContext&lt;LDAPIdentity, RoleBasedAccessController&gt;&gt; router) {
         ...
     }
 
@@ -554,7 +552,7 @@ Creating openldap_ldap_1 ... done
                             <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                         </ul>
                     </div>
-                    <div class="col d-none d-lg-block"><iframe src="https://github.com/sponsors/inverno-io/card" title="Sponsor inverno-io" height="225" width="600" style="border: 0;"></iframe>
+                    <div class="col d-none d-lg-block"><iframe class="border rounded" src="https://github.com/sponsors/inverno-io/card" title="Sponsor inverno-io" width="100%"></iframe>
                     </div>
                 </div>
             </div>

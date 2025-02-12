@@ -143,7 +143,7 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer<Interc
 }
 ```
 
-> Note that it is important to define `RoleBasedAccessController` in both `WebRoutesConfigurer` and `WebInterceptorsConfigurer`. Since the `InterceptingSecurityContext` also extends the `SecurityContext`, they cannot be defined with different bounds and the compilation will fail with inconsistent context types errors when this happens. It is also interesting to notice that it is not required to change this in the `SecurityController` since bounds could have been declared using upper wildcards (i.e. `SecurityContext<? extends PersonIdentity, ? extends AccessController>`) which is perfectly fine. Please consult the [reference documentation][reference-doc] to better understand how the exchange context is generated when defining multiple Web configurers and Web controllers.
+> Note that it is important to declare `RoleBasedAccessController` in both `WebRouter.Configurer` and `WebRouteInterceptor.Configurer`. Since the `InterceptingSecurityContext` also extends the `SecurityContext`, they cannot be defined with different bounds and the compilation will fail with inconsistent context types errors when this happens. It is also interesting to notice that it is not required to change this in the `SecurityController` since bounds could have been declared using upper wildcards (i.e. `SecurityContext<? extends PersonIdentity, ? extends AccessController>`) which is perfectly fine. Please consult the [reference documentation][reference-doc] to better understand how the exchange context is generated when defining multiple Web configurers and Web controllers.
 
 A `RoleBasedAccessController` should now be present in the `SecurityContext` and accessible to subsequent interceptors and route handlers.
 
@@ -211,7 +211,7 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer<Interc
 
     ...
     @Override
-	public WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, RoleBasedAccessController>> configure(WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, RoleBasedAccessController>> interceptors) {
+    public WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, RoleBasedAccessController>> configure(WebRouteInterceptor<InterceptingSecurityContext<PersonIdentity, RoleBasedAccessController>> interceptors) {
         return interceptors
             ...
             .intercept()
@@ -348,7 +348,7 @@ import org.apache.logging.log4j.Logger;
 import reactor.core.publisher.Mono;
 
 public class TicketApp {
-	
+    
     private static final Logger LOGGER = LogManager.getLogger(TicketApp.class);
 
     public static final String REDIS_KEY = "APP:Ticket";

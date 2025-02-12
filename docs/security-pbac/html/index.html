@@ -3,12 +3,12 @@
     <head><!-- Google tag (gtag.js) -->
         <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GQCEQ9P38V"></script>
         <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-          gtag('config', 'G-GQCEQ9P38V');
-        </script>
+            gtag('config', 'G-GQCEQ9P38V');
+		</script>
         <meta charset="UTF-8" />
         <title>The Inverno Framework | Permission-based Access Control Guide</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -52,7 +52,7 @@
                               <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
                               <li class="nav-item ms-4"><a class="nav-link" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                               </ul></li>
-                            <li class="nav-item mt-2"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill"></i> Sponsor</a></li>
+                            <li class="nav-item mt-2"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill me-1"></i> Sponsor</a></li>
                         </ul>
                     </div>
                     <ul class="navbar-nav d-none d-sm-none d-lg-flex flex-fill justify-content-end align-self-stretch">
@@ -79,7 +79,7 @@
                               <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-examples">Examples</a></li>
                               <li><a class="dropdown-item" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                             </ul></li>
-                        <li class="nav-item d-flex align-items-center"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill"></i> Sponsor</a></li>
+                        <li class="nav-item d-flex align-items-center"><a class="btn btn-outline-secondary" href="https://github.com/sponsors/inverno-io?o=esb" id="sponsor" role="button" aria-label="Sponsor @inverno-io" target="_top"><i class="bi bi-heart-fill me-1"></i> Sponsor</a></li>
                     </ul>
                 </nav>
             </div>
@@ -257,7 +257,7 @@ public class SecurityConfigurer implements WebRouteInterceptor.Configurer&lt;Int
 
     ...
     @Override
-	public WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt; configure(WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt; interceptors) {
+    public WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt; configure(WebRouteInterceptor&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt; interceptors) {
         return interceptors
             ...
             .intercept()
@@ -398,7 +398,7 @@ import reactor.core.publisher.Mono;
     @WebRoute(path = { "/logout" }, method = { Method.GET }, produces = { "application/json" }),
 })
 @Bean( visibility = Bean.Visibility.PRIVATE )
-public class SecurityConfigurer implements WebRoutesConfigurer&lt;SecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, WebInterceptorsConfigurer&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, ErrorWebRouterConfigurer&lt;ExchangeContext&gt; {
+public class SecurityConfigurer implements WebRouteInterceptor.Configurer&lt;InterceptingSecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, WebRouter.Configurer&lt;SecurityContext&lt;PersonIdentity, PermissionBasedAccessController&gt;&gt;, ErrorWebRouteInterceptor.Configurer&lt;ExchangeContext&gt; {
 
     ...
     @Init
@@ -521,7 +521,7 @@ winter-redis:6379&gt;
                             <li class="nav-item"><a class="nav-link px-0" href="https://github.com/inverno-io/inverno-apps">Apps</a></li>
                         </ul>
                     </div>
-                    <div class="col d-none d-lg-block"><iframe src="https://github.com/sponsors/inverno-io/card" title="Sponsor inverno-io" height="225" width="600" style="border: 0;"></iframe>
+                    <div class="col d-none d-lg-block"><iframe class="border rounded" src="https://github.com/sponsors/inverno-io/card" title="Sponsor inverno-io" width="100%"></iframe>
                     </div>
                 </div>
             </div>

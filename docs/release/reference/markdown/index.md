@@ -10,10 +10,10 @@ $properties(base = ../../../../, title = Reference Documentation)
 [github-issue]: https://github.com/inverno-io/inverno-core/issues
 
 <div class="heading"> 
-	<h1 class="heading-title">Inverno Framework Documentation</h1> 
-	<p class="heading-subtitle">Version: ${VERSION_INVERNO_DIST}</p> 
-	<p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p>
-	<a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-${VERSION_INVERNO_DIST}.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
+    <h1 class="heading-title">Inverno Framework Documentation</h1> 
+    <p class="heading-subtitle">Version: ${VERSION_INVERNO_DIST}</p> 
+    <p class="heading-subtitle">Author: <a href="mailto:jeremy.kuhn@inverno.io">Jeremy Kuhn</a></p>
+    <a class="btn btn-primary d-none d-lg-inline-block d-print-none m-5 position-absolute bottom-0 end-0" href="../reference.pdf" role="button" download="inverno-framework-documentation-${VERSION_INVERNO_DIST}.pdf"><i class="bi bi-download"></i> Inverno Documentation.pdf</a>
 </div>
 
 $toc( level=5 )
